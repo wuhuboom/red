@@ -1,6 +1,7 @@
 <template>
   <div class="register-page">
-    <div class="register-up flex-column">
+    <div class="register-up d-flex">
+      <p>LOGIN</p>
       <div class="lang-list d-flex" @click="show = !show">
         <ul class="align-center justify-between flex-1">
           <li class="uppercase align-center">
@@ -212,9 +213,6 @@ export default {
 .register-page {
   font-size: 16px;
   color: var(--color-text);
-  background: url("@/assets/img/loginbg.webp") center top no-repeat;
-  // background-size: 100% 100%;
-  background-size: cover;
   min-height: 100vh;
   color: #fff;
   .res-van-button {
@@ -285,17 +283,14 @@ export default {
 .register-up {
   position: relative;
   padding-left: 24px;
-  justify-content: flex-end;
+  align-items: flex-end;
+  justify-content: center;
   color: #fff;
-  height: 224px;
-  background: url("@/assets/img/login-logo.png") center center no-repeat;
-  background-size: cover;
-  font-size: 26px;
-  background-size: 139px 139px;
+  height: 348px;
+  background: url("@/assets/img/loginbg.webp") top center no-repeat;
+  background-size: 100% 348px;
   .lang-list {
-    position: absolute;
-    top: 16px;
-    right: 16px;
+    position: relative;
     width: 100px;
     height: 30px;
     border-radius: 3.5px;
@@ -303,6 +298,7 @@ export default {
     background-color: rgba(255, 255, 255, 0.2);
     color: #fff;
     font-size: 16px;
+    z-index: 3;
     img {
       height: 22px;
       width: 22px;
