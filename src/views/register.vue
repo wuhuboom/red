@@ -1,38 +1,21 @@
 <template>
   <div class="register-page">
-    <AppTopBar
-      :styleObj="{
-        backgroundColor: '',
-      }"
-    />
-    <div class="register-up flex-column">
-      <ul>
-        <li>
-          <img class="car d-block" src="@/assets/img/car.png" alt="" />
-        </li>
-        <li class="text-left text">
-          Create your <br />
-          account
-        </li>
-      </ul>
-    </div>
     <div>
       <van-form class="register-form column-form" ref="form" @submit="onSubmit">
         <van-field
+          class="username"
           v-model.trim="form.username"
           autocomplete="new-password"
           name="username"
-          :label="$t('form.account.text')"
           :placeholder="$t('form.account.text')"
           :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
         />
         <!-- showText -->
         <van-field
-          class="res-icon-size"
+          class="res-icon-size password"
           v-model.trim="form.password"
           autocomplete="new-password"
-          :type="showText ? '' : 'password'"
-          :label="$t('form.password.text')"
+          :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.password.text')"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont ${
@@ -48,10 +31,9 @@
         <van-field
           v-model.trim="form.twoPassword"
           autocomplete="new-password"
-          class="res-icon-size"
+          class="res-icon-size password"
           @click-right-icon="openEye"
-          :type="showText ? '' : 'password'"
-          :label="$t('form.twoPassword.text')"
+          :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.twoPassword.text')"
           :right-icon="`icon iconfont ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
@@ -69,8 +51,7 @@
         />
         <van-field
           v-model.trim="form.invitationCode"
-          class="res-icon-size"
-          :label="$t('form.invitecode.text')"
+          class="res-icon-size login-ceode"
           autocomplete="new-password"
           :placeholder="$t('form.invitecode.text')"
           :rules="[
@@ -79,21 +60,16 @@
         />
         <van-field
           v-model.trim="form.email"
-          :label="$t('form.email.text')"
           :placeholder="$t('form.email.text')"
-          class="left-icon-box res-icon-size"
+          class="email res-icon-size"
           autocomplete="new-password"
           name="email"
-          left-icon="envelop-o iconfix"
           :rules="[{ required: true, message: $t('ruls.email.empty') }]"
         >
-          <template #button>
-            <span class="emial-fix">{{ emailFix }}</span>
-          </template>
         </van-field>
         <van-field
-          class=""
-          :label="$t('Submitted.email.code')"
+          class="login-ceode"
+          :placeholder="$t('Submitted.email.code')"
           v-if="authConfig.mailCodeRequired === 1"
           v-model.trim="form.emailCode"
           :rules="[
@@ -120,7 +96,6 @@
         </van-field>
         <van-field
           v-model.trim="form.phone"
-          :label="$t('form.phoneNum.text')"
           :placeholder="$t('form.phoneNum.text')"
           type="digit"
           autocomplete="new-password"
@@ -135,8 +110,7 @@
         </van-field>
         <van-field
           v-model.trim="form.code"
-          class="res-icon-size"
-          :label="$t('form.vercode.text')"
+          class="res-icon-size login-ceode"
           autocomplete="new-password"
           :placeholder="$t('form.vercode.text')"
           :rules="[{ required: true, message: $t('ruls.vercode.empty') }]"
@@ -144,7 +118,7 @@
           <template #right-icon>
             <img
               @click="verifyCodeReq"
-              height="30"
+              width="68"
               class="d-block"
               :src="src"
               alt=""
@@ -318,7 +292,7 @@ export default {
     // this.authSysconfig();
     this.verifyCodeReq();
     this.form.areaCode = this.area_code[0];
-    this.$store.commit("setPdTop", false);
+
     if (this.$route.query.code) {
       this.form.invitationCode = this.$route.query.code;
     }
@@ -360,11 +334,56 @@ export default {
     }
   }
   ::v-deep .register-form {
-    .van-field__label {
-      color: var(--color-text);
+    width: 283px;
+    margin: 0 auto;
+    .van-cell {
+      // padding: 0;
+      padding-left: 0;
+      padding-right: 0;
+      background-color: transparent;
+    }
+    .van-field__body {
+      background-color: transparent;
+      border-color: transparent;
+      height: 34px;
+      background-position: left center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding-left: 39px;
+      padding-right: 0;
+      font-size: 12px;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="tel"] {
+      &,
+      &::placeholder {
+        color: #c72826;
+      }
+    }
+    .username {
+      .van-field__body {
+        background-image: url("@/assets/img/red/login-user.webp");
+      }
+    }
+    .password {
+      .van-field__body {
+        background-image: url("@/assets/img/red/login-password.webp");
+      }
+    }
+    .login-ceode {
+      .van-field__body {
+        background-image: url("@/assets/img/red/login-cod.webp");
+      }
+    }
+    .email {
+      .van-field__body {
+        background-image: url("@/assets/img/red/login-email.webp");
+      }
     }
     .res-icon-size .van-icon {
-      font-size: 24px;
+      font-size: 20px;
+      color: var(--primary);
     }
     .left-icon-box {
       position: relative;

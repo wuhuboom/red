@@ -59,7 +59,7 @@
           <template #right-icon>
             <img
               @click="verifyCodeReq"
-              width="60"
+              width="68"
               class="d-block"
               :src="src"
               alt=""
