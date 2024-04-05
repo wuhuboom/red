@@ -2,7 +2,9 @@
   <div class="register-page">
     <div class="register-up d-flex">
       <div class="center-center register-up-desc">
-        <p class="color-primary title-logo">{{ $t("login.btn.text") }}</p>
+        <p class="color-primary title-logo">
+          <img src="@/assets/img/red/login-logo.webp" alt="" />
+        </p>
         <div class="lang-list d-flex" @click="show = !show">
           <ul class="align-center justify-between flex-1">
             <li class="uppercase align-center">
@@ -252,8 +254,12 @@ export default {
   color: var(--color-text);
   min-height: 100vh;
   color: #fff;
+  background: url("@/assets/img/red/lognbg.webp") top center no-repeat;
+  background-size: 100% auto;
   .title-logo {
-    font-size: 30px;
+    img {
+      height: 36px;
+    }
   }
   .res-van-button {
     background-color: #041faf;
@@ -376,10 +382,10 @@ export default {
   justify-content: center;
   color: #fff;
   height: 348px;
-  background: url("@/assets/img/loginbg.webp") top center no-repeat;
+
   background-size: 100% 348px;
   .register-up-desc {
-    margin-bottom: 16px;
+    //margin-bottom: 16px;
     & > p {
       margin-right: 10px;
     }
