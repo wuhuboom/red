@@ -306,10 +306,12 @@ export default {
     }
   }
   ::v-deep .register-form {
-    width: 244px;
+    width: 283px;
     margin: 0 auto;
     .van-cell {
       // padding: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
     .van-field__body {
       background-color: transparent;
@@ -318,7 +320,7 @@ export default {
       background-position: left center;
       background-repeat: no-repeat;
       background-size: cover;
-      padding-left: 37px;
+      padding-left: 39px;
       padding-right: 0;
       font-size: 12px;
     }
