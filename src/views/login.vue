@@ -6,7 +6,7 @@
         <div class="lang-list d-flex" @click="show = !show">
           <ul class="align-center justify-between flex-1">
             <li class="uppercase align-center">
-              <img :src="curLang.icon" alt="" /> {{ lang }}
+              {{ lang }}
             </li>
             <li><van-icon name="arrow-down" /></li>
           </ul>
@@ -18,7 +18,7 @@
               v-for="(item, idx) in langOptions"
               :key="idx"
             >
-              <img :src="item.icon" alt="" />
+              <!-- <img :src="item.icon" alt="" /> -->
               {{ item.label }}
             </li>
           </ul>
@@ -284,7 +284,6 @@ export default {
 }
 .register-up {
   position: relative;
-  padding-left: 24px;
   align-items: flex-end;
   justify-content: center;
   color: #fff;
@@ -299,13 +298,12 @@ export default {
   }
   .lang-list {
     position: relative;
-    width: 100px;
-    height: 30px;
+    height: 16px;
     border-radius: 3.5px;
     padding: 0 8px;
-    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid #f11714;
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
     z-index: 3;
     img {
       height: 22px;
@@ -317,13 +315,14 @@ export default {
       text-align: left;
       position: absolute;
       padding: 0 8px;
-      top: 32px;
+      top: 16px;
       left: 0;
       width: 100%;
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: var(--bg-body);
       color: #fff;
+      border: 1px solid #f11714;
       & > li {
-        height: 30px;
+        height: 16px;
       }
       .active {
         // color: var(--primary);
