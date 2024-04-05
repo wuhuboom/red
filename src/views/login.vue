@@ -256,8 +256,8 @@ export default {
   }
   ::v-deep .register-form {
     .van-field__body {
-      background-color: #fff;
-      border-color: #fff;
+      background-color: transparent;
+      border-color: transparent;
     }
     .van-cell {
       background-color: transparent;
@@ -305,11 +305,15 @@ export default {
     color: #fff;
     font-size: 12px;
     z-index: 3;
+    color: #f11714;
     img {
       height: 22px;
       width: 22px;
       object-fit: cover;
       margin-right: 6px;
+    }
+    .van-icon-arrow-down {
+      margin-left: 4px;
     }
     .down {
       text-align: left;
@@ -319,10 +323,10 @@ export default {
       left: 0;
       width: 100%;
       background-color: var(--bg-body);
-      color: #fff;
+
       border: 1px solid #f11714;
       & > li {
-        height: 16px;
+        height: 24px;
       }
       .active {
         // color: var(--primary);
