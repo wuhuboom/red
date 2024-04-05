@@ -2,7 +2,7 @@
   <div class="register-page">
     <div class="register-up d-flex">
       <div class="center-center register-up-desc">
-        <p>LOGIN</p>
+        <p class="color-primary title-logo">{{ $t("login.btn.text") }}</p>
         <div class="lang-list d-flex" @click="show = !show">
           <ul class="align-center justify-between flex-1">
             <li class="uppercase align-center">
@@ -30,17 +30,16 @@
         <van-field
           v-model.trim="form.username"
           autocomplete="new-password"
-          :label="$t('form.account.text')"
           :placeholder="$t('form.account.text')"
+          class="username"
           :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
         />
         <!-- showText -->
         <van-field
-          class="res-icon-size"
+          class="res-icon-size password"
           v-model.trim="form.password"
           autocomplete="new-password"
-          :type="showText ? '' : 'password'"
-          :label="$t('form.password.text')"
+          :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.password.text')"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont ${
@@ -50,8 +49,7 @@
         />
         <van-field
           v-model.trim="form.code"
-          class="res-icon-size"
-          :label="$t('form.vercode.text')"
+          class="res-icon-size login-ceode"
           autocomplete="new-password"
           :placeholder="$t('form.vercode.text')"
           :rules="[{ required: true, message: $t('ruls.vercode.empty') }]"
@@ -59,15 +57,27 @@
           <template #right-icon>
             <img
               @click="verifyCodeReq"
-              height="30"
+              width="60"
               class="d-block"
               :src="src"
               alt=""
             />
           </template>
         </van-field>
-        <ul class="justify-between skip-msg">
-          <li
+
+        <div class="sumit-section font14">
+          <van-button
+            class="res-van-button"
+            block
+            type="info"
+            native-type="submit"
+            >{{ $t("login.btn.text") }}</van-button
+          >
+          <van-button
+            class="res-van-button"
+            block
+            type="info"
+            native-type="button"
             @click="
               $router.push({
                 name: 'Register',
@@ -77,26 +87,43 @@
               })
             "
           >
-            {{ $t("reg.btn.text") }}
-          </li>
-          <li @click="$router.push({ name: 'LoginForget' })">
-            {{ $t("index.login.forget.text") }}?
-          </li>
-        </ul>
-        <div class="sumit-section">
-          <van-button
-            class="res-van-button"
-            block
-            type="info"
-            native-type="submit"
-            >{{ $t("login.btn.text") }}</van-button
+            {{ $t("reg.btn.text") }}</van-button
           >
         </div>
-        <ul class="serve-btm center-center" @click="goServe">
-          <li>
-            <img class="d-block" src="@/assets/img/serve@2x.webp" alt="" />
+        <ul class="serve-btm center-center text-center">
+          <li
+            class="flex-column center-center"
+            @click="$router.push({ name: 'LoginForget' })"
+          >
+            <p>
+              <img
+                class="d-block"
+                src="@/assets/img/red/login-btm1.webp"
+                alt=""
+              />
+            </p>
+            {{ $t("index.login.forget.text") }}
           </li>
-          <li>{{ $t("index.login.service.text") }}</li>
+          <li class="flex-column center-center" @click="goServe">
+            <p>
+              <img
+                class="d-block"
+                src="@/assets/img/red/login-btm2.webp"
+                alt=""
+              />
+            </p>
+            {{ $t("index.login.service.text") }}
+          </li>
+          <li class="flex-column center-center" @click="download">
+            <p>
+              <img
+                class="d-block"
+                src="@/assets/img/red/login-btm3.webp"
+                alt=""
+              />
+            </p>
+            {{ $t("fuc.app.download") }}
+          </li>
         </ul>
       </van-form>
     </div>
@@ -147,6 +174,14 @@ export default {
     },
   },
   methods: {
+    async download() {
+      this.$toast.loading({
+        duration: 0,
+        forbidClick: true,
+      });
+      await this.$store.dispatch("appDownload");
+      this.$toast.clear();
+    },
     async onSubmit() {
       const data = Object.assign({}, this.form);
       this.$toast.loading({
@@ -217,6 +252,9 @@ export default {
   color: var(--color-text);
   min-height: 100vh;
   color: #fff;
+  .title-logo {
+    font-size: 30px;
+  }
   .res-van-button {
     background-color: #041faf;
     background-image: none;
@@ -225,13 +263,26 @@ export default {
     background-color: #041faf;
   }
   .sumit-section {
-    padding: 16px;
+    padding: 38px 0;
+    display: flex;
+    justify-content: space-around;
+    button {
+      width: auto;
+      height: auto;
+      padding: 0;
+      background-color: transparent;
+      color: #ef7367;
+    }
   }
   .serve-btm {
     font-size: 14px;
+    color: #c72826;
+    padding-bottom: 20px;
     img {
-      height: 18px;
-      margin-right: 4px;
+      height: 16px;
+    }
+    p {
+      padding-bottom: 8px;
     }
   }
   .radio-list-row {
@@ -255,9 +306,43 @@ export default {
     }
   }
   ::v-deep .register-form {
+    width: 244px;
+    margin: 0 auto;
+    .van-cell {
+      // padding: 0;
+    }
     .van-field__body {
       background-color: transparent;
       border-color: transparent;
+      height: 34px;
+      background-position: left center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding-left: 37px;
+      padding-right: 0;
+      font-size: 12px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      &,
+      &::placeholder {
+        color: #c72826;
+      }
+    }
+    .username {
+      .van-field__body {
+        background-image: url("@/assets/img/red/login-user.webp");
+      }
+    }
+    .password {
+      .van-field__body {
+        background-image: url("@/assets/img/red/login-password.webp");
+      }
+    }
+    .login-ceode {
+      .van-field__body {
+        background-image: url("@/assets/img/red/login-cod.webp");
+      }
     }
     .van-cell {
       background-color: transparent;
@@ -266,7 +351,8 @@ export default {
       color: #fff;
     }
     .res-icon-size .van-icon {
-      font-size: 24px;
+      font-size: 20px;
+      color: var(--primary);
     }
     .left-icon-box {
       position: relative;
