@@ -1,0 +1,11 @@
+{
+  "logopage": {
+    "singin": "登录",
+    "wel":"欢迎回来！",
+    "forgetPassWord":"忘记密码？",
+    "noAcount":"没有账号？",
+    "nowRegister":"立即注册",
+    "email":"邮箱",
+    "password":"密码"
+  }
+}

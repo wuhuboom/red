@@ -1,0 +1,46 @@
+/* 公共样式 */
+@font-face {
+  font-family: 'SFProText';
+  src: url('SF-Pro-Text-Regular.otf') format('opentype');
+}
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+i {
+  font-style: normal;
+}
+@media (min-width: 750px) {
+  html {
+    font-size: 73.5Px !important;
+  }
+}
+body {
+  max-width: 750Px;
+  margin: 0 auto;
+  background-color: var(--bg-body);
+  color: #606060;
+  font-size: 14px;
+  font-family: "SFProText, PingFang SC-Medium, PingFang SC, sans-serif";
+}
+.text-left{
+  text-align: left;
+}
+.d-block{
+  display: block;
+}
+// 进度条
+#nprogress{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  .bar {
+    height: 3px;
+    background-color: var(--primary);
+  }
+  
+}

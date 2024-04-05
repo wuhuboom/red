@@ -1,0 +1,26 @@
+@import './mixins/ellipsis';
+
+.app-ellipsis {
+  .ellipsis();
+}
+
+.app-multi-ellipsis--l2 {
+  .multi-ellipsis(2);
+}
+
+.app-multi-ellipsis--l3 {
+  .multi-ellipsis(3);
+}
+:root{
+  --bg-body: #fff;
+  --color-text:#222222;
+  //主题色
+  --primary:  #0022FF;
+  --bg-primary: linear-gradient(to right, #051da0, #0025fc);
+}
+.color-primary{
+  color: var(--primary);
+}
+.color222{
+  color: var(--color-text);
+}
