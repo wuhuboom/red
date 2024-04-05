@@ -1,26 +1,28 @@
 <template>
   <div class="register-page">
     <div class="register-up d-flex">
-      <p>LOGIN</p>
-      <div class="lang-list d-flex" @click="show = !show">
-        <ul class="align-center justify-between flex-1">
-          <li class="uppercase align-center">
-            <img :src="curLang.icon" alt="" /> {{ lang }}
-          </li>
-          <li><van-icon name="arrow-down" /></li>
-        </ul>
-        <ul class="down" v-if="show">
-          <li
-            class="align-center"
-            @click="select(item)"
-            :class="{ active: lang === item.value }"
-            v-for="(item, idx) in langOptions"
-            :key="idx"
-          >
-            <img :src="item.icon" alt="" />
-            {{ item.label }}
-          </li>
-        </ul>
+      <div class="center-center register-up-desc">
+        <p>LOGIN</p>
+        <div class="lang-list d-flex" @click="show = !show">
+          <ul class="align-center justify-between flex-1">
+            <li class="uppercase align-center">
+              <img :src="curLang.icon" alt="" /> {{ lang }}
+            </li>
+            <li><van-icon name="arrow-down" /></li>
+          </ul>
+          <ul class="down" v-if="show">
+            <li
+              class="align-center"
+              @click="select(item)"
+              :class="{ active: lang === item.value }"
+              v-for="(item, idx) in langOptions"
+              :key="idx"
+            >
+              <img :src="item.icon" alt="" />
+              {{ item.label }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div>
@@ -289,6 +291,12 @@ export default {
   height: 348px;
   background: url("@/assets/img/loginbg.webp") top center no-repeat;
   background-size: 100% 348px;
+  .register-up-desc {
+    margin-bottom: 16px;
+    & > p {
+      margin-right: 10px;
+    }
+  }
   .lang-list {
     position: relative;
     width: 100px;
