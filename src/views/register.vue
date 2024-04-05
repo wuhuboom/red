@@ -1,6 +1,15 @@
 <template>
   <div class="register-page">
     <div>
+      <div class="center-center register-title">
+        <p>
+          <img
+            class="d-block"
+            src="@/assets/img/red/register-title.webp"
+            alt=""
+          />
+        </p>
+      </div>
       <van-form class="register-form column-form" ref="form" @submit="onSubmit">
         <van-field
           class="username"
@@ -99,7 +108,7 @@
           :placeholder="$t('form.phoneNum.text')"
           type="digit"
           autocomplete="new-password"
-          class="left-icon-box res-icon-size"
+          class="left-icon-box res-icon-size login-phone"
           :rules="[{ required: true, message: $t('ruls.phone.empty') }]"
         >
           <template #left-icon>
@@ -125,7 +134,7 @@
             />
           </template>
         </van-field>
-        <div style="margin: 16px">
+        <div class="sumit-section">
           <van-button
             class="res-van-button"
             block
@@ -133,12 +142,16 @@
             native-type="submit"
             >{{ $t("reg.btn.text") }}</van-button
           >
+          <van-button
+            class="res-van-button"
+            block
+            type="info"
+            native-type="button"
+            @click="$router.push({ name: 'Login' })"
+            >{{ $t("login.btn.text") }}</van-button
+          >
         </div>
       </van-form>
-      <ul class="center-center go-login">
-        <li>Already Registered?</li>
-        <li @click="$router.push({ name: 'Login' })">Login</li>
-      </ul>
     </div>
     <BtmActionSheet
       :text="`+${form.areaCode}`"
@@ -289,7 +302,7 @@ export default {
     },
   },
   created() {
-    // this.authSysconfig();
+    this.$store.commit("setPdTop", false);
     this.verifyCodeReq();
     this.form.areaCode = this.area_code[0];
 
@@ -304,9 +317,13 @@ export default {
   font-size: 16px;
   color: var(--color-text);
   .code-btn {
-    border-radius: 8px;
-    min-width: 70px;
-    padding: 0 4px;
+    height: 18px;
+    border-radius: 9px;
+    padding: 0 8px;
+    min-width: 54px;
+    background-color: #dc2525 !important;
+    border-color: #dc2525 !important;
+    color: #fff;
   }
   .radio-list-row {
     padding: 8px 16px;
@@ -324,6 +341,12 @@ export default {
       margin-left: 4px;
     }
   }
+  .register-title {
+    padding: 64px 0 30px;
+    img {
+      height: 36px;
+    }
+  }
   ::v-deep div.appp-top-bar {
     .icon-button {
       background-color: rgba(0, 0, 0, 0.16) !important;
@@ -336,6 +359,19 @@ export default {
   ::v-deep .register-form {
     width: 283px;
     margin: 0 auto;
+    .sumit-section {
+      padding: 38px 0;
+      display: flex;
+      justify-content: space-around;
+      button {
+        width: auto;
+        height: auto;
+        padding: 0;
+        background-color: transparent;
+        color: #ef7367;
+        background-image: none;
+      }
+    }
     .van-cell {
       // padding: 0;
       padding-left: 0;
@@ -381,6 +417,13 @@ export default {
         background-image: url("@/assets/img/red/login-email.webp");
       }
     }
+    .login-phone {
+      position: relative;
+      color: var(--primary);
+      .van-field__body {
+        background-image: url("@/assets/img/red/login-phone.webp");
+      }
+    }
     .res-icon-size .van-icon {
       font-size: 20px;
       color: var(--primary);
@@ -390,7 +433,7 @@ export default {
       @wid: 60px;
       .van-field__left-icon {
         position: absolute;
-        top: 54px;
+        top: 16px;
         left: 32px;
         z-index: 2;
         width: @wid;
