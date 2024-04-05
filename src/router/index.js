@@ -426,7 +426,8 @@ router.beforeEach(async (to, from, next) => {
       next();
     }
   } else {
-    if (to.path.includes("/login") || to.path === "/") {
+    // || to.path === "/"
+    if (to.path.includes("/login")) {
       next();
     } else {
       Nprogress.done();

@@ -1,36 +1,5 @@
 <template>
   <div class="home">
-    <AppTopBar :showLeft="false" :back="back">
-      <template #title>
-        <ul class="head-tile align-center pl-16">
-          <li>ABC</li>
-          <li>.HN</li>
-        </ul>
-      </template>
-      <template #right>
-        <div class="user" v-if="user.id">
-          <ImgCom class="pa-0" :src="$userPic" />
-        </div>
-
-        <div class="align-center" v-else>
-          <van-button
-            @click="$router.push({ name: 'Register' })"
-            class="mr-16 register"
-            round
-            type="primary"
-            size="small"
-            >{{ $t("reg.btn.text") }}</van-button
-          >
-          <van-button
-            @click="$router.push({ name: 'Login' })"
-            round
-            class="mr-16"
-            size="small"
-            >{{ $t("login.btn.text") }}</van-button
-          >
-        </div>
-      </template>
-    </AppTopBar>
     <div class="pb-16 px-16 search">
       <van-field
         @click="goList"
@@ -289,6 +258,7 @@ export default {
     },
   },
   created() {
+    this.$store.commit("setPdTop", false);
     this.$store.dispatch("getServeData");
     this.navList = [
       {
