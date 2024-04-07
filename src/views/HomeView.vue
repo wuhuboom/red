@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <div class="pb-16 px-16 search">
+    <div class="m-x-16 search p-x-8">
       <van-field
         @click="goList"
         left-icon="search"
-        class="field-input"
+        class="field-input d-flex align-center"
         :placeholder="$t('backapi.self.bank.search.text')"
       />
     </div>
@@ -357,12 +357,14 @@ export default {
       border-color: var(--color-text);
     }
     .search {
+      border: 1px solid var(--primary);
       .field-input {
-        height: 46px;
-        background-color: #f7f7f8;
-        border-radius: 23px;
-        font-size: 16px;
-        border: 1px solid #f5f5f5;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 30px;
+        background-color: #303234;
+        font-size: 12px;
+        border: 1px solid #303234;
       }
       @searchColor: #737b8c;
       .van-icon-search {

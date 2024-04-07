@@ -189,7 +189,7 @@ export default {
       },
       radio: [],
       showText: false,
-      emailFix: "@gmail.com",
+      emailFix: "", //@gmail.com
     };
   },
   computed: {
