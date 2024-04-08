@@ -1,7 +1,7 @@
 <template>
   <div class="row-list">
     <div
-      class="row-list-item m-x-24"
+      class="row-list-item m-x-24 font12 p-l-16 p-r-16 p-t-8 p-b-8"
       v-for="(item, idx) in hotList"
       :key="idx"
       @click="goDetail(item)"
@@ -117,8 +117,7 @@ export default {
 .row-list {
   .row-list-item {
     box-shadow: @shadow;
-    font-size: 14px;
-    border-radius: 8px;
+    border-radius: 20px;
     color: #b31917;
     border: 1px solid #b31917;
   }
@@ -132,14 +131,11 @@ export default {
   }
   .title {
     font-size: 12px;
-    color: #797d86;
   }
   .fistr {
     padding-bottom: 8px;
   }
   .num {
-    font-size: 12px;
-    color: #797d86;
   }
   .half {
     font-size: 12px;
@@ -148,7 +144,6 @@ export default {
   }
   .galate {
     font-size: 14px;
-    color: #17191c;
   }
   .row-list-rigth {
     justify-content: flex-end;
