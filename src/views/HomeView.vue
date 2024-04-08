@@ -23,6 +23,7 @@
       loading-text="loading"
       @load="onLoad"
     >
+      <RowMatch :hotList="curItem.data.results" />
       <RowList :hotList="curItem.data.results" />
     </van-list>
     <VersionDilalog ref="VersionDilalog" />

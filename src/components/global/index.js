@@ -7,6 +7,7 @@ import RowList from "@/components/global/RowList.vue";
 import Countdown from "@choujiaojiao/vue2-countdown";
 import AppBackTop from "@/components/global/AppBackTop.vue";
 import NoData from "@/components/global/NoData.vue";
+import RowMatch from "@/components/global/RowMatch.vue";
 import {
   Form,
   Field,
@@ -43,6 +44,7 @@ export default {
     Vue.component(AppTopBar.name, AppTopBar);
     Vue.component(AppBackTop.name, AppBackTop);
     Vue.component(NoData.name, NoData);
+    Vue.component(RowMatch.name, RowMatch);
     Vue.use(Form);
     Vue.use(Field);
     Vue.use(Button);
