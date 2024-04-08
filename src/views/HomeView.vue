@@ -16,66 +16,7 @@
         </van-swipe-item>
       </van-swipe>
     </div>
-    <div class="home-hot px-16">
-      <ul class="hot-tips align-center">
-        <li><img class="d-block" src="@/assets/img/live.webp" /></li>
-        <li>{{ $t("home.Hot.Matches") }}</li>
-      </ul>
-      <div class="hot-all">
-        <div class="d-flex">
-          <div
-            v-for="(item, idx) in hotList"
-            :key="idx"
-            @click="
-              $router.push({
-                name: 'Detail',
-                query: {
-                  id: item.id,
-                },
-              })
-            "
-          >
-            <ul class="hot-row">
-              <li class="justify-between hot-row-icon">
-                <p class="align-center pic-box">
-                  <span class="pic"> <ImgCom :src="item.mainLogo" /></span>
-                  <span class="pic">
-                    <ImgCom :src="item.guestLogo" />
-                  </span>
-                </p>
-                <p class="text-list">
-                  <span class="d-block text" v-if="item.remainingTime">
-                    <Count-down :time="item.remainingTime" format="hh:mm:ss">
-                      <template slot-scope="{ time }">{{ time }}</template>
-                    </Count-down>
-                  </span>
-                  <span v-if="item.startTimeStr" class="d-block text">{{
-                    item.startTimeStr.slice(5, 10)
-                  }}</span>
-                </p>
-              </li>
-
-              <li class="app-ellipsis main-name">
-                {{ item.mainName | removeEsports }}
-              </li>
-              <li class="app-ellipsis gest-name">
-                {{ item.guestName | removeEsports }}
-              </li>
-              <li class="app-ellipsis gest-alliance">
-                {{ item.allianceName }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <ul class="hot-tips align-center justify-between" @click="goList">
-        <li>{{ $t("home.All.Games") }}</li>
-        <li class="see-all">{{ $t("home.SEE.ALL") }}</li>
-      </ul>
-    </div>
-    <RowList :hotList="allList" :title="$t('home.All.Games')" />
-    <!-- <van-list
-      v-else
+    <van-list
       v-model="loading"
       :finished="curItem.data.hasNext === false"
       finished-text="No More"
@@ -83,7 +24,7 @@
       @load="onLoad"
     >
       <RowList :hotList="curItem.data.results" />
-    </van-list> -->
+    </van-list>
     <VersionDilalog ref="VersionDilalog" />
   </div>
 </template>
