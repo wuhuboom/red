@@ -25,7 +25,7 @@
           </Count-down>
         </li>
       </ul>
-      <p class="center-center font14 alliance-name m-t-4">
+      <p class="center-center font14 alliance-name m-t-4 p-x-4">
         {{ item.allianceName }}
       </p>
       <ul class="team-vs m-t-8">

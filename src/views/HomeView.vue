@@ -9,23 +9,22 @@
       />
     </div>
 
-    <div class="swiper m-l-24 m-r-24" v-if="swiperList.length">
+    <div class="swiper m-l-24 m-r-24 m-b-24" v-if="swiperList.length">
       <van-swipe :autoplay="3000">
         <van-swipe-item v-for="(item, index) in swiperList" :key="index">
           <img v-lazy="item.imageUrl" />
         </van-swipe-item>
       </van-swipe>
     </div>
-    <van-list
-      v-model="loading"
-      :finished="curItem.data.hasNext === false"
-      finished-text="No More"
-      loading-text="loading"
-      @load="onLoad"
-    >
-      <RowMatch :hotList="curItem.data.results" />
-      <RowList :hotList="curItem.data.results" />
-    </van-list>
+    <ul class="user-money p-l-24 p-r-24 font12">
+      <li class="text-center">{{ balanceMoneyNum }}</li>
+      <li class="center-center m-t-1 m-b-8">
+        {{ $t("home.index.account.balance.text") }}
+        <i @click="refresh" class="iconfont font14 icon-shuaxin"></i>
+      </li>
+      <li></li>
+    </ul>
+    <RowMatch :hotList="hotList" />
     <VersionDilalog ref="VersionDilalog" />
   </div>
 </template>
@@ -93,8 +92,22 @@ export default {
     curItem() {
       return this.tabsList.find((item) => item.startTime === this.startTime);
     },
+    balanceMoneyNum() {
+      return (
+        this.numToFixed(this.user.balance, this.$globalUnit.val) /
+        this.$globalNum.val
+      );
+    },
   },
   methods: {
+    async refresh() {
+      this.$toast.loading({
+        duration: 0,
+        forbidClick: true,
+      });
+      await this.$store.dispatch("getInfo");
+      this.$toast.clear();
+    },
     goTo(item) {
       const link = item.link;
       if (link) {
@@ -173,8 +186,8 @@ export default {
       });
       if (err) return;
       const { data } = res;
-      this.hotList = this.turnSecond(data.filter((item, idx) => idx < 4));
-      this.allList = this.turnSecond(data.filter((item, idx) => idx >= 4));
+      this.hotList = data;
+      //this.allList = this.turnSecond(data.filter((item, idx) => idx >= 4));
     },
     noUseR() {
       this.hotList = this.turnSecond(staticData.filter((item, idx) => idx < 4));
@@ -239,6 +252,30 @@ export default {
     }
     & > li:nth-child(2) {
       color: var(--primary);
+    }
+  }
+  .user-money {
+    & > li:nth-child(1) {
+      font-size: 26px;
+      font-weight: 900;
+      color: #ef7367;
+    }
+    & > li:nth-child(2) {
+      color: var(--primary);
+    }
+    & > li:nth-child(3) {
+      height: 3px;
+      background-image: linear-gradient(
+        to right,
+        #8a1c1b,
+        #f34139 30%,
+        #ff928d 38%,
+        #fd7361 53%,
+        #f4483f 54%,
+        #ef3932 64%,
+        #fa574c 91%,
+        #f03f38
+      );
     }
   }
   .nav {
