@@ -15,7 +15,7 @@ import element from "./plugins/element";
 //   "process.env.VUE_APP_VERSION",
 //   semver.compare(process.env.VUE_APP_VERSION, "0.1.9")
 // );
-console.log(process.env.VUE_APP_VERSION);
+import { publicDateTimeSolt } from "@/plugins/publicTool.js";
 // 公共样式
 import "@/assets/style/base.less";
 import "@/assets/font/iconfont.css";
@@ -25,6 +25,13 @@ Vue.use(VueClipboard);
 Vue.use(element);
 Vue.filter("removeEsports", (value) => {
   return (value || "").trim().replace(/esports/gi, "");
+});
+Vue.filter("timestampStr", (value) => {
+  if (value && value != "---" && value != 0) {
+    return publicDateTimeSolt(value, 1);
+  } else if (value === "---" || value === 0) {
+    return value;
+  }
 });
 const countTrailingZeros = (number) => {
   // 将数转换为字符串

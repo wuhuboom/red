@@ -6,7 +6,7 @@
       :key="idx"
       @click="goDetail(item)"
     >
-      <ul class="row-list-up">
+      <ul class="row-list-up m-b-4">
         <li class="row-list-rigth align-center mt-0" @click.stop>
           <span
             class="num"
@@ -16,27 +16,24 @@
           ></span>
         </li>
       </ul>
-      <ul class="row-list-up align-center btm-list">
-        <li class="flex-1 title flex-column app-ellipsis">
-          <div class="app-ellipsis align-center fistr">
-            <p class="pic"><img class="d-block" :src="item.mainLogo" /></p>
-            <p class="app-ellipsis flex-1 galate">
-              {{ item.mainName | removeEsports }}
-            </p>
-          </div>
-          <div class="app-ellipsis align-center">
-            <p class="pic"><img class="d-block" :src="item.guestLogo" /></p>
-            <p class="app-ellipsis flex-1 galate">
-              {{ item.guestName | removeEsports }}
-            </p>
-          </div>
+      <ul class="justify-between align-center">
+        <li>{{ item.startTime | timestampStr }}</li>
+        <li class="justify-between align-center">
+          {{ $t("match.order.detail.closing.text") }}:
+          <Count-down :time="item.remainingTime" format="hh:mm:ss">
+            <template slot-scope="{ time }">{{ time }}</template>
+          </Count-down>
         </li>
-        <li class="row-list-rigth align-center">
-          <div class="up-doc center-center doc-gray" v-if="item.startTimeStr">
-            <p>{{ item.startTimeStr.slice(5, 10) }}</p>
-            <p>{{ item.startTimeStr.slice(11, 16) }}</p>
-          </div>
+      </ul>
+      <p class="center-center font14 alliance-name m-t-4">
+        {{ item.allianceName }}
+      </p>
+      <ul class="team-vs m-t-8">
+        <li class="text-center">{{ item.mainName | removeEsports }}</li>
+        <li class="pic">
+          <img src="@/assets/img/red/vs.webp" alt="" class="d-block" />
         </li>
+        <li class="text-center">{{ item.guestName | removeEsports }}</li>
       </ul>
     </div>
   </div>
@@ -135,7 +132,24 @@ export default {
   .fistr {
     padding-bottom: 8px;
   }
+  .alliance-name {
+    color: #fff;
+    border-bottom: 1px solid #dc2525;
+    border-top: 1px solid #dc2525;
+  }
+  .team-vs {
+    color: var(--primary);
+    .pic {
+      width: 24px;
+      height: 42px;
+      margin: 0 auto;
+    }
+  }
   .num {
+    color: #ef7367;
+    .el-icon-document-copy {
+      color: var(--primary);
+    }
   }
   .half {
     font-size: 12px;
