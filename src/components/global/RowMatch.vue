@@ -1,13 +1,12 @@
 <template>
-  <div class="row-list px-16">
+  <div class="row-list">
     <div
-      class="row-list-item px-16 py-16"
+      class="row-list-item m-x-24"
       v-for="(item, idx) in hotList"
       :key="idx"
       @click="goDetail(item)"
     >
       <ul class="row-list-up">
-        <li class="flex-1 title app-ellipsis">{{ item.allianceName }}</li>
         <li class="row-list-rigth align-center mt-0" @click.stop>
           <span
             class="num"
@@ -15,7 +14,6 @@
             v-clipboard:success="handleCopySuccess"
             >ID:{{ item.id }} <i class="el-icon-document-copy"></i
           ></span>
-          <!-- <span class="half">{{ screenings(item) }}</span> -->
         </li>
       </ul>
       <ul class="row-list-up align-center btm-list">
@@ -120,14 +118,14 @@ export default {
   .row-list-item {
     box-shadow: @shadow;
     font-size: 14px;
-    margin-bottom: 10px;
     border-radius: 8px;
+    color: #b31917;
+    border: 1px solid #b31917;
   }
   .row-list-up {
     display: flex;
     justify-content: space-between;
     .row-list-rigth {
-      width: 112px;
       flex-shrink: 0;
       flex-grow: 0;
     }
