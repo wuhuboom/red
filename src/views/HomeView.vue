@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="m-x-16 search p-x-8">
+    <div class="m-l-24 m-r-24 m-t-32 m-b-16 search p-x-8">
       <van-field
         @click="goList"
         left-icon="search"
@@ -8,18 +8,8 @@
         :placeholder="$t('backapi.self.bank.search.text')"
       />
     </div>
-    <ul class="nav px-16 pb-16 d-flex align-center capitalize">
-      <li
-        class="center-center"
-        @click="goTo(item)"
-        v-for="(item, idx) in navList"
-        :key="idx"
-      >
-        <p><img :src="item.icon" /></p>
-        <p>{{ item.name }}</p>
-      </li>
-    </ul>
-    <div class="swiper" v-if="swiperList.length">
+
+    <div class="swiper m-l-24 m-r-24" v-if="swiperList.length">
       <van-swipe :autoplay="3000">
         <van-swipe-item v-for="(item, index) in swiperList" :key="index">
           <img v-lazy="item.imageUrl" />
