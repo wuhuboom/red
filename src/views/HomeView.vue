@@ -24,6 +24,17 @@
       </li>
       <li></li>
     </ul>
+    <ul class="nav m-t-12 p-l-24 p-r-24 align-center capitalize">
+      <li
+        class="center-center"
+        @click="goTo(item)"
+        v-for="(item, idx) in navList"
+        :key="idx"
+      >
+        <p><img :src="item.icon" /></p>
+        <p>{{ item.name }}</p>
+      </li>
+    </ul>
     <RowMatch :hotList="hotList" />
     <VersionDilalog ref="VersionDilalog" />
   </div>
@@ -34,10 +45,10 @@ import VersionDilalog from "@/views/components/VersionDilalog.vue";
 import userApi from "@/api/user";
 import staticData from "@/data/hot.json";
 //import slide from "@/data/slide.json";
-import nav1 from "@/assets/img/nav1@2x.png";
-import nav2 from "@/assets/img/nav2@2x.png";
-import nav3 from "@/assets/img/nav3@2x.png";
-import nav4 from "@/assets/img/nav4.webp";
+import nav1 from "@/assets/img/red/path-52@3x.png";
+import nav2 from "@/assets/img/red/group-19@2x.png";
+import nav3 from "@/assets/img/red/group-20@2x.png";
+import nav4 from "@/assets/img/red/path-57@2x.png";
 import i18n from "@/locale";
 import userPic from "@/assets/img/user@2x.png";
 const initData = (startTime = 0) => {
@@ -207,8 +218,8 @@ export default {
     this.$store.dispatch("getServeData");
     this.navList = [
       {
-        name: this.$t("home.index.nav.text3"),
-        link: "List",
+        name: this.$t("backapi.self.safe.text"),
+        link: "Wallet",
         icon: nav1,
       },
       {
@@ -218,12 +229,12 @@ export default {
       },
       {
         name: this.$t("backapi.self.home.tool.online.ser.text"),
-        link: "service",
+        link: "Withdraw",
         icon: nav3,
       },
       {
-        name: this.$t("safe.invite.types"),
-        link: "Share",
+        name: this.$t("backapi.self.home.tool.online.ser.text"),
+        link: "service",
         icon: nav4,
       },
     ];
@@ -281,14 +292,11 @@ export default {
   .nav {
     justify-content: space-between;
     font-size: 12px;
-    color: #17191c;
+    color: var(--primary);
     & > li {
       flex-direction: column;
       width: 76px;
       height: 70px;
-      box-shadow: @shadow;
-      border: solid 1px rgba(0, 0, 0, 0.02);
-      background-color: #fff;
       border-radius: 8px;
     }
     & > li {
@@ -298,8 +306,7 @@ export default {
     }
     img {
       display: block;
-      height: 32px;
-      width: 32px;
+      height: 18px;
     }
   }
   ::v-deep {
