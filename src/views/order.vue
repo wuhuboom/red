@@ -1,21 +1,6 @@
 <template>
   <div class="list-page">
-    <AppTopBar>
-      <template #title>
-        <ul class="head-tile align-center">
-          <li>ABC</li>
-          <li>.HN</li>
-        </ul>
-      </template>
-      <template #right>
-        <div class="user" v-if="user.id">
-          <ImgCom class="pa-0" :src="$userPic" />
-        </div>
-      </template>
-    </AppTopBar>
-    <AppBackTop />
-    <OrderNav />
-    <div class="tab-list-section mb-16">
+    <!-- <div class="tab-list-section mb-16">
       <div class="px-16 tab-list max-width750">
         <div
           class="center-center list-doc"
@@ -27,7 +12,14 @@
           {{ item.name }}
         </div>
       </div>
-    </div>
+    </div> -->
+    <ul class="user-money p-l-24 p-r-24 font12 p-t-32 m-b-24">
+      <li class="text-center">{{ curItem.data.totalCount }}</li>
+      <li class="center-center m-t-1 m-b-8">
+        {{ $t(`Today.s.Orders`) }}
+      </li>
+      <li></li>
+    </ul>
     <van-list
       v-model="loading"
       :finished="curItem.data.hasNext === false"
@@ -35,71 +27,77 @@
       loading-text="loading"
       @load="onLoad"
     >
-      <div class="order-list px-16">
+      <div class="order-list p-l-24 p-r-24">
         <div
           v-for="(item, idx) in curItem.data.results"
           :key="idx"
-          class="order-doc mb-16 font14"
+          class="order-new color-primary font12 m-b-16"
         >
-          <ul class="justify-between order-head">
-            <li>{{ item.gameInfo | removeEsports }}</li>
-            <li class="font12 align-center">
-              {{ formatDate(item.createdAt, "yyyy-MM-dd") }}
+          <ul class="text-center p-l-8 p-r-8 m-b-8">
+            <li class="alliance-name font14 m-t-4 p-x-4">
+              {{ item.allianceName | removeEsports }}
+            </li>
+            <li class="m-t-8">
+              <p>{{ item.mainName | removeEsports }}</p>
+              <p class="pic">
+                <img src="@/assets/img/red/vs.webp" alt="" class="d-block" />
+              </p>
+              <p>{{ item.guestName | removeEsports }}</p>
             </li>
           </ul>
-          <div class="trade-rit justify-between align-center">
-            <ul class="trade-num">
-              <li>
-                {{ $t("table.head.bet.text") }}：{{
+          <ul class="m-b-8 p-l-8 p-r-8 btm-text">
+            <li class="justify-between m-b-4">
+              <p>{{ $t(`bet.detail.score.text`) }}</p>
+              <p>{{ $t("bet.detail.bet.num.text") }}</p>
+            </li>
+            <li class="justify-between">
+              <p>{{ item.betScore }} @ {{ item.betOdds }}%</p>
+              <p>
+                {{
                   numToFixed(item.betMoney, $globalUnit.val) / $globalNum.val
                 }}
-              </li>
-              <li>
-                {{ $t("table.head.loss.text") }}：<span class="">{{
-                  numToFixed(statusToStr(item), $globalUnit.val) /
-                  $globalNum.val
-                }}</span>
-              </li>
-            </ul>
-            <ul class="trade-left">
-              <li>
-                <p v-if="item.status == 1 && item.statusOpen == 1" class="red">
-                  {{ $t("order.win") }}
-                </p>
-                <p
-                  v-if="item.status == 1 && item.statusOpen == 2"
-                  class="green"
-                >
-                  {{ $t("order.lose") }}
-                </p>
-                <p v-if="item.status == 3 && item.statusOpen == 0">
-                  {{ $t("order.canceled") }}
-                </p>
-                <p
-                  v-if="wait(item)"
-                  class="canle center-center"
-                  @click="canleFn(item)"
-                >
-                  {{ $t("modal.cancel.text") }}
-                </p>
-              </li>
-            </ul>
-          </div>
-          <ul
-            class="trade-bottom align-center justify-between"
-            :class="[wait(item) ? 'blue' : 'gray']"
-          >
-            <li>NO.{{ item.orderNo }}</li>
-            <li>
-              <!-- <p v-if="wait(item)" class="align-center">
-                <span class="min-doc"></span><span>{{ $t("order.wait") }}</span>
-              </p> -->
-              <p class="detal-btm center-center" @click="getDetail(item)">
-                {{ $t("table.head.detail.text") }}
-                <van-icon name="arrow" />
               </p>
             </li>
           </ul>
+          <ul class="m-b-8 p-l-8 p-r-8 btm-text">
+            <li class="justify-between m-b-4">
+              <p>{{ $t(`table.head.date.text`) }}</p>
+              <p>{{ $t("deal.createOrderMer.354499-3") }}</p>
+            </li>
+            <li class="justify-between">
+              <p>{{ item.createdAt | timestampStr }}</p>
+              <p>
+                {{ item.orderNo }}
+              </p>
+            </li>
+          </ul>
+          <ul class="justify-between p-l-8 p-r-8 align-center btm-text">
+            <li class="m-b-4">
+              <p>{{ $t(`bet.index.estimated.profit.text`) }}</p>
+              <p>
+                {{
+                  numToFixed(statusToStr(item), $globalUnit.val) /
+                  $globalNum.val
+                }}
+              </p>
+            </li>
+            <li>
+              <p v-if="item.status == 3 && item.statusOpen == 0">
+                {{ $t("order.canceled") }}
+              </p>
+              <p
+                v-if="wait(item)"
+                class="canle center-center"
+                @click="canleFn(item)"
+              >
+                {{ $t("modal.cancel.text") }}
+              </p>
+            </li>
+          </ul>
+          <p
+            class="black-line m-t-8"
+            v-if="idx != curItem.data.results.length - 1"
+          ></p>
         </div>
       </div>
       <p class="center-center nothing" v-if="nothing">
@@ -136,7 +134,6 @@
 import userApi from "@/api/user";
 import staticData from "@/data/hot.json";
 import i18n from "@/locale";
-import OrderNav from "@/views/components/OrderNav.vue";
 import OrderDetail from "@/views/components/OrderDetail.vue";
 import { Dialog } from "vant";
 import userPic from "@/assets/img/user@2x.png";
@@ -188,7 +185,6 @@ export default {
     };
   },
   components: {
-    OrderNav,
     OrderDetail,
   },
   computed: {
@@ -365,6 +361,9 @@ export default {
       this.getslider();
     },
   },
+  created() {
+    this.$store.commit("setPdTop", false);
+  },
 };
 </script>
 <style scoped lang="less">
@@ -384,6 +383,61 @@ export default {
     }
     & > li:nth-child(2) {
       //color: var(--primary);
+    }
+  }
+  .user-money {
+    & > li:nth-child(1) {
+      font-size: 26px;
+      font-weight: 900;
+      color: #ef7367;
+    }
+    & > li:nth-child(2) {
+      color: var(--primary);
+    }
+    & > li:nth-child(3) {
+      height: 3px;
+      background-image: linear-gradient(
+        to right,
+        #8a1c1b,
+        #f34139 30%,
+        #ff928d 38%,
+        #fd7361 53%,
+        #f4483f 54%,
+        #ef3932 64%,
+        #fa574c 91%,
+        #f03f38
+      );
+    }
+  }
+  .order-new {
+    .black-line {
+      height: 5px;
+      background-image: linear-gradient(
+        to right,
+        #af1816,
+        #af1816 5%,
+        #0c0c0c 5%,
+        #0c0c0c
+      );
+    }
+    .alliance-name {
+      color: #fff;
+      border-bottom: 1px solid #dc2525;
+      border-top: 1px solid #dc2525;
+    }
+    .btm-text {
+      & > li:nth-child(2) {
+        color: #ef7367;
+      }
+    }
+    .pic {
+      width: 24px;
+      height: 42px;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   .tab-list-section,
@@ -512,7 +566,7 @@ export default {
     .canle {
       min-width: 74px;
       padding: 0 4px;
-      height: 30px;
+      height: 18px;
       border-radius: 8px;
       background-color: #e5142e;
       color: #fff;

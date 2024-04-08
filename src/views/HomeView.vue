@@ -228,7 +228,7 @@ export default {
         icon: nav2,
       },
       {
-        name: this.$t("backapi.self.home.tool.online.ser.text"),
+        name: this.$t("home.index.withdraw.text"),
         link: "Withdraw",
         icon: nav3,
       },
@@ -337,6 +337,7 @@ export default {
       .field-input {
         padding-top: 0;
         padding-bottom: 0;
+        padding-left: 12px;
         height: 30px;
         background-color: #303234;
         font-size: 12px;
@@ -345,7 +346,7 @@ export default {
       @searchColor: #737b8c;
       .van-icon-search {
         font-size: 24px;
-        color: @searchColor;
+        color: #ef7367;
       }
       ::-webkit-input-placeholder,
       ::placeholder {
