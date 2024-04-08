@@ -1,6 +1,6 @@
 <template>
-  <div class="user-page font14">
-    <AppTopBar :back="back" :showLeft="false">
+  <div class="user-page p-x-24 font14">
+    <!-- <AppTopBar :back="back" :showLeft="false">
       <template #title>
         <div class="align-center">
           <div class="user" v-if="user.id">
@@ -24,7 +24,7 @@
           </van-badge>
         </p>
       </template>
-    </AppTopBar>
+    </AppTopBar> -->
     <div class="mx-16 card font14">
       <p class="balance">{{ $t("home.index.account.balance.text") }}</p>
       <p class="balance-num align-center">
@@ -232,6 +232,7 @@ export default {
     },
   },
   created() {
+    this.$store.commit("setPdTop", false);
     this.$store.dispatch("getServeData");
     this.$store.dispatch("getHasMsg");
     this.$store.dispatch("getInfo");
@@ -245,7 +246,6 @@ export default {
   .content-user-lang {
     & > li {
       height: 40px;
-      padding: 0 30px;
       img {
         width: 22px;
         height: 22px;
