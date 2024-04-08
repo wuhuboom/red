@@ -24,7 +24,7 @@
       </li>
       <li></li>
     </ul>
-    <ul class="nav m-t-12 p-l-24 p-r-24 align-center capitalize">
+    <ul class="nav m-t-12 p-l-24 p-r-24 align-center capitalize m-b-16">
       <li
         class="center-center"
         @click="goTo(item)"

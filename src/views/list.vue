@@ -1,26 +1,20 @@
 <template>
   <div class="list-page">
-    <AppTopBar>
-      <template #title>
-        <div class="search align-center" @click.stop.prevent>
-          <!-- @submit="handleEnterKey" -->
-          <van-form @submit.prevent>
-            <van-field
-              @click.stop.prevent
-              v-model.trim="teamName"
-              @input="handleEnterKey"
-              @paste="handleEnterKey"
-              left-icon="search"
-              class="field-input"
-              :placeholder="$t('backapi.self.bank.search.text')"
-            />
-          </van-form>
-        </div>
-      </template>
-    </AppTopBar>
-    <AppBackTop />
-    <div class="tab-list-section">
-      <div class="px-16 tab-list max-width750">
+    <div class="search align-center m-l-24 m-r-24 m-t-24" @click.stop.prevent>
+      <!-- @submit="handleEnterKey" -->
+      <van-form @submit.prevent>
+        <van-field
+          @click.stop.prevent
+          v-model.trim="teamName"
+          @input="handleEnterKey"
+          @paste="handleEnterKey"
+          class="field-input"
+          :placeholder="$t('backapi.self.bank.search.text')"
+        />
+      </van-form>
+    </div>
+    <div class="tab-list-section p-l-24 p-r-24 m-t-12 m-b-12">
+      <div class="tab-list font12">
         <div
           class="center-center list-doc"
           v-for="(item, idx) in tabsList"
@@ -39,7 +33,7 @@
       loading-text="loading"
       @load="onLoad"
     >
-      <RowList :hotList="curItem.data.results" />
+      <RowMatch :hotList="curItem.data.results" />
       <p
         class="center-center py-16"
         v-if="!loading && curItem.data.totalCount === 0"
@@ -197,6 +191,9 @@ export default {
       this.getslider();
     },
   },
+  created() {
+    this.$store.commit("setPdTop", false);
+  },
 };
 </script>
 <style scoped lang="less">
@@ -215,33 +212,18 @@ export default {
   }
   .tab-list-section,
   .tab-list {
-    height: 66px;
+    height: 42;
   }
   .tab-list {
     display: flex;
     align-items: center;
-    //justify-content: space-between;
-    position: fixed;
-    background-color: #fff;
-    z-index: 10;
-    top: 74px;
-    left: 0;
-    right: 0;
+    justify-content: space-around;
     .list-doc {
-      flex-basis: 80px;
-      font-size: 14px;
-      height: 32px;
-      padding: 0 14px;
-      color: #707070;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.09);
-      border: solid 1px rgba(0, 0, 0, 0.02);
-      background-color: #fff;
-      margin-right: 12px;
+      color: var(--primary);
     }
     .active {
-      color: #fff;
-      background-color: var(--primary);
+      // color: #fff;
+      // background-color: var(--primary);
     }
   }
   ::v-deep {
@@ -258,18 +240,27 @@ export default {
     .search {
       &,
       .van-icon-search {
-        color: #fff;
+        color: #b31917;
       }
       .van-form {
         width: 100%;
       }
       .field-input {
-        height: 46px;
-        background-color: rgba(255, 255, 255, 0.15);
+        height: 25px;
+        padding-top: 0;
+        padding-bottom: 0;
         border-radius: 23px;
+        font-size: 12px;
+        background: url("@/assets/img/red/search-bg.webp") no-repeat center
+          center transparent;
+        background-size: 98% 100%;
+        padding-left: 38px;
+        input::placeholder {
+          color: var(--primary);
+        }
       }
       .van-field__control {
-        color: #fff;
+        color: var(--primary);
       }
       .van-icon-search {
         font-size: 24px;

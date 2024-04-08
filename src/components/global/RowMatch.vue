@@ -1,7 +1,7 @@
 <template>
   <div class="row-list">
     <div
-      class="row-list-item m-x-24 font12 p-l-16 p-r-16 p-t-8 p-b-8"
+      class="row-list-item m-x-24 mt-0 font12 p-l-16 p-r-16 p-t-8 p-b-8"
       v-for="(item, idx) in hotList"
       :key="idx"
       @click="goDetail(item)"
