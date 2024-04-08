@@ -1,12 +1,14 @@
 <template>
   <div class="home">
     <div class="m-l-24 m-r-24 m-t-32 m-b-16 search p-x-8">
-      <van-field
-        @click="goList"
-        left-icon="search"
-        class="field-input d-flex align-center"
-        :placeholder="$t('backapi.self.bank.search.text')"
-      />
+      <div class="field-input-box align-center">
+        <p class="m-r-4">
+          <img class="d-block" src="@/assets/img/red/voice.webp" alt="" />
+        </p>
+        <div class="flex-1 content">
+          <div class="u-notice-content">Welcome to BHB 111</div>
+        </div>
+      </div>
     </div>
 
     <div class="swiper m-l-24 m-r-24 m-b-24" v-if="swiperList.length">
@@ -332,9 +334,26 @@ export default {
       background-color: var(--color-text);
       border-color: var(--color-text);
     }
+
+    .u-notice-content {
+      animation: u-loop-animation 10s linear infinite both;
+      text-align: right;
+      // 这一句很重要，为了能让滚动左右连接起来
+      flex-wrap: nowrap;
+      color: #afafaf;
+    }
+    @keyframes u-loop-animation {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-100%, 0, 0);
+      }
+    }
     .search {
       border: 1px solid var(--primary);
-      .field-input {
+      .field-input-box {
         padding-top: 0;
         padding-bottom: 0;
         padding-left: 12px;
@@ -342,6 +361,12 @@ export default {
         background-color: #303234;
         font-size: 12px;
         border: 1px solid #303234;
+        img {
+          height: 12px;
+        }
+        .content {
+          overflow: hidden;
+        }
       }
       @searchColor: #737b8c;
       .van-icon-search {
