@@ -39,8 +39,10 @@
         :key="idx"
       >
         <li class="icon m-r-16"><img :src="item.icon" alt="" /></li>
-        <li class="flex-1">{{ item.name }}</li>
-        <li class="dec"><img src="@/assets/img/red/usernav6.png" alt="" /></li>
+        <li class="flex-1 align-center justify-between">
+          {{ item.name }}
+          <p class="dec"><img src="@/assets/img/red/usernav6.png" alt="" /></p>
+        </li>
       </ul>
     </div>
   </div>
@@ -316,6 +318,12 @@ export default {
   .menu {
     height: 65px;
     color: #fff;
+    & > li:nth-child(2) {
+      border-bottom: 1px solid #484b4c;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
     .icon {
       img {
         width: 45px;
