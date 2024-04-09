@@ -80,6 +80,13 @@ const routes = [
     },
   },
   {
+    path: "/pages/user/help/help",
+    name: "HelpCenter",
+    components: {
+      default: () => import("@/views/allHelp.vue"),
+    },
+  },
+  {
     path: "/technicalsupport",
     name: "Technicalsupport",
     components: {
