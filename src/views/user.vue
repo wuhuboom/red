@@ -89,12 +89,12 @@ export default {
         {
           icon: require("@/assets/img/red/usernav3.png"),
           name: i18n.t("user.Report.Management"),
-          link: "Wallet",
+          link: "ReportManagement",
         },
         {
           icon: require("@/assets/img/red/usernav4.png"),
           name: i18n.t("me.security.text"),
-          link: "Wallet",
+          link: "SecurityCenter",
         },
         {
           icon: require("@/assets/img/red/usernav5.png"),

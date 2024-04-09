@@ -250,6 +250,14 @@ const routes = [
     },
   },
   {
+    path: "/pages/user/report_management",
+    name: "ReportManagement",
+    components: {
+      default: () => import("@/views/reportManagement.vue"),
+    },
+  },
+
+  {
     path: "/pages/user/orderCenter",
     name: "orderCenter",
     components: {
