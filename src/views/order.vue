@@ -1,18 +1,5 @@
 <template>
   <div class="list-page">
-    <!-- <div class="tab-list-section mb-16">
-      <div class="px-16 tab-list max-width750">
-        <div
-          class="center-center list-doc"
-          v-for="(item, idx) in tabsList"
-          @click.stop.prevent="changTab(item)"
-          :class="{ active: startTime === item.startTime }"
-          :key="idx"
-        >
-          {{ item.name }}
-        </div>
-      </div>
-    </div> -->
     <ul class="user-money p-l-24 p-r-24 font12 p-t-32 m-b-24">
       <li class="text-center">{{ curItem.data.totalCount }}</li>
       <li class="center-center m-t-1 m-b-8">
@@ -111,13 +98,13 @@
       :showConfirmButton="false"
       :showCancelButton="false"
       :closeOnClickOverlay="true"
+      class="cancel-dialog-parent font12"
     >
-      <ul class="center-center flex-column cancle-dialog">
-        <li class="cancel-img">
-          <img src="@/assets/img/canclered.webp" alt="" />
+      <ul class="flex-column cancle-dialog">
+        <li class="sure-game center-center p-l-16 p-r-16">
+          {{ $t("You.sure.cancel.game") }}
         </li>
-        <li class="sure-game">{{ $t("You.sure.cancel.game") }}</li>
-        <li class="cancle-btns center-center">
+        <li class="cancle-btns center-center p-l-24 p-r-24">
           <p class="center-center" @click="show = false">
             {{ $t("modal.cancel.text") }}
           </p>
@@ -585,36 +572,30 @@ export default {
         object-fit: cover;
       }
     }
-    .cancle-dialog {
-      padding-top: 22px;
-      font-size: 15px;
-    }
-    .cancel-img {
-      width: 59px;
-      height: 59px;
-      margin-bottom: 12px;
-      img {
+    .cancel-dialog-parent {
+      background-color: transparent;
+      color: var(--primary);
+      .sure-game {
+        height: 123px;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
       }
-    }
-    .cancle-btns {
-      width: 100%;
-      border-bottom: 1px solid #eee;
-      border-top: 1px solid #eee;
-      margin: 10px 0;
-      p:nth-child(1) {
-        border-right: 1px solid #eee;
-        color: #1677ff;
+      .cancle-dialog {
+        width: 318px;
+        height: 194px;
+        background: url("@/assets/img/red/canclebg.webp") no-repeat center
+          center;
+        background-size: 100% 100%;
       }
-      p:nth-child(2) {
-        color: #ff3141;
-      }
-      P {
-        flex: 1;
-        height: 45px;
-        font-size: 18px;
+      .cancle-btns {
+        width: 100%;
+        justify-content: space-around !important;
+        P {
+          width: 76px;
+          height: 18px;
+          color: #fff;
+          border-radius: 9px;
+          background-color: var(--primary);
+        }
       }
     }
   }
