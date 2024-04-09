@@ -34,12 +34,7 @@
       @load="onLoad"
     >
       <RowMatch :hotList="curItem.data.results" />
-      <p
-        class="center-center py-16"
-        v-if="!loading && curItem.data.totalCount === 0"
-      >
-        No More
-      </p>
+      <NoData v-if="!loading && curItem.data.totalCount === 0" />
     </van-list>
   </div>
 </template>

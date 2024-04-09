@@ -87,10 +87,7 @@
           ></p>
         </div>
       </div>
-      <p class="center-center nothing" v-if="nothing">
-        <img src="@/assets/img/noting.webp" alt="" />
-        <span class="center-center">{{ $t("order.nothing") }}</span>
-      </p>
+      <NoData v-if="nothing" />
     </van-list>
     <OrderDetail ref="OrderDetail" />
     <van-dialog

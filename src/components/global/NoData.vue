@@ -1,7 +1,5 @@
 <template>
-  <div class="no-data center-center">
-    <img src="@/assets/img/nodata.webp" alt="" />
-  </div>
+  <div class="no-data center-center font14">No More</div>
 </template>
 
 <script>
@@ -12,6 +10,7 @@ export default {
 <style scoped lang="less">
 .no-data {
   padding-top: 80px;
+  color: var(--primary);
   img {
     width: 102px;
     height: 112px;
