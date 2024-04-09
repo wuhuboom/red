@@ -45,14 +45,14 @@ export default {
         },
         {
           icon: require("@/assets/img/red/btm1.png"),
-          icon1: require("@/assets/img/red/app-btm2.webp"),
+          icon1: require("@/assets/img/red/app-btm3.webp"),
           text: i18n.t("tabar.match"),
           name: "List",
           active: false,
         },
         {
           icon: require("@/assets/img/red/btm2.png"),
-          icon1: require("@/assets/img/red/app-btm3.webp"),
+          icon1: require("@/assets/img/red/app-btm2.webp"),
           text: i18n.t("home.order.535219-0"),
           name: "order",
           active: false,
