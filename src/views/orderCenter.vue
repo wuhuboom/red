@@ -35,7 +35,7 @@ u
           </el-dropdown-menu>
         </el-dropdown>
       </li>
-      <li class="search center-center">
+      <li class="search center-center" @click="searchLoad">
         {{ $t("backapi.self.bank.search.text") }}
       </li>
     </ul>
@@ -184,6 +184,13 @@ export default {
       this.filterTab = v;
       await this.onLoad(1);
     },
+    async searchLoad() {
+      this.$toast.loading({
+        forbidClick: true,
+        duration: 0,
+      });
+      await this.onLoad(1);
+    },
     async onLoad(num) {
       const time = this.filterTab;
       const pageNo = !isNaN(num) ? num : this.curItem.pageNo;
@@ -202,17 +209,6 @@ export default {
         this.curItem.hasNext = false;
         return;
       }
-      // res.data.results = res.data.results.map((item) => {
-      //   // item.date = this.$moment(item.date).format("YYYY-MM-DD HH:mm:ss");
-      //   // return item;
-      //   const doc = {
-      //     date: item.createdAt,
-      //     amount: item.betMoney,
-      //     loss: item,
-      //     detail: i18n.t("table.head.detail.text"),
-      //   };
-      //   return doc;
-      // });
       let list =
         res.data.pageNo == 1
           ? res.data.results
@@ -222,7 +218,6 @@ export default {
         results: list,
         pageNo: res.data.pageNo + 1,
       };
-      console.log(list);
       this.$toast.clear();
     },
   },

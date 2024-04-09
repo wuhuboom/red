@@ -272,6 +272,13 @@ export default {
         duration: 0,
       });
     },
+    async searchLoad() {
+      this.$toast.loading({
+        forbidClick: true,
+        duration: 0,
+      });
+      await this.onLoad();
+    },
     async onLoad(num) {
       const startTime = this.curItem.startTime;
       const pageNo = !isNaN(num) ? num : this.curItem.data.pageNo;
