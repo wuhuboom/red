@@ -1,91 +1,106 @@
 <template>
-  <div class="user-page p-x-24 font14">
-    <!-- <AppTopBar :back="back" :showLeft="false">
-      <template #title>
-        <div class="align-center">
-          <div class="user" v-if="user.id">
-            <ImgCom class="pa-0" :src="$userPic" />
-          </div>
-          <div>
-            <p class="username">{{ user.username }}</p>
-            <ul class="vip-head" @click="$router.push({ name: 'Vip' })">
-              <li class="vip-img">
-                <img src="@/assets/img/vipicon.webp" alt="" />
-              </li>
-              <li>Lv{{ user.vipLevel }}</li>
-            </ul>
-          </div>
-        </div>
-      </template>
-      <template #right>
-        <p class="badge" @click="$router.push({ name: 'Message' })">
-          <van-badge :dot="$store.state.fbMsg.hasMsg > 0">
-            <i class="icon iconfont icon-lingdang"></i>
-          </van-badge>
-        </p>
-      </template>
-    </AppTopBar> -->
-    <div class="mx-16 card font14">
-      <p class="balance">{{ $t("home.index.account.balance.text") }}</p>
-      <p class="balance-num align-center">
-        {{ balanceMoneyNum }}
-        <i @click="refresh" class="iconfont icon-shuaxin"></i>
-      </p>
-      <ul class="justify-between">
-        <li
-          class="withdrawal center-center"
-          @click="$router.push({ name: 'Withdraw' })"
-        >
-          {{ $t("home.index.withdraw.text") }}
-        </li>
-        <li
-          class="top-up center-center"
-          @click="$router.push({ name: 'Recharge' })"
-        >
-          {{ $t("home.index.recharge.text") }}
-        </li>
-      </ul>
-    </div>
-    <p class="all-serve">{{ $t("user.All.Services") }}</p>
-    <ul class="nav-list">
-      <li v-for="(item, idx) in list" @click="goPage(item)" :key="idx">
-        <div class="cont">
-          <p class="pic">
-            <img :src="item.icon" alt="" />
-          </p>
-          <div class="center-center">
-            <p class="text" :class="{ 'break-all': lang != 'en' }">
-              {{ item.text }}
+  <div class="user-page p-x-24 font12">
+    <div class="top-user-msg align-center">
+      <div class="avatrt m-r-12">
+        <img class="d-block" src="@/assets/img/user@2x.png" alt="" />
+      </div>
+      <div>
+        <ul class="color-primary">
+          <li class="m-b-8 user-name">
+            <p class="color-active m-b-4">{{ user.username }}</p>
+            <p class="align-center level">
+              Lv{{ user.vipLevel }}
+              <img class="m-l-4" src="@/assets/img/red/vip.png" alt="" />
             </p>
-          </div>
-        </div>
+          </li>
+          <li class="user-num">
+            <p class="color-active">{{ balanceMoneyNum }}</p>
+            <p>{{ $t("home.index.account.balance.text") }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <ul class="nav m-t-12 align-center capitalize m-b-16">
+      <li
+        class="center-center"
+        @click="goTo(item)"
+        v-for="(item, idx) in navList"
+        :key="idx"
+      >
+        <p><img :src="item.icon" /></p>
+        <p>{{ item.name }}</p>
       </li>
     </ul>
-    <div class="center-center login-out">
-      <p @click="loginOut">{{ $t("fuc.sign.out") }}</p>
-    </div>
-    <van-action-sheet v-model="show" :description="$t(`index.index.lang`)">
-      <ul class="content-user-lang">
-        <li
-          @click="onSelect(item)"
-          class="align-center"
-          v-for="(item, idx) in langOptions"
-          :key="idx"
-        >
-          <img :src="item.icon" alt="" />
-          {{ item.text }}
-        </li>
+    <div>
+      <ul
+        class="align-center menu font16"
+        v-for="(item, idx) in menu"
+        @click="goTo(item)"
+        :key="idx"
+      >
+        <li class="icon m-r-16"><img :src="item.icon" alt="" /></li>
+        <li class="flex-1">{{ item.name }}</li>
+        <li class="dec"><img src="@/assets/img/red/usernav6.png" alt="" /></li>
       </ul>
-    </van-action-sheet>
+    </div>
   </div>
 </template>
 
 <script>
 import i18n from "@/locale";
+import nav2 from "@/assets/img/red/group-19@2x.png";
+import nav3 from "@/assets/img/red/group-20@2x.png";
+import nav4 from "@/assets/img/red/history.png";
 export default {
   name: "HomeView",
   data() {
-    return { show: false };
+    return {
+      show: false,
+      navList: [
+        {
+          name: i18n.t("home.index.recharge.text"),
+          link: "Recharge",
+          icon: nav2,
+        },
+        {
+          name: i18n.t("home.index.withdraw.text"),
+          link: "Withdraw",
+          icon: nav3,
+        },
+        {
+          name: i18n.t("Today.History"),
+          link: "service",
+          icon: nav4,
+        },
+      ],
+      menu: [
+        {
+          icon: require("@/assets/img/red/usernav1.png"),
+          name: i18n.t("backapi.self.safe.text"),
+          link: "Wallet",
+        },
+        {
+          icon: require("@/assets/img/red/usernav2.png"),
+          name: i18n.t("deal_my_orders"),
+          link: "Wallet",
+        },
+        {
+          icon: require("@/assets/img/red/usernav3.png"),
+          name: i18n.t("user.Report.Management"),
+          link: "Wallet",
+        },
+        {
+          icon: require("@/assets/img/red/usernav4.png"),
+          name: i18n.t("me.security.text"),
+          link: "Wallet",
+        },
+        {
+          icon: require("@/assets/img/red/usernav5.png"),
+          name: i18n.t("help_center"),
+          link: "Wallet",
+        },
+      ],
+    };
   },
   components: {},
   computed: {
@@ -186,6 +201,16 @@ export default {
     },
   },
   methods: {
+    goTo(item) {
+      const link = item.link;
+      if (link) {
+        if (link === "service") {
+          this.$store.commit("goServe");
+          return;
+        }
+        this.$router.push({ name: item.link });
+      }
+    },
     onSelect(e) {
       this.show = false;
       this.$store.commit("setLang", e.value);
@@ -243,6 +268,67 @@ export default {
 <style scoped lang="less">
 @shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 .user-page {
+  .top-user-msg {
+    .avatrt {
+      img {
+        width: 128px;
+        height: 131px;
+      }
+    }
+    .level {
+      img {
+        width: 14px;
+        height: 12px;
+        object-fit: cover;
+      }
+    }
+    .user-name {
+      p:nth-child(1) {
+        font-size: 16px;
+      }
+    }
+    .user-num {
+      p:nth-child(1) {
+        font-size: 26px;
+      }
+    }
+  }
+  .nav {
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--primary);
+    & > li {
+      flex-direction: column;
+      width: 76px;
+      height: 70px;
+      border-radius: 8px;
+    }
+    & > li {
+      p:last-child {
+        margin-top: 6px;
+      }
+    }
+    img {
+      display: block;
+      height: 18px;
+    }
+  }
+  .menu {
+    height: 65px;
+    color: #fff;
+    .icon {
+      img {
+        width: 45px;
+        display: block;
+      }
+    }
+    .dec {
+      img {
+        width: 10px;
+        display: block;
+      }
+    }
+  }
   .content-user-lang {
     & > li {
       height: 40px;

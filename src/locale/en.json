@@ -1100,5 +1100,7 @@
   "Edt.Bank.Wallet":"Edt Wallet",
   
   "home.order.535219-0": "Orders",
-  "Today.s.Orders":"Today's Orders"
+  "Today.s.Orders":"Today's Orders",
+  "Today.History":"History",
+  "user.Report.Management":"Report Management"
 }

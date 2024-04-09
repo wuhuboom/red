@@ -88,7 +88,28 @@ export default {
   data() {
     return {
       userPic,
-      navList: [],
+      navList: [
+        {
+          name: i18n.t("backapi.self.safe.text"),
+          link: "Wallet",
+          icon: nav1,
+        },
+        {
+          name: i18n.t("home.index.recharge.text"),
+          link: "Recharge",
+          icon: nav2,
+        },
+        {
+          name: i18n.t("home.index.withdraw.text"),
+          link: "Withdraw",
+          icon: nav3,
+        },
+        {
+          name: i18n.t("backapi.self.home.tool.online.ser.text"),
+          link: "service",
+          icon: nav4,
+        },
+      ],
       swiperList: [],
       hotList: [],
       allList: [],
@@ -218,28 +239,6 @@ export default {
   created() {
     this.$store.commit("setPdTop", false);
     this.$store.dispatch("getServeData");
-    this.navList = [
-      {
-        name: this.$t("backapi.self.safe.text"),
-        link: "Wallet",
-        icon: nav1,
-      },
-      {
-        name: this.$t("home.index.recharge.text"),
-        link: "Recharge",
-        icon: nav2,
-      },
-      {
-        name: this.$t("home.index.withdraw.text"),
-        link: "Withdraw",
-        icon: nav3,
-      },
-      {
-        name: this.$t("backapi.self.home.tool.online.ser.text"),
-        link: "service",
-        icon: nav4,
-      },
-    ];
     if (this.$store.state.token) {
       this.haveUser();
     } else {
