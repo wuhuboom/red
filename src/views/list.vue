@@ -222,8 +222,7 @@ export default {
       color: var(--primary);
     }
     .active {
-      // color: #fff;
-      // background-color: var(--primary);
+      color: var(--active);
     }
   }
   ::v-deep {
