@@ -84,7 +84,7 @@ export default {
         {
           icon: require("@/assets/img/red/usernav2.png"),
           name: i18n.t("deal_my_orders"),
-          link: "Wallet",
+          link: "orderCenter",
         },
         {
           icon: require("@/assets/img/red/usernav3.png"),

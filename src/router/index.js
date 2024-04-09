@@ -250,6 +250,13 @@ const routes = [
     },
   },
   {
+    path: "/pages/user/orderCenter",
+    name: "orderCenter",
+    components: {
+      default: () => import("@/views/orderCenter.vue"),
+    },
+  },
+  {
     path: "/pages/function/billing_details",
     name: "BalanceDetails",
     components: {
