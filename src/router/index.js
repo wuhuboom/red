@@ -247,7 +247,6 @@ const routes = [
     name: "Wallet",
     components: {
       default: () => import("@/views/wallet.vue"),
-      AppBtmBar,
     },
   },
   {
