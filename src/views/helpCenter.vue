@@ -39,25 +39,25 @@ export default {
       const arr = [
         {
           icon: require("@/assets/img/red/help1.png"),
-          text: i18n.t("fuc.rebate.center"),
+          text: i18n.t("user.help.center.contact.us.text"),
           name: "SafeRecharge",
           active: false,
         },
         {
           icon: require("@/assets/img/red/help2.png"),
-          text: `${i18n.t("Data.Center.Level")}`,
+          text: `${i18n.t("user.help.center.user.notice.text")}`,
           name: "TransferSub",
           active: false,
         },
         {
           icon: require("@/assets/img/red/help3.png"),
-          text: `${i18n.t("fuc.balance.details")}`,
+          text: `${i18n.t("user.help.center.privacy.solicy.text")}`,
           name: "TransferSelf",
           active: false,
         },
         {
           icon: require("@/assets/img/red/help4.png"),
-          text: `${i18n.t("fuc.personal.security")}`,
+          text: `${i18n.t("user.help.center.technical.support.text")}`,
           name: "TransferSelf",
           active: false,
         },

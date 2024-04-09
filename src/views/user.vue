@@ -99,7 +99,7 @@ export default {
         {
           icon: require("@/assets/img/red/usernav5.png"),
           name: i18n.t("help_center"),
-          link: "Wallet",
+          link: "HelpCenter",
         },
       ],
     };
