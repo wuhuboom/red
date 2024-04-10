@@ -25,8 +25,9 @@ u
           <span class="el-dropdown-link">
             {{ choseDoc.text }}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown">
+          <el-dropdown-menu class="drop-down-list" slot="dropdown">
             <el-dropdown-item
+              :class="{ 'color-active': type === item.type }"
               @click.native="chose(item)"
               v-for="(item, idx) in typeOptions"
               :key="idx"

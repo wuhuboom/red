@@ -237,3 +237,18 @@
    flex-basis: 26px;
   }
 }
+.drop-down-list{
+  background-color: var(--bg-body);
+  border: 1px solid var(--primary);
+  margin-top: 8px !important;
+  .el-dropdown-menu__item{
+    color: var(--primary);
+    &:hover{
+      background-color: transparent !important;
+      color: var(--primary);
+    }
+  }
+  .popper__arrow{
+    display: none;
+  }
+}
