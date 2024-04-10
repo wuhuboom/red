@@ -1,7 +1,8 @@
 <template>
-  <div class="message-page">
+  <div class="message-page font12 color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('home.index.withdraw.text')"
     >
     </AppTopBar>
@@ -9,8 +10,7 @@
       <van-Loading color="#1989fa" />
     </div>
     <div v-else class="">
-      <p class="type-text py-16 px-16">{{ $t("withdray.type") }}</p>
-      <ul class="type-list">
+      <ul class="type-list p-l-12 p-r-12 m-b-8">
         <li
           v-for="(item, index) in withdrawList"
           @click="chose(item)"
@@ -25,31 +25,114 @@
           </div>
         </li>
       </ul>
-      <ul class="py-16 px-16 justify-between align-center">
-        <li class="type-text">{{ getWithdrawChooseName }}</li>
-        <li class="go-bind" @click="getWithdrawRoutingJump">
-          {{ getWithdrawBindName }}
-        </li>
-      </ul>
-
-      <div class="px-16 mb-16 menu-inpu">
-        <van-field class="">
-          <template #input>
-            <van-dropdown-menu
-              :overlay="false"
-              class="drop-menu"
-              active-color="#222222"
+      <div class="p-x-24 p-r-24">
+        <p>{{ getWithdrawChooseName }}</p>
+        <div class="justify-between align-center list-doc">
+          <div>
+            <el-select
+              v-if="typeOptions.length"
+              :placeholder="getWithdrawChooseName"
+              v-model="typeValue"
             >
-              <van-dropdown-item
-                @open="open"
-                v-model="typeValue"
-                :options="typeOptions"
-              />
-            </van-dropdown-menu>
-          </template>
-        </van-field>
+              <el-option
+                v-for="item in typeOptions"
+                :key="item.value"
+                :label="item.text"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+          <div @click="getWithdrawRoutingJump">{{ getWithdrawBindName }}</div>
+        </div>
+        <p>{{ $t("deal.buyDetail.387081-3") }}</p>
+        <div class="justify-between align-center list-doc">
+          <div>
+            <div class="black-form">
+              <van-field
+                :placeholder="`${$t('deal.buyDetail.387081-5')} ${
+                  chooseRecType.withdrawMin
+                }-${chooseRecType.withdrawMax}`"
+                v-model.trim="amount"
+                type="number"
+              >
+              </van-field>
+            </div>
+          </div>
+          <div @click="setAll">
+            {{ $t(`order.search.all.text`) }}
+          </div>
+        </div>
+        <van-form ref="form" class="black-form column-form withdraw-form">
+          <van-field
+            class="res-icon-size chose-verification"
+            autocomplete="new-password"
+            :label="$t('index.editor.psd.text')"
+            v-if="msg"
+          >
+            <template #input>
+              <van-dropdown-menu
+                class="drop-menu"
+                :overlay="false"
+                active-color="#222222"
+              >
+                <van-dropdown-item
+                  :disabled="countdown > 0"
+                  v-model.trim="form.verificationVal"
+                  :options="verificationOpt"
+                />
+              </van-dropdown-menu>
+            </template>
+          </van-field>
+          <van-field
+            class="verification-input"
+            :label="$t('form.vercode.text')"
+            v-model.trim="form.vercode"
+            v-if="msg"
+            name="vercode"
+            :rules="[
+              {
+                required: true,
+                message: $t('ruls.xxx.please', {
+                  name: $t('form.vercode.text'),
+                }),
+              },
+            ]"
+          >
+            <template #button>
+              <van-button
+                size="small"
+                @click="sendCode"
+                :disabled="countdown > 0"
+                class="code-btn center-center"
+                color="#0025fc"
+                >{{ $t("deal.chat.921073-7")
+                }}{{ countdown ? `(${countdown})` : "" }}</van-button
+              >
+            </template>
+          </van-field>
+          <van-field
+            type="password"
+            :placeholder="
+              $t(`user.security.center.bankcard.bankadd.input.pay.pass.text`)
+            "
+            autocomplete="new-password"
+            v-model.trim="form.password"
+            name="password"
+            :rules="[
+              {
+                required: true,
+                message: $t('ruls.xxx.please', {
+                  name: $t(
+                    `user.security.center.bankcard.bankadd.input.pay.pass.text`
+                  ),
+                }),
+              },
+            ]"
+          />
+        </van-form>
       </div>
-      <p class="type-text pb-16 px-16">{{ $t("deal.buyDetail.387081-3") }}</p>
+
       <div class="mx-16 count-col">
         <div class="justify-between align-center count">
           <div>
@@ -80,87 +163,8 @@
             </p>
           </div>
         </div>
-        <div class="enter-form">
-          <van-field
-            :placeholder="`${$t('deal.buyDetail.387081-5')} ${
-              chooseRecType.withdrawMin
-            }-${chooseRecType.withdrawMax}`"
-            v-model.trim="amount"
-            type="number"
-          >
-          </van-field>
-        </div>
       </div>
 
-      <van-form ref="form" class="register-form column-form withdraw-form">
-        <van-field
-          class="res-icon-size chose-verification"
-          autocomplete="new-password"
-          :label="$t('index.editor.psd.text')"
-          v-if="msg"
-        >
-          <template #input>
-            <van-dropdown-menu
-              class="drop-menu"
-              :overlay="false"
-              active-color="#222222"
-            >
-              <van-dropdown-item
-                :disabled="countdown > 0"
-                v-model.trim="form.verificationVal"
-                :options="verificationOpt"
-              />
-            </van-dropdown-menu>
-          </template>
-        </van-field>
-        <van-field
-          class="verification-input"
-          :label="$t('form.vercode.text')"
-          v-model.trim="form.vercode"
-          v-if="msg"
-          name="vercode"
-          :rules="[
-            {
-              required: true,
-              message: $t('ruls.xxx.please', {
-                name: $t('form.vercode.text'),
-              }),
-            },
-          ]"
-        >
-          <template #button>
-            <van-button
-              size="small"
-              @click="sendCode"
-              :disabled="countdown > 0"
-              class="code-btn center-center"
-              color="#0025fc"
-              >{{ $t("deal.chat.921073-7")
-              }}{{ countdown ? `(${countdown})` : "" }}</van-button
-            >
-          </template>
-        </van-field>
-        <van-field
-          class="verification-input"
-          type="password"
-          :label="
-            $t(`user.security.center.bankcard.bankadd.input.pay.pass.text`)
-          "
-          autocomplete="new-password"
-          v-model.trim="form.password"
-          name="password"
-          :rules="[
-            {
-              required: true,
-              message: $t('ruls.xxx.please', {
-                name: $t(
-                  `user.security.center.bankcard.bankadd.input.pay.pass.text`
-                ),
-              }),
-            },
-          ]"
-        />
-      </van-form>
       <div class="sumit-section px-16 py-16">
         <van-button
           class="res-van-button button-blue"
@@ -591,6 +595,15 @@ export default {
       });
       this.typeValue = this.typeOptions[0].id;
     },
+    async setAll() {
+      this.$toast.loading({
+        duration: 0,
+        forbidClick: true,
+      });
+      await this.$store.dispatch("getInfo");
+      this.amount = this.balanceMoneyNum;
+      this.$toast.clear();
+    },
   },
   created() {
     this.$store.dispatch("getInfo");
@@ -604,30 +617,23 @@ export default {
 </script>
 <style scoped lang="less">
 .message-page {
-  min-height: 100vh;
-  background-color: #f8f8f8;
   .type-text {
     font-size: 18px;
     font-weight: bold;
     color: #222;
   }
+  .list-doc {
+    background: url("@/assets/img/red/inputborder.webp") no-repeat center bottom;
+    background-size: 100% auto;
+    padding-bottom: 12px;
+  }
   .type-list {
-    padding: 0 8px;
     display: flex;
     flex-wrap: wrap;
     & > li {
-      padding: 8px;
-      width: 50%;
-      font-size: 16px;
-      color: #53668e;
+      width: 33.33%;
       .cont {
         height: 84px;
-        border-radius: 15px;
-        border: solid 1px #fff;
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -643,11 +649,12 @@ export default {
         }
       }
     }
+    & > li:nth-child(3n + 2) {
+      border-right: 1px solid var(--primary);
+      border-left: 1px solid var(--primary);
+    }
     & > li.active {
       .cont {
-        border-color: #02f;
-        background: url("~@/assets/img/chosebg.webp") no-repeat right -2px;
-        background-size: 32px 32px;
       }
     }
   }
@@ -658,11 +665,6 @@ export default {
   }
   .count {
     padding: 8px;
-  }
-  .enter-form {
-    font-size: 24px;
-    //font-weight: bold;
-    color: #222;
   }
   .pre-amount {
     padding: 8px;
@@ -706,12 +708,17 @@ export default {
       }
 
       .van-field__body {
-        border-color: transparent;
+        background: url("@/assets/img/red/inputborder.webp") no-repeat center
+          bottom;
+        background-size: 100% auto;
+        padding-bottom: 12px;
+        border: none;
+        padding-left: 0;
       }
       .verification-input {
         background-color: transparent;
         .van-field__body {
-          background-color: #fff;
+          // background-color: #fff;
         }
       }
       .van-field__label {

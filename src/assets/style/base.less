@@ -259,3 +259,47 @@
     color: var(--primary) !important;
   }
 }
+.el-select{
+  .el-input__inner,.is-disabled{
+    font-size: 12px;
+    background: none !important;
+    border: none  !important;
+    padding-left: 0;
+  }
+  .el-input__inner,.el-select__caret{
+    color: var(--primary) !important;
+  }
+ 
+}
+.el-select-dropdown{
+  background-color: var(--bg-body) !important;
+  border-color: var(--primary) !important;
+  margin-top: 0  !important;
+  .popper__arrow{
+    display: none;
+  }
+  .el-select-dropdown__item{
+    background-color: transparent;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: normal;
+    &.selected {
+      color: var(--active);
+    }
+  }
+ }
+ .black-form{
+  .van-cell{
+    background-color: transparent;
+    padding: 0;
+    font-size: 12px;
+  }
+  input[type="text"],
+    input[type="password"],
+    input[type="tel"] {
+      &,
+      &::placeholder {
+        color: #c72826;
+      }
+    }
+ }
