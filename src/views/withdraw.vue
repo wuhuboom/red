@@ -14,7 +14,7 @@
         <li
           v-for="(item, index) in withdrawList"
           @click="chose(item)"
-          :class="{ active: item.type === chooseRecType.type }"
+          :class="{ 'color-active': item.type === chooseRecType.type }"
           :key="index"
         >
           <div class="cont">
@@ -27,7 +27,7 @@
       </ul>
       <div class="p-x-24 p-r-24">
         <p>{{ getWithdrawChooseName }}</p>
-        <div class="justify-between align-center list-doc">
+        <div class="justify-between align-center list-doc m-b-4">
           <div>
             <el-select
               v-if="typeOptions.length"
@@ -63,30 +63,26 @@
             {{ $t(`order.search.all.text`) }}
           </div>
         </div>
-        <van-form ref="form" class="black-form column-form withdraw-form">
-          <van-field
-            class="res-icon-size chose-verification"
-            autocomplete="new-password"
-            :label="$t('index.editor.psd.text')"
+        <van-form ref="form" class="black-form withdraw-form">
+          <el-select
+            style="width: 100%"
             v-if="msg"
+            class="bg-select"
+            :placeholder="$t('index.editor.psd.text')"
+            v-model="form.verificationVal"
+            :disabled="countdown > 0"
           >
-            <template #input>
-              <van-dropdown-menu
-                class="drop-menu"
-                :overlay="false"
-                active-color="#222222"
-              >
-                <van-dropdown-item
-                  :disabled="countdown > 0"
-                  v-model.trim="form.verificationVal"
-                  :options="verificationOpt"
-                />
-              </van-dropdown-menu>
-            </template>
-          </van-field>
+            <el-option
+              v-for="item in verificationOpt"
+              :key="item.value"
+              :label="item.text"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+
           <van-field
-            class="verification-input"
-            :label="$t('form.vercode.text')"
+            :placeholder="$t('form.vercode.text')"
             v-model.trim="form.vercode"
             v-if="msg"
             name="vercode"
@@ -104,7 +100,7 @@
                 size="small"
                 @click="sendCode"
                 :disabled="countdown > 0"
-                class="code-btn center-center"
+                class="page-res-btn center-center"
                 color="#0025fc"
                 >{{ $t("deal.chat.921073-7")
                 }}{{ countdown ? `(${countdown})` : "" }}</van-button
@@ -131,51 +127,85 @@
             ]"
           />
         </van-form>
-      </div>
+        <div class="count-col p-t-16">
+          <div class="justify-between count-col-up align-center">
+            <div>
+              <p class="font12 flex-column center-center">
+                <span>{{ $t("recharge.usdt.rate.text") }}</span
+                ><span class="color-active">{{ chooseRecType.rate }}</span>
+              </p>
+              <p class="font12 flex-column center-center">
+                <span>{{ $t("wallet.index.balance.text") }}</span
+                ><span class="color-active">{{ balanceMoneyNum }}</span>
+              </p>
+            </div>
 
-      <div class="mx-16 count-col">
-        <div class="justify-between align-center count">
-          <div>
-            <p class="font12">
-              <span>{{ $t("recharge.usdt.rate.text") }}&nbsp;</span
-              ><span>{{ chooseRecType.rate }}</span>
-            </p>
-            <p class="font12">
-              <span>{{ $t("wallet.index.balance.text") }}&nbsp;</span
-              ><span>{{ balanceMoneyNum }}</span>
-            </p>
+            <div>
+              <p class="font12 flex-column center-center">
+                <span>{{ $t("Withdrawal.risk.fee") }}</span
+                ><span class="color-active"
+                  >{{ withdrawNumRate }}
+                  {{ chooseRecType.currencySymbol }}</span
+                >
+              </p>
+              <p class="font12 flex-column center-center">
+                <span>{{ $t("recharge.real.amount.text") }}</span
+                ><span class="color-active"
+                  >{{ actualAmountTran }}
+                  {{ chooseRecType.currencySymbol }}</span
+                >
+              </p>
+            </div>
           </div>
-
-          <div>
-            <p class="font12 rate-money">
-              <span>{{ $t("Withdrawal.risk.fee") }}</span
-              ><span
-                >≈&nbsp;{{ withdrawNumRate }}
-                {{ chooseRecType.currencySymbol }}</span
-              >
-            </p>
-            <p class="font12 rate-money blue">
-              <span>{{ $t("recharge.real.amount.text") }}</span
-              ><span
-                >≈&nbsp;{{ actualAmountTran }}
-                {{ chooseRecType.currencySymbol }}</span
-              >
-            </p>
+          <div class="sumit-section center-center">
+            <van-button
+              class="page-res-btn"
+              block
+              type="info"
+              :loading="loading"
+              @click="sumitData"
+            >
+              {{ $t("confirm.btn.text") }}</van-button
+            >
           </div>
         </div>
+        <ul class="m-t-16">
+          <li>{{ $t(`recharge.tip.title.text`) }}</li>
+          <li class="m-b-16">
+            1、{{ $t("withdraw.desc.list1") }}
+            {{ chooseRecType.everydayWithdrawFree }}
+          </li>
+          <li class="m-b-16">
+            2、{{ $t("withdraw.desc.list2") }}
+            {{ chooseRecType.everydayWithdrawTimes }}
+          </li>
+          <li class="m-b-16">
+            3、{{ $t("withdraw.desc.list3") }}
+            {{ chooseRecType.withdrawalRate }}%
+          </li>
+          <li class="m-b-16">
+            4、{{ $t("withdraw.desc.list4") }}
+            {{ chooseRecType.withdrawMax }},{{ $t("withdraw.desc.list5") }}
+            {{ chooseRecType.withdrawMin }}
+          </li>
+          <li class="m-b-16">
+            5、{{ $t("withdraw.desc.list6") }}
+            {{ chooseRecType.withdrawalToday }}
+          </li>
+          <li class="m-b-16">
+            6、{{ $t("withdraw.desc.list7") }}
+            {{ chooseRecType.withdrawalRateMin }},{{
+              $t("withdraw.desc.list8")
+            }}
+            {{ chooseRecType.withdrawalRateMax }}
+          </li>
+          <li class="m-b-16">
+            7、{{ $t("withdraw.desc.list9") }}
+            {{ chooseRecType.rate }}
+          </li>
+        </ul>
       </div>
 
-      <div class="sumit-section px-16 py-16">
-        <van-button
-          class="res-van-button button-blue"
-          block
-          type="info"
-          :loading="loading"
-          @click="sumitData"
-        >
-          {{ $t("confirm.btn.text") }}</van-button
-        >
-      </div>
       <van-dialog
         class="upload-dialog"
         :confirmButtonText="$t(`withdraw.risk.uploadTitle`)"
@@ -623,10 +653,18 @@ export default {
     color: #222;
   }
   .list-doc {
-    background: url("@/assets/img/red/inputborder.webp") no-repeat center bottom;
-    background-size: 100% auto;
-    padding-bottom: 12px;
+    min-height: 40px;
   }
+  ::v-deep {
+    .list-doc,
+    .bg-select .el-input__inner {
+      background: url("@/assets/img/red/inputborder.webp") no-repeat center
+        bottom !important;
+      background-size: 100% auto !important;
+      // padding-bottom: 12px;
+    }
+  }
+
   .type-list {
     display: flex;
     flex-wrap: wrap;
@@ -659,9 +697,15 @@ export default {
     }
   }
   .count-col {
-    border-radius: 15px;
-    background-color: #fff;
-    overflow: hidden;
+    background: url("@/assets/img/red/witbg.webp") no-repeat center bottom;
+    background-size: 100% 100%;
+    height: 116px;
+    .count-col-up {
+      & > div {
+        width: 50%;
+        text-align: center;
+      }
+    }
   }
   .count {
     padding: 8px;
@@ -699,14 +743,6 @@ export default {
 
   ::v-deep {
     .withdraw-form {
-      .chose-verification {
-        background-color: transparent;
-        .van-field__body {
-          padding-left: 0;
-          padding-right: 0;
-        }
-      }
-
       .van-field__body {
         background: url("@/assets/img/red/inputborder.webp") no-repeat center
           bottom;
@@ -714,17 +750,10 @@ export default {
         padding-bottom: 12px;
         border: none;
         padding-left: 0;
+        padding-right: 0;
       }
-      .verification-input {
-        background-color: transparent;
-        .van-field__body {
-          // background-color: #fff;
-        }
-      }
-      .van-field__label {
-        font-size: 18px;
-        font-weight: bold;
-        color: #222;
+      .van-cell {
+        margin: 0;
       }
     }
     .menu-inpu {

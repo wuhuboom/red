@@ -291,8 +291,12 @@
  .black-form{
   .van-cell{
     background-color: transparent;
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
     font-size: 12px;
+    &::after{
+      display: none;
+    }
   }
   input[type="text"],
     input[type="password"],
@@ -303,3 +307,14 @@
       }
     }
  }
+ .page-res-btn {
+  height: 18px;
+  border-radius: 9px;
+  padding: 0 8px;
+  min-width: 54px;
+  background-color: #dc2525 !important;
+  border-color: #dc2525 !important;
+  color: #fff;
+  font-size: 12px;
+  width: auto;
+}
