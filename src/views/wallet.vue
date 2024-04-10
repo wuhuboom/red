@@ -1,6 +1,7 @@
 <template>
   <div class="wallet-page font12 p-l-24 p-r-24">
     <AppTopBar
+      class="app-top-bar-black"
       :titleClass="['app-top-black-title']"
       :topBarTitle="$t('fuc.safe.text')"
     >
@@ -187,15 +188,6 @@ export default {
         width: 10px;
         display: block;
       }
-    }
-  }
-  ::v-deep {
-    .appp-top-bar {
-      background-color: var(--bg-body) !important;
-    }
-    .appp-top-bar-title,
-    .icon-button {
-      color: var(--primary) !important;
     }
   }
 }

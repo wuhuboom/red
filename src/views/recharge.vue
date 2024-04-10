@@ -1,6 +1,7 @@
 <template>
-  <div class="message-page">
+  <div class="message-page font12 color-primary">
     <AppTopBar
+      class="app-top-bar-black"
       :titleClass="['app-top-black-title']"
       :topBarTitle="$t('deal.recharge.354498-0')"
     >
@@ -10,9 +11,10 @@
     </div>
     <div v-else class="">
       <p class="type-text py-16 px-16">{{ $t("recharge.type.text") }}</p>
-      <ul class="type-list">
+      <ul class="type-list p-l-12 p-r-12">
         <li
           v-for="(item, index) in rechargeList"
+          class="p-x-12"
           @click="chose(item)"
           :class="{ active: item.id === chooseRecType.id }"
           :key="index"
@@ -195,19 +197,13 @@ export default {
   min-height: 100vh;
   background-color: #f8f8f8;
   .type-text {
-    font-size: 18px;
-    font-weight: bold;
-    color: #222;
+    text-align: center;
   }
   .type-list {
-    padding: 0 8px;
     display: flex;
     flex-wrap: wrap;
     & > li {
-      padding: 8px;
-      width: 50%;
-      font-size: 16px;
-      color: #53668e;
+      width: 33.33%;
       .cont {
         height: 84px;
         border-radius: 15px;
