@@ -7,84 +7,107 @@
     >
     </AppTopBar>
     <div class="center-center py-16" v-if="!rechargeList.length">
-      <van-Loading color="#1989fa" />
+      <van-Loading class="color-primary" />
     </div>
     <div v-else class="">
-      <p class="type-text py-16 px-16">{{ $t("recharge.type.text") }}</p>
-      <ul class="type-list p-l-12 p-r-12">
+      <ul class="type-list p-l-12 p-r-12 m-b-16">
         <li
           v-for="(item, index) in rechargeList"
           class="p-x-12"
           @click="chose(item)"
-          :class="{ active: item.id === chooseRecType.id }"
+          :class="{ 'color-active': item.id === chooseRecType.id }"
           :key="index"
         >
           <div class="cont">
-            <p class="pic center-center" v-if="item.img">
-              <img :src="item.img" alt="" />
+            <p class="pic center-center">
+              <img v-if="item.img" :src="item.img" alt="" />
             </p>
             <p class="center-center">{{ item.name }}</p>
           </div>
         </li>
       </ul>
-      <p class="type-text py-16 px-16">{{ $t("recharge.amount.text") }}</p>
-      <div class="mx-16">
-        <div class="justify-between count">
-          <p class="font12">
-            <span>{{ $t("recharge.usdt.rate.text") }}&nbsp;</span
-            ><span>
-              <!-- {{ chooseRecType.type == 1 ? "USDT" : ""
-              }} -->
-              {{ chooseRecType.rate }}</span
-            >
+      <div class="enter-form p-l-24 p-r-24 m-b-16">
+        <van-form ref="form" @submit="onSubmit">
+          <!-- :placeholder="inputPlace" -->
+          <van-field
+            v-model.trim="amount"
+            :rules="[
+              {
+                validator,
+                message: this.inputPlace,
+              },
+            ]"
+            type="number"
+          >
+            <template #button>
+              <span class="color-primary">{{
+                chooseRecType.currencySymbol
+              }}</span>
+            </template>
+          </van-field>
+          <p class="limit">
+            {{ $t(`deal.buyDetail.387081-5`) }}:{{ chooseRecType.minMax }}
           </p>
-          <p class="font12">
-            <span>{{ $t("recharge.real.amount.text") }}</span
-            ><span
-              >≈&nbsp;{{ ngnToUsdtMoney }}
-              <!-- {{ chooseRecType.currencySymbol }} -->
-            </span>
-          </p>
-        </div>
-        <div class="enter-form">
-          <van-form ref="form" @submit="onSubmit">
-            <!-- :placeholder="inputPlace" -->
-            <van-field
-              v-model.trim="amount"
-              :rules="[
-                {
-                  validator,
-                  message: this.inputPlace,
-                },
-              ]"
-              type="number"
-            >
-            </van-field>
-          </van-form>
-        </div>
+        </van-form>
       </div>
-      <ul class="pre-amount font14">
+      <ul class="pre-amount p-l-24 p-r-24 m-b-16">
         <li
           v-for="(item, idx) in quickAmountList"
           @click="amount = item"
           :key="idx"
         >
-          <div class="num center-center" :class="{ active: item == amount }">
+          <div
+            class="num center-center color-active"
+            :class="{ 'color-primary': item == amount }"
+          >
             {{ item }}
           </div>
         </li>
       </ul>
-      <div class="sumit-section px-16 py-16">
-        <van-button
-          class="res-van-button"
-          block
-          type="info"
-          :loading="loading"
-          @click="$refs.form.submit()"
-        >
-          {{ $t("recharge.button.now.text") }}</van-button
-        >
+      <div class="mx-16">
+        <div class="count text-center p-t-16">
+          <div class="justify-between">
+            <p class="flex-1 flex-column center-center">
+              <span class="m-b-4">{{ $t("recharge.usdt.rate.text") }}</span
+              ><span>
+                <!-- {{ chooseRecType.type == 1 ? "USDT" : ""
+              }} -->
+                {{ chooseRecType.rate }}</span
+              >
+            </p>
+            <p class="flex-1 flex-column center-center">
+              <span class="m-b-4">{{ $t("recharge.real.amount.text") }}</span
+              ><span
+                >{{ ngnToUsdtMoney }}
+                <!-- {{ chooseRecType.currencySymbol }} -->
+              </span>
+            </p>
+          </div>
+          <div class="sumit-section center-center m-t-8">
+            <van-button
+              block
+              class="p-l-4 p-r-4 font12"
+              type="info"
+              :loading="loading"
+              @click="$refs.form.submit()"
+            >
+              {{ $t("recharge.button.now.text") }}</van-button
+            >
+          </div>
+        </div>
       </div>
+      <ul class="p-x-24">
+        <li>{{ $t(`recharge.tip.title.text`) }}</li>
+        <li class="m-b-16">
+          {{ $t(`backapi.self.recharge.tip.content1.text`) }}
+        </li>
+        <li class="m-b-16">
+          {{ $t(`backapi.self.recharge.tip.content2.text`) }}
+        </li>
+        <li class="m-b-16">
+          {{ $t(`backapi.self.recharge.tip.content3.text`) }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -194,8 +217,6 @@ export default {
 </script>
 <style scoped lang="less">
 .message-page {
-  min-height: 100vh;
-  background-color: #f8f8f8;
   .type-text {
     text-align: center;
   }
@@ -206,12 +227,6 @@ export default {
       width: 33.33%;
       .cont {
         height: 84px;
-        border-radius: 15px;
-        border: solid 1px #fff;
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -227,42 +242,79 @@ export default {
         }
       }
     }
+    & > li:nth-child(3n + 2) {
+      border-right: 1px solid var(--primary);
+      border-left: 1px solid var(--primary);
+    }
     & > li.active {
       .cont {
-        border-color: #02f;
-        background: url("~@/assets/img/chosebg.webp") no-repeat right -2px;
-        background-size: 32px 32px;
       }
     }
   }
   .count {
-    padding: 8px;
-    border-radius: 15px;
-    background-color: #fff;
+    height: 99px;
+    background: url("@/assets/img/red/reghar.webp") no-repeat center center;
+    background-size: 100% 100%;
   }
   .enter-form {
-    font-size: 24px;
-    font-weight: bold;
-    color: #222;
+    ::v-deep {
+      .van-cell {
+        background-color: transparent;
+        padding-left: 0;
+        padding-right: 0;
+        &::after {
+          display: none;
+        }
+      }
+      .van-field__control {
+        color: var(--primary);
+      }
+      .van-field__body {
+        background: url("@/assets/img/red/inputborder.webp") no-repeat 0 12px;
+        padding-bottom: 4px;
+        background-size: 100% auto;
+        text-align: right;
+      }
+      .limit,
+      [type="text"],
+      .van-field__error-message {
+        text-align: right;
+      }
+    }
   }
   .pre-amount {
-    padding: 8px;
     display: flex;
     flex-wrap: wrap;
     & > li {
-      width: 33.33%;
-      padding: 8px;
+      width: 25%;
+      height: 24px;
+      line-height: 21px;
+      text-align: center;
+    }
+    & > li:nth-child(4n + 1) {
+      border-right: 1px solid var(--primary);
+    }
+    & > li:nth-child(4n + 2) {
+      border-right: 1px solid var(--primary);
+    }
+    & > li:nth-child(4n + 3) {
+      border-right: 1px solid var(--primary);
     }
     .num {
-      height: 42px;
-      border-radius: 12px;
-      background-color: #fff;
-      font-weight: bold;
-      color: #222;
     }
     .active {
       background-color: #10ab61;
       color: #fff;
+    }
+  }
+  .sumit-section {
+    .van-button {
+      height: 20px;
+      border-radius: 8px;
+      background-color: #dc2525;
+      border: none;
+      flex-basis: 100px;
+      white-space: nowrap;
     }
   }
 }
