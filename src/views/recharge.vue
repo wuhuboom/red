@@ -10,10 +10,10 @@
       <van-Loading class="color-primary" />
     </div>
     <div v-else class="">
-      <ul class="type-list p-l-12 p-r-12 m-b-16">
+      <ul class="type-list p-l-12 p-r-12 m-b-8">
         <li
           v-for="(item, index) in rechargeList"
-          class="p-x-12"
+          class="p-x-4"
           @click="chose(item)"
           :class="{ 'color-active': item.id === chooseRecType.id }"
           :key="index"
