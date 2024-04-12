@@ -1,5 +1,5 @@
 <template>
-  <div class="address-add font14 olor-primary">
+  <div class="address-add font12 olor-primary">
     <AppTopBar
       class="app-top-bar-black"
       :titleClass="['app-top-black-title']"
