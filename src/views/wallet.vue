@@ -70,17 +70,17 @@ export default {
         },
         {
           icon: require("@/assets/img/red/safe2.png"),
-          text: `${i18n.t("wallet.index.transfer.text")}${i18n.t(
+          text: `${i18n.t("wallet.index.transfer.text")}(${i18n.t(
             "wallet.index.for.subordinate.text"
-          )}`,
+          )})`,
           name: "TransferSub",
           active: false,
         },
         {
           icon: require("@/assets/img/red/safe3.png"),
-          text: `${i18n.t("wallet.index.transfer.text")}${i18n.t(
+          text: `${i18n.t("wallet.index.transfer.text")}(${i18n.t(
             "wallet.index.for.self.text"
-          )}`,
+          )})`,
           name: "TransferSelf",
           active: false,
         },
