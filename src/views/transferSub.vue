@@ -1,6 +1,7 @@
 <template>
   <div class="address-add font14">
     <AppTopBar
+      class="app-top-bar-black"
       :titleClass="['app-top-black-title']"
       :topBarTitle="`${$t('wallet.index.transfer.text')}( ${$t(
         'wallet.index.for.subordinate.text'
@@ -9,22 +10,20 @@
     </AppTopBar>
     <!-- v-if="!dataList.length" -->
     <div class="center-center py-16" v-if="false">
-      <van-Loading color="#1989fa" />
+      <van-Loading class="color-primary" />
     </div>
     <div v-else class="px-16 py-16">
       <van-form class="register-form column-form" @submit="onSubmit">
         <van-field
+          class="m-b-24"
           v-model.trim="form.account"
-          :label="$t('form.account.text')"
+          :placeholder="$t('form.account.text')"
           :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
         />
-        <div class="center-center icon-img py-16">
-          <img src="@/assets/img/down@2x.webp" alt="" />
-        </div>
         <van-field
           v-model.trim="form.amount"
-          placeholder="0.00"
-          :label="$t('backapi.self.safe.transfer.money.text')"
+          class="m-b-24"
+          :placeholder="$t('backapi.self.safe.transfer.money.text')"
           type="number"
           :rules="[
             {
@@ -49,11 +48,11 @@
           <span>{{ mygold }}</span>
         </p>
         <van-field
-          class="mb-16"
+          class="m-b-24"
           v-model.trim="form.password"
           type="password"
           autocomplete="new-password"
-          :label="$t('ruls.pwd2.empty')"
+          :placeholder="$t('ruls.pwd2.empty')"
           :rules="[
             {
               required: true,
