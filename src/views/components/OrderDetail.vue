@@ -94,17 +94,31 @@
           </p>
         </li>
       </ul>
+      <div class="center-center m-t-8">
+        <van-button
+          class="page-res-btn p-l-12 pr-12"
+          @click="$refs.CancleOrder.open(item)"
+          block
+          type="info"
+          >{{ $t("modal.cancel.text") }}</van-button
+        >
+      </div>
     </div>
+    <CancleOrder @sure="sure" ref="CancleOrder" />
   </van-dialog>
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 import userApi from "@/api/user";
+import CancleOrder from "@/views/components/CancleOrder.vue";
 export default {
   name: "OrderDetail",
+  components: {
+    CancleOrder,
+  },
   data() {
     return {
+      loading: false,
       load: true,
       show: false,
       game: {},
@@ -119,7 +133,6 @@ export default {
       default: 0,
     },
   },
-  components: {},
   computed: {
     getLotteyStatus() {
       if (this.betinfo.status === 1 && this.betinfo.statusSettlement === 1) {
@@ -184,6 +197,25 @@ export default {
     },
   },
   methods: {
+    async sure() {
+      this.show = false;
+      this.$toast.loading({
+        forbidClick: true,
+        duration: 0,
+      });
+      const [err] = await userApi.unbet({ betId: this.item.id });
+      if (err) {
+        if (Array.isArray(err.data) && err.data.length) {
+          this.$toast(this.$t(`backapi.${err.data[0].msgKey}`));
+        }
+        return;
+      }
+
+      await this.sleep(1000);
+      this.$toast(this.$t("wallet.index.cancel.bet.success.desc"));
+
+      this.onLoad(1);
+    },
     async getBetInfo() {
       this.load = true;
       const [err, res] = await userApi.betInfo({ betId: this.item.id });
