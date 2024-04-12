@@ -279,6 +279,13 @@ const routes = [
     },
   },
   {
+    path: "/pages/user/withdrawRecord",
+    name: "WithdrawRecord",
+    components: {
+      default: () => import("@/views/withdrawRecord.vue"),
+    },
+  },
+  {
     path: "/pages/function/rechargeHistory",
     name: "FinancialPecords",
     components: {

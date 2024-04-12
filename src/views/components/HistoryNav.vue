@@ -2,17 +2,15 @@
   <ul class="order-nav">
     <li
       :class="{ active: type === 0 }"
-      @click="$router.replace({ name: 'order' })"
+      @click="$router.replace({ name: 'FinancialPecords' })"
     >
-      <p><img src="@/assets/img/order@2x.webp" alt="" /></p>
-      <p>{{ $t("deal_my_orders") }}</p>
+      <p>{{ $t("me.recharge.text") }}</p>
     </li>
     <li
       :class="{ active: type === 1 }"
       @click="$router.replace({ name: 'trade' })"
     >
-      <p><img src="@/assets/img/orderres.webp" alt="" /></p>
-      <p>{{ $t("bet.detail.lottey.status.text") }}</p>
+      <p>{{ $t("me.withdraw.text") }}</p>
     </li>
   </ul>
 </template>
@@ -55,8 +53,11 @@ export default {
   display: flex;
   justify-content: space-between;
   color: var(--primary);
-  height: 55px;
+  height: 77px;
   padding: 8px 0;
+  background: url("@/assets/img/red/rechargeHistory.webp") no-repeat center
+    center;
+  background-size: 100% 100%;
   li {
     cursor: pointer;
     flex: 1;

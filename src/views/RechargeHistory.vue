@@ -3,11 +3,11 @@ u
   <div class="wallet-page font12 p-l-16 p-r-16 color-primary font12">
     <AppTopBar
       :titleClass="['app-top-black-title']"
-      :topBarTitle="$t('deal_my_orders')"
+      :topBarTitle="$t('Today.History')"
     >
     </AppTopBar>
-
-    <div class="tab-list">
+    <HistoryNav />
+    <div class="tab-list m-t-24">
       <ul class="tab p-b-8 p-t-8">
         <li
           class="m-r-16"
@@ -87,7 +87,7 @@ u
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
+import HistoryNav from "@/views/components/HistoryNav.vue";
 import userApi from "@/api/user";
 import i18n from "@/locale";
 const init = () => {
@@ -202,6 +202,9 @@ export default {
         totalPage: null,
       },
     };
+  },
+  components: {
+    HistoryNav,
   },
   computed: {
     choseDoc() {
