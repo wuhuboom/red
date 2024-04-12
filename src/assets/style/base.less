@@ -318,3 +318,27 @@
   font-size: 12px;
   width: auto;
 }
+.defind-form{
+  .van-field__body{
+    background: url("@/assets/img/red/item-line.webp") no-repeat center 24px;
+    background-size: 100% auto;
+    padding-bottom: 12px;
+  }
+  .van-cell{
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 12px;
+    &::after{
+      display: none;
+    }
+  }
+  input[type="text"],
+    input[type="password"],
+    input[type="tel"] {
+      &,
+      &::placeholder {
+        color: #c72826;
+      }
+    }
+ }

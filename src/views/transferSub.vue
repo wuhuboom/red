@@ -1,5 +1,5 @@
 <template>
-  <div class="address-add font14">
+  <div class="address-add font14 olor-primary">
     <AppTopBar
       class="app-top-bar-black"
       :titleClass="['app-top-black-title']"
@@ -8,12 +8,20 @@
       )})`"
     >
     </AppTopBar>
-    <!-- v-if="!dataList.length" -->
     <div class="center-center py-16" v-if="false">
       <van-Loading class="color-primary" />
     </div>
-    <div v-else class="px-16 py-16">
-      <van-form class="register-form column-form" @submit="onSubmit">
+    <div v-else class="p-l-24 p-r-24">
+      <ul class="text-center color-primary m-b-24">
+        <li class="m-b-8">
+          <p class="color-active money-str m-b-4">
+            {{ mygold }}
+          </p>
+          <p class="m-b-4">{{ $t("wallet.Account.Balance") }}</p>
+          <p><i @click="refresh" class="iconfont font14 icon-shuaxin"></i></p>
+        </li>
+      </ul>
+      <van-form class="defind-form" @submit="onSubmit">
         <van-field
           class="m-b-24"
           v-model.trim="form.account"
@@ -35,7 +43,7 @@
           <template #button>
             <van-button
               size="small"
-              class="code-btn center-center"
+              class="page-res-btn"
               native-type="button"
               @click="sendAll"
               color="#0025fc"
@@ -43,10 +51,6 @@
             >
           </template>
         </van-field>
-        <p class="mb-16 font12 balance">
-          {{ $t("wallet.index.balance.text") }}:
-          <span>{{ mygold }}</span>
-        </p>
         <van-field
           class="m-b-24"
           v-model.trim="form.password"
@@ -60,9 +64,9 @@
             },
           ]"
         />
-        <div class="sumit-section">
+        <div class="sumit-section center-center">
           <van-button
-            class="res-van-button button-blue"
+            class="page-res-btn"
             block
             type="info"
             :loading="formLoaing"
@@ -101,6 +105,14 @@ export default {
     },
   },
   methods: {
+    async refresh() {
+      this.$toast.loading({
+        duration: 0,
+        forbidClick: true,
+      });
+      await this.detailSafeInfo();
+      this.$toast.clear();
+    },
     sendAll() {
       this.form.amount = this.mygold;
     },
@@ -136,8 +148,10 @@ export default {
 </script>
 <style scoped lang="less">
 .address-add {
-  min-height: 100vh;
-  background-color: #f8f8f8;
+  .money-str {
+    font-size: 26px;
+    font-weight: 900;
+  }
   .van-cell {
     padding: 0;
     background-color: transparent;
@@ -152,23 +166,6 @@ export default {
       width: 50px;
       height: 50px;
       object-fit: cover;
-    }
-  }
-  ::v-deep {
-    .van-field__label {
-      color: #9da4b4;
-    }
-    .van-field__body {
-      border-color: #fff;
-      background-color: #fff;
-      color: #222222;
-    }
-    .code-btn {
-      min-width: 70px;
-      padding: 0 4px;
-      height: 32px;
-      border-radius: 8px;
-      background-color: #0025fc;
     }
   }
 }

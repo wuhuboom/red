@@ -1,6 +1,7 @@
 <template>
-  <div class="address-add font14">
+  <div class="address-add font12">
     <AppTopBar
+      class="app-top-bar-black"
       :titleClass="['app-top-black-title']"
       :topBarTitle="`${$t('wallet.index.transfer.text')}( ${$t(
         'wallet.index.for.self.text'
@@ -11,22 +12,24 @@
     <div class="center-center py-16" v-if="false">
       <van-Loading color="#1989fa" />
     </div>
-    <div v-else class="px-16 py-16">
-      <van-form class="register-form column-form" @submit="onSubmit">
-        <van-field
-          :value="mygold"
-          disabled
-          :label="$t(`wallet.index.balance.text`)"
-          :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
-        />
-        <div class="center-center icon-img py-16">
-          <img src="@/assets/img/down@2x.webp" alt="" />
-        </div>
+    <div v-else class="p-l-24 p-r-24">
+      <ul class="text-center color-primary m-b-24">
+        <li class="m-b-24">
+          {{ $t(`backapi.self.safe.huaz.transfer.center.desc.text`) }}
+        </li>
+        <li class="m-b-8">
+          <p class="color-active money-str m-b-4">
+            {{ mygold }}
+          </p>
+          <p class="m-b-4">{{ $t("wallet.Account.Balance") }}</p>
+          <p><i @click="refresh" class="iconfont font14 icon-shuaxin"></i></p>
+        </li>
+      </ul>
+      <van-form class="defind-form" @submit="onSubmit">
         <van-field
           v-model.trim="form.amount"
-          placeholder="0.00"
-          class="mb-16"
-          :label="$t('backapi.self.safe.transfer.money.text')"
+          class="m-b-24"
+          :placeholder="$t('backapi.self.safe.transfer.money.text')"
           type="number"
           :rules="[
             {
@@ -38,7 +41,7 @@
           <template #button>
             <van-button
               size="small"
-              class="code-btn center-center"
+              class="page-res-btn"
               native-type="button"
               @click="sendAll"
               color="#0025fc"
@@ -47,11 +50,11 @@
           </template>
         </van-field>
         <van-field
-          class="mb-16"
+          class="m-b-24"
           v-model.trim="form.password"
           type="password"
           autocomplete="new-password"
-          :label="$t('ruls.pwd2.empty')"
+          :placeholder="$t('ruls.pwd2.empty')"
           :rules="[
             {
               required: true,
@@ -59,9 +62,9 @@
             },
           ]"
         />
-        <div class="sumit-section">
+        <div class="sumit-section center-center">
           <van-button
-            class="res-van-button button-blue"
+            class="page-res-btn"
             block
             type="info"
             :loading="formLoaing"
@@ -100,6 +103,14 @@ export default {
     },
   },
   methods: {
+    async refresh() {
+      this.$toast.loading({
+        duration: 0,
+        forbidClick: true,
+      });
+      await this.detailSafeInfo();
+      this.$toast.clear();
+    },
     sendAll() {
       this.form.amount = this.mygold;
     },
@@ -142,8 +153,6 @@ export default {
 </script>
 <style scoped lang="less">
 .address-add {
-  min-height: 100vh;
-  background-color: #f8f8f8;
   .van-cell {
     padding: 0;
     background-color: transparent;
@@ -158,36 +167,6 @@ export default {
       width: 50px;
       height: 50px;
       object-fit: cover;
-    }
-  }
-  ::v-deep {
-    .van-field__label {
-      color: #9da4b4;
-    }
-    .van-field__body {
-      border-color: #fff;
-      background-color: #fff;
-      color: #222222;
-    }
-    .code-btn {
-      min-width: 70px;
-      padding: 0 4px;
-      height: 32px;
-      border-radius: 8px;
-      background-color: #0025fc;
-    }
-    .van-field--disabled {
-      .van-field__body {
-        background-color: transparent;
-        border-bottom: 1px solid #fff;
-        border-color: transparent;
-        border-bottom-color: #d5d5d5;
-        border-radius: 0;
-      }
-      .van-field__control:disabled {
-        color: #222222;
-        -webkit-text-fill-color: initial;
-      }
     }
   }
 }
