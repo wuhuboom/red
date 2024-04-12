@@ -282,7 +282,8 @@ const routes = [
     path: "/pages/function/rechargeHistory",
     name: "FinancialPecords",
     components: {
-      default: () => import("@/views/financialPecords.vue"),
+      //RechargeHistory
+      default: () => import("@/views/RechargeHistory.vue"),
     },
   },
   {

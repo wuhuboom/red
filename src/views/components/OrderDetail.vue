@@ -4,31 +4,39 @@
     :showConfirmButton="false"
     :showCancelButton="false"
     :closeOnClickOverlay="true"
+    class="order-detail-dialog color-primary p-b-32"
   >
     <div v-if="load" class="px-16 py-16 center-center">
-      <van-loading color="#1989fa" />
+      <van-loading />
     </div>
 
-    <div v-else class="order-detail">
-      <ul class="head">
-        <li class="game-info font-12">
-          {{ betinfo.gameInfo | removeEsports }}
+    <div v-else class="order-detail p-l-12 p-r-12 font12">
+      <ul class="text-center p-t-24 p-b-24 head-score">
+        <li>{{ $t(`bet.detail.title.text`) }}</li>
+        <li class="color-active bet-score p-t-8 p-b-8">
+          {{ betinfo.betScore }}
         </li>
-        <li class="align-center name main-name font14">
-          <p class="pic">
-            <img :src="game.mainLogo" alt="" />
-          </p>
+        <li>{{ $t(`bet.detail.score.text`) }}</li>
+      </ul>
+      <ul class="head center-center">
+        <li class="align-center name main-name">
           <p>{{ game.mainName | removeEsports }}</p>
         </li>
-        <li class="align-center name font14">
-          <p class="pic">
-            <img :src="game.guestLogo" alt="" />
-          </p>
+        <li class="m-r-4 m-l-4">vs</li>
+        <li class="align-center name">
           <p>{{ game.guestName | removeEsports }}</p>
         </li>
       </ul>
-      <ul class="head list font14">
-        <li class="game-info justify-between align-center">
+      <ul class="head list">
+        <li class="game-info justify-between align-center p-b-24">
+          <p style="white-space: nowrap" class="p-r-8">
+            {{ $t("bet.detail.team.text") }}
+          </p>
+          <p class="app-ellipsis">
+            {{ betinfo.gameInfo | removeEsports }}
+          </p>
+        </li>
+        <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.screenings.text") }}</p>
           <p>
             {{
@@ -40,46 +48,52 @@
             }}
           </p>
         </li>
-        <li class="game-info justify-between align-center">
+        <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.score.text") }}</p>
           <p>
             {{ betinfo.betScore }}
           </p>
         </li>
-        <li class="game-info justify-between align-center">
+        <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.odds.text") }}</p>
           <p>
             {{ betinfo.betOdds }}
           </p>
         </li>
-        <li class="game-info justify-between align-center">
+        <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.bet.num.text") }}</p>
           <p>
             {{ numToFixed(betinfo.betMoney, $globalUnit.val) / $globalNum.val }}
           </p>
         </li>
-        <li class="game-info justify-between align-center">
+        <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.loss.text") }}</p>
           <p>
             {{ getLoss }}
           </p>
         </li>
-        <li class="game-info justify-between align-center">
+        <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.start.time.text") }}</p>
           <p>
             {{ game.startTimeStr }}
           </p>
         </li>
-        <li class="game-info justify-between align-center">
+        <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.lottey.status.text") }}</p>
           <p :class="[getLotteyStatusClass]">
             {{ getLotteyStatus }}
           </p>
         </li>
+        <li
+          class="game-info justify-between align-center p-b-24"
+          v-if="betinfo.status == 3"
+        >
+          <p>{{ $t("recharge.Status") }}</p>
+          <p>
+            {{ $t("order.canceled") }}
+          </p>
+        </li>
       </ul>
-      <div class="canceled" v-if="betinfo.status == 3">
-        <p class="center-center">{{ $t("order.canceled") }}</p>
-      </div>
     </div>
   </van-dialog>
 </template>
@@ -191,14 +205,24 @@ export default {
 };
 </script>
 <style scoped lang="less">
+.order-detail-dialog {
+  background: url("@/assets/img/red/event.webp") transparent no-repeat center
+    bottom;
+  background-size: 100% 100%;
+}
 .order-detail {
-  font-size: 14px;
+  .bet-score {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .head-score {
+    border-bottom: solid 1px #484b4c;
+  }
   .game-info {
-    color: #797d86;
   }
   .head {
-    padding: 16px 30px 16px;
-    border-bottom: 1px solid #e6e6e6;
+    // padding: 16px 30px 16px;
+    // border-bottom: 1px solid #e6e6e6;
   }
   .main-name {
     padding: 10px 0;
@@ -214,22 +238,17 @@ export default {
     }
   }
   .name {
-    color: #17191c;
   }
   .list {
-    color: #475467;
     li > p:nth-child(2) {
-      color: #222;
     }
     li {
       padding-bottom: 10px;
     }
   }
   .notwin_state {
-    color: #10ab61 !important;
   }
   .win_state {
-    color: #e5142e !important;
   }
   .canceled {
     padding: 15px 15px 22px;
@@ -237,7 +256,6 @@ export default {
       height: 40px;
       border-radius: 8px;
       background-color: #acaab3;
-      color: #fff;
     }
   }
 }

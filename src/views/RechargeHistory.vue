@@ -6,6 +6,7 @@ u
       :topBarTitle="$t('deal_my_orders')"
     >
     </AppTopBar>
+
     <div class="tab-list">
       <ul class="tab p-b-8 p-t-8">
         <li
@@ -21,20 +22,26 @@ u
     </div>
     <ul class="drop-list justify-between align-center m-b-12">
       <li>
-        <el-dropdown class="align-center color-primary" trigger="click">
-          <span class="el-dropdown-link">
-            {{ choseDoc.text }}<i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu class="drop-down-list" slot="dropdown">
-            <el-dropdown-item
-              :class="{ 'color-active': type === item.type }"
-              @click.native="chose(item)"
-              v-for="(item, idx) in typeOptions"
-              :key="idx"
-              >{{ item.text }}</el-dropdown-item
-            >
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-select v-model="status" @change="changeStatus">
+          <el-option
+            v-for="item in inputSearchListItemArray"
+            :key="item.id"
+            :label="item.text"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+      </li>
+      <li>
+        <el-select v-model="type" @change="changeSType">
+          <el-option
+            v-for="item in inputSearchListItemArray_type"
+            :key="item.id"
+            :label="item.text"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
       </li>
       <li class="search center-center" @click="searchLoad">
         {{ $t("backapi.self.bank.search.text") }}
@@ -65,38 +72,41 @@ u
             {{ item.createdAt | timestampStr }}
           </van-grid-item>
           <van-grid-item class="color-fff">
-            {{ numToFixed(item.betMoney, $globalUnit.val) / $globalNum.val }}
+            {{ getType(+item.type) }}
           </van-grid-item>
           <van-grid-item class="color-fff">
-            {{
-              numToFixed(statusToStr(item), $globalUnit.val) / $globalNum.val
-            }}
+            {{ numToFixed(item.money, $globalUnit.val) / $globalNum.val }}
           </van-grid-item>
-          <van-grid-item class="color-active" @click="getDetail(item)">
-            {{ $t("table.head.detail.text") }}
+          <van-grid-item class="color-active">
+            {{ getState(+item.status) }}
           </van-grid-item>
         </van-grid>
       </div>
     </van-list>
-    <OrderDetail ref="OrderDetail" />
   </div>
 </template>
 
 <script>
-import OrderDetail from "@/views/components/OrderDetail.vue";
+// eslint-disable-next-line no-unused-vars
 import userApi from "@/api/user";
 import i18n from "@/locale";
+const init = () => {
+  return {
+    type: 0,
+    status: 0,
+  };
+};
 export default {
   name: "OrderCenterView",
   data() {
     return {
-      type: 1,
+      ...init(),
       filterTab: 1,
       head: [
         i18n.t("bet.index.date.text"),
+        i18n.t("rebate.center.list.nav.type.text"),
         i18n.t("rebate.center.list.nav.smount.text"),
-        i18n.t("table.head.loss.text"),
-        i18n.t("table.head.detail.text"),
+        i18n.t("recharge.Status"),
       ],
       typeOptions: [
         {
@@ -130,6 +140,58 @@ export default {
           id: 5,
         },
       ],
+      inputSearchListItemArray_type: [
+        {
+          text: i18n.t("recharge.All.Type"),
+          id: 0,
+        },
+        {
+          text: i18n.t("recharge.On.line"),
+          id: 1,
+        },
+        {
+          text: i18n.t("recharge.Offline"),
+          id: 2,
+        },
+      ],
+      inputSearchListItemArray: [
+        {
+          text: this.$t("recharge.All.Status"),
+          id: 0,
+        },
+        {
+          text: i18n.t("recharge.record.status.pendding.text"),
+          id: 1,
+        },
+        {
+          text: i18n.t("recharge.Examination.Passed"),
+          id: 2,
+        },
+      ],
+      statusArr: [
+        {
+          text: i18n.t("recharge.All.Status"),
+          id: 0,
+        },
+        {
+          text: i18n.t("recharge.record.status.pendding.text"),
+          id: 1,
+        },
+        {
+          text: i18n.t("recharge.Arrives"),
+          id: 2,
+        },
+        {
+          text: i18n.t("recharge.record.center.show.detail.status.scored.text"),
+          id: 3,
+        },
+        {
+          text: i18n.t(
+            "recharge.record.center.show.detail.status.pay.timeout.text"
+          ),
+          id: 4,
+        },
+      ],
       loading: false,
       curItem: {
         hasNext: true,
@@ -140,9 +202,6 @@ export default {
         totalPage: null,
       },
     };
-  },
-  components: {
-    OrderDetail,
   },
   computed: {
     choseDoc() {
@@ -173,11 +232,40 @@ export default {
     },
   },
   methods: {
-    getDetail(item) {
-      this.$refs.OrderDetail.open(item);
+    getType(value) {
+      const doc = this.inputSearchListItemArray_type.find(
+        (item) => item.id === value
+      );
+      if (doc) {
+        return doc.text;
+      }
+      return "--";
+    },
+    getState(value) {
+      const doc = this.statusArr.find((item) => item.id === value);
+      if (doc) {
+        return doc.text;
+      }
+      return "--";
     },
     chose(v) {
       this.type = v.type;
+      this.$toast.loading({
+        forbidClick: true,
+        duration: 0,
+      });
+      this.onLoad(1);
+    },
+    changeStatus(v) {
+      this.status = v;
+      this.$toast.loading({
+        forbidClick: true,
+        duration: 0,
+      });
+      this.onLoad(1);
+    },
+    changeSType(v) {
+      this.type = v;
       this.$toast.loading({
         forbidClick: true,
         duration: 0,
@@ -190,6 +278,7 @@ export default {
         duration: 0,
       });
       this.filterTab = v;
+      Object.assign(this.$data, init());
       await this.onLoad(1);
     },
     async searchLoad() {
@@ -199,16 +288,48 @@ export default {
       });
       await this.onLoad(1);
     },
+    realTypeName(realTypeName, typeNum) {
+      // console.log("realTypeName", realTypeName);
+      let tempFindArray = [];
+      if (typeNum === 1) {
+        //支付状态
+        tempFindArray = this.inputSearchListItemArray;
+      } else if (typeNum === 2) {
+        //支付类型,线上、线下
+        tempFindArray = this.inputSearchListItemArray_type;
+      }
+
+      // console.log("tempFindArray",tempFindArray);
+      let tempArray = tempFindArray.find((itemT) => {
+        if (itemT.id === realTypeName) {
+          return itemT;
+        }
+      });
+      // console.log("tempArray",tempArray);
+      // return tempArray.nameStr
+      if (tempArray) {
+        return tempArray.nameStr;
+      } else {
+        return this.$t(
+          "recharge.record.center.show.detail.status.pay.other.text"
+        );
+      }
+    },
     async onLoad(num) {
       const time = this.filterTab;
       const pageNo = !isNaN(num) ? num : this.curItem.pageNo;
       const obj = {
         time: time,
-        type: this.type,
         pageNo: pageNo,
         pageSize: this.curItem.pageSize,
       };
-      const [err, res] = await userApi.listBets(obj);
+      if (this.status) {
+        obj.status = this.status;
+      }
+      if (this.type) {
+        obj.type = this.type;
+      }
+      const [err, res] = await userApi.rechargeLogReq(obj);
       this.loading = false;
       if (err) {
         if (err.code == 409) {
@@ -235,10 +356,6 @@ export default {
 .wallet-page {
   .money-str {
     font-size: 26px;
-    font-weight: 900;
-  }
-  .bet-score {
-    font-size: 20px;
     font-weight: 900;
   }
   .black-line {

@@ -1103,5 +1103,14 @@
   "Today.s.Orders":"Today's Orders",
   "Today.History":"History",
   "user.Report.Management":"Report Management",
-  "Data.Center.Level":"Data Center Level 1-3"
+  "Data.Center.Level":"Data Center Level 1-3",
+  "recharge.Arrives":"Arrives",
+  "recharge.All.Status":"All Status",
+  "recharge.Examination.Passed":"Examination Passed",
+  "recharge.All.Type":"All Type",
+  "recharge.On.line":"On-line",
+  "recharge.Offline":"Offline",
+  "recharge.Status":"Status",
+  "recharge.record.center.show.detail.status.scored.text": "Scored",
+	"recharge.record.center.show.detail.status.pay.timeout.text": "payment timeout"
 }

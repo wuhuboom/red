@@ -71,7 +71,7 @@ export default {
         },
         {
           name: i18n.t("Today.History"),
-          link: "service",
+          link: "FinancialPecords",
           icon: nav4,
         },
       ],
