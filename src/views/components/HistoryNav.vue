@@ -54,7 +54,7 @@ export default {
 .order-nav {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid var(--primary);
+  color: var(--primary);
   height: 55px;
   padding: 8px 0;
   li {
@@ -64,7 +64,6 @@ export default {
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    color: #333;
     flex-direction: column;
     position: relative;
     & > p:nth-child(2) {
@@ -82,15 +81,7 @@ export default {
       justify-content: center;
     }
     &.active {
-      &::after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 2px;
-        background-color: var(--primary);
-        position: absolute;
-        bottom: -8px;
-      }
+      color: var(--active);
     }
   }
 }

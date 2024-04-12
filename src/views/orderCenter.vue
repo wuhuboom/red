@@ -1,12 +1,13 @@
 u
 <template>
-  <div class="wallet-page font12 p-l-16 p-r-16 color-primary font12">
+  <div class="wallet-page font12 color-primary font12">
     <AppTopBar
       :titleClass="['app-top-black-title']"
       :topBarTitle="$t('deal_my_orders')"
     >
     </AppTopBar>
-    <div class="tab-list">
+    <HistoryNav />
+    <div class="tab-list m-l-16 m-r-16">
       <ul class="tab p-b-8 p-t-8">
         <li
           class="m-r-16"
@@ -19,7 +20,7 @@ u
         </li>
       </ul>
     </div>
-    <ul class="drop-list justify-between align-center m-b-12">
+    <ul class="drop-list justify-between align-center m-b-12 m-l-16 m-r-16">
       <li>
         <el-dropdown class="align-center color-primary" trigger="click">
           <span class="el-dropdown-link">
@@ -84,6 +85,7 @@ u
 
 <script>
 import OrderDetail from "@/views/components/OrderDetail.vue";
+import HistoryNav from "@/views/components/HistoryNav.vue";
 import userApi from "@/api/user";
 import i18n from "@/locale";
 export default {
@@ -143,6 +145,7 @@ export default {
   },
   components: {
     OrderDetail,
+    HistoryNav,
   },
   computed: {
     choseDoc() {

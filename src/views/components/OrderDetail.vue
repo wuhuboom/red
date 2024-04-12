@@ -94,7 +94,7 @@
           </p>
         </li>
       </ul>
-      <div class="center-center m-t-8">
+      <div class="center-center m-t-8" v-if="wait">
         <van-button
           class="page-res-btn p-l-12 pr-12"
           @click="$refs.CancleOrder.open(item)"
@@ -134,6 +134,9 @@ export default {
     },
   },
   computed: {
+    wait() {
+      return this.item.status == 1 && this.item.statusOpen == 0;
+    },
     getLotteyStatus() {
       if (this.betinfo.status === 1 && this.betinfo.statusSettlement === 1) {
         if (this.betinfo.winningAmount > this.betinfo.betMoney) {
