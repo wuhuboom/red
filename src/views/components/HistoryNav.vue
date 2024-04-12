@@ -8,7 +8,7 @@
     </li>
     <li
       :class="{ active: type === 1 }"
-      @click="$router.replace({ name: 'trade' })"
+      @click="$router.replace({ name: 'WithdrawRecord' })"
     >
       <p>{{ $t("me.withdraw.text") }}</p>
     </li>

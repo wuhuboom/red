@@ -6,7 +6,7 @@ u
       :topBarTitle="$t('Today.History')"
     >
     </AppTopBar>
-    <HistoryNav />
+    <HistoryNav :type="1" />
     <div class="tab-list m-t-24">
       <ul class="tab p-b-8 p-t-8">
         <li
@@ -32,17 +32,7 @@ u
           </el-option>
         </el-select>
       </li>
-      <li>
-        <el-select v-model="type" @change="changeSType">
-          <el-option
-            v-for="item in inputSearchListItemArray_type"
-            :key="item.id"
-            :label="item.text"
-            :value="item.id"
-          >
-          </el-option>
-        </el-select>
-      </li>
+
       <li class="search center-center" @click="searchLoad">
         {{ $t("backapi.self.bank.search.text") }}
       </li>
@@ -80,6 +70,9 @@ u
           <van-grid-item class="color-active">
             {{ getState(+item.status) }}
           </van-grid-item>
+          <div class="color-active" v-if="item.status === 3">
+            {{ $t("withdraw.record.status.fail.text") }}：{{ item.remark }}
+          </div>
         </van-grid>
       </div>
     </van-list>
@@ -192,6 +185,60 @@ export default {
           id: 4,
         },
       ],
+      typeList: [
+        {
+          nameStr: this.$t("withdraw.record.center.show.detail.type.bank.text"),
+          valueNum: 1,
+        },
+        {
+          nameStr: this.$t("withdraw.record.center.show.detail.usdt.bank.text"),
+          valueNum: 2,
+        },
+        {
+          nameStr: this.$t(
+            "backapi.self.whitdraw.type.ewallet.form.wallet.addr.text"
+          ),
+          valueNum: 4,
+        },
+      ],
+      statusList: [
+        {
+          nameStr: this.$t("withdraw.record.status.need.audit.text"),
+          valueNum: 1,
+        },
+        {
+          nameStr: this.$t("withdraw.record.status.already.audit.text"),
+          valueNum: 2,
+        },
+        {
+          nameStr: this.$t("withdraw.failed"),
+          valueNum: 3,
+        },
+        {
+          nameStr: this.$t("withdraw.record.status.withdraw.success.text"),
+          valueNum: 4,
+        },
+        {
+          nameStr: this.$t("withdraw.record.status.paid.in.text"),
+          valueNum: 5,
+        },
+        {
+          nameStr: this.$t("backapi.self.pay.failed.text"),
+          valueNum: 6,
+        },
+        {
+          nameStr: this.$t("withdraw.record.status.operation.in.text"),
+          valueNum: 7,
+        },
+        {
+          nameStr: this.$t("withdraw.record.status.redo.in.text"),
+          valueNum: 8,
+        },
+        {
+          nameStr: this.$t("backapi.self.pay.failed.text"),
+          valueNum: 9,
+        },
+      ],
       loading: false,
       curItem: {
         hasNext: true,
@@ -236,18 +283,16 @@ export default {
   },
   methods: {
     getType(value) {
-      const doc = this.inputSearchListItemArray_type.find(
-        (item) => item.id === value
-      );
-      if (doc) {
-        return doc.text;
+      if (value) {
+        let res = this.typeList.find((item) => item.valueNum === value);
+        return res.nameStr;
       }
       return "--";
     },
     getState(value) {
-      const doc = this.statusArr.find((item) => item.id === value);
-      if (doc) {
-        return doc.text;
+      const res = this.statusList.find((item) => item.valueNum === value);
+      if (res) {
+        return res.nameStr;
       }
       return "--";
     },
@@ -332,7 +377,7 @@ export default {
       if (this.type) {
         obj.type = this.type;
       }
-      const [err, res] = await userApi.rechargeLogReq(obj);
+      const [err, res] = await userApi.withdrawLogReq(obj);
       this.loading = false;
       if (err) {
         if (err.code == 409) {
