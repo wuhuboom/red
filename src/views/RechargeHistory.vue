@@ -164,7 +164,7 @@ export default {
           id: 1,
         },
         {
-          text: i18n.t("recharge.Examination.Passed"),
+          text: i18n.t("recharge.Arrives"),
           id: 2,
         },
       ],
