@@ -1,52 +1,43 @@
 <!-- eslint-disable no-unused-vars -->
 <template>
-  <div class="agency-page font14">
+  <div class="agency-page font12 color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('fuc.rebate.center')"
     >
     </AppTopBar>
     <!-- v-if="!dataList.length" -->
     <div class="center-center py-16" v-if="totalNum === null">
-      <van-Loading color="#1989fa" />
+      <van-Loading class="color-primary" />
     </div>
     <div v-else>
-      <div class="agency px-16">
-        <ul class="agency-lst mb-16">
-          <li class="flex-column num-up px-16 py-16">
-            <div>
-              <p>{{ $t("backapi.self.rebate.top.content.total.text") }}</p>
-              <p class="big-num">
-                {{ numToFixed(totalNum, $globalUnit.val) / $globalNum.val }}
-              </p>
-            </div>
-            <div class="align-center">
-              <p>{{ $t("backapi.self.rebate.top.content.lastweek.text") }}</p>
-              <p class="week-num">
-                {{ numToFixed(lastWeekNum, $globalUnit.val) / $globalNum.val }}
-              </p>
-            </div>
+      <div class="agency px-16 m-b-24">
+        <ul class="agency-lst d-flex flex-wrap p-x-16">
+          <li class="m-b-16 p-b-8 border-active">
+            <p>{{ $t("backapi.self.rebate.top.content.total.text") }}</p>
+            <p class="color-active">
+              {{ numToFixed(totalNum, $globalUnit.val) / $globalNum.val }}
+            </p>
           </li>
-          <li class="num-btm justify-around align-center">
-            <div>
-              <p>{{ $t("backapi.self.rebate.top.content.today.text") }}</p>
-              <p class="mid-num">
-                {{ numToFixed(todayNum, $globalUnit.val) / $globalNum.val }}
-              </p>
-            </div>
-            <div>
-              <p>{{ $t("backapi.self.rebate.top.content.week.text") }}</p>
-              <p class="mid-num">
-                {{ numToFixed(weekNum, $globalUnit.val) / $globalNum.val }}
-              </p>
-            </div>
+          <li class="m-b-16 p-b-8 border-active">
+            <p>{{ $t("backapi.self.rebate.top.content.lastweek.text") }}</p>
+            <p class="color-active">
+              {{ numToFixed(lastWeekNum, $globalUnit.val) / $globalNum.val }}
+            </p>
           </li>
-        </ul>
-      </div>
-      <div class="px-16 mb-16">
-        <ul class="type-head justify-between">
-          <li>{{ $t("rebate.center.list.nav.type.text") }}</li>
-          <li>{{ $t("rebate.center.list.nav.smount.text") }}</li>
+          <li>
+            <p>{{ $t("backapi.self.rebate.top.content.today.text") }}</p>
+            <p class="color-active">
+              {{ numToFixed(todayNum, $globalUnit.val) / $globalNum.val }}
+            </p>
+          </li>
+          <li>
+            <p>{{ $t("backapi.self.rebate.top.content.week.text") }}</p>
+            <p class="color-active">
+              {{ numToFixed(weekNum, $globalUnit.val) / $globalNum.val }}
+            </p>
+          </li>
         </ul>
       </div>
       <van-list
@@ -60,25 +51,28 @@
           <NoData />
         </div>
         <div v-else class="px-16 p-16">
-          <ul
-            class="d-flex list"
-            :class="{ 'list-add': add(item) }"
+          <van-grid class="color-primary m-b-8" :border="false" :column-num="3">
+            <van-grid-item v-for="value in head" :key="value">
+              {{ value }}
+            </van-grid-item>
+          </van-grid>
+          <van-grid
+            class="color-primary m-b-8"
             v-for="(item, idx) in curItem.results"
             :key="idx"
+            :border="false"
+            :column-num="3"
           >
-            <li class="pic center-center">
-              <img :src="add(item) ? icon2 : icon1" alt="" />
-            </li>
-            <li class="txt flex-1">
-              <p>{{ getType(item.type) }}</p>
-              <p class="font12">
-                {{ formatDate(item.ymd, "yyyy-MM-dd") }}
-              </p>
-            </li>
-            <li class="center-center num">
+            <van-grid-item class="color-fff">
+              {{ item.ymd }}
+            </van-grid-item>
+            <van-grid-item class="color-fff">
+              {{ getType(item.type) }}
+            </van-grid-item>
+            <van-grid-item class="color-fff">
               {{ numToFixed(item.money, $globalUnit.val) / $globalNum.val }}
-            </li>
-          </ul>
+            </van-grid-item>
+          </van-grid>
         </div>
       </van-list>
     </div>
@@ -86,13 +80,18 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
+import i18n from "@/locale";
 import userApi from "@/api/user";
 import NoData from "@/components/global/NoData.vue";
 export default {
   name: "AebateView",
   data() {
     return {
+      head: [
+        i18n.t("bet.index.date.text"),
+        i18n.t("rebate.center.list.nav.type.text"),
+        i18n.t("rebate.center.list.nav.smount.text"),
+      ],
       icon1: require("@/assets/img/billing1.webp"),
       icon2: require("@/assets/img/billing2.webp"),
       detail: {},
@@ -178,35 +177,25 @@ export default {
 </script>
 <style scoped lang="less">
 .agency-page {
-  min-height: 100vh;
-  background-color: #f8f8f8;
-  color: var(--color-text);
-
+  ::v-deep {
+    .van-grid-item__content {
+      background-color: transparent;
+      padding: 0;
+      text-align: center;
+    }
+    .van-grid {
+      flex-wrap: nowrap;
+    }
+  }
   .agency-lst {
     border-radius: 10px;
-    background-image: linear-gradient(to bottom, #0f3aff, #5374f6);
-    color: #fff;
-    overflow: hidden;
-    .num-up {
-      padding-bottom: 20px;
+    border: 1px solid var(--primary);
+    text-align: center;
+    & > li {
+      width: 50%;
     }
-    .big-num {
-      font-size: 22px;
-      font-weight: bold;
-      padding: 4px 0 10px;
-    }
-    .week-num {
-      margin-left: 4px;
-      color: #adf68d;
-    }
-    .num-btm {
-      height: 68px;
-      background-color: #60b33f;
-      text-align: center;
-      .mid-num {
-        font-weight: bold;
-        margin-top: 10px;
-      }
+    .border-active {
+      border-bottom: 1px solid var(--active);
     }
   }
   .type-head {

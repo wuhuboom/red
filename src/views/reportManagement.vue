@@ -40,7 +40,7 @@ export default {
         {
           icon: require("@/assets/img/red/report1.png"),
           text: i18n.t("fuc.rebate.center"),
-          name: "SafeRecharge",
+          name: "Rebate",
           active: false,
         },
         {

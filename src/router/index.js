@@ -246,7 +246,6 @@ const routes = [
     name: "Rebate",
     components: {
       default: () => import("@/views/rebate.vue"),
-      AppBtmBar,
     },
   },
   {
