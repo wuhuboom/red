@@ -3,7 +3,7 @@
     <AppTopBar
       class="app-top-bar-black"
       :titleClass="['app-top-black-title']"
-      :topBarTitle="$t('backapi.self.safe.bill.data.text')"
+      :topBarTitle="$t(`wallet.index.explanation.text`)"
     >
     </AppTopBar>
     <!-- v-if="!dataList.length" -->
