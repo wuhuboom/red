@@ -1,6 +1,7 @@
 <template>
-  <div class="safe-billing font14 pb-16">
+  <div class="safe-billing font12 color-primary pb-16">
     <AppTopBar
+      class="app-top-bar-black"
       :titleClass="['app-top-black-title']"
       :topBarTitle="$t('backapi.self.safe.bill.data.text')"
     >
@@ -10,52 +11,54 @@
       <van-Loading color="#1989fa" />
     </div>
     <div v-else class="">
-      <ul class="billing-head pt-16">
-        <li class="capitalize" v-for="(item, idx) in tabsList" :key="idx">
-          <div
-            @click="changTab(item)"
-            :class="{ active: item.value == tabCurrent }"
-            class="cont center-center"
-          >
-            {{ item.label }}
-          </div>
+      <ul class="drop-list justify-between align-center m-b-12 m-l-16 m-r-16">
+        <li>
+          <el-select v-model="tabCurrent" @change="changTab">
+            <el-option
+              v-for="item in tabsList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </li>
       </ul>
       <van-list
         v-model="loading"
         :finished="curItem.data.hasNext === false"
-        :finished-text="nothing ? '' : 'No More'"
         loading-text="loading"
         @load="onLoad"
       >
-        <div class="px-16 p-16">
-          <ul
-            class="d-flex list"
-            :class="{ 'list-add': add(item) }"
+        <div class="p-l-16 p-r-16">
+          <van-grid class="color-primary m-b-8" :border="false" :column-num="3">
+            <van-grid-item v-for="value in head" :key="value">
+              {{ value }}
+            </van-grid-item>
+          </van-grid>
+          <van-grid
+            class="color-primary m-b-8"
             v-for="(item, idx) in curItem.data.results"
             :key="idx"
+            :border="false"
+            :column-num="3"
           >
-            <li class="pic center-center">
-              <img :src="add(item) ? icon2 : icon1" alt="" />
-            </li>
-            <li class="txt flex-1">
-              <p class="capitalize">{{ dataTxt(item) }}</p>
-              <p class="font12">
-                {{ formatDate(item.createdAt, "yyyy-MM-dd hh:mm:ss") }}
-              </p>
-            </li>
-            <li class="center-center num">
+            <van-grid-item class="color-fff">
+              {{ item.createdAt | timestampStr }}
+            </van-grid-item>
+            <van-grid-item class="color-fff">
+              {{ dataTxt(item) }}
+            </van-grid-item>
+            <van-grid-item class="color-fff">
               {{
                 numToFixed(item.changeMoney, $globalUnit.val) / $globalNum.val
               }}
-            </li>
-          </ul>
+            </van-grid-item>
+          </van-grid>
         </div>
       </van-list>
-      <p class="center-center nothing" v-if="nothing">
-        <img src="@/assets/img/noting.webp" alt="" />
-        <span class="center-center">No Data</span>
-      </p>
+
+      <NoData v-if="nothing" />
     </div>
   </div>
 </template>
@@ -80,6 +83,11 @@ export default {
   name: "SafeBillingView",
   data() {
     return {
+      head: [
+        i18n.t("bet.index.date.text"),
+        i18n.t("rebate.center.list.nav.type.text"),
+        i18n.t("rebate.center.list.nav.smount.text"),
+      ],
       loading: false,
       icon1: require("@/assets/img/billing1.webp"),
       icon2: require("@/assets/img/billing2.webp"),
@@ -143,9 +151,10 @@ export default {
       return doc.label;
     },
     changTab(item) {
-      this.tabCurrent = item.value;
-      if (this.curItem.data.totalPage !== null) return;
-      this.onLoad();
+      console.log(item);
+      // //this.tabCurrent = item.value;
+      // if (this.curItem.data.totalPage !== null) return;
+      this.onLoad(1);
       this.$toast.loading({
         forbidClick: true,
         duration: 0,
@@ -201,8 +210,29 @@ export default {
 </script>
 <style scoped lang="less">
 .safe-billing {
-  background-color: #f8f8f8;
-  min-height: 100vh;
+  ::v-deep {
+    .van-grid-item__content {
+      background-color: transparent;
+      padding: 0;
+      text-align: center;
+    }
+    .van-grid {
+      flex-wrap: nowrap;
+    }
+  }
+
+  .drop-list {
+    height: 32px;
+    border-bottom: 1px solid #484b4c;
+    border-top: 1px solid #484b4c;
+    .search {
+      min-width: 74px;
+      height: 18px;
+      border-radius: 8px;
+      background-color: #dc2525;
+      color: #fff;
+    }
+  }
   .billing-head {
     margin-left: 16px;
     display: flex;
