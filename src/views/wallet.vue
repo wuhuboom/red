@@ -87,13 +87,13 @@ export default {
         {
           icon: require("@/assets/img/red/safe4.png"),
           text: `${i18n.t("wallet.index.explanation.text")}`,
-          name: "TransferSelf",
+          name: "Explanation",
           active: false,
         },
         {
           icon: require("@/assets/img/red/safe5.png"),
           text: `${i18n.t("wallet.index.billing.details.text")}`,
-          name: "Explanation",
+          name: "SafeBilling",
           active: false,
         },
       ];
