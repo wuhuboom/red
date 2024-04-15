@@ -1,18 +1,39 @@
 <template>
-  <div class="safe-recharge-view font14">
+  <div class="safe-recharge-view font12 color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('home.index.recharge.text')"
     >
     </AppTopBar>
-    <div class="head center-center">
-      <p class="recharge-sign center-center">
-        <span class="center-center">{{ $t("home.index.recharge.text") }}</span>
-      </p>
-    </div>
-    <p class="center-center">{{ $t(`rebate.center.list.nav.smount.text`) }}</p>
-    <div class="px-16">
-      <van-form ref="form" class="safe-fome pt-16" @submit="onSubmit">
+    <ul class="text-center color-primary m-b-24">
+      <li class="m-b-8">
+        <p class="color-active money-str m-b-4">
+          {{ numToFixed(moneyStr, $globalUnit.val) }}
+        </p>
+        <p class="m-b-4">{{ $t("wallet.Account.Balance") }}</p>
+        <p><i @click="refresh" class="iconfont font14 icon-shuaxin"></i></p>
+      </li>
+    </ul>
+    <p class="center-center">{{ $t(`safe.Recharge.types`) }}</p>
+    <ul class="type-list p-l-12 p-r-12 m-b-8 m-t-16">
+      <li
+        v-for="(item, index) in rechargeList"
+        @click="chose(item)"
+        :class="{ 'color-active': item.type === chooseRecType.type }"
+        :key="index"
+      >
+        <div class="cont">
+          <p class="pic center-center">
+            <img :src="item.img" alt="" v-if="item.img" />
+          </p>
+          <p class="center-center">{{ item.name }}</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="m-x-24 form-box p-x-16">
+      <van-form ref="form" class="defind-form pt-16" @submit="onSubmit">
         <van-field
           :rules="[
             {
@@ -24,35 +45,20 @@
           v-model="amount"
         />
       </van-form>
-      <ul class="justify-between rate">
-        <li>{{ $t("recharge.usdt.rate.text") }} {{ chooseRecType.rate }}</li>
+      <ul class="text-center">
+        <li class="p-t-24 p-b-24">
+          <p>{{ $t("recharge.usdt.rate.text") }}</p>
+          <p>{{ chooseRecType.rate }}</p>
+        </li>
         <li>
-          {{ $t("recharge.real.amount.text") }} ≈&nbsp;{{ ngnToUsdtMoney }}
+          <p>{{ $t("recharge.real.amount.text") }}</p>
+          <p>{{ ngnToUsdtMoney }}</p>
         </li>
       </ul>
-      <p class="types">{{ $t(`safe.Recharge.types`) }}</p>
-      <ul
-        v-for="(item, idx) in rechargeList"
-        class="justify-between align-center type-list"
-        :key="idx"
-        :class="{ active: item.id === chooseRecType.id }"
-        @click="chose(item)"
-      >
-        <li class="pic center-center">
-          <img v-if="item.img" :src="item.img" alt="" />
-          <span v-else>{{ item.name }}</span>
-        </li>
-        <li v-if="item.img" class="flex-1">{{ item.name }}</li>
-        <li>
-          <van-checkbox
-            checked-color="#0022ff"
-            :value="item.chose"
-          ></van-checkbox>
-        </li>
-      </ul>
-      <div class="sumit-section py-16">
+
+      <div class="sumit-section center-center p-t-24 p-b-24">
         <van-button
-          class="res-van-button button-blue"
+          class="page-res-btn"
           block
           type="info"
           :loading="loading"
@@ -77,9 +83,13 @@ export default {
       rechargeList: [],
       amount: "",
       chooseRecType: {},
+      data: {},
     };
   },
   computed: {
+    moneyStr() {
+      return this.data.money / this.$globalNum.val;
+    },
     minMax() {
       if (!this.chooseRecType.minMax) return "";
       return this.chooseRecType.minMax.split("-").map((v) => +v);
@@ -115,6 +125,21 @@ export default {
     },
   },
   methods: {
+    async refresh() {
+      this.$toast.loading({
+        duration: 0,
+        forbidClick: true,
+      });
+      await this.safeInfo();
+      this.$toast.clear();
+    },
+    async safeInfo() {
+      this.loading = true;
+      const [err, res] = await userApi.safeInfo();
+      this.loading = false;
+      if (err) return;
+      this.data = res.data;
+    },
     validator(val) {
       if (Array.isArray(this.minMax)) {
         if (+val < this.minMax[0] || +val > this.minMax[1]) {
@@ -179,36 +204,55 @@ export default {
   },
   created() {
     this.getList();
+    this.safeInfo();
   },
 };
 </script>
 <style scoped lang="less">
 .safe-recharge-view {
-  min-height: 100vh;
-  background-color: #f8f8f8;
-  color: var(--color-text);
+  .form-box {
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+  }
+  .money-str {
+    font-size: 26px;
+    font-weight: 900;
+  }
   .types {
     font-size: 16px;
     font-weight: bold;
     padding: 30px 0 16px;
   }
   .type-list {
-    height: 64px;
-    padding-right: 16px;
-    .pic {
-      height: 42px;
-      width: 94px;
-      flex-grow: 0;
-      flex-shrink: 0;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+    display: flex;
+    flex-wrap: wrap;
+    & > li {
+      width: 33.33%;
+      .cont {
+        height: 84px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .pic {
+        height: 42px;
+        width: 94px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
       }
     }
-  }
-  .type-list.active {
-    background-color: #edefff;
+    & > li:nth-child(3n + 2) {
+      border-right: 1px solid var(--primary);
+      border-left: 1px solid var(--primary);
+    }
+    & > li.active {
+      .cont {
+      }
+    }
   }
   .rate {
     color: #8a929a;
