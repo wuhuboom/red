@@ -24,6 +24,13 @@ const routes = [
     },
   },
   {
+    path: "/safe/explanation",
+    name: "Explanation",
+    components: {
+      default: () => import("@/views/explanation.vue"),
+    },
+  },
+  {
     path: "/pages/securityCenter/bankAccountList",
     name: "BankAccountList",
     components: {

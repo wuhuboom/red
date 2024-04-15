@@ -93,7 +93,7 @@ export default {
         {
           icon: require("@/assets/img/red/safe5.png"),
           text: `${i18n.t("wallet.index.billing.details.text")}`,
-          name: "SafeBilling",
+          name: "Explanation",
           active: false,
         },
       ];
