@@ -20,21 +20,10 @@ u
       </ul>
     </div>
     <ul class="drop-list justify-between align-center m-b-12 m-l-16 m-r-16">
-      <li>
-        <el-dropdown class="align-center color-primary" trigger="click">
-          <span class="el-dropdown-link">
-            {{ choseDoc.text }}<i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu class="drop-down-list" slot="dropdown">
-            <el-dropdown-item
-              :class="{ 'color-active': type === item.type }"
-              @click.native="chose(item)"
-              v-for="(item, idx) in typeOptions"
-              :key="idx"
-              >{{ item.text }}</el-dropdown-item
-            >
-          </el-dropdown-menu>
-        </el-dropdown>
+      <li class="flex-1">
+        <van-form ref="form" class="defind-form" @submit="searchLoad">
+          <van-field v-model.trim="username" />
+        </van-form>
       </li>
       <li class="search center-center" @click="searchLoad">
         {{ $t("backapi.self.bank.search.text") }}
@@ -83,7 +72,8 @@ export default {
   data() {
     return {
       type: 1,
-      filterTab: 5,
+      filterTab: 1,
+      username: "",
       head: [
         i18n.t("bet.index.date.text"),
         i18n.t("personal.report.recharge"),
@@ -185,6 +175,7 @@ export default {
       await this.onLoad(1);
     },
     async searchLoad() {
+      if (!this.username) return;
       this.$toast.loading({
         forbidClick: true,
         duration: 0,
@@ -196,10 +187,12 @@ export default {
       const pageNo = !isNaN(num) ? num : this.curItem.pageNo;
       const obj = {
         time: time,
-        type: this.type,
         pageNo: pageNo,
         pageSize: this.curItem.pageSize,
       };
+      if (this.username) {
+        obj.username = this.username;
+      }
       const [err, res] = await userApi.reportForm(obj);
       this.loading = false;
       if (err) {
@@ -275,8 +268,6 @@ export default {
     }
   }
   .drop-list {
-    height: 32px;
-    border-bottom: 1px solid #484b4c;
     border-top: 1px solid #484b4c;
     .search {
       min-width: 74px;
