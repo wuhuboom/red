@@ -2,22 +2,21 @@
   <ul class="order-nav">
     <li
       :class="{ active: type === 0 }"
-      @click="$router.replace({ name: 'FinancialPecords' })"
+      @click="$router.replace({ name: skip1.name })"
     >
-      <p>{{ $t("me.recharge.text") }}</p>
+      <p>{{ skip1.text }}</p>
     </li>
     <li
       :class="{ active: type === 1 }"
-      @click="$router.replace({ name: 'WithdrawRecord' })"
+      @click="$router.replace({ name: skip2.name })"
     >
-      <p>{{ $t("me.withdraw.text") }}</p>
+      <p>{{ skip2.text }}</p>
     </li>
   </ul>
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
-import userApi from "@/api/user";
+import i18n from "@/locale";
 export default {
   name: "HistoryNav",
   data() {
@@ -27,6 +26,24 @@ export default {
     type: {
       type: Number,
       default: 0,
+    },
+    skip1: {
+      type: Object,
+      default: () => {
+        return {
+          name: "FinancialPecords",
+          text: i18n.t("me.recharge.text"),
+        };
+      },
+    },
+    skip2: {
+      type: Object,
+      default: () => {
+        return {
+          name: "WithdrawRecord",
+          text: i18n.t("me.withdraw.text"),
+        };
+      },
     },
   },
   components: {},

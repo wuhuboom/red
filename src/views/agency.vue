@@ -1,163 +1,129 @@
 <template>
-  <div class="agency-page font14">
+  <div class="agency-page font12 color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('fuc.agency.center')"
     >
     </AppTopBar>
-
+    <HistoryNav
+      :skip1="{
+        name: 'Agency',
+        text: $t('DATE.CENTER.LEVEL1-3'),
+      }"
+    />
+    <div class="tab-list m-l-16 m-r-16">
+      <ul class="tab p-b-24 p-t-24">
+        <li
+          class="m-r-16"
+          v-for="(item, idx) in tabsList"
+          @click="chang(item)"
+          :class="{ 'color-active': tabCurrent === item.value }"
+          :key="idx"
+        >
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
     <div class="center-center py-16" v-if="cumulativeActivity === null">
-      <van-Loading color="#1989fa" />
+      <van-Loading class="color-primary" />
     </div>
     <div v-else>
-      <div class="new-head">
-        <div class="new-head-up">
-          <div class="name-user-list align-center">
-            <p class="user-pic"><ImgCom class="pa-0" :src="$userPic" /></p>
-            <ul class="user-rit flex-1 justify-between">
-              <li>
-                <p>Hi～</p>
-                <p class="font16">{{ user.username }}</p>
-              </li>
-              <li
-                class="align-center user-link"
-                @click="$router.push({ name: 'UserList' })"
-              >
-                <img src="@/assets/img/userlist.webp" alt="" />
-                {{ $t("agency.center.user.center.text") }}
-              </li>
-            </ul>
+      <van-grid class="color-primary p-x-16" :border="false" :column-num="3">
+        <van-grid-item>
+          <div>{{ $t("agency.center.teambalance.text") }}</div>
+          <div>
+            {{ numToFixed(totalBalance, $globalUnit.val) / $globalNum.val }}
           </div>
-          <ul class="netprofit">
-            <li>{{ $t(`team.report.netprofit.text`) }}</li>
-            <li>
-              {{ numToFixed(netProfit, $globalUnit.val) / $globalNum.val }}
-            </li>
-          </ul>
-          <ul class="amounto-win">
-            <li class="justify-between">
-              <p><i></i> {{ $t("agency.center.amountofwin.text") }}</p>
-              <p>
-                {{
-                  numToFixed(cumulativeWinning, $globalUnit.val) /
-                  $globalNum.val
-                }}
-              </p>
-            </li>
-            <li class="justify-between">
-              <p><i></i> {{ $t("agency.center.team.motivation.text") }}</p>
-              <p>
-                {{ teamGroupAim }}
-              </p>
-            </li>
-            <li class="justify-between">
-              <p><i></i> {{ $t("agency.center.team.motivation.not.text") }}</p>
-              <p>
-                {{ teamGroupUnAim }}
-              </p>
-            </li>
-          </ul>
-        </div>
-        <ul class="new-head-tabs align-center justify-around font12">
-          <li
-            :class="{ active: item.value === tabCurrent }"
-            @click="chang(item)"
-            v-for="(item, idx) in tabsList"
-            :key="idx"
-            class="center-center"
-          >
-            {{ item.name }}
-          </li>
-        </ul>
-      </div>
-      <div class="px-16 pt-16">
-        <ul class="row-btm-list align-center">
-          <li>
-            <p>{{ $t("agency.center.teambalance.text") }}</p>
-            <p>
-              {{ numToFixed(totalBalance, $globalUnit.val) / $globalNum.val }}
-            </p>
-          </li>
-          <li>
-            <p>{{ $t("team.report.teamrecharge.text") }}</p>
-            <p>
-              {{ numToFixed(totalRecharge, $globalUnit.val) / $globalNum.val }}
-            </p>
-          </li>
-        </ul>
-        <ul class="row-btm-list align-center">
-          <li>
-            <p>{{ $t("team.report.teamwithdraw.text") }}</p>
-            <p>
-              {{
-                numToFixed(totalWithdrawal, $globalUnit.val) / $globalNum.val
-              }}
-            </p>
-          </li>
-          <li>
-            <p>{{ $t("agency.center.amountofwin.text") }}</p>
-            <p>
-              {{
-                numToFixed(cumulativeWinning, $globalUnit.val) / $globalNum.val
-              }}
-            </p>
-          </li>
-        </ul>
-        <ul class="row-btm-list align-center">
-          <li>
-            <p>{{ $t("agency.center.teamSize.text") }}</p>
-            <p>
-              {{ playerCount }}
-            </p>
-          </li>
-          <li>
-            <p>{{ $t("agency.center.newreg.text") }}</p>
-            <p>
-              {{ newPlayer }}
-            </p>
-          </li>
-        </ul>
-        <ul class="row-btm-list align-center">
-          <li>
-            <p>{{ $t("bet.index.stake.text") }}</p>
-            <p>
-              {{
-                numToFixed(totalBetBalance, $globalUnit.val) / $globalNum.val
-              }}
-            </p>
-          </li>
-          <li>
-            <p>{{ $t("agency.center.numofbets.text") }}</p>
-            <p>
-              {{ totalBetPlayer }}
-            </p>
-          </li>
-        </ul>
-        <ul class="row-btm-list align-center">
-          <li>
-            <p>{{ $t("agency.center.team.motivation.not.text") }}</p>
-            <p>
-              {{ teamGroupUnAim }}
-            </p>
-          </li>
-          <li>
-            <p>{{ $t("agency.center.team.motivation.text") }}</p>
-            <p>
-              {{ teamGroupAim }}
-            </p>
-          </li>
-        </ul>
-      </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>{{ $t("team.report.teamrecharge.text") }}</div>
+          <div>
+            {{ numToFixed(totalBalance, $globalUnit.val) / $globalNum.val }}
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>{{ $t("team.report.teamrecharge.text") }}</div>
+          <div>
+            {{ numToFixed(totalRecharge, $globalUnit.val) / $globalNum.val }}
+          </div>
+        </van-grid-item>
+      </van-grid>
+      <van-grid class="color-primary p-x-16" :border="false" :column-num="3">
+        <van-grid-item>
+          <div>{{ $t("team.report.teamwithdraw.text") }}</div>
+          <div>
+            {{ numToFixed(totalWithdrawal, $globalUnit.val) / $globalNum.val }}
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>{{ $t("team.report.netprofit.text") }}</div>
+          <div>
+            {{ numToFixed(netProfit, $globalUnit.val) / $globalNum.val }}
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>{{ $t("agency.center.teamSize.text") }}</div>
+          <div>
+            {{ playerCount }}
+          </div>
+        </van-grid-item>
+      </van-grid>
+      <van-grid class="color-primary p-x-16" :border="false" :column-num="3">
+        <van-grid-item>
+          <div>{{ $t("agency.center.newreg.text") }}</div>
+          <div>
+            {{ newPlayer }}
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>{{ $t("bet.index.stake.text") }}</div>
+          <div>
+            {{ numToFixed(totalBetBalance, $globalUnit.val) / $globalNum.val }}
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>{{ $t("agency.center.numofbets.text") }}</div>
+          <div>
+            {{ totalBetPlayer }}
+          </div>
+        </van-grid-item>
+      </van-grid>
+      <van-grid class="color-primary p-x-16" :border="false" :column-num="3">
+        <van-grid-item>
+          <div>{{ $t("agency.center.amountofwin.text") }}</div>
+          <div>
+            {{
+              numToFixed(cumulativeWinning, $globalUnit.val) / $globalNum.val
+            }}
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>{{ $t("agency.center.team.motivation.text") }}</div>
+          <div>
+            {{ teamGroupAim }}
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>{{ $t("agency.center.team.motivation.not.text") }}</div>
+          <div>
+            {{ teamGroupUnAim }}
+          </div>
+        </van-grid-item>
+      </van-grid>
     </div>
   </div>
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
+import HistoryNav from "@/views/components/HistoryNav.vue";
 import userApi from "@/api/user";
 import i18n from "@/locale";
 export default {
   name: "AgencyView",
+  components: {
+    HistoryNav,
+  },
   data() {
     return {
       tabsList: [
@@ -173,10 +139,10 @@ export default {
           name: i18n.t("match.records.nearly7.text"),
           value: 3,
         },
-        // {
-        //   name: i18n.t("match.records.nearly10.text"),
-        //   value: 4,
-        // },
+        {
+          name: i18n.t("match.records.nearly10.text"),
+          value: 4,
+        },
         {
           name: i18n.t("match.records.nearly30.text"),
           value: 5,
@@ -279,76 +245,22 @@ export default {
 </script>
 <style scoped lang="less">
 .agency-page {
-  min-height: 100vh;
-  background-color: #f8f8f8;
-  color: var(--color-text);
-  .new-head {
-    background-color: var(--primary);
-    overflow: hidden;
-    color: #fff;
-    .new-head-up {
-      margin: 16px 16px 0;
-      background: url("@/assets/img/monti.webp") center top no-repeat;
-      background-size: cover;
-      padding: 12px 12px 0;
+  ::v-deep {
+    .van-grid-item__content {
+      background-color: transparent;
+      padding: 0;
+      text-align: center;
     }
-    .name-user-list {
-      .user-pic {
-        height: 65px;
-        width: 65px;
-      }
+    .van-grid {
+      flex-wrap: nowrap;
     }
-    .user-rit {
-      padding-left: 8px;
-    }
-    .user-link {
-      img {
-        height: 21px;
-        width: 21px;
-        margin-right: 4px;
-        object-fit: cover;
-      }
-    }
-    .netprofit {
-      padding: 10px 0 22px;
-      & > li:last-child {
-        font-size: 22px;
-        font-weight: bold;
-      }
-    }
-    .amounto-win {
+  }
+  .tab-list {
+    overflow-x: auto;
+    .tab {
+      display: flex;
       & > li {
-        padding-bottom: 14px;
-        & > p:last-child {
-          font-weight: 600;
-        }
-      }
-      p {
-        display: flex;
-        align-items: center;
-        i {
-          width: 6px;
-          height: 6px;
-          border-radius: 3px;
-          background-color: rgba(255, 255, 255, 0.5);
-          margin: 0 10px 0 0;
-        }
-      }
-    }
-    .new-head-tabs {
-      font-weight: bold;
-      height: 53px;
-      border-radius: 20px 20px 0 0;
-      border: solid 1px rgba(255, 255, 255, 0.11);
-      background-image: linear-gradient(to bottom, #0f3aff, #5374f6);
-      & > li {
-        height: 25px;
-        padding: 0 8px;
-      }
-      .active {
-        color: #02f;
-        border-radius: 6px;
-        background-color: #fff;
+        white-space: nowrap;
       }
     }
   }
