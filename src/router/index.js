@@ -278,6 +278,13 @@ const routes = [
     },
   },
   {
+    path: "/pages/user/Report/personalReport",
+    name: "PersonalReport",
+    components: {
+      default: () => import("@/views/personalReport.vue"),
+    },
+  },
+  {
     path: "/pages/function/billing_details",
     name: "BalanceDetails",
     components: {

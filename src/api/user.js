@@ -622,4 +622,11 @@ export default {
       data,
     });
   },
+  reportForm(data) {
+    return request({
+      url: "/report_form",
+      method: "post",
+      data,
+    });
+  },
 };

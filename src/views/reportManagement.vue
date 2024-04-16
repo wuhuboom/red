@@ -58,7 +58,7 @@ export default {
         {
           icon: require("@/assets/img/red/report4.png"),
           text: `${i18n.t("fuc.personal.report")}`,
-          name: "TransferSelf",
+          name: "PersonalReport",
           active: false,
         },
         {
