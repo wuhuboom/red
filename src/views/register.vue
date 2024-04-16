@@ -256,6 +256,13 @@ export default {
       return value === this.form.password;
     },
     async onSubmit() {
+      if (!this.form.areaCode) {
+        this.$toast(this.$t("backapi.areaCodeIsEmpty"));
+        if (!this.area_code.length) {
+          this.$store.dispatch("getCodeList");
+        }
+        return;
+      }
       const data = Object.assign({}, this.form);
       data.phone = data.areaCode + data.phone;
       data.email = data.email + this.emailFix;
