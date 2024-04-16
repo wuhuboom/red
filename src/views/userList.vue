@@ -1,10 +1,21 @@
 <template>
-  <div class="user-list-page font14">
+  <div class="user-list-page font12 color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('agency.center.user.center.text')"
     >
     </AppTopBar>
+    <HistoryNav
+      :skip1="{
+        name: 'Agency',
+        text: $t('DATE.CENTER.LEVEL1-3'),
+      }"
+      :skip2="{
+        name: 'UserList',
+        text: $t('agency.center.user.center.text'),
+      }"
+    />
     <div class="px-16 head align-center bg-blue">
       <ul class="align-center list-table app-ellipsis">
         <li class="app-ellipsis">{{ $t(`form.account.text`) }}</li>
@@ -114,9 +125,6 @@ export default {
 </script>
 <style scoped lang="less">
 .user-list-page {
-  min-height: 100vh;
-  background-color: #f8f8f8;
-  color: #000;
   .head {
     background-color: #fff;
     border-bottom: 1px solid #efefef;

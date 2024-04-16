@@ -11,6 +11,10 @@
         name: 'Agency',
         text: $t('DATE.CENTER.LEVEL1-3'),
       }"
+      :skip2="{
+        name: 'UserList',
+        text: $t('agency.center.user.center.text'),
+      }"
     />
     <div class="tab-list m-l-16 m-r-16">
       <ul class="tab p-b-24 p-t-24">
@@ -29,70 +33,86 @@
       <van-Loading class="color-primary" />
     </div>
     <div v-else>
-      <van-grid class="color-primary p-x-16" :border="false" :column-num="3">
+      <van-grid
+        class="color-primary m-x-16 p-b-16 border-btm"
+        :border="false"
+        :column-num="3"
+      >
         <van-grid-item>
           <div>{{ $t("agency.center.teambalance.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ numToFixed(totalBalance, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("team.report.teamrecharge.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ numToFixed(totalBalance, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("team.report.teamrecharge.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ numToFixed(totalRecharge, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
       </van-grid>
-      <van-grid class="color-primary p-x-16" :border="false" :column-num="3">
+      <van-grid
+        class="color-primary m-x-16 p-b-16 border-btm"
+        :border="false"
+        :column-num="3"
+      >
         <van-grid-item>
           <div>{{ $t("team.report.teamwithdraw.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ numToFixed(totalWithdrawal, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("team.report.netprofit.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ numToFixed(netProfit, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("agency.center.teamSize.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ playerCount }}
           </div>
         </van-grid-item>
       </van-grid>
-      <van-grid class="color-primary p-x-16" :border="false" :column-num="3">
+      <van-grid
+        class="color-primary m-x-16 p-b-16 border-btm"
+        :border="false"
+        :column-num="3"
+      >
         <van-grid-item>
           <div>{{ $t("agency.center.newreg.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ newPlayer }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("bet.index.stake.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ numToFixed(totalBetBalance, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("agency.center.numofbets.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ totalBetPlayer }}
           </div>
         </van-grid-item>
       </van-grid>
-      <van-grid class="color-primary p-x-16" :border="false" :column-num="3">
+      <van-grid
+        class="color-primary m-x-16 p-b-16 border-btm"
+        :border="false"
+        :column-num="3"
+      >
         <van-grid-item>
           <div>{{ $t("agency.center.amountofwin.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{
               numToFixed(cumulativeWinning, $globalUnit.val) / $globalNum.val
             }}
@@ -100,13 +120,13 @@
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("agency.center.team.motivation.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ teamGroupAim }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("agency.center.team.motivation.not.text") }}</div>
-          <div>
+          <div class="color-active m-t-4">
             {{ teamGroupUnAim }}
           </div>
         </van-grid-item>
@@ -263,6 +283,9 @@ export default {
         white-space: nowrap;
       }
     }
+  }
+  .border-btm {
+    border-bottom: solid 1px #484b4c;
   }
   .row-btm-list {
     border: solid 1px #8c8c8c;

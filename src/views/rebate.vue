@@ -47,16 +47,17 @@
         loading-text="loading"
         @load="onLoad"
       >
-        <div v-if="nothing">
-          <NoData />
-        </div>
-        <div v-else class="px-16 p-16">
+        <div class="px-16 p-16">
           <van-grid class="color-primary m-b-8" :border="false" :column-num="3">
             <van-grid-item v-for="value in head" :key="value">
               {{ value }}
             </van-grid-item>
           </van-grid>
+          <div v-if="nothing">
+            <NoData />
+          </div>
           <van-grid
+            v-show="!nothing"
             class="color-primary m-b-8"
             v-for="(item, idx) in curItem.results"
             :key="idx"
