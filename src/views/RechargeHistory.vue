@@ -106,6 +106,7 @@ export default {
         i18n.t("bet.index.date.text"),
         i18n.t("rebate.center.list.nav.type.text"),
         i18n.t("rebate.center.list.nav.smount.text"),
+        i18n.t("recharge.Status"),
       ],
       typeOptions: [
         {
