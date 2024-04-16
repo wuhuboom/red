@@ -7,6 +7,7 @@
     >
     </AppTopBar>
     <HistoryNav
+      :type="1"
       :skip1="{
         name: 'Agency',
         text: $t('DATE.CENTER.LEVEL1-3'),
@@ -16,13 +17,37 @@
         text: $t('agency.center.user.center.text'),
       }"
     />
-    <div class="px-16 head align-center bg-blue">
+    <div class="m-l-16 m-r-16">
+      <van-form ref="form" class="defind-form" @submit="changTab">
+        <van-field
+          :placeholder="$t(`form.account.text`)"
+          v-model.trim="username"
+        />
+      </van-form>
+    </div>
+    <ul class="drop-list justify-between align-center m-b-12 m-l-16 m-r-16">
+      <li>
+        <el-select v-model="tabCurrent" @change="changTab">
+          <el-option
+            v-for="item in dropList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+      </li>
+      <li class="search center-center" @click="changTab">
+        {{ $t("backapi.self.bank.search.text") }}
+      </li>
+    </ul>
+    <div class="m-l-16 m-r-16 head align-center bg-blue">
       <ul class="align-center list-table app-ellipsis">
         <li class="app-ellipsis">{{ $t(`form.account.text`) }}</li>
         <li class="app-ellipsis">{{ $t(`vip.level`) }}</li>
         <li class="flex-1 app-ellipsis center-center">
           {{ $t(`user.list.last.text`) }}
-          <img class="rank" src="@/assets/img/rank.webp" alt="" />
+          <!-- <img class="rank" src="@/assets/img/rank.webp" alt="" /> -->
         </li>
       </ul>
     </div>
@@ -38,7 +63,7 @@
         <NoData v-if="notthing" />
         <div class="cont" v-else>
           <div
-            class="mx-16 cont"
+            class="m-l-16 m-r-16 cont"
             v-for="(item, idx) in curItem.results"
             :key="idx"
           >
@@ -61,13 +86,32 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
+import HistoryNav from "@/views/components/HistoryNav.vue";
 import userApi from "@/api/user";
 export default {
   name: "UserListView",
+  components: {
+    HistoryNav,
+  },
   data() {
     return {
       loading: false,
+      tabCurrent: 1,
+      username: "",
+      dropList: [
+        {
+          label: this.$t("backapi.self.statistics.top.content.sub.level1.text"),
+          value: 1,
+        },
+        {
+          label: this.$t("backapi.self.statistics.top.content.sub.level2.text"),
+          value: 2,
+        },
+        {
+          label: this.$t("backapi.self.statistics.top.content.sub.level3.text"),
+          value: 3,
+        },
+      ],
       curItem: {
         hasNext: true,
         pageNo: 1,
@@ -84,12 +128,19 @@ export default {
     },
   },
   methods: {
+    changTab() {
+      this.onLoad(1);
+    },
     async onLoad(num) {
       const pageNo = !isNaN(num) ? num : this.curItem.pageNo;
       const obj = {
         pageNo: pageNo,
+        level: this.tabCurrent,
         pageSize: this.curItem.pageSize,
       };
+      if (this.username) {
+        obj.username = this.username;
+      }
       const [err, res] = await userApi.subPlayersReq(obj);
       this.loading = false;
       if (err) {
@@ -99,21 +150,10 @@ export default {
         this.curItem.hasNext = false;
         return;
       }
-      let list = this.curItem.results.concat(res.data.results);
-      // if (list.length === 0) {
-      //   list = [
-      //     {
-      //       username: 154545,
-      //       vipRank: 1,
-      //       theNewLoginTime: new Date().getTime(),
-      //     },
-      //     {
-      //       username: 154545,
-      //       vipRank: 1,
-      //       theNewLoginTime: new Date().getTime(),
-      //     },
-      //   ];
-      // }
+      let list =
+        pageNo === 1
+          ? res.data.results
+          : this.curItem.results.concat(res.data.results);
       this.curItem = {
         ...res.data,
         results: list,
@@ -125,9 +165,18 @@ export default {
 </script>
 <style scoped lang="less">
 .user-list-page {
+  .drop-list {
+    height: 32px;
+    border-bottom: 1px solid #484b4c;
+    .search {
+      min-width: 74px;
+      height: 18px;
+      border-radius: 8px;
+      background-color: #dc2525;
+      color: #fff;
+    }
+  }
   .head {
-    background-color: #fff;
-    border-bottom: 1px solid #efefef;
     text-transform: uppercase;
     height: 46px;
   }
@@ -141,18 +190,8 @@ export default {
     & > li:nth-child(3) {
       width: 46%;
     }
+  }
 
-    // & > li:nth-child(1) {
-    //   width: 108px;
-    // }
-    // & > li:nth-child(2) {
-    //   width: 90px;
-    // }
-  }
-  .bg-blue {
-    background-color: #135ef2;
-    color: #fff;
-  }
   .rank {
     width: 12px;
     height: 12px;
@@ -160,17 +199,8 @@ export default {
     margin-left: 4px;
   }
   .cont {
-    background-color: #fff;
     .list-table {
-      padding: 0 8px;
-      border-bottom: 1px solid #efefef;
       height: 48px;
-      // & > li:nth-child(1) {
-      //   width: 100px;
-      // }
-      // & > li:nth-child(2) {
-      //   width: 70px;
-      // }
     }
   }
   .cont:last-child .list-table {

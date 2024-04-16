@@ -3,10 +3,11 @@
     <AppTopBar
       :titleClass="['app-top-black-title']"
       class="app-top-bar-black"
-      :topBarTitle="$t('fuc.agency.center')"
+      :topBarTitle="$t('Data.Center.Level')"
     >
     </AppTopBar>
     <HistoryNav
+      class="m-b-24"
       :skip1="{
         name: 'Agency',
         text: $t('DATE.CENTER.LEVEL1-3'),
@@ -17,7 +18,7 @@
       }"
     />
     <div class="tab-list m-l-16 m-r-16">
-      <ul class="tab p-b-24 p-t-24">
+      <ul class="tab p-b-24">
         <li
           class="m-r-16"
           v-for="(item, idx) in tabsList"

@@ -46,7 +46,7 @@ export default {
         {
           icon: require("@/assets/img/red/report2.png"),
           text: `${i18n.t("Data.Center.Level")}`,
-          name: "TransferSub",
+          name: "Agency",
           active: false,
         },
         {
@@ -64,7 +64,7 @@ export default {
         {
           icon: require("@/assets/img/red/report5.png"),
           text: `${i18n.t("agency.center.user.center.text")}`,
-          name: "SafeBilling",
+          name: "UserList",
           active: false,
         },
       ];
