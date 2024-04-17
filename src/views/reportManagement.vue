@@ -52,7 +52,7 @@ export default {
         {
           icon: require("@/assets/img/red/report3.png"),
           text: `${i18n.t("fuc.balance.details")}`,
-          name: "TransferSelf",
+          name: "BalanceDetails",
           active: false,
         },
         {
