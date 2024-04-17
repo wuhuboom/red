@@ -1,10 +1,24 @@
 <template>
-  <RecordsLayout
-    :title="$t('me.recharge.text')"
-    @changFilter="changFilter"
-    :filterTab="filterTab"
-    :tabs="tabsList"
-  >
+  <div class="agency-page font12 color-primary">
+    <AppTopBar
+      :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
+      :topBarTitle="$t('fuc.balance.details')"
+    >
+    </AppTopBar>
+    <div class="tab-list m-l-16 m-r-16">
+      <ul class="tab p-b-24">
+        <li
+          class="m-r-16"
+          v-for="(item, idx) in tabsList"
+          @click="changFilter(item.value)"
+          :class="{ 'color-active': filterTab === item.value }"
+          :key="idx"
+        >
+          {{ item.name || item.label }}
+        </li>
+      </ul>
+    </div>
     <van-list
       v-model="loading"
       :finished="curItem.hasNext === false"
@@ -12,57 +26,57 @@
       loading-text="loading"
       @load="onLoad"
     >
-      <NoData v-if="notthing" />
-      <div v-else class="px-16 p-16">
-        <ul
-          class="d-flex list"
-          :class="{ 'list-add': add(item) }"
+      <div class="px-16 p-16">
+        <van-grid class="color-primary m-b-8" :border="false" :column-num="4">
+          <van-grid-item v-for="value in head" :key="value">
+            {{ value }}
+          </van-grid-item>
+        </van-grid>
+        <NoData v-if="notthing" />
+        <van-grid
+          :border="false"
+          :column-num="4"
+          class="m-b-8"
           v-for="(item, idx) in curItem.results"
           :key="idx"
         >
-          <li class="pic center-center">
-            <img src="@/assets/img/record.webp" alt="" />
-          </li>
-          <li class="txt flex-1">
-            <p>{{ getTabName(item.balanceChangeType) }}</p>
-            <p class="font12">
-              {{ formatDate(item.createdAt, "yyyy-MM-dd hh:mm:ss") }}
-            </p>
-          </li>
-          <li class="txt text-right">
-            <p class="num">
-              {{
-                numToFixed(item.changeMoney, $globalUnit.val) / $globalNum.val
-              }}
-            </p>
-            <p class="font12">
-              {{ $t("wallet.index.balance.text") }}:
-              {{ numToFixed(item.dnedMoney, $globalUnit.val) / $globalNum.val }}
-            </p>
-          </li>
-        </ul>
+          <van-grid-item>
+            {{ formatDate(item.createdAt, "yyyy-MM-dd hh:mm:ss") }}
+          </van-grid-item>
+          <van-grid-item>
+            {{ getTabName(item.balanceChangeType) }}
+          </van-grid-item>
+          <van-grid-item>
+            {{ numToFixed(item.changeMoney, $globalUnit.val) / $globalNum.val }}
+          </van-grid-item>
+          <van-grid-item>
+            {{ numToFixed(item.dnedMoney, $globalUnit.val) / $globalNum.val }}
+          </van-grid-item>
+        </van-grid>
       </div>
     </van-list>
-  </RecordsLayout>
+  </div>
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 import userApi from "@/api/user";
-import RecordsLayout from "@/views/components/RecordsLayout.vue";
+import i18n from "@/locale";
 export default {
   name: "BalanceDetailsView",
-  components: {
-    RecordsLayout,
-  },
   data() {
     return {
+      head: [
+        i18n.t("bet.index.date.text"),
+        i18n.t("rebate.center.list.nav.type.text"),
+        i18n.t("rebate.center.list.nav.smount.text"),
+        i18n.t("wallet.index.balance.text"),
+      ],
       filterTab: 0,
       loading: false,
       curItem: {
         hasNext: true,
         pageNo: 1,
-        pageSize: 10,
+        pageSize: 30,
         results: [],
         totalCount: null,
         totalPage: null,
@@ -322,30 +336,22 @@ export default {
 </script>
 <style scoped lang="less">
 .agency-page {
-  min-height: 100vh;
-  background-color: #f8f8f8;
-  .tabs-list {
-    background-color: #fff;
-    color: #939598;
-    & > li {
-      margin-right: 40px;
-      height: 45px;
-      position: relative;
+  ::v-deep {
+    .van-grid-item__content {
+      background-color: transparent;
+      padding: 0;
+      text-align: center;
     }
-    & > li:last-child {
-      margin-right: 0;
+    .van-grid {
+      flex-wrap: nowrap;
     }
-    .active {
-      color: #135ef2;
-
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        border-bottom: 2px solid #135ef2;
-        display: block;
-        width: 100%;
+  }
+  .tab-list {
+    overflow-x: auto;
+    .tab {
+      display: flex;
+      & > li {
+        white-space: nowrap;
       }
     }
   }
