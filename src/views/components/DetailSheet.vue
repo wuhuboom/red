@@ -1,18 +1,38 @@
 <template>
-  <van-action-sheet class="detail-action-sheet" v-model="show">
+  <van-action-sheet class="detail-action-sheet color-primary" v-model="show">
     <div class="content font14">
-      <ul class="title justify-between align-center px-16">
-        <li>{{ $t("home.bet.slip") }}</li>
-        <li class="center-center">
-          <van-button
+      <ul class="title flex-column center-center px-16">
+        <li class="center-center color-primary color-active p-t-24 p-b-4">
+          <!-- <van-button
             icon="plus"
             type="primary"
             size="small"
             @click="$router.push({ name: 'Recharge' })"
-          ></van-button>
+          ></van-button> -->
           {{ balanceMoneyNum }}
         </li>
+        <li>{{ $t("wallet.Account.Balance") }}</li>
       </ul>
+      <div class="defind-form p-l-16 p-r-16">
+        <van-form @submit="onSubmit">
+          <!-- :placeholder="$t('match.order.detail.field.amount.text')" -->
+          <van-field
+            v-model.trim="amount"
+            :placeholder="$t('match.order.detail.field.amount.text')"
+            :rules="[
+              {
+                validator,
+                message: $t(`betRange`, {
+                  min: cmopetitionData.minBet,
+                  max: cmopetitionData.maxBet,
+                }),
+              },
+            ]"
+            type="number"
+          >
+          </van-field>
+        </van-form>
+      </div>
       <div class="cont-btm pt-16 px-16">
         <ul class="name-list pb-16">
           <li class="font12">{{ cmopetitionData.allianceName }}</li>
@@ -274,41 +294,13 @@ export default {
 </script>
 <style scoped lang="less">
 .detail-action-sheet {
+  background-color: var(--bg-body);
   ::v-deep {
     .title {
-      height: 56px;
       text-transform: capitalize;
-      border-bottom: 1px solid #f7f7f8;
-      > li:last-child {
-        color: #222222;
-        padding: 0 6px;
-        height: 32px;
-        line-height: 32px;
-        border-radius: 16px;
-        background-color: #eaeaea;
-        border-color: #eaeaea;
-        font-size: 12px;
-        font-weight: bold;
-      }
-      .van-button {
-        color: #222222;
-        padding: 0;
-        height: 24px;
-        border-radius: 16px;
-        background-color: #eaeaea;
-        border-color: #eaeaea;
-
-        .van-icon {
-          width: 24px;
-          height: 24px;
-          margin-right: 2px;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: #0025fc;
-          color: #fff;
-        }
+      & > li:nth-child(1) {
+        font-size: 26px;
+        font-weight: 900;
       }
     }
     .enter-form {
