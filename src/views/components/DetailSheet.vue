@@ -1,23 +1,18 @@
 <template>
   <van-action-sheet class="detail-action-sheet color-primary" v-model="show">
-    <div class="content font14">
+    <div class="content font12">
       <ul class="title flex-column center-center px-16">
         <li class="center-center color-primary color-active p-t-24 p-b-4">
-          <!-- <van-button
-            icon="plus"
-            type="primary"
-            size="small"
-            @click="$router.push({ name: 'Recharge' })"
-          ></van-button> -->
           {{ balanceMoneyNum }}
         </li>
         <li>{{ $t("wallet.Account.Balance") }}</li>
       </ul>
       <div class="defind-form p-l-16 p-r-16">
-        <van-form @submit="onSubmit">
+        <van-form ref="form" @submit="onSubmit">
           <!-- :placeholder="$t('match.order.detail.field.amount.text')" -->
           <van-field
             v-model.trim="amount"
+            name="amount"
             :placeholder="$t('match.order.detail.field.amount.text')"
             :rules="[
               {
@@ -32,80 +27,6 @@
           >
           </van-field>
         </van-form>
-      </div>
-      <div class="cont-btm pt-16 px-16">
-        <ul class="name-list pb-16">
-          <li class="font12">{{ cmopetitionData.allianceName }}</li>
-          <li class="align-center">
-            <p class="pic"><ImgCom :src="cmopetitionData.mainLogo" /></p>
-            {{ cmopetitionData.mainName | removeEsports }}
-          </li>
-          <li class="align-center">
-            <p class="pic"><ImgCom :src="cmopetitionData.guestLogo" /></p>
-            {{ cmopetitionData.guestName | removeEsports }}
-          </li>
-        </ul>
-        <ul class="odds mb-16">
-          <li class="align-center justify-between">
-            <p class="txt">{{ $t("detail.action.Events") }}</p>
-            <p class="num">{{ score.scoreHome }}-{{ score.scoreAway }}</p>
-          </li>
-          <li class="align-center justify-between">
-            <p class="txt">{{ $t("detail.action.Odds") }}</p>
-            <p class="num anti">{{ score.antiPerCent }}%</p>
-          </li>
-        </ul>
-        <ul class="win">
-          <li>
-            {{ $t("match.order.detail.estimate.profit.text") }}:
-            <span class="win-num">{{ getEstimateProfit }}</span>
-          </li>
-          <li>
-            {{
-              $t(`betRange`, {
-                min: cmopetitionData.minBet,
-                max: cmopetitionData.maxBet,
-              })
-            }}
-          </li>
-        </ul>
-        <div class="enter-form">
-          <van-form @submit="onSubmit">
-            <!-- :placeholder="$t('match.order.detail.field.amount.text')" -->
-            <van-field
-              v-model.trim="amount"
-              :rules="[
-                {
-                  validator,
-                  message: $t(`betRange`, {
-                    min: cmopetitionData.minBet,
-                    max: cmopetitionData.maxBet,
-                  }),
-                },
-              ]"
-              type="number"
-              ><template #button>
-                <ul class="count">
-                  <li><van-icon name="minus" @click="minus" /></li>
-                  <li><van-icon name="plus" @click="plus" /></li>
-                </ul>
-                <van-button
-                  size="small"
-                  :loading="loading"
-                  native-type="submit"
-                  class="comfire"
-                  type="primary"
-                  >{{ $t("modal.confirm.text") }}</van-button
-                >
-              </template>
-            </van-field>
-          </van-form>
-        </div>
-        <p class="fee-amount">
-          <span>{{ $t("match.order.detail.proce.fee.text") }}:</span
-          ><span>-{{ feeAmount }}(%)</span>
-        </p>
-        <p>{{ $t("detail.Quick.bets") }}</p>
         <ul class="chose-glod justify-between align-center">
           <li
             v-for="(item, idx) in goldList"
@@ -114,6 +35,34 @@
             class="center-center"
           >
             {{ item.text }}
+          </li>
+        </ul>
+        <ul class="title flex-column center-center px-16 m-b-8">
+          <li class="center-center color-primary color-active p-b-4">
+            {{ getEstimateProfit }}
+          </li>
+          <li>{{ $t("match.order.detail.estimate.profit.text") }}</li>
+        </ul>
+        <ul class="text-center m-b-8">
+          <li>{{ $t("Pay.Rate") }}</li>
+          <li class="color-active">x{{ payRate }}%</li>
+        </ul>
+        <ul class="text-center m-b-8">
+          <li>{{ $t("VIP.earnings") }}</li>
+          <li class="color-active">x{{ vipRate }}%</li>
+        </ul>
+        <ul class="text-center m-b-8">
+          <li>{{ $t("match.order.detail.proce.fee.text") }}</li>
+          <li class="color-active">-{{ feeAmount }}%</li>
+        </ul>
+        <ul class="p-t-24">
+          <li class="center-center p-b-40">
+            <p class="page-res-btn m-r-24" @click="close">
+              {{ $t(`modal.cancel.text`) }}
+            </p>
+            <p class="page-res-btn" @click="vaidForm">
+              {{ $t(`modal.confirm.text`) }}
+            </p>
           </li>
         </ul>
       </div>
@@ -125,6 +74,7 @@
 import { Dialog } from "vant";
 import userApi from "@/api/user";
 import i18n from "@/locale";
+import to from "await-to-js";
 export default {
   name: "DetailSheet",
   data() {
@@ -159,9 +109,6 @@ export default {
   },
   components: {},
   computed: {
-    // getEstimateProfit() {
-    //   return this.amount * this.score.antiPerCent;
-    // },
     getEstimateProfit() {
       if (this.amount) {
         return this.numToFixed(
@@ -175,6 +122,12 @@ export default {
     },
   },
   methods: {
+    async vaidForm() {
+      const [err] = await to(this.$refs.form.validate("amount"));
+      console.log(err);
+      if (err) return;
+      this.onSubmit();
+    },
     async onSubmit() {
       let reqParam = {};
       reqParam.gameId = this.cmopetitionData.id;
@@ -196,7 +149,7 @@ export default {
         message: this.$t(`backapi.success.bet.text`),
         theme: "round-button",
         confirmButtonText: "OK",
-        confirmButtonColor: "#051da0",
+        confirmButtonColor: "#f11714",
       }).then(() => {
         // on close
       });
@@ -281,6 +234,7 @@ export default {
       this.fastMoneyArray = fastMoenyArr;
     },
     async open(obj) {
+      console.log(obj);
       this.cmopetitionData = obj.game;
       this.score = obj.curItem;
       await this.betPre();
@@ -396,15 +350,17 @@ export default {
     }
     .chose-glod {
       padding: 6px 0 32px;
-      color: #fff;
+      color: var(--active);
       margin: 0 -4px;
       & > li {
         margin: 0 4px;
         width: 80px;
         height: 36px;
-        border-radius: 8px;
-        background-color: #222;
         padding: 4px;
+        border-right: 1px solid var(--primary);
+      }
+      & > li:last-child {
+        border-right: none;
       }
     }
   }
