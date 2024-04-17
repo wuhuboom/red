@@ -1,73 +1,57 @@
 <template>
-  <div class="detail-page">
-    <AppTopBar
-      :styleObj="{
-        backgroundColor: isScrolled
-          ? 'rgba(0, 0, 0, 0.4)'
-          : 'rgba(186, 12, 47, 0)',
-      }"
-    >
-      <template #title>
-        <ul class="head-title align-center">
-          <li class="title-in app-ellipsis flex-1">{{ game.allianceName }}</li>
-          <li class="game-id">ID:{{ gameId }}</li>
-        </ul>
-      </template>
+  <div class="detail-page font12">
+    <AppTopBar :topBarTitle="`${game.allianceName}`" class="app-top-bar-black">
     </AppTopBar>
-    <div class="focus">
-      <ul class="align-center focus-list justify-around">
-        <li>
-          <div class="flex-column center-center">
-            <span class="pic">
-              <ImgCom :src="game.mainLogo" />
-            </span>
-            <p class="name">{{ game.mainName | removeEsports }}</p>
-          </div>
-        </li>
-        <li class="flex-column center-center">
-          <div class="center-center txt-vs">VS</div>
-          <div v-if="game.remainingTime">
-            <Count-down :time="game.remainingTime" format="hh:mm:ss">
-              <template slot-scope="{ time }">
-                <div class="center-center time">
-                  {{ time }}
-                </div>
-              </template>
-            </Count-down>
-          </div>
-        </li>
-        <li>
-          <div class="flex-column center-center">
-            <span class="pic">
-              <ImgCom :src="game.guestLogo" />
-            </span>
-            <p class="name">{{ game.guestName | removeEsports }}</p>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <RowMatch :hotList="[game]" />
+    <p class="black-line m-b-16 m-l-24 m-r-24"></p>
     <div class="game-bg">
-      <div class="geme-type align-center">
-        <p :class="{ active: type === 1 }" @click="type = 1">
+      <div class="geme-type flex-column center-center">
+        <p
+          class="page-res-btn m-b-8"
+          :class="{ active: type === 1 }"
+          @click="type = 1"
+        >
           {{ $t("bet.detail.screenings.half.text") }}
         </p>
-        <p :class="{ active: type === 2 }" @click="type = 2">
+        <p
+          class="page-res-btn"
+          :class="{ active: type === 2 }"
+          @click="type = 2"
+        >
           {{ $t("bet.detail.screenings.full.text") }}
         </p>
       </div>
     </div>
-    <ul class="loss-list">
-      <li v-for="(item, idx) in lossPerCent" :key="idx" @click="chose(item)">
-        <div class="loss-cont" :class="{ active: item.id == curItem.id }">
-          <p>{{ item.scoreHome }}-{{ item.scoreAway }}</p>
-          <p>{{ item.antiPerCent }}%</p>
-        </div>
-      </li>
-    </ul>
-    <div class="place center-center max-width750">
-      <p class="center-center flex-1" @click="open">
-        {{ $t("Confirm Transaction") }}
-      </p>
+    <div class="p-l-16 p-r-16 m-b-24">
+      <van-grid
+        class="color-primary m-b-8 m-t-16"
+        :border="false"
+        :column-num="3"
+      >
+        <van-grid-item v-for="(value, idx) in head" :key="value">
+          <p v-if="idx !== head.length - 1">{{ value }}</p>
+          <p v-else class="three-row">{{ value }}</p>
+        </van-grid-item>
+      </van-grid>
+      <van-grid
+        class="color-primary m-b-8"
+        v-for="(item, idx) in lossPerCent"
+        :key="idx"
+        :border="false"
+        :column-num="3"
+      >
+        <van-grid-item class="color-fff">
+          {{ item.scoreHome }}-{{ item.scoreAway }}
+        </van-grid-item>
+        <van-grid-item class="color-fff">
+          {{ item.antiPerCent }}%
+        </van-grid-item>
+        <van-grid-item class="color-fff">
+          <p class="page-res-btn three-row" @click="chose(item)">
+            {{ $t(`match.cmopetition.list.canbescore.text`) }}
+          </p>
+        </van-grid-item>
+      </van-grid>
     </div>
     <DetailSheet ref="DetailSheet" />
   </div>
@@ -76,11 +60,17 @@
 <script>
 import userApi from "@/api/user";
 import DetailSheet from "@/views/components/DetailSheet.vue";
+import i18n from "@/locale";
 export default {
   name: "DetailView",
   components: { DetailSheet },
   data() {
     return {
+      head: [
+        i18n.t("match.cmopetition.list.scorebet.text"),
+        i18n.t("match.cmopetition.list.odd.text"),
+        i18n.t("match.cmopetition.list.status.text"),
+      ],
       gameId: this.$route.query.id,
       isScrolled: false,
       doc: {},
@@ -107,6 +97,7 @@ export default {
     },
     chose(item) {
       this.curItem = item;
+      this.open();
     },
     async geDetail() {
       const [err, res] = await userApi.gameDetail({
@@ -124,19 +115,35 @@ export default {
   },
   created() {
     this.geDetail();
-    this.$store.commit("setPdTop", false);
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
 <style scoped lang="less">
 .detail-page {
-  padding-bottom: 88px;
+  .three-row {
+    width: 144px;
+    white-space: nowrap;
+  }
+  ::v-deep {
+    .van-grid-item__content {
+      background-color: transparent;
+      padding: 0;
+      text-align: center;
+    }
+    .van-grid {
+      flex-wrap: nowrap;
+    }
+  }
+  .black-line {
+    height: 5px;
+    background-image: linear-gradient(
+      to right,
+      #af1816,
+      #af1816 5%,
+      #0c0c0c 5%,
+      #0c0c0c
+    );
+  }
   .focus {
     background: url("@/assets/img/detailbg.png") no-repeat center;
     background-size: cover;
@@ -170,45 +177,16 @@ export default {
     text-align: left;
     color: #ff7c43;
   }
-  .game-bg {
-    border-radius: 16px 16px 0 0;
-    overflow: hidden;
-    background-image: var(--bg-primary);
-    margin-top: -23px;
-    color: #fff;
-    &,
-    .geme-type {
-      height: 46px;
+  .geme-type {
+    p {
+      width: 216px;
+      text-align: center;
+      border: 1px solid var(--primary);
+      background-color: transparent !important;
     }
-    .geme-type {
-      background: url("@/assets/img/iconv.webp") no-repeat center;
-      background-size: cover;
-      font-size: 17px;
-      padding: 0 28px;
+    p.active {
       color: #fff;
-      position: relative;
-      .active {
-        &::after {
-          content: "";
-          display: block;
-          width: 23px;
-          margin-left: -11.5px;
-          height: 2px;
-          background-color: #fff;
-          position: absolute;
-          bottom: 5px;
-          left: 50%;
-        }
-      }
-      & > p {
-        position: relative;
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
-      & > p:nth-child(2) {
-        margin-left: 24px;
-      }
+      background-color: var(--primary) !important;
     }
   }
   .loss-list {
@@ -251,16 +229,7 @@ export default {
     width: 160px;
     margin-left: 8px;
   }
-  ::v-deep {
-    .appp-top-bar-title {
-      width: 100%;
-    }
-    .icon-button,
-    .head-title {
-      color: #fff !important;
-      font-size: 14px;
-    }
-  }
+
   .place {
     padding: 16px;
     position: fixed;
