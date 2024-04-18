@@ -1,5 +1,9 @@
 <template>
   <div class="user-page p-x-24 font12">
+    <ul class="top-msg">
+      <li class="d-block"><img src="@/assets/img/red/msg.webp" /></li>
+      <li></li>
+    </ul>
     <div class="top-user-msg align-center">
       <div class="avatrt m-r-12">
         <img class="d-block" src="@/assets/img/user@2x.png" alt="" />
@@ -270,6 +274,16 @@ export default {
 <style scoped lang="less">
 @shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 .user-page {
+  position: relative;
+  .top-msg {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    img {
+      width: 21px;
+      height: 16px;
+    }
+  }
   .top-user-msg {
     .avatrt {
       img {
