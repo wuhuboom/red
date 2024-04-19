@@ -8,7 +8,7 @@
         <div class="lang-list d-flex" @click="show = !show">
           <ul class="align-center justify-between flex-1">
             <li class="uppercase align-center">
-              {{ lang }}
+              {{ lang == "ind" ? "in" : lang }}
             </li>
             <li><van-icon name="arrow-down" /></li>
           </ul>
