@@ -149,7 +149,7 @@ export default {
         message: this.$t(`backapi.success.bet.text`),
         theme: "round-button",
         confirmButtonText: "OK",
-        confirmButtonColor: "#f11714",
+        className: "order-finis-button",
       }).then(() => {
         // on close
       });
@@ -363,6 +363,18 @@ export default {
         border-right: none;
       }
     }
+  }
+}
+</style>
+<style lang="less">
+.order-finis-button {
+  background-color: var(--bg-body);
+  color: var(--primary);
+  .van-dialog__message {
+    color: var(--primary);
+  }
+  。van-dialog__footer {
+    background-color: transparent;
   }
 }
 </style>
