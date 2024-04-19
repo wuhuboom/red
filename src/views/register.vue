@@ -55,6 +55,7 @@
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :rules="[
+            { required: true, message: $t('backapi.passwordIsEmpty') },
             {
               validator: validatePassword,
               message: $t('backapi.passwordEasy'),
