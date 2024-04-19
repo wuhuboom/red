@@ -1,6 +1,6 @@
 <template>
   <div class="user-page p-x-24 font12">
-    <ul class="top-msg">
+    <ul class="top-msg" @click="$router.push({ name: 'Message' })">
       <li class="d-block"><img src="@/assets/img/red/msg.webp" /></li>
       <li></li>
     </ul>

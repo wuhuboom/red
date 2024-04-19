@@ -1,7 +1,8 @@
 <template>
-  <div class="message-page">
+  <div class="message-page color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('fuc.message.center')"
     >
     </AppTopBar>
@@ -46,22 +47,18 @@ export default {
 </script>
 <style scoped lang="less">
 .message-page {
-  background-color: #f8f8f8;
-  min-height: 100vh;
-  ::v-deep {
-  }
   .msg-list {
-    background-color: #fff;
     margin-bottom: 4px;
     padding: 20px 16px 16px;
     font-size: 14px;
-    color: #222741;
+    border-bottom: solid 1px #484b4c;
+    .cont,
+    .time {
+      color: #fff;
+    }
   }
   .cont {
     margin: 8px 0;
-  }
-  .time {
-    color: #acaebe;
   }
 }
 </style>
