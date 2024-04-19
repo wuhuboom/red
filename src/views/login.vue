@@ -52,6 +52,7 @@
         <van-field
           v-model.trim="form.code"
           class="res-icon-size login-ceode"
+          :maxlength="4"
           autocomplete="new-password"
           :placeholder="$t('form.vercode.text')"
           :rules="[{ required: true, message: $t('ruls.vercode.empty') }]"
@@ -234,7 +235,14 @@ export default {
     async verifyCodeReq() {
       this.form.code = "";
       const [err, res] = await userApi.verifyCodeReq();
-      if (err) return;
+      console.log("res", err);
+      if (err) {
+        if (+err.code == 409) {
+          this.$toast(this.$t("backapi.self.alert.fast.access.tip.text"));
+        }
+
+        return;
+      }
       this.src = res.data.img;
       this.form.verifyKey = res.data.verifyKey;
     },

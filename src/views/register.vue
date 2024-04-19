@@ -17,7 +17,13 @@
           autocomplete="new-password"
           name="username"
           :placeholder="$t('form.account.text')"
-          :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
+          :rules="[
+            { required: true, message: $t('ruls.accout.empty') },
+            {
+              pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d\W]+$/,
+              message: this.$t('Username.cannot.numbers.or.letters'),
+            },
+          ]"
         />
         <!-- showText -->
         <van-field
@@ -73,7 +79,15 @@
           class="email res-icon-size"
           autocomplete="new-password"
           name="email"
-          :rules="[{ required: true, message: $t('ruls.email.empty') }]"
+          :rules="[
+            { required: true, message: $t('ruls.email.empty') },
+            {
+              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: this.$t(
+                'backapi.self.login.reg.page.email.input.format.text'
+              ),
+            },
+          ]"
         >
         </van-field>
         <van-field
@@ -120,6 +134,7 @@
         <van-field
           v-model.trim="form.code"
           class="res-icon-size login-ceode"
+          :maxlength="4"
           autocomplete="new-password"
           :placeholder="$t('form.vercode.text')"
           :rules="[{ required: true, message: $t('ruls.vercode.empty') }]"
@@ -303,7 +318,13 @@ export default {
     async verifyCodeReq() {
       this.form.code = "";
       const [err, res] = await userApi.verifyCodeReq();
-      if (err) return;
+      if (err) {
+        if (+err.code == 409) {
+          this.$toast(this.$t("backapi.self.alert.fast.access.tip.text"));
+        }
+
+        return;
+      }
       this.src = res.data.img;
       this.form.verifyKey = res.data.verifyKey;
     },
