@@ -115,8 +115,8 @@ export default {
   .row-list-item {
     box-shadow: @shadow;
     border-radius: 20px;
-    color: #b31917;
-    border: 1px solid #b31917;
+    color: var(--primary);
+    border: 1px solid var(--primary);
   }
   .row-list-up {
     display: flex;

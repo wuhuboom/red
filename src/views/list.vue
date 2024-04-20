@@ -234,7 +234,7 @@ export default {
     .search {
       &,
       .van-icon-search {
-        color: #b31917;
+        color: var(--primary);
       }
       .van-form {
         width: 100%;
