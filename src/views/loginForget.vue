@@ -8,25 +8,26 @@
     </AppTopBar>
     <div class="p-x-24">
       <van-form ref="form" class="defind-form" @submit="onSubmit">
-        <van-field
-          class="res-icon-size chose-verification"
-          autocomplete="new-password"
-          :placeholder="$t('index.editor.psd.text')"
-        >
+        <p>{{ $t("index.editor.psd.text") }}</p>
+        <van-field>
           <template #input>
-            <van-dropdown-menu
-              class="drop-menu"
-              :overlay="false"
-              active-color="#222222"
+            <el-select
+              v-model="form.verificationVal"
+              :disabled="countdown > 0"
+              class="full100"
+              :placeholder="$t('index.editor.psd.text')"
             >
-              <van-dropdown-item
-                :disabled="countdown > 0"
-                v-model.trim="form.verificationVal"
-                :options="verificationOpt"
-              />
-            </van-dropdown-menu>
+              <el-option
+                v-for="item in verificationOpt"
+                :key="item.value"
+                :label="item.text"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
           </template>
         </van-field>
+
         <van-field
           v-model.trim="form.email"
           name="email"
