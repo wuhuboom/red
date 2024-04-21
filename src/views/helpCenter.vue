@@ -2,7 +2,7 @@
   <div class="wallet-page font12 p-l-24 p-r-24">
     <AppTopBar
       :titleClass="['app-top-black-title']"
-      :topBarTitle="$t('user.Report.Management')"
+      :topBarTitle="$t('help_center')"
     >
     </AppTopBar>
     <div>
@@ -40,25 +40,25 @@ export default {
         {
           icon: require("@/assets/img/red/help1.png"),
           text: i18n.t("user.help.center.contact.us.text"),
-          name: "SafeRecharge",
+          name: "service",
           active: false,
         },
         {
           icon: require("@/assets/img/red/help2.png"),
           text: `${i18n.t("user.help.center.user.notice.text")}`,
-          name: "TransferSub",
+          name: "ArtTpl",
           active: false,
         },
         {
           icon: require("@/assets/img/red/help3.png"),
           text: `${i18n.t("user.help.center.privacy.solicy.text")}`,
-          name: "TransferSelf",
+          name: "PrivacySolicy",
           active: false,
         },
         {
           icon: require("@/assets/img/red/help4.png"),
           text: `${i18n.t("user.help.center.technical.support.text")}`,
-          name: "TransferSelf",
+          name: "Technicalsupport",
           active: false,
         },
       ];
@@ -79,6 +79,10 @@ export default {
   },
   methods: {
     goTo(name) {
+      if (name === "service") {
+        this.$store.commit("goServe");
+        return;
+      }
       this.$router.push({ name });
     },
     async safeInfo() {

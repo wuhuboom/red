@@ -237,6 +237,9 @@ export default {
 <style scoped lang="less">
 .change-password-view {
   ::v-deep {
+    .iconfont {
+      color: var(--primary);
+    }
   }
 }
 </style>

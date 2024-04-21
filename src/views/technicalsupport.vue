@@ -1,7 +1,8 @@
 <template>
-  <div class="art-tpl-view font14">
+  <div class="art-tpl-view font12 colorfff">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('user.help.center.privacy.solicy.text')"
     >
     </AppTopBar>
@@ -34,15 +35,9 @@ export default {
 </script>
 <style scoped lang="less">
 .art-tpl-view {
-  min-height: 100vh;
-  background-color: #f8f8f8;
-  color: #707070;
-  padding-top: 24px;
-
   .title {
     padding: 0 0 16px;
     font-size: 18px;
-    color: #222;
   }
   .cont {
     line-height: 1.8;
