@@ -1,44 +1,42 @@
 <template>
-  <div class="address-add font14">
+  <div class="address-add font12 color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="id ? $t('Edit.USDT.Address') : $t('Add.USDT.Address')"
     >
     </AppTopBar>
     <!-- v-if="!dataList.length" -->
     <div class="center-center py-16" v-if="false">
-      <van-Loading color="#1989fa" />
+      <van-Loading class="color-primary" />
     </div>
-    <div v-else class="px-16 py-16">
-      <van-form class="register-form column-form" @submit="onSubmit">
+    <div v-else class="m-l-24 m-r-24">
+      <van-form class="defind-form" @submit="onSubmit">
         <van-field
           v-model.trim="form.currency"
           class="mb-16"
-          :label="$t(`withdraw.add.with.currency.text`)"
+          :placeholder="$t(`withdraw.add.with.currency.text`)"
           :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
         />
-        <van-field
-          class="mb-16"
-          :label="$t('backapi.self.safe.bill.data.type.text')"
+        <el-select
+          v-model="form.typeValue"
+          :placeholder="$t('index.editor.psd.text')"
         >
-          <template #input>
-            <van-dropdown-menu
-              :overlay="false"
-              class="drop-menu"
-              active-color="#222222"
-            >
-              <van-dropdown-item
-                v-model.trim="form.typeValue"
-                :options="usdtTypeOptions"
-              />
-            </van-dropdown-menu>
-          </template>
-        </van-field>
+          <el-option
+            v-for="item in usdtTypeOptions"
+            :key="item.value"
+            :label="item.text"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
 
         <van-field
           v-model.trim="form.usdtAddress"
           class="mb-16"
-          :label="$t('user.security.center.bankcard.useradd.usdt.address.text')"
+          :placeholder="
+            $t('user.security.center.bankcard.useradd.usdt.address.text')
+          "
           :rules="[
             {
               required: true,
@@ -50,24 +48,23 @@
             },
           ]"
         />
-        <van-field class="mb-16" :label="$t('index.editor.psd.text')">
-          <template #input>
-            <van-dropdown-menu
-              class="drop-menu"
-              :overlay="false"
-              active-color="#222222"
-            >
-              <van-dropdown-item
-                :disabled="countdown > 0"
-                v-model.trim="form.verificationVal"
-                :options="verificationOpt"
-              />
-            </van-dropdown-menu>
-          </template>
-        </van-field>
+        <el-select
+          v-model="form.verificationVal"
+          :placeholder="$t('index.editor.psd.text')"
+          :disabled="countdown > 0"
+        >
+          <el-option
+            v-for="item in verificationOpt"
+            :key="item.value"
+            :label="item.text"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+
         <van-field
           class="mb-16"
-          :label="$t('form.vercode.text')"
+          :placeholder="$t('form.vercode.text')"
           v-model.trim="form.veriftValue"
           :rules="[
             {
@@ -83,7 +80,7 @@
               size="small"
               @click="sendCode"
               :disabled="countdown > 0"
-              class="code-btn center-center"
+              class="page-res-btn"
               color="#0025fc"
               >{{ $t("deal.chat.921073-7")
               }}{{ countdown ? `(${countdown})` : "" }}</van-button
@@ -96,7 +93,7 @@
           v-model.trim="form.payPwd"
           type="password"
           autocomplete="new-password"
-          :label="
+          :placeholder="
             $t('user.security.center.bankcard.bankadd.input.pay.pass.text')
           "
           :rules="[
@@ -110,9 +107,9 @@
             },
           ]"
         />
-        <div class="sumit-section">
+        <div class="sumit-section center-center">
           <van-button
-            class="res-van-button button-blue"
+            class="page-res-btn"
             block
             type="info"
             :loading="formLoaing"
@@ -290,28 +287,5 @@ export default {
 </script>
 <style scoped lang="less">
 .address-add {
-  min-height: 100vh;
-  background-color: #f8f8f8;
-  .van-cell {
-    padding: 0;
-    background-color: transparent;
-  }
-  ::v-deep {
-    .van-field__label {
-      color: #9da4b4;
-    }
-    .van-field__body {
-      border-color: #fff;
-      background-color: #fff;
-      color: #222222;
-    }
-    .code-btn {
-      min-width: 70px;
-      padding: 0 4px;
-      height: 32px;
-      border-radius: 8px;
-      background-color: #0025fc;
-    }
-  }
 }
 </style>

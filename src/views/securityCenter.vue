@@ -49,24 +49,24 @@ export default {
           name: "ChangFundPassword",
           active: false,
         },
-        {
-          icon: require("@/assets/img/red/security3.png"),
-          text: `${i18n.t("fuc.balance.details")}`,
-          name: "TransferSelf",
-          active: false,
-        },
-        {
-          icon: require("@/assets/img/red/security4.png"),
-          text: `${i18n.t("fuc.personal.security")}`,
-          name: "TransferSelf",
-          active: false,
-        },
+        // {
+        //   icon: require("@/assets/img/red/security3.png"),
+        //   text: `${i18n.t("fuc.balance.details")}`,
+        //   name: "TransferSelf",
+        //   active: false,
+        // },
         {
           icon: require("@/assets/img/red/security5.png"),
-          text: `${i18n.t("agency.center.user.center.text")}`,
-          name: "SafeBilling",
+          text: `${i18n.t("security.bank.card.text")}`,
+          name: "BankAccountList",
           active: false,
         },
+        // {
+        //   icon: require("@/assets/img/red/security5.png"),
+        //   text: `${i18n.t("agency.center.user.center.text")}`,
+        //   name: "SafeBilling",
+        //   active: false,
+        // },
         {
           icon: require("@/assets/img/red/security4.png"),
           text: `${i18n.t("fuc.personal.report")}`,

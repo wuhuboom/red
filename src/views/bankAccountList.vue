@@ -1,12 +1,13 @@
 <template>
-  <div class="bank-account-list font14">
+  <div class="bank-account-list color-primary font12">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('security.bank.card.text')"
     >
     </AppTopBar>
     <div class="center-center px-16 py-16" v-if="loading">
-      <van-loading color="#1989fa" />
+      <van-loading class="color-primary" />
     </div>
     <div class="px-16 py-16" v-else>
       <ul
@@ -16,66 +17,68 @@
       >
         <li class="icon-box center-center"><img :src="udticon1" alt="" /></li>
         <li class="name flex-1 app-ellipsis">
-          <p class="app-ellipsis">
+          <p class="app-ellipsis name-title">
             {{ item.addr | usdt_left_addr }} **** ****
             {{ item.addr | usdt_right_addr }}
           </p>
           <p>{{ item.protocol }}</p>
         </li>
         <li class="rit">
-          <img
-            src="@/assets/img/edt.webp"
-            alt=""
+          <i
+            class="el-icon-edit"
             @click="
               $router.push({ name: 'AddressUsdt', query: { id: item.id } })
             "
-          />
+          ></i>
+
           <p>{{ formatDate(item.createdAt, "yyyy-MM-dd") }}</p>
         </li>
       </ul>
       <ul
-        class="bank align-center bg-yellow"
+        class="bank align-center"
         v-for="(item, idx) in bankList"
         :key="`${idx}-bank`"
       >
         <li class="icon-box center-center"><img :src="udticon2" alt="" /></li>
         <li class="name flex-1 app-ellipsis">
-          <p class="app-ellipsis">
+          <p class="app-ellipsis name-title">
             {{ item.cardNumber | leftAddr }} **** ****
             {{ item.cardNumber | rightAddr }}
           </p>
           <p>{{ item.cardName }}</p>
         </li>
         <li class="rit">
-          <img
-            src="@/assets/img/edt.webp"
+          <i
+            class="el-icon-edit"
             @click="
               $router.push({ name: 'AddBankCard', query: { id: item.id } })
             "
-          />
+          ></i>
+
           <p>{{ formatDate(item.createdAt, "yyyy-MM-dd") }}</p>
         </li>
       </ul>
       <ul
-        class="bank align-center bg-blue"
+        class="bank align-center"
         v-for="(item, idx) in wallwtList"
         :key="`${idx}-wallet`"
       >
         <li class="icon-box center-center"><img :src="udticon3" alt="" /></li>
         <li class="name flex-1 app-ellipsis">
-          <p class="app-ellipsis">
+          <p class="app-ellipsis name-title">
             {{ item.address | leftAddr }} **** ****
             {{ item.address | rightAddr }}
           </p>
           <p>{{ item.type }}{{ $t("wallet.list.wallet.text") }}</p>
         </li>
         <li class="rit">
-          <img
-            src="@/assets/img/edt.webp"
+          <i
+            class="el-icon-edit"
             @click="
               $router.push({ name: 'AddressWallet', query: { id: item.id } })
             "
-          />
+          ></i>
+
           <p>{{ formatDate(item.createdAt, "yyyy-MM-dd") }}</p>
         </li>
       </ul>
@@ -199,22 +202,26 @@ export default {
 </script>
 <style scoped lang="less">
 .bank-account-list {
-  min-height: 100vh;
-  background-color: #f8f8f8;
   .bank-types {
     font-size: 16px;
     font-weight: bold;
     padding: 16px 0;
-    color: #222;
+  }
+  .name-title {
+    color: #fff;
+  }
+  .el-icon-edit {
+    font-size: 16px;
+    margin-bottom: 8px;
   }
   .bank {
     height: 80px;
     border-radius: 15px;
-    border: solid 1px #f5f5f5;
+    border: solid 1px var(--primary);
     margin-bottom: 8px;
-    background: url("@/assets/img/bankbg.webp") right center no-repeat #52b173;
+
     background-size: auto 100%;
-    color: #fff;
+
     padding-right: 16px;
     .name {
       & > p:first-child {
