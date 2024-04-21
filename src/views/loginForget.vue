@@ -68,7 +68,6 @@
           :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
         />
         <van-field
-          class="mb-16"
           :placeholder="$t('form.vercode.text')"
           v-model.trim="form.vercode"
           :rules="[
