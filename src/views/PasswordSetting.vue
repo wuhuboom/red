@@ -29,25 +29,6 @@
           >
           </el-option>
         </el-select>
-        <!-- <van-field
-          class="res-icon-size chose-verification"
-          autocomplete="new-password"
-          :placeholder="$t('index.editor.psd.text')"
-        >
-          <template #input>
-            <van-dropdown-menu
-              class="drop-menu"
-              :overlay="false"
-              active-color="#222222"
-            >
-              <van-dropdown-item
-                :disabled="countdown > 0"
-                v-model.trim="form.verificationVal"
-                :options="verificationOpt"
-              />
-            </van-dropdown-menu>
-          </template>
-        </van-field> -->
         <van-field
           class="res-icon-size"
           v-if="form.verificationVal == 1"
