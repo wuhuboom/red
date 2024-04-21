@@ -95,9 +95,9 @@
           @click="$router.push({ name: 'AddressUsdt' })"
         >
           <li>
-            <img src="@/assets/img/addbank3.webp" alt="" />
+            <i class="el-icon-plus"></i>
           </li>
-          <li>+{{ $t("user.Add.usdt.Address") }}</li>
+          <li>{{ $t("user.Add.usdt.Address") }}</li>
         </ul>
         <ul
           class="add-list align-center"
@@ -105,9 +105,9 @@
           @click="$router.push({ name: 'AddBankCard' })"
         >
           <li>
-            <img src="@/assets/img/addbank2.webp" alt="" />
+            <i class="el-icon-plus"></i>
           </li>
-          <li>+{{ $t("user.new.bank") }}</li>
+          <li>{{ $t("user.new.bank") }}</li>
         </ul>
         <ul
           class="add-list align-center"
@@ -115,7 +115,7 @@
           @click="$router.push({ name: 'AddressWallet' })"
         >
           <li>
-            <img src="@/assets/img/addbank1.webp" alt="" />
+            <i class="el-icon-plus"></i>
           </li>
           <li>+{{ $t("user.Add.Wallet") }}</li>
         </ul>
@@ -252,11 +252,13 @@ export default {
   .add-list {
     height: 48px;
     border-radius: 15px;
-    border: solid 1px #f5f5f5;
-    background-color: #fff;
+    border: solid 1px var(--primary);
     margin-bottom: 4px;
+
+    color: #fff;
     & > li:first-child {
       padding: 0 8px 0 16px;
+      color: var(--primary);
     }
     img {
       width: 22px;
