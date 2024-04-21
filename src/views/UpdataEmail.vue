@@ -43,11 +43,19 @@
           :placeholder="$t('form.email.text')"
           class="left-icon-box res-icon-size"
           autocomplete="new-password"
-          :rules="[{ required: true, message: $t('ruls.email.empty') }]"
+          :rules="[
+            { required: true, message: $t('ruls.email.empty') },
+            {
+              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: this.$t(
+                'backapi.self.login.reg.page.email.input.format.text'
+              ),
+            },
+          ]"
         >
-          <template #button>
+          <!-- <template #button>
             <span class="emial-fix">{{ emailFix }}</span>
-          </template>
+          </template> -->
         </van-field>
 
         <div class="sumit-section center-center pt-16 px-16">
@@ -72,7 +80,7 @@ export default {
   name: "ChangPassword",
   data() {
     return {
-      emailFix: "@gmail.com",
+      emailFix: "",
       countdown: 0,
       loading: false,
       showText: false,
