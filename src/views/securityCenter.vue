@@ -45,8 +45,8 @@ export default {
         },
         {
           icon: require("@/assets/img/red/security2.png"),
-          text: `${i18n.t("Data.Center.Level")}`,
-          name: "TransferSub",
+          text: `${i18n.t("security.fun.pass.text")}`,
+          name: "ChangFundPassword",
           active: false,
         },
         {

@@ -1,19 +1,30 @@
 <template>
-  <div class="change-password-view font14">
+  <div class="change-password-view color-primary font12 pb-16">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('security.fun.pass.text')"
     >
     </AppTopBar>
-    <FunNav />
-    <div>
-      <van-form class="register-form column-form" @submit="onSubmit">
+    <HistoryNav
+      :type="0"
+      :skip1="{
+        name: 'ChangFundPassword',
+        text: $t(`password.setting.pass.button.text`),
+      }"
+      :skip2="{
+        name: 'FundPasswordSetting',
+        text: $t(`index.login.forget.text`),
+      }"
+    />
+    <div class="m-l-24 m-r-24">
+      <van-form class="defind-form" @submit="onSubmit">
         <van-field
           class="res-icon-size"
           v-model.trim="form.loginPass"
           autocomplete="new-password"
           :type="showText ? '' : 'password'"
-          :label="$t('form.pwd2.text')"
+          :placeholder="$t('form.pwd2.text')"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
@@ -30,7 +41,7 @@
           v-model.trim="form.password"
           autocomplete="new-password"
           :type="showText ? '' : 'password'"
-          :label="$t('form.new.password.text')"
+          :placeholder="$t('form.new.password.text')"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
@@ -47,7 +58,7 @@
           v-model.trim="form.twoPassword"
           autocomplete="new-password"
           :type="showText ? '' : 'password'"
-          :label="$t('form.confirm.password.text')"
+          :placeholder="$t('form.confirm.password.text')"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
@@ -63,9 +74,9 @@
             },
           ]"
         />
-        <div class="sumit-section pt-16 px-16">
+        <div class="sumit-section center-center pt-16 px-16">
           <van-button
-            class="res-van-button button-blue"
+            class="page-res-btn"
             :loading="loading"
             block
             type="info"
@@ -81,11 +92,11 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import userApi from "@/api/user";
-import FunNav from "@/views/components/FunNav.vue";
+import HistoryNav from "@/views/components/HistoryNav.vue";
 export default {
   name: "ChangPassword",
   components: {
-    FunNav,
+    HistoryNav,
   },
   data() {
     return {
@@ -167,11 +178,9 @@ export default {
 </script>
 <style scoped lang="less">
 .change-password-view {
-  color: #242424;
-  background-color: #f8f8f8;
   ::v-deep {
-    .van-cell {
-      background-color: transparent;
+    .iconfont {
+      color: var(--primary);
     }
   }
 }
