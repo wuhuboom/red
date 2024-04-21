@@ -1,7 +1,8 @@
 <template>
-  <div class="address-add font14">
+  <div class="address-add font12 color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="
         $t(
           id
@@ -13,13 +14,12 @@
     </AppTopBar>
     <!-- v-if="!dataList.length" -->
     <div class="center-center py-16" v-if="false">
-      <van-Loading color="#1989fa" />
+      <van-Loading class="color-primary" />
     </div>
-    <div v-else class="px-16 py-16">
-      <van-form class="register-form column-form" @submit="onSubmit">
+    <div v-else class="m-l-24 m-r-24 m-b-24">
+      <van-form class="defind-form defind-form-row" @submit="onSubmit">
         <van-field
           v-model.trim="form.name"
-          class="mb-16"
           :label="$t('backapi.self.whitdraw.type.ewallet.form.name.text')"
           :rules="[
             {
@@ -28,21 +28,21 @@
             },
           ]"
         />
-        <van-field
-          class="mb-16"
-          :label="$t('backapi.self.safe.bill.data.type.text')"
-        >
+        <van-field :label="$t('backapi.self.safe.bill.data.type.text')">
           <template #input>
-            <van-dropdown-menu
-              :overlay="false"
-              class="drop-menu"
-              active-color="#222222"
+            <el-select
+              v-model="form.typeValue"
+              class="full100"
+              :placeholder="$t('index.editor.psd.text')"
             >
-              <van-dropdown-item
-                v-model.trim="form.typeValue"
-                :options="usdtTypeOptions"
-              />
-            </van-dropdown-menu>
+              <el-option
+                v-for="item in usdtTypeOptions"
+                :key="item.value"
+                :label="item.text"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
           </template>
         </van-field>
 
@@ -63,23 +63,25 @@
             },
           ]"
         />
-        <van-field class="mb-16" :label="$t('index.editor.psd.text')">
+        <van-field :label="$t('index.editor.psd.text')">
           <template #input>
-            <van-dropdown-menu
-              :overlay="false"
-              class="drop-menu"
-              active-color="#222222"
+            <el-select
+              v-model="form.verificationVal"
+              class="full100"
+              :placeholder="$t('index.editor.psd.text')"
             >
-              <van-dropdown-item
-                :disabled="countdown > 0"
-                v-model.trim="form.verificationVal"
-                :options="verificationOpt"
-              />
-            </van-dropdown-menu>
+              <el-option
+                v-for="item in verificationOpt"
+                :key="item.value"
+                :label="item.text"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
           </template>
         </van-field>
+
         <van-field
-          class="mb-16"
           :label="$t('form.vercode.text')"
           v-model.trim="form.veriftValue"
           :rules="[
@@ -96,8 +98,7 @@
               size="small"
               @click="sendCode"
               :disabled="countdown > 0"
-              class="code-btn center-center"
-              color="#0025fc"
+              class="page-res-btn"
               >{{ $t("deal.chat.921073-7")
               }}{{ countdown ? `(${countdown})` : "" }}</van-button
             >
@@ -105,7 +106,6 @@
         </van-field>
 
         <van-field
-          class="mb-16"
           v-model.trim="form.payPwd"
           type="password"
           autocomplete="new-password"
@@ -123,9 +123,9 @@
             },
           ]"
         />
-        <div class="sumit-section">
+        <div class="sumit-section center-center">
           <van-button
-            class="res-van-button button-blue"
+            class="page-res-btn"
             block
             type="info"
             :loading="formLoaing"
@@ -320,28 +320,5 @@ export default {
 </script>
 <style scoped lang="less">
 .address-add {
-  min-height: 100vh;
-  background-color: #f8f8f8;
-  .van-cell {
-    padding: 0;
-    background-color: transparent;
-  }
-  ::v-deep {
-    .van-field__label {
-      color: #9da4b4;
-    }
-    .van-field__body {
-      border-color: #fff;
-      background-color: #fff;
-      color: #222222;
-    }
-    .code-btn {
-      min-width: 70px;
-      padding: 0 4px;
-      height: 32px;
-      border-radius: 8px;
-      background-color: #0025fc;
-    }
-  }
 }
 </style>

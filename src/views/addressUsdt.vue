@@ -18,22 +18,25 @@
           :placeholder="$t(`withdraw.add.with.currency.text`)"
           :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
         />
-        <el-select
-          v-model="form.typeValue"
-          :placeholder="$t('index.editor.psd.text')"
-        >
-          <el-option
-            v-for="item in usdtTypeOptions"
-            :key="item.value"
-            :label="item.text"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
-
+        <van-field class="mb-16">
+          <template #input>
+            <el-select
+              v-model="form.typeValue"
+              class="full100"
+              :placeholder="$t('index.editor.psd.text')"
+            >
+              <el-option
+                v-for="item in usdtTypeOptions"
+                :key="item.value"
+                :label="item.text"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </template>
+        </van-field>
         <van-field
           v-model.trim="form.usdtAddress"
-          class="mb-16"
           :placeholder="
             $t('user.security.center.bankcard.useradd.usdt.address.text')
           "
@@ -48,20 +51,24 @@
             },
           ]"
         />
-        <el-select
-          v-model="form.verificationVal"
-          :placeholder="$t('index.editor.psd.text')"
-          :disabled="countdown > 0"
-        >
-          <el-option
-            v-for="item in verificationOpt"
-            :key="item.value"
-            :label="item.text"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
-
+        <van-field>
+          <template #input>
+            <el-select
+              v-model="form.verificationVal"
+              class="full100"
+              :placeholder="$t('index.editor.psd.text')"
+              :disabled="countdown > 0"
+            >
+              <el-option
+                v-for="item in verificationOpt"
+                :key="item.value"
+                :label="item.text"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </template>
+        </van-field>
         <van-field
           class="mb-16"
           :placeholder="$t('form.vercode.text')"

@@ -187,19 +187,22 @@
             },
           ]"
         />
-        <van-field class="mb-16" :label="$t('index.editor.psd.text')">
+        <van-field class="mb-16">
           <template #input>
-            <van-dropdown-menu
-              :overlay="false"
-              class="drop-menu"
-              active-color="#222222"
+            <el-select
+              v-model="form.verificationVal"
+              class="full100"
+              :placeholder="$t('index.editor.psd.text')"
+              :disabled="countdown > 0"
             >
-              <van-dropdown-item
-                :disabled="countdown > 0"
-                v-model.trim="form.verificationVal"
-                :options="verificationOpt"
-              />
-            </van-dropdown-menu>
+              <el-option
+                v-for="item in verificationOpt"
+                :key="item.value"
+                :label="item.text"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
           </template>
         </van-field>
         <van-field
