@@ -11,14 +11,13 @@
       <van-Loading class="color-primary" />
     </div>
     <div v-else class="m-l-24 m-r-24">
-      <van-form class="defind-form" @submit="onSubmit">
+      <van-form class="defind-form defind-form-row" @submit="onSubmit">
         <van-field
           v-model.trim="form.currency"
-          class="mb-16"
-          :placeholder="$t(`withdraw.add.with.currency.text`)"
+          :label="$t(`withdraw.add.with.currency.text`)"
           :rules="[{ required: true, message: $t('ruls.accout.empty') }]"
         />
-        <van-field class="mb-16">
+        <van-field :label="$t('backapi.self.safe.bill.data.type.text')">
           <template #input>
             <el-select
               v-model="form.typeValue"
@@ -37,9 +36,7 @@
         </van-field>
         <van-field
           v-model.trim="form.usdtAddress"
-          :placeholder="
-            $t('user.security.center.bankcard.useradd.usdt.address.text')
-          "
+          :label="$t('user.security.center.bankcard.useradd.usdt.address.text')"
           :rules="[
             {
               required: true,
@@ -51,7 +48,7 @@
             },
           ]"
         />
-        <van-field>
+        <van-field :label="$t('index.editor.psd.text')">
           <template #input>
             <el-select
               v-model="form.verificationVal"
@@ -70,8 +67,7 @@
           </template>
         </van-field>
         <van-field
-          class="mb-16"
-          :placeholder="$t('form.vercode.text')"
+          :label="$t('form.vercode.text')"
           v-model.trim="form.veriftValue"
           :rules="[
             {
@@ -96,11 +92,10 @@
         </van-field>
 
         <van-field
-          class="mb-16"
           v-model.trim="form.payPwd"
           type="password"
           autocomplete="new-password"
-          :placeholder="
+          :label="
             $t('user.security.center.bankcard.bankadd.input.pay.pass.text')
           "
           :rules="[
