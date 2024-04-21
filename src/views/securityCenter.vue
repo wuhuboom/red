@@ -68,15 +68,15 @@ export default {
         //   active: false,
         // },
         {
-          icon: require("@/assets/img/red/security4.png"),
-          text: `${i18n.t("fuc.personal.report")}`,
-          name: "TransferSelf",
+          icon: require("@/assets/img/red/group-135@2x.png"),
+          text: `${i18n.t("security.phone.text")}`,
+          name: "UpdataPhone",
           active: false,
         },
         {
-          icon: require("@/assets/img/red/security5.png"),
-          text: `${i18n.t("agency.center.user.center.text")}`,
-          name: "SafeBilling",
+          icon: require("@/assets/img/red/group-134@2x.png"),
+          text: `${i18n.t("security.mail.text")}`,
+          name: "UpdataEmail",
           active: false,
         },
       ];

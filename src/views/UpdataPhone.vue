@@ -1,21 +1,22 @@
 <template>
-  <div class="change-password-view font14 pb-16">
+  <div class="change-password-view font12 color-primary pb-16">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('security.phone.text')"
     >
     </AppTopBar>
-    <div>
-      <van-form class="register-form column-form" @submit="onSubmit">
+    <div class="m-l-24 m-r-24">
+      <van-form class="defind-form" @submit="onSubmit">
         <van-field
           class="res-icon-size"
           disabled
           :value="user.phone"
-          :label="$t('password.setting.phone.old.phone.text')"
+          :placeholder="$t('password.setting.phone.old.phone.text')"
         />
         <van-field
           class="mb-16"
-          :label="$t('form.vercode.text')"
+          :placeholder="$t('form.vercode.text')"
           v-model.trim="form.vercode"
           :rules="[
             {
@@ -31,8 +32,7 @@
               size="small"
               @click="sendCode"
               :disabled="countdown > 0"
-              class="code-btn center-center"
-              color="#0025fc"
+              class="page-res-btn"
               >{{ $t("deal.chat.921073-7")
               }}{{ countdown ? `(${countdown})` : "" }}</van-button
             >
@@ -40,7 +40,6 @@
         </van-field>
         <van-field
           v-model.trim="form.phone"
-          :label="$t('form.phoneNum.text')"
           :placeholder="$t('form.phoneNum.text')"
           autocomplete="new-password"
           type="digit"
@@ -48,15 +47,28 @@
           :rules="[{ required: true, message: $t('ruls.phone.empty') }]"
         >
           <template #left-icon>
-            <p @click="leftFn" class="align-center area-code">
+            <!-- <el-select
+              v-model="form.areaCode"
+              class="full100"
+              :placeholder="$t('index.editor.psd.text')"
+            >
+              <el-option
+                v-for="item in area_code"
+                :key="item"
+                :label="item"
+                :value="item"
+              >
+              </el-option>
+            </el-select> -->
+            <p @click="leftFn" class="align-center area-code color-primary">
               <span>+{{ form.areaCode }}</span> <van-icon name="arrow-down" />
             </p>
           </template>
         </van-field>
 
-        <div class="sumit-section pt-16 px-16">
+        <div class="sumit-section center-center pt-16 px-16">
           <van-button
-            class="res-van-button button-blue"
+            class="page-res-btn"
             :loading="loading"
             block
             type="info"
@@ -199,54 +211,38 @@ export default {
 </script>
 <style scoped lang="less">
 .change-password-view {
-  color: #242424;
-  background-color: #f8f8f8;
-  .code-btn {
-    min-width: 70px;
-    padding: 0 4px;
-    height: 32px;
-    border-radius: 8px;
-    background-color: #0025fc;
-  }
-  ::v-deep {
-    .van-cell {
-      background-color: transparent;
-    }
-    .van-field__body {
-      background-color: #fff;
-      border-color: #fff;
-    }
-    .chose-verification {
-      .van-field__body {
-        padding: 0;
-        border: none;
-      }
-      .van-dropdown-menu__bar {
-        border-radius: 10px;
-      }
-    }
-    .van-field--disabled {
-      .van-field__label {
-        color: #646566;
-      }
-    }
-    .area-code {
-      padding-right: 8px;
-    }
-    .left-icon-box {
-      position: relative;
-      @wid: 60px;
-      .van-field__left-icon {
-        position: absolute;
-        top: 54px;
-        left: 32px;
-        z-index: 2;
-        width: @wid;
-      }
-      .van-field__control {
-        padding-left: @wid;
-      }
-    }
-  }
+  // ::v-deep {
+  //   .chose-verification {
+  //     .van-field__body {
+  //       padding: 0;
+  //       border: none;
+  //     }
+  //     .van-dropdown-menu__bar {
+  //       border-radius: 10px;
+  //     }
+  //   }
+  //   .van-field--disabled {
+  //     .van-field__label {
+  //       color: #646566;
+  //     }
+  //   }
+  //   .area-code {
+  //     padding-right: 8px;
+  //   }
+  //   .left-icon-box {
+  //     position: relative;
+  //     @wid: 60px;
+  //     .van-field__left-icon {
+  //       position: absolute;
+  //       top: 54px;
+  //       left: 32px;
+  //       z-index: 2;
+  //       width: @wid;
+  //     }
+  //     .van-field__control {
+  //       padding-left: @wid;
+  //     }
+  //   }
+  // }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <van-action-sheet
     :description="description"
-    class="btm-action-sheet"
+    class="btm-action-sheet color-primary"
     v-model="show"
     :actions="list"
     @select="onSelect"
@@ -62,9 +62,16 @@ export default {
 </script>
 <style scoped lang="less">
 .btm-action-sheet {
+  background-color: var(--bg-body);
   ::v-deep {
+    .van-action-sheet__item {
+      background-color: var(--bg-body);
+    }
     .van-action-sheet__description {
-      color: var(--color-text);
+      color: var(--primary);
+      &::after {
+        border-color: var(--primary);
+      }
     }
     .van-action-sheet__item {
       text-align: left;
