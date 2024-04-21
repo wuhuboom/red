@@ -13,10 +13,9 @@
       <van-Loading class="color-primary" />
     </div>
     <div v-else class="m-l-24 m-r-24 m-b-24">
-      <van-form class="defind-form" @submit="onSubmit">
+      <van-form class="defind-form defind-form-row" @submit="onSubmit">
         <van-field
-          class="mb-16"
-          :placeholder="
+          :label="
             $t('user.security.center.bankcard.bankadd.input.address.text')
           "
         >
@@ -39,8 +38,7 @@
 
         <van-field
           v-model.trim="form.provinceStr"
-          class="mb-16"
-          :placeholder="
+          :label="
             $t('user.security.center.bankcard.bankadd.input.province.text') +
             '(' +
             $t('selectable.text') +
@@ -59,8 +57,7 @@
         />
         <van-field
           v-model.trim="form.cityStr"
-          class="mb-16"
-          :placeholder="
+          :label="
             $t('user.security.center.bankcard.bankadd.input.city.text') +
             '(' +
             $t('selectable.text') +
@@ -79,10 +76,7 @@
         />
         <van-field
           v-model.trim="form.branchStr"
-          class="mb-16"
-          :placeholder="
-            $t('user.security.center.bankcard.bankadd.input.branch.text')
-          "
+          :label="$t('user.security.center.bankcard.bankadd.input.branch.text')"
           :rules="[
             {
               required: true,
@@ -96,8 +90,7 @@
         />
         <van-field
           v-model.trim="form.accountNameStr"
-          class="mb-16"
-          :placeholder="
+          :label="
             $t('user.security.center.bankcard.bankadd.input.account.name.text')
           "
           :rules="[
@@ -114,8 +107,7 @@
         <van-field
           v-model.trim="form.cardIDStr"
           v-if="withDrawAreaStatus"
-          class="mb-16"
-          :placeholder="$t('backapi.self.add.bank.cardID.text')"
+          :label="$t('backapi.self.add.bank.cardID.text')"
           :rules="[
             {
               required: true,
@@ -128,8 +120,7 @@
         <van-field
           v-model.trim="form.cardPhoneStr"
           v-if="withDrawAreaStatus"
-          class="mb-16"
-          :placeholder="$t('backapi.self.add.bank.phone.text')"
+          :label="$t('backapi.self.add.bank.phone.text')"
           :rules="[
             {
               required: true,
@@ -141,8 +132,7 @@
         />
         <van-field
           v-model.trim="form.cardNumStr"
-          class="mb-16"
-          :placeholder="
+          :label="
             $t('user.security.center.bankcard.bankadd.input.card.number.text')
           "
           :rules="[
@@ -158,8 +148,7 @@
         />
         <van-field
           v-model.trim="form.cardConfirmNumStr"
-          class="mb-16"
-          :placeholder="
+          :label="
             $t('user.security.center.bankcard.bankadd.input.confirm.text')
           "
           :rules="[
@@ -175,7 +164,6 @@
         />
         <van-field
           v-model.trim="form.backCode"
-          class="mb-16"
           label="IFSC"
           v-if="indian"
           :rules="[
@@ -187,7 +175,7 @@
             },
           ]"
         />
-        <van-field class="mb-16">
+        <van-field :label="$t('index.editor.psd.text')">
           <template #input>
             <el-select
               v-model="form.verificationVal"
@@ -206,8 +194,7 @@
           </template>
         </van-field>
         <van-field
-          class="mb-16"
-          :placeholder="$t('form.vercode.text')"
+          :label="$t('form.vercode.text')"
           v-model.trim="form.veriftValue"
           :rules="[
             {
@@ -231,11 +218,10 @@
         </van-field>
 
         <van-field
-          class="mb-16"
           v-model.trim="form.payPwd"
           type="password"
           autocomplete="new-password"
-          :placeholder="
+          :label="
             $t('user.security.center.bankcard.bankadd.input.pay.pass.text')
           "
           :rules="[
