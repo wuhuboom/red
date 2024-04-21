@@ -39,8 +39,8 @@ export default {
       const arr = [
         {
           icon: require("@/assets/img/red/security1.png"),
-          text: i18n.t("fuc.rebate.center"),
-          name: "SafeRecharge",
+          text: i18n.t("security.pass.text"),
+          name: "ChangPassword",
           active: false,
         },
         {
