@@ -270,7 +270,7 @@ export default {
     & > li:nth-child(1) {
       font-size: 26px;
       font-weight: 900;
-      color: #ef7367;
+      color: var(--active);
     }
     & > li:nth-child(2) {
       color: var(--primary);
@@ -370,7 +370,7 @@ export default {
       @searchColor: #737b8c;
       .van-icon-search {
         font-size: 24px;
-        color: #ef7367;
+        color: var(--active);
       }
       ::-webkit-input-placeholder,
       ::placeholder {

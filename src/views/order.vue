@@ -380,7 +380,7 @@ export default {
     & > li:nth-child(1) {
       font-size: 26px;
       font-weight: 900;
-      color: #ef7367;
+      color: var(--active);
     }
     & > li:nth-child(2) {
       color: var(--primary);
@@ -418,7 +418,7 @@ export default {
     }
     .btm-text {
       & > li:nth-child(2) {
-        color: #ef7367;
+        color: var(--active);
       }
     }
     .pic {

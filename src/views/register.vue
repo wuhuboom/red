@@ -399,7 +399,7 @@ export default {
         height: auto;
         padding: 0;
         background-color: transparent;
-        color: #ef7367;
+        color: var(--active);
         background-image: none;
       }
     }

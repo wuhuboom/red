@@ -146,7 +146,7 @@ export default {
     }
   }
   .num {
-    color: #ef7367;
+    color: var(--active);
     .el-icon-document-copy {
       color: var(--primary);
     }

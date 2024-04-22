@@ -285,7 +285,7 @@ export default {
       height: auto;
       padding: 0;
       background-color: transparent;
-      color: #ef7367;
+      color: var(--active);
     }
   }
   .serve-btm {
@@ -403,11 +403,11 @@ export default {
     height: 16px;
     border-radius: 3.5px;
     padding: 0 8px;
-    border: 1px solid #f11714;
+    border: 1px solid var(--primary);
     color: #fff;
     font-size: 12px;
     z-index: 3;
-    color: #f11714;
+    color: var(--primary);
     img {
       height: 22px;
       width: 22px;
@@ -426,7 +426,7 @@ export default {
       width: 100%;
       background-color: var(--bg-body);
 
-      border: 1px solid #f11714;
+      border: 1px solid var(--primary);
       & > li {
         height: 24px;
       }
