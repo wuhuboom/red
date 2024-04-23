@@ -83,10 +83,10 @@
               </span>
             </p>
           </div>
-          <div class="sumit-section center-center m-t-8">
+          <div class="center-center m-t-8">
             <van-button
               block
-              class="p-l-4 p-r-4 font12"
+              class="p-l-4 p-r-4 font12 page-res-btn"
               type="info"
               :loading="loading"
               @click="$refs.form.submit()"
