@@ -13,19 +13,19 @@
       <ul class="head list m-t-24">
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("personal.report.bet") }}</p>
-          <p>
+          <p class="color-fff">
             {{ numToFixed(datainfo.bet, $globalUnit.val) / $globalNum.val }}
           </p>
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("personal.report.bingo") }}</p>
-          <p>
+          <p class="color-fff">
             {{ numToFixed(datainfo.bingo, $globalUnit.val) / $globalNum.val }}
           </p>
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("personal.report.rebate") }}</p>
-          <p>
+          <p class="color-fff">
             {{ numToFixed(datainfo.rebate, $globalUnit.val) / $globalNum.val }}
           </p>
         </li>

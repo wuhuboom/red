@@ -38,8 +38,8 @@
               <p>{{ $t("bet.detail.bet.num.text") }}</p>
             </li>
             <li class="justify-between">
-              <p>{{ item.betScore }} @ {{ item.betOdds }}%</p>
-              <p>
+              <p class="color-fff">{{ item.betScore }} @ {{ item.betOdds }}%</p>
+              <p class="color-fff">
                 {{
                   numToFixed(item.betMoney, $globalUnit.val) / $globalNum.val
                 }}
@@ -52,8 +52,8 @@
               <p>{{ $t("deal.createOrderMer.354499-3") }}</p>
             </li>
             <li class="justify-between">
-              <p>{{ item.createdAt | timestampStr }}</p>
-              <p>
+              <p class="color-fff">{{ item.createdAt | timestampStr }}</p>
+              <p class="color-fff">
                 {{ item.orderNo }}
               </p>
             </li>
@@ -61,7 +61,7 @@
           <ul class="justify-between p-l-8 p-r-8 align-center btm-text">
             <li class="m-b-4">
               <p>{{ $t(`bet.index.estimated.profit.text`) }}</p>
-              <p>
+              <p class="color-fff">
                 {{
                   numToFixed(statusToStr(item), $globalUnit.val) /
                   $globalNum.val
@@ -102,10 +102,10 @@
           {{ $t("You.sure.cancel.game") }}
         </li>
         <li class="cancle-btns center-center p-l-24 p-r-24">
-          <p class="center-center" @click="show = false">
+          <p class="page-res-btn" @click="show = false">
             {{ $t("modal.cancel.text") }}
           </p>
-          <p class="center-center" @click="sure">
+          <p class="page-res-btn" @click="sure">
             {{ $t("modal.confirm.text") }}
           </p>
         </li>
@@ -413,8 +413,8 @@ export default {
     }
     .alliance-name {
       color: #fff;
-      border-bottom: 1px solid var(--primary);
-      border-top: 1px solid var(--primary);
+      border-bottom: 1px solid var(--active);
+      border-top: 1px solid var(--active);
     }
     .btm-text {
       & > li:nth-child(2) {

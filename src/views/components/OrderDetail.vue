@@ -18,7 +18,7 @@
         </li>
         <li>{{ $t(`bet.detail.score.text`) }}</li>
       </ul>
-      <ul class="head center-center">
+      <ul class="head center-center color-fff">
         <li class="align-center name main-name">
           <p>{{ game.mainName | removeEsports }}</p>
         </li>
@@ -32,13 +32,13 @@
           <p style="white-space: nowrap" class="p-r-8">
             {{ $t("bet.detail.team.text") }}
           </p>
-          <p class="app-ellipsis">
+          <p class="app-ellipsis color-fff">
             {{ betinfo.gameInfo | removeEsports }}
           </p>
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.screenings.text") }}</p>
-          <p>
+          <p class="color-fff">
             {{
               betinfo.gameType == 1
                 ? $t("bet.detail.screenings.half.text")
@@ -50,37 +50,37 @@
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.score.text") }}</p>
-          <p>
+          <p class="color-fff">
             {{ betinfo.betScore }}
           </p>
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.odds.text") }}</p>
-          <p>
+          <p class="color-fff">
             {{ betinfo.betOdds }}
           </p>
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.bet.num.text") }}</p>
-          <p>
+          <p class="color-fff">
             {{ numToFixed(betinfo.betMoney, $globalUnit.val) / $globalNum.val }}
           </p>
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.loss.text") }}</p>
-          <p>
+          <p class="color-fff">
             {{ getLoss }}
           </p>
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.start.time.text") }}</p>
-          <p>
+          <p class="color-fff">
             {{ game.startTimeStr }}
           </p>
         </li>
         <li class="game-info justify-between align-center p-b-24">
           <p>{{ $t("bet.detail.lottey.status.text") }}</p>
-          <p :class="[getLotteyStatusClass]">
+          <p class="color-fff" :class="[getLotteyStatusClass]">
             {{ getLotteyStatus }}
           </p>
         </li>
@@ -89,7 +89,7 @@
           v-if="betinfo.status == 3"
         >
           <p>{{ $t("recharge.Status") }}</p>
-          <p>
+          <p class="color-fff">
             {{ $t("order.canceled") }}
           </p>
         </li>

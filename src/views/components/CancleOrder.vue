@@ -11,10 +11,10 @@
         {{ $t("You.sure.cancel.game") }}
       </li>
       <li class="cancle-btns center-center p-l-24 p-r-24">
-        <p class="center-center" @click="close">
+        <p class="page-res-btn" @click="close">
           {{ $t("modal.cancel.text") }}
         </p>
-        <p class="center-center" @click="sure">
+        <p class="page-res-btn" @click="sure">
           {{ $t("modal.confirm.text") }}
         </p>
       </li>

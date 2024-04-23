@@ -32,7 +32,7 @@ u
 
     <NoData v-if="notthing" />
     <div v-else>
-      <van-grid class="color-primary" :border="false" :column-num="4">
+      <van-grid class="color-primary m-b-8" :border="false" :column-num="4">
         <van-grid-item v-for="value in head" :key="value">
           {{ value }}
         </van-grid-item>
@@ -54,7 +54,8 @@ u
           {{ numToFixed(item.withdrawal, $globalUnit.val) / $globalNum.val }}
         </van-grid-item>
         <van-grid-item class="color-active" @click="getDetail(item)">
-          {{ $t("table.head.detail.text") }}
+          <!-- {{ $t("table.head.detail.text") }} -->
+          <i class="el-icon-tickets font14"></i>
         </van-grid-item>
       </van-grid>
     </div>
