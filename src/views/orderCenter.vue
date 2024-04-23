@@ -36,7 +36,7 @@ u
           </el-dropdown-menu>
         </el-dropdown>
       </li>
-      <li class="search center-center" @click="searchLoad">
+      <li class="search center-center page-res-btn" @click="searchLoad">
         {{ $t("backapi.self.bank.search.text") }}
       </li>
     </ul>
@@ -287,13 +287,6 @@ export default {
     height: 32px;
     border-bottom: 1px solid #484b4c;
     border-top: 1px solid #484b4c;
-    .search {
-      min-width: 74px;
-      height: 18px;
-      border-radius: 8px;
-      background-color: var(--primary);
-      color: #fff;
-    }
   }
   ::v-deep {
     .appp-top-bar {

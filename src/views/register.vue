@@ -33,7 +33,7 @@
           :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.password.text')"
           @click-right-icon="openEye"
-          :right-icon="`icon iconfont ${
+          :right-icon="`icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :rules="[
@@ -51,7 +51,7 @@
           @click-right-icon="openEye"
           :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.twoPassword.text')"
-          :right-icon="`icon iconfont ${
+          :right-icon="`icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :rules="[
@@ -399,7 +399,7 @@ export default {
         height: auto;
         padding: 0;
         background-color: transparent;
-        color: var(--active);
+        color: var(--primary);
         background-image: none;
       }
     }
@@ -457,7 +457,7 @@ export default {
     }
     .res-icon-size .van-icon {
       font-size: 20px;
-      color: var(--primary);
+      //color: var(--primary);
     }
     .left-icon-box {
       position: relative;

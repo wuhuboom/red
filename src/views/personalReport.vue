@@ -25,7 +25,7 @@ u
           <van-field v-model.trim="username" />
         </van-form>
       </li>
-      <li class="search center-center" @click="searchLoad">
+      <li class="page-res-btn center-center" @click="searchLoad">
         {{ $t("backapi.self.bank.search.text") }}
       </li>
     </ul>

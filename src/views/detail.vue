@@ -8,17 +8,17 @@
       <div class="geme-type flex-column center-center">
         <p
           class="page-res-btn m-b-8"
-          :class="{ active: type === 1 }"
-          @click="type = 1"
-        >
-          {{ $t("bet.detail.screenings.half.text") }}
-        </p>
-        <p
-          class="page-res-btn"
           :class="{ active: type === 2 }"
           @click="type = 2"
         >
           {{ $t("bet.detail.screenings.full.text") }}
+        </p>
+        <p
+          class="page-res-btn"
+          :class="{ active: type === 1 }"
+          @click="type = 1"
+        >
+          {{ $t("bet.detail.screenings.half.text") }}
         </p>
       </div>
     </div>
@@ -75,7 +75,7 @@ export default {
       isScrolled: false,
       doc: {},
       curItem: {},
-      type: 1,
+      type: 2,
     };
   },
   computed: {
@@ -181,12 +181,12 @@ export default {
     p {
       width: 216px;
       text-align: center;
-      border: 1px solid var(--primary);
+      border: 1px solid var(--active);
       background-color: transparent !important;
     }
     p.active {
       color: #fff;
-      background-color: var(--primary) !important;
+      background-color: var(--active) !important;
     }
   }
   .loss-list {

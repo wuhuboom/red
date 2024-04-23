@@ -37,7 +37,7 @@
           </el-option>
         </el-select>
       </li>
-      <li class="search center-center" @click="changTab">
+      <li class="page-res-btn center-center" @click="changTab">
         {{ $t("backapi.self.bank.search.text") }}
       </li>
     </ul>

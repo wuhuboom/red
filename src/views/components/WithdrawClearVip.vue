@@ -1,21 +1,21 @@
 <template>
   <van-dialog
-    class="withdraw-clear-vip-dialog"
+    class="withdraw-clear-vip-dialog color-primary"
     :showConfirmButton="false"
     v-model="showDialog"
     :close-on-click-overlay="true"
   >
     <ul class="promotion-cont font14">
       <li class="center-center">
-        <img src="@/assets/img/shared.png" alt="" />
+        <!-- <img src="@/assets/img/shared.png" alt="" /> -->
       </li>
       <li class="center-center tip pt-16 pb-16">
         {{ $t(`withdrawal.level.to.reset`) }}
       </li>
     </ul>
-    <div class="d-flex bmt-btns">
+    <div class="justify-around bmt-btns p-b-24">
       <van-button
-        class="res-van-button no-bg-btn"
+        class="page-res-btn"
         :loading="loading"
         block
         type="info"
@@ -23,7 +23,7 @@
         >{{ $t("index.editor.psd.modal.cancel.btn") }}</van-button
       >
       <van-button
-        class="res-van-button button-confirm button-blue"
+        class="page-res-btn"
         :loading="loading"
         @click="confirm"
         block
@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       loading: false,
-      showDialog: false,
+      showDialog: true,
     };
   },
   props: {
@@ -68,8 +68,10 @@ export default {
 </script>
 <style scoped lang="less">
 .withdraw-clear-vip-dialog {
-  background-image: linear-gradient(to bottom, #c6cdff, #fff 22%);
-  color: #474747;
+  //background-color: var(--bg-body);
+  background: url("@/assets/img/red/witbg.webp") no-repeat center bottom
+    transparent;
+  background-size: 100% 100%;
   padding: 10px 20px 20px;
   ::v-deep {
     .bmt-btns {
