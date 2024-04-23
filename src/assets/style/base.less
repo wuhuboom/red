@@ -273,7 +273,7 @@
 }
 .el-select-dropdown{
   background-color: var(--bg-body) !important;
-  border-color: var(--primary) !important;
+  border-color: var(--active) !important;
   margin-top: 0  !important;
   .popper__arrow{
     display: none;
@@ -284,7 +284,7 @@
     font-size: 12px;
     font-weight: normal;
     &.selected {
-      color: var(--active);
+      color: var(--color-fff);
     }
   }
  }
@@ -359,4 +359,9 @@
  }
  .colorfff{
   color: #fff;
+ }
+ .tab-list{
+  .active,.color-active{
+    color: var(--color-fff) !important;
+  }
  }

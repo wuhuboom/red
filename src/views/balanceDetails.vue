@@ -36,7 +36,7 @@
         <van-grid
           :border="false"
           :column-num="4"
-          class="m-b-8"
+          class="m-b-8 color-fff"
           v-for="(item, idx) in curItem.results"
           :key="idx"
         >

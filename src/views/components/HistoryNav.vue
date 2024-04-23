@@ -1,13 +1,13 @@
 <template>
-  <ul class="order-nav">
+  <ul class="order-nav color-fff">
     <li
-      :class="{ active: type === 0 }"
+      :class="{ 'color-primary': type === 0 }"
       @click="$router.replace({ name: skip1.name })"
     >
       <p>{{ skip1.text }}</p>
     </li>
     <li
-      :class="{ active: type === 1 }"
+      :class="{ 'color-primary': type === 1 }"
       @click="$router.replace({ name: skip2.name })"
     >
       <p>{{ skip2.text }}</p>
@@ -69,7 +69,6 @@ export default {
 .order-nav {
   display: flex;
   justify-content: space-between;
-  color: var(--primary);
   height: 77px;
   padding: 8px 0;
   background: url("@/assets/img/red/rechargeHistory.webp") no-repeat center

@@ -2,7 +2,7 @@
   <van-action-sheet class="detail-action-sheet color-primary" v-model="show">
     <div class="content font12">
       <ul class="title flex-column center-center px-16">
-        <li class="center-center color-primary color-active p-t-24 p-b-4">
+        <li class="center-center color-primary color-primary p-t-24 p-b-4">
           {{ balanceMoneyNum }}
         </li>
         <li>{{ $t("wallet.Account.Balance") }}</li>
@@ -27,7 +27,7 @@
           >
           </van-field>
         </van-form>
-        <ul class="chose-glod justify-between align-center">
+        <ul class="chose-glod color-primary justify-between align-center">
           <li
             v-for="(item, idx) in goldList"
             @click="glod(item)"
@@ -38,22 +38,22 @@
           </li>
         </ul>
         <ul class="title flex-column center-center px-16 m-b-8">
-          <li class="center-center color-primary color-active p-b-4">
+          <li class="center-center color-primary p-b-4">
             {{ getEstimateProfit }}
           </li>
           <li>{{ $t("match.order.detail.estimate.profit.text") }}</li>
         </ul>
         <ul class="text-center m-b-8">
           <li>{{ $t("Pay.Rate") }}</li>
-          <li class="color-active">x{{ payRate }}%</li>
+          <li class="color-primary">x{{ payRate }}%</li>
         </ul>
         <ul class="text-center m-b-8">
           <li>{{ $t("VIP.earnings") }}</li>
-          <li class="color-active">x{{ vipRate }}%</li>
+          <li class="color-primary">x{{ vipRate }}%</li>
         </ul>
         <ul class="text-center m-b-8">
           <li>{{ $t("match.order.detail.proce.fee.text") }}</li>
-          <li class="color-active">-{{ feeAmount }}%</li>
+          <li class="color-primary">-{{ feeAmount }}%</li>
         </ul>
         <ul class="p-t-24">
           <li class="center-center p-b-40">
@@ -350,14 +350,14 @@ export default {
     }
     .chose-glod {
       padding: 6px 0 32px;
-      color: var(--active);
+
       margin: 0 -4px;
       & > li {
         margin: 0 4px;
         width: 80px;
         height: 36px;
         padding: 4px;
-        border-right: 1px solid var(--primary);
+        border-right: 1px solid var(--active);
       }
       & > li:last-child {
         border-right: none;

@@ -73,7 +73,8 @@ u
             }}
           </van-grid-item>
           <van-grid-item class="color-active" @click="getDetail(item)">
-            {{ $t("table.head.detail.text") }}
+            <!-- {{ $t("table.head.detail.text") }} -->
+            <i class="el-icon-tickets"></i>
           </van-grid-item>
         </van-grid>
       </div>
