@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       loading: false,
-      showDialog: true,
+      showDialog: false,
     };
   },
   props: {
