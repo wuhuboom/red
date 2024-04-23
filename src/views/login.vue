@@ -290,7 +290,7 @@ export default {
   }
   .serve-btm {
     font-size: 14px;
-    color: #c72826;
+    color: var(--primary);
     padding-bottom: 20px;
     img {
       height: 16px;
@@ -342,7 +342,7 @@ export default {
     input[type="password"] {
       &,
       &::placeholder {
-        color: #c72826;
+        color: var(--primary);
       }
     }
     .username {

@@ -425,7 +425,7 @@ export default {
     input[type="tel"] {
       &,
       &::placeholder {
-        color: #c72826;
+        color: var(--primary);
       }
     }
     .username {

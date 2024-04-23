@@ -3,7 +3,7 @@
     <ul class="app-btm-list max-width750">
       <li
         :class="{
-          active: $router.currentRoute.name == item.name || item.active,
+          // active: $router.currentRoute.name == item.name || item.active,
         }"
         class="btm-item center-center"
         v-for="(item, idx) in list"

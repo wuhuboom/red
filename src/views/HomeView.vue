@@ -6,7 +6,7 @@
           <img class="d-block" src="@/assets/img/red/voice.webp" alt="" />
         </p>
         <div class="flex-1 content">
-          <div class="u-notice-content">Welcome to BHB 111</div>
+          <div class="u-notice-content">Welcome to BHB</div>
         </div>
       </div>
     </div>
@@ -19,10 +19,13 @@
       </van-swipe>
     </div>
     <ul class="user-money p-l-24 p-r-24 font12">
-      <li class="text-center">{{ balanceMoneyNum }}</li>
-      <li class="center-center m-t-1 m-b-8">
+      <li class="text-center color-primary">{{ balanceMoneyNum }}</li>
+      <li class="center-center m-t-1 m-b-8 color-primary">
         {{ $t("home.index.account.balance.text") }}
-        <i @click="refresh" class="iconfont font14 icon-shuaxin"></i>
+        <i
+          @click="refresh"
+          class="iconfont font14 icon-shuaxin color-active"
+        ></i>
       </li>
       <li></li>
     </ul>
@@ -270,10 +273,6 @@ export default {
     & > li:nth-child(1) {
       font-size: 26px;
       font-weight: 900;
-      color: var(--active);
-    }
-    & > li:nth-child(2) {
-      color: var(--primary);
     }
     & > li:nth-child(3) {
       height: 3px;

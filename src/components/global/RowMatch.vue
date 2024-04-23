@@ -116,7 +116,7 @@ export default {
     box-shadow: @shadow;
     border-radius: 20px;
     color: var(--primary);
-    border: 1px solid var(--primary);
+    border: 1px solid var(--active);
   }
   .row-list-up {
     display: flex;
@@ -134,8 +134,8 @@ export default {
   }
   .alliance-name {
     color: #fff;
-    border-bottom: 1px solid var(--primary);
-    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--active);
+    border-top: 1px solid var(--active);
   }
   .team-vs {
     color: var(--primary);
@@ -146,9 +146,9 @@ export default {
     }
   }
   .num {
-    color: var(--active);
+    color: var(--primary);
     .el-icon-document-copy {
-      color: var(--primary);
+      color: var(--active);
     }
   }
   .half {
