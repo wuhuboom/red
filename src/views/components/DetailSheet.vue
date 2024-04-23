@@ -373,7 +373,7 @@ export default {
   .van-dialog__message {
     color: var(--primary);
   }
-  。van-dialog__footer {
+  .van-dialog__footer {
     background-color: transparent;
   }
 }
