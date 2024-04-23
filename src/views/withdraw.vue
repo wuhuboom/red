@@ -7,7 +7,7 @@
     >
     </AppTopBar>
     <div class="center-center py-16" v-if="!withdrawList.length">
-      <van-Loading color="#1989fa" />
+      <van-Loading class="color-primary" />
     </div>
     <div v-else class="">
       <ul class="type-list p-l-12 p-r-12 m-b-8">
