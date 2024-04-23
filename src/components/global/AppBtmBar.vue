@@ -25,13 +25,18 @@
         </p>
       </li>
     </ul>
+    <RootDialog />
   </div>
 </template>
 
 <script>
 import i18n from "@/locale";
+import RootDialog from "@/views/components/RootDialog.vue";
 export default {
   name: "AppBtmBar",
+  components: {
+    RootDialog,
+  },
   props: {},
   data() {
     return {

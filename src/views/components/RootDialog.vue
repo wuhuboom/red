@@ -1,21 +1,21 @@
 <template>
   <div class="root-dialog">
     <van-dialog
-      class="app-root-upload-dialog"
+      class="app-root-upload-dialog color-primary"
       :showConfirmButton="false"
       v-model="show"
       @confirm="confirm"
     >
       <ul class="upload-cont">
         <li class="center-center">
-          <img src="@/assets/img/setPay.webp" alt="" />
+          <!-- <img src="@/assets/img/setPay.webp" alt="" /> -->
         </li>
         <li class="py-16">{{ $t(`user.payment.password`) }}</li>
       </ul>
-      <van-form @submit="onSubmit">
+      <van-form class="defind-form" @submit="onSubmit">
         <van-field
           v-model.trim="form.payPwd"
-          :right-icon="`icon iconfont ${
+          :right-icon="`icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :type="showText ? '' : 'password'"
@@ -33,7 +33,7 @@
           v-model.trim="form.payPwdAgain"
           :type="showText ? '' : 'password'"
           @click-right-icon="openEye"
-          :right-icon="`icon iconfont ${
+          :right-icon="`icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           autocomplete="new-password"
@@ -49,9 +49,10 @@
             },
           ]"
         />
-        <div class="pt-16">
+        <div class="pt-16 center-center">
           <van-button
             :loading="loading"
+            class="page-res-btn"
             round
             block
             type="info"
@@ -132,6 +133,9 @@ export default {
   ::v-deep {
     .app-root-upload-dialog {
       padding: 20px 30px 30px;
+      background: url("@/assets/img/red/paybg.webp") no-repeat center bottom
+        transparent;
+      background-size: 100% 100%;
       .van-hairline--top::after {
         display: none;
       }
@@ -147,34 +151,7 @@ export default {
 
         & > li:nth-child(2) {
           font-size: 14px;
-          color: #474747;
           line-height: 1.8;
-        }
-      }
-      .van-form {
-        .van-cell {
-          padding-left: 0;
-          padding-right: 0;
-        }
-        .van-cell::after {
-          display: none;
-        }
-        .van-field__error-message {
-          padding: 0 16px;
-        }
-        .van-field__body {
-          padding: 0 16px;
-          height: 52px;
-          border-radius: 26px;
-          background-color: #f3f4f7;
-        }
-        [type="submit"] {
-          height: 52px;
-          border-radius: 24px;
-          background-color: #02f;
-        }
-        .iconfont {
-          font-size: 20px;
         }
       }
     }
