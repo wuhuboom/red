@@ -8,16 +8,19 @@
     >
       <ul class="upload-cont">
         <li class="center-center">
-          <img src="@/assets/img/notification.png" alt="" />
+          <!-- <img src="@/assets/img/notification.png" alt="" /> -->
         </li>
-        <li class="center-center tip">{{ $t(`UserProfile.Notification`) }}</li>
-        <li>{{ msg }}</li>
+        <li class="center-center tip color-fff">
+          {{ $t(`UserProfile.Notification`) }}
+        </li>
+        <li class="color-primary">{{ msg }}</li>
       </ul>
     </van-dialog>
   </div>
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import userApi from "@/api/user";
 export default {
   name: "MaintainDialog",
@@ -70,7 +73,9 @@ export default {
 .main-tain-dialog {
   .tain-upload-dialog {
     padding: 20px 30px 30px;
-    background-image: linear-gradient(to bottom, #c6cdff, #fff 22%);
+    background: url("@/assets/img/red/note.webp") no-repeat center bottom
+      transparent;
+    background-size: 100% 100%;
     .van-hairline--top::after {
       display: none;
     }
@@ -78,7 +83,6 @@ export default {
       padding: 12px 0;
       font-size: 22px;
       font-weight: bold;
-      color: #222;
     }
     .upload-cont {
       & > li:nth-child(1) {
@@ -92,7 +96,6 @@ export default {
 
       & > li:nth-child(3) {
         font-size: 14px;
-        color: #474747;
         line-height: 1.8;
       }
     }
