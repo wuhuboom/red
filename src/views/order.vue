@@ -413,8 +413,8 @@ export default {
     }
     .alliance-name {
       color: #fff;
-      border-bottom: 1px solid #dc2525;
-      border-top: 1px solid #dc2525;
+      border-bottom: 1px solid var(--primary);
+      border-top: 1px solid var(--primary);
     }
     .btm-text {
       & > li:nth-child(2) {

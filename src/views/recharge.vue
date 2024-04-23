@@ -311,7 +311,7 @@ export default {
     .van-button {
       height: 20px;
       border-radius: 8px;
-      background-color: #dc2525;
+      background-color: var(--primary);
       border: none;
       flex-basis: 100px;
       white-space: nowrap;

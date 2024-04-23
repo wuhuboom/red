@@ -410,7 +410,7 @@ export default {
       min-width: 74px;
       height: 18px;
       border-radius: 8px;
-      background-color: #dc2525;
+      background-color: var(--primary);
       color: #fff;
     }
   }

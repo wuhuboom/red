@@ -352,8 +352,8 @@ export default {
     border-radius: 9px;
     padding: 0 8px;
     min-width: 54px;
-    background-color: #dc2525 !important;
-    border-color: #dc2525 !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
     color: #fff;
   }
   .radio-list-row {
