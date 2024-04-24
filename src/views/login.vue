@@ -6,7 +6,7 @@
           <img class="d-block" src="@/assets/img/red/zeplogo@2x.png" alt="" />
         </p>
         <p class="color-primary title-logo">
-          <img src="@/assets/img/red/login-logo.webp" alt="" />
+          <img class="d-block" src="@/assets/img/red/login-logo.webp" alt="" />
         </p>
         <div class="lang-list d-flex" @click="show = !show">
           <ul class="align-center justify-between flex-1">
@@ -265,7 +265,7 @@ export default {
   color: var(--color-text);
   min-height: 100vh;
   color: #fff;
-  background: url("@/assets/img/red/lognbg.jpg") top center no-repeat;
+  background: url("@/assets/img/red/lognbg.png") top center no-repeat;
   background-size: 100% auto;
   .logo {
     img {
@@ -275,7 +275,7 @@ export default {
   }
   .title-logo {
     img {
-      height: 26px;
+      height: 36px;
     }
   }
   .res-van-button {
@@ -286,7 +286,7 @@ export default {
     background-color: #041faf;
   }
   .sumit-section {
-    padding: 38px 0;
+    padding: 24px 0 30px;
     display: flex;
     justify-content: space-around;
     button {
@@ -398,7 +398,7 @@ export default {
   align-items: flex-end;
   justify-content: center;
   color: #fff;
-  height: 348px;
+  height: 352px;
 
   background-size: 100% 348px;
   .register-up-desc {

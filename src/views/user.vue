@@ -49,7 +49,11 @@
         </li>
       </ul>
     </div>
-    <van-action-sheet v-model="show" :description="$t(`index.index.lang`)">
+    <van-action-sheet
+      class="btm-action-sheet color-primary"
+      v-model="show"
+      :description="$t(`index.index.lang`)"
+    >
       <ul class="content-user-lang">
         <li
           @click="onSelect(item)"
@@ -305,6 +309,29 @@ export default {
 @shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 .user-page {
   position: relative;
+  .btm-action-sheet {
+    background-color: var(--bg-body);
+    ::v-deep {
+      .van-action-sheet__item {
+        background-color: var(--bg-body);
+      }
+      .van-action-sheet__description {
+        color: var(--primary);
+        &::after {
+          border-color: var(--primary);
+        }
+      }
+      .van-action-sheet__item {
+        text-align: left;
+      }
+      .van-action-sheet__content {
+        padding: 0 16px;
+      }
+      .van-action-sheet__content {
+        max-height: 258px;
+      }
+    }
+  }
   .content-user-lang {
     & > li {
       height: 40px;

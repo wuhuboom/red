@@ -46,10 +46,11 @@
           <div @click="getWithdrawRoutingJump">{{ getWithdrawBindName }}</div>
         </div>
         <p>{{ $t("deal.buyDetail.387081-3") }}</p>
-        <div class="justify-between align-center list-doc">
+        <div ref="align" class="justify-between align-center list-doc">
           <div>
             <div class="black-form">
               <van-field
+                ref="amount"
                 :placeholder="`${$t('deal.buyDetail.387081-5')} ${
                   chooseRecType.withdrawMin
                 }-${chooseRecType.withdrawMax}`"
@@ -635,10 +636,13 @@ export default {
       this.$toast.clear();
     },
   },
-  created() {
+  async created() {
     this.$store.dispatch("getInfo");
     this.getFingrtPrint();
-    this.withdrawalPre();
+    await this.withdrawalPre();
+    this.$nextTick(() => {
+      this.$refs.amount && this.$refs.amount.focus();
+    });
   },
   beforeDestroy() {
     this.clearTimer();
