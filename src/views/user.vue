@@ -49,6 +49,19 @@
         </li>
       </ul>
     </div>
+    <van-action-sheet v-model="show" :description="$t(`index.index.lang`)">
+      <ul class="content-user-lang">
+        <li
+          @click="onSelect(item)"
+          class="align-center"
+          v-for="(item, idx) in langOptions"
+          :key="idx"
+        >
+          <img :src="item.icon" alt="" />
+          {{ item.text }}
+        </li>
+      </ul>
+    </van-action-sheet>
   </div>
 </template>
 
@@ -109,6 +122,16 @@ export default {
           icon: require("@/assets/img/red/usernav5.png"),
           name: i18n.t("help_center"),
           link: "HelpCenter",
+        },
+        {
+          icon: require("@/assets/img/red/user9.png"),
+          name: i18n.t("index.index.lang"),
+          link: "lang",
+        },
+        {
+          icon: require("@/assets/img/red/user8.png"),
+          name: i18n.t("fuc.sign.out"),
+          link: "out",
         },
       ],
     };
@@ -183,12 +206,6 @@ export default {
           name: "AboutUs",
           active: false,
         },
-        // {
-        //   icon: require("@/assets/img/user9.webp"),
-        //   text: i18n.t("user.special.offer"),
-        //   name: "home",
-        //   active: false,
-        // },
         {
           icon: require("@/assets/img/user10.webp"),
           text: i18n.t("index.login.service.text"),
@@ -217,6 +234,14 @@ export default {
       if (link) {
         if (link === "service") {
           this.$store.commit("goServe");
+          return;
+        }
+        if (link === "out") {
+          this.loginOut();
+          return;
+        }
+        if (link === "lang") {
+          this.show = true;
           return;
         }
         this.$router.push({ name: item.link });
@@ -280,6 +305,17 @@ export default {
 @shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 .user-page {
   position: relative;
+  .content-user-lang {
+    & > li {
+      height: 40px;
+      padding: 0 30px;
+      img {
+        width: 22px;
+        height: 22px;
+        margin-right: 8px;
+      }
+    }
+  }
   .top-msg {
     position: absolute;
     right: 16px;
