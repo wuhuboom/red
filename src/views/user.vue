@@ -11,7 +11,7 @@
       <div>
         <ul class="color-primary">
           <li class="m-b-8 user-name">
-            <p class="color-active m-b-4">{{ user.username }}</p>
+            <p class="color-active m-b-4 color-fff">{{ user.username }}</p>
             <p class="align-center level">
               Lv{{ user.vipLevel }}
               <img class="m-l-4" src="@/assets/img/red/vip.png" alt="" />
@@ -24,7 +24,7 @@
         </ul>
       </div>
     </div>
-    <ul class="nav m-t-12 align-center capitalize m-b-16">
+    <ul class="nav align-center capitalize">
       <li
         class="center-center"
         @click="goTo(item)"
@@ -94,6 +94,11 @@ export default {
           icon: require("@/assets/img/red/usernav3.png"),
           name: i18n.t("user.Report.Management"),
           link: "ReportManagement",
+        },
+        {
+          icon: require("@/assets/img/red/er-icon.webp"),
+          name: i18n.t("me.my.qr.code.text"),
+          link: "Share",
         },
         {
           icon: require("@/assets/img/red/usernav4.png"),
@@ -287,8 +292,8 @@ export default {
   .top-user-msg {
     .avatrt {
       img {
-        width: 128px;
-        height: 131px;
+        //width: 128px;
+        height: 106px;
       }
     }
     .level {

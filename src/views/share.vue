@@ -1,8 +1,9 @@
 <!-- eslint-disable no-unused-vars -->
 <template>
-  <div class="invite-friends font14">
+  <div class="invite-friends font14 color-primary">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t(`me.my.qr.code.text`)"
     >
     </AppTopBar>
@@ -23,7 +24,7 @@
         <p class="referral-link">{{ $t(`ercode.referral.link`) }}</p>
         <div class="hrefs center-center copy-button" @click="copy(link)">
           <span class="href-link flex-1 app-ellipsis">{{ link }}</span
-          ><i class="iconfont icon-copy"></i>
+          ><i class="iconfont icon-copy color-active"></i>
         </div>
       </div>
     </div>
@@ -100,15 +101,8 @@ export default {
 </script>
 <style scoped lang="less">
 .invite-friends {
-  min-height: 100vh;
-  background: url("@/assets/img/ercodebg.jpg") center top no-repeat #60b33f;
-  background-size: 100% auto;
-  padding-top: 180px;
-  color: #222;
   text-align: center;
   .cont {
-    border-radius: 15px;
-    background-color: #fff;
     padding: 24px 12px 45px;
   }
   .long-text {
@@ -121,9 +115,10 @@ export default {
     width: 219px;
     height: 55px;
     border-radius: 16px;
-    background-color: #e8efff;
     font-size: 20px;
+    font-weight: bold;
     margin: 0 auto;
+    color: var(--active);
   }
   .icon-copy {
     margin-left: 8px;
@@ -136,7 +131,8 @@ export default {
     height: 55px;
     border-radius: 16px;
     padding: 0 16px;
-    border: solid 1px #707070;
+    border: solid 1px var(--active);
+    color: var(--color-fff);
   }
   .href-link {
     font-size: 16px;

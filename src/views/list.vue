@@ -7,7 +7,7 @@
           @click.stop.prevent
           v-model.trim="teamName"
           @input="handleEnterKey"
-          @paste="handleEnterKey"
+          @paste="pasteEnterKey"
           class="field-input"
           :placeholder="$t('backapi.self.bank.search.text')"
         />
@@ -29,7 +29,7 @@
     <van-list
       v-model="loading"
       :finished="curItem.data.hasNext === false"
-      finished-text="No More"
+      finished-text=""
       loading-text="loading"
       @load="onLoad"
     >
@@ -103,8 +103,13 @@ export default {
       //   duration: 0,
       //   message: "search...",
       // });
+      this.startTime = 0;
       this.tabsList = initList();
       this.onLoad(1);
+    },
+    pasteEnterKey() {
+      if (this.teamName.teamName) return;
+      this.handleEnterKey();
     },
     changTab(item) {
       this.startTime = item.startTime;
