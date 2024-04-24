@@ -2,6 +2,9 @@
   <div class="register-page">
     <div class="register-up d-flex">
       <div class="center-center register-up-desc">
+        <p class="logo m-r-8">
+          <img class="d-block" src="@/assets/img/red/zeplogo@2x.png" alt="" />
+        </p>
         <p class="color-primary title-logo">
           <img src="@/assets/img/red/login-logo.webp" alt="" />
         </p>
@@ -262,11 +265,17 @@ export default {
   color: var(--color-text);
   min-height: 100vh;
   color: #fff;
-  background: url("@/assets/img/red/lognbg.webp") top center no-repeat;
+  background: url("@/assets/img/red/lognbg.jpg") top center no-repeat;
   background-size: 100% auto;
+  .logo {
+    img {
+      width: 42px;
+      height: 43px;
+    }
+  }
   .title-logo {
     img {
-      height: 36px;
+      height: 26px;
     }
   }
   .res-van-button {
