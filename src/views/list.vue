@@ -108,7 +108,7 @@ export default {
       this.onLoad(1);
     },
     pasteEnterKey() {
-      if (this.teamName.teamName) return;
+      if (!this.teamName) return;
       this.handleEnterKey();
     },
     changTab(item) {
