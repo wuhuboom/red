@@ -6,7 +6,7 @@
           <img class="d-block" src="@/assets/img/red/voice.webp" alt="" />
         </p>
         <div class="flex-1 content">
-          <div class="u-notice-content">Welcome to BHB</div>
+          <div class="u-notice-content">Welcome to ZEP</div>
         </div>
       </div>
     </div>
