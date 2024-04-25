@@ -242,6 +242,7 @@ export default {
   created() {
     this.$store.commit("setPdTop", false);
     this.$store.dispatch("getServeData");
+    this.$store.dispatch("getInfo");
     if (this.$store.state.token) {
       this.haveUser();
     } else {
