@@ -113,6 +113,7 @@ export default {
   computed: {
     getEstimateProfit() {
       if (this.amount) {
+        console.log(this.$globalNum.val);
         return this.numToFixed(
           this.amount * (this.payRate / 100 + this.vipRate / 100) -
             this.feeAmount / this.$globalNum.val,

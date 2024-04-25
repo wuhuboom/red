@@ -182,7 +182,10 @@ export default {
           (value.status === 3 && value.statusSettlement === 0)
         ) {
           //未结算/已撤销
-          return 0;
+          return this.numToFixed(
+            value.betMoney * (value.betOdds / 100),
+            this.$globalUnit.val
+          );
         } else if (value.status === 1 && value.statusSettlement === 1) {
           //已结算
           if (value.statusOpen === 1) {
