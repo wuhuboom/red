@@ -68,16 +68,22 @@
                 }}
               </p>
             </li>
-            <li>
+            <li class="center-center">
               <p v-if="item.status == 3 && item.statusOpen == 0">
                 {{ $t("order.canceled") }}
               </p>
               <p
                 v-if="wait(item)"
-                class="canle center-center"
+                class="page-res-btn m-l-4"
                 @click="canleFn(item)"
               >
                 {{ $t("modal.cancel.text") }}
+              </p>
+              <p
+                class="page-res-btn m-l-4"
+                @click="$refs.OrderDetail.open(item)"
+              >
+                {{ $t("backapi.self.safe.bill.detail.text") }}
               </p>
             </li>
           </ul>
@@ -90,7 +96,8 @@
       <NoData v-if="nothing" />
     </van-list>
     <OrderDetail ref="OrderDetail" />
-    <van-dialog
+    <ComfireDialog @sure="sure" ref="ComfireDialog" />
+    <!-- <van-dialog
       v-model="show"
       :showConfirmButton="false"
       :showCancelButton="false"
@@ -110,7 +117,7 @@
           </p>
         </li>
       </ul>
-    </van-dialog>
+    </van-dialog> -->
   </div>
 </template>
 
@@ -236,7 +243,8 @@ export default {
       this.onLoad(1);
     },
     canleFn(item) {
-      this.show = true;
+      //this.show = true;
+      this.$refs.ComfireDialog.open();
       this.item = item;
     },
     comfire() {
@@ -577,32 +585,6 @@ export default {
         width: 98px;
         height: 70px;
         object-fit: cover;
-      }
-    }
-    .cancel-dialog-parent {
-      background-color: transparent;
-      color: var(--primary);
-      .sure-game {
-        height: 123px;
-        width: 100%;
-      }
-      .cancle-dialog {
-        width: 318px;
-        height: 194px;
-        background: url("@/assets/img/red/canclebg.webp") no-repeat center
-          center;
-        background-size: 100% 100%;
-      }
-      .cancle-btns {
-        width: 100%;
-        justify-content: space-around !important;
-        P {
-          width: 76px;
-          height: 18px;
-          color: #fff;
-          border-radius: 9px;
-          background-color: var(--primary);
-        }
       }
     }
   }

@@ -49,6 +49,11 @@
         </li>
       </ul>
     </div>
+    <ComfireDialog
+      :texts="[$t(`now.exit`)]"
+      ref="ComfireDialog"
+      @sure="loginOut"
+    />
     <van-action-sheet
       class="btm-action-sheet color-primary"
       v-model="show"
@@ -241,7 +246,8 @@ export default {
           return;
         }
         if (link === "out") {
-          this.loginOut();
+          // this.loginOut();
+          this.$refs.ComfireDialog.open();
           return;
         }
         if (link === "lang") {

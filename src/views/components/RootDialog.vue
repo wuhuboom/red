@@ -18,7 +18,7 @@
           :right-icon="`icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
-          :type="showText ? '' : 'password'"
+          :type="showText ? 'text' : 'password'"
           @click-right-icon="openEye"
           :placeholder="$t(`form.password.place`)"
           autocomplete="new-password"
@@ -31,7 +31,7 @@
         />
         <van-field
           v-model.trim="form.payPwdAgain"
-          :type="showText ? '' : 'password'"
+          :type="showText ? 'text' : 'password'"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'

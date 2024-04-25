@@ -47,7 +47,7 @@
         </div>
         <p>{{ $t("deal.buyDetail.387081-3") }}</p>
         <div ref="align" class="justify-between align-center list-doc">
-          <div>
+          <div class="flex-1">
             <div class="black-form">
               <van-field
                 ref="amount"

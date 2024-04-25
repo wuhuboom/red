@@ -20,7 +20,7 @@
           class="res-icon-size"
           v-model.trim="form.loginPass"
           autocomplete="new-password"
-          :type="showText ? '' : 'password'"
+          :type="showText ? 'text' : 'password'"
           :placeholder="$t('password.setting.login.pass.button.text')"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont ${
@@ -32,7 +32,7 @@
           class="res-icon-size"
           v-model.trim="form.password"
           autocomplete="new-password"
-          :type="showText ? '' : 'password'"
+          :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.new.password.text')"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont ${
@@ -49,7 +49,7 @@
           class="res-icon-size"
           v-model.trim="form.twoPassword"
           autocomplete="new-password"
-          :type="showText ? '' : 'password'"
+          :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.confirm.password.text')"
           @click-right-icon="openEye"
           :right-icon="`icon iconfont ${

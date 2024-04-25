@@ -44,7 +44,13 @@
             {{ formatDate(item.createdAt, "yyyy-MM-dd hh:mm:ss") }}
           </van-grid-item>
           <van-grid-item>
-            {{ getTabName(item.balanceChangeType) }}
+            <span
+              :class="{
+                'unde-line': tranfser.includes(+item.balanceChangeType),
+              }"
+              @click="goDetail(item)"
+              >{{ getTabName(item.balanceChangeType) }}</span
+            >
           </van-grid-item>
           <van-grid-item>
             {{ numToFixed(item.changeMoney, $globalUnit.val) / $globalNum.val }}
@@ -55,6 +61,11 @@
         </van-grid>
       </div>
     </van-list>
+    <ComfireDialog
+      :footBtn="false"
+      :texts="[$t(`Transfer.source.account`), item.parentName]"
+      ref="ComfireDialog"
+    />
   </div>
 </template>
 
@@ -65,6 +76,7 @@ export default {
   name: "BalanceDetailsView",
   data() {
     return {
+      tranfser: [6, 31, 32],
       head: [
         i18n.t("bet.index.date.text"),
         i18n.t("rebate.center.list.nav.type.text"),
@@ -81,6 +93,7 @@ export default {
         totalCount: null,
         totalPage: null,
       },
+      item: {},
       // 1线上充值 2提现 3投注 4投注盈利 5下级盈利返利
       // 6人工加款 7投注撤消
       // 8人工减款 9投注返奖扣除 10 充值撤消 11线下充值
@@ -127,7 +140,7 @@ export default {
           value: 5,
         },
         {
-          label: this.$t("dropdown.billing.income.manually.add.money.text"),
+          label: this.$t("dropdown.billing.offline.activity.text"),
           value: 6,
         },
         {
@@ -233,7 +246,7 @@ export default {
           value: 31,
         },
         {
-          label: this.$t("dropdown.billing.report.score.text"),
+          label: this.$t("dropdown.billing.offline.activity.text"),
           value: 32,
         },
         {
@@ -279,6 +292,12 @@ export default {
     },
   },
   methods: {
+    goDetail(item) {
+      if (this.tranfser.includes(+item.balanceChangeType)) {
+        this.item = item;
+        this.$refs.ComfireDialog.open();
+      }
+    },
     getState(value) {
       if (this.statusList[value]) {
         return this.statusList[value].label;
@@ -336,6 +355,19 @@ export default {
 </script>
 <style scoped lang="less">
 .agency-page {
+  .unde-line {
+    position: relative;
+  }
+  .unde-line::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    bottom: -2px;
+    left: 0;
+    position: absolute;
+  }
   ::v-deep {
     .van-grid-item__content {
       background-color: transparent;

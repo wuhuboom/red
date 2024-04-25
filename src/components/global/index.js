@@ -8,6 +8,7 @@ import Countdown from "@choujiaojiao/vue2-countdown";
 import AppBackTop from "@/components/global/AppBackTop.vue";
 import NoData from "@/components/global/NoData.vue";
 import RowMatch from "@/components/global/RowMatch.vue";
+import ComfireDialog from "@/components/global/ComfireDialog.vue";
 import {
   Form,
   Field,
@@ -45,6 +46,7 @@ export default {
     Vue.component(AppBackTop.name, AppBackTop);
     Vue.component(NoData.name, NoData);
     Vue.component(RowMatch.name, RowMatch);
+    Vue.component(ComfireDialog.name, ComfireDialog);
     Vue.use(Form);
     Vue.use(Field);
     Vue.use(Button);
