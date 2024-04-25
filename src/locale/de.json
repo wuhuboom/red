@@ -1119,5 +1119,6 @@
   "VIP.earnings":"VIP-Einnahmen",
   "Username.cannot.numbers.or.letters":"Benutzername darf nicht nur aus Zahlen oder Buchstaben bestehen, sondern muss eine Kombination aus Buchstaben und Zahlen sein.",
   "now.exit":"Möchten Sie jetzt aussteigen?",
-  "Transfer.source.account":"Überweisungsquelle-Konto"
+  "Transfer.source.account":"Überweisungsquelle-Konto",
+  "Welcome.to":"Willkommen bei"
 }

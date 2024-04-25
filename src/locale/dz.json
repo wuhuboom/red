@@ -1111,5 +1111,6 @@
   "VIP.earnings":"أرباح VIP",
   "Username.cannot.numbers.or.letters":"يجب ألا يكون اسم المستخدم مكونًا فقط من الأرقام أو الحروف، بل يجب أن يكون تركيبًا من الحروف والأرقام.",
   "now.exit":"هل ترغب في الخروج الآن؟",
-  "Transfer.source.account":"الحساب المصدر للتحويل"
+  "Transfer.source.account":"الحساب المصدر للتحويل",
+  "Welcome.to": "مرحبًا بك في"
 }

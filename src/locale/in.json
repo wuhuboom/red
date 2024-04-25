@@ -1118,5 +1118,6 @@
   "VIP.earnings":"VIP कमाई",
   "Username.cannot.numbers.or.letters":"उपयोगकर्ता नाम केवल उपलब्ध अंकों या अक्षरों से होना चाहिए, बल्कि यह अक्षरों और अंकों का मिश्रण होना चाहिए।",
   "now.exit":"क्या आप अब बाहर निकलना चाहते हैं?",
-  "Transfer.source.account":"स्रोत खाता स्थानांतरण"
+  "Transfer.source.account":"स्रोत खाता स्थानांतरण",
+  "Welcome.to":"आपका स्वागत है"
 }

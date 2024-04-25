@@ -1118,5 +1118,6 @@
   "VIP.earnings":"VIP earnings",
   "Username.cannot.numbers.or.letters":"Username cannot be all numbers or all letters, must be a combination of letters and numbers.",
   "now.exit":"Do you want to exit now?",
-  "Transfer.source.account":"Transfer source account"
+  "Transfer.source.account":"Transfer source account",
+  "Welcome.to":"Welcome to"
 }

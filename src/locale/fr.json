@@ -1118,5 +1118,6 @@
   "VIP.earnings":"Gains VIP",
   "Username.cannot.numbers.or.letters":"Le nom d'utilisateur ne peut pas être composé uniquement de chiffres ou de lettres, mais doit être une combinaison de lettres et de chiffres.",
   "now.exit":"Voulez-vous quitter maintenant ?",
-  "Transfer.source.account":"Compte source de transfert"
+  "Transfer.source.account":"Compte source de transfert",
+  "Welcome.to":"Bienvenue à"
 }
