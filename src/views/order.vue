@@ -197,7 +197,7 @@ export default {
           //已结算
           if (value.statusOpen === 1) {
             //赢的情况(已中奖)
-            return value.winningAmount;
+            return value.winningAmount - value.betMoney;
           } else if (value.statusOpen === 2) {
             //输的情况
             return value.winningAmount * 1 - value.betMoney;
