@@ -86,6 +86,8 @@ export default {
       fastMoneyArray: [],
       balanceMoneyNum: 0,
       feeAmount: 0,
+      payRate: 0,
+      vipRate: 0,
       amount: "",
       goldList: [
         {

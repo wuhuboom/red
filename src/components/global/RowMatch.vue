@@ -6,7 +6,7 @@
       :key="idx"
       @click="goDetail(item)"
     >
-      <ul class="row-list-up m-b-4">
+      <ul class="row-list-up m-b-4 justify-between align-center">
         <li class="row-list-rigth align-center mt-0" @click.stop>
           <span
             class="num"
@@ -15,8 +15,9 @@
             >ID:{{ item.id }} <i class="el-icon-document-copy"></i
           ></span>
         </li>
+        <li>{{ item.startTime | timestampStr }}</li>
       </ul>
-      <ul class="justify-between align-center">
+      <!-- <ul class="justify-between align-center">
         <li>{{ item.startTime | timestampStr }}</li>
         <li class="justify-between align-center">
           {{ $t("match.order.detail.closing.text") }}:
@@ -24,7 +25,7 @@
             <template slot-scope="{ time }">{{ time }}</template>
           </Count-down>
         </li>
-      </ul>
+      </ul> -->
       <p class="center-center font14 alliance-name m-t-4 p-x-4">
         {{ item.allianceName }}
       </p>
