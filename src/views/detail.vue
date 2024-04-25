@@ -1,6 +1,9 @@
 <template>
   <div class="detail-page font12">
-    <AppTopBar :topBarTitle="`${game.allianceName}`" class="app-top-bar-black">
+    <AppTopBar
+      :topBarTitle="`${game.allianceName || ''}`"
+      class="app-top-bar-black"
+    >
     </AppTopBar>
     <RowMatch :hotList="[game]" />
     <p class="black-line m-b-16 m-l-24 m-r-24"></p>
