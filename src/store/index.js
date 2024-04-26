@@ -8,6 +8,7 @@ import delang from "@/assets/img/de-lang.webp";
 import dzlang from "@/assets/img/dz-lang.webp";
 import inlang from "@/assets/img/in-lang.webp";
 import frlang from "@/assets/img/fr-lang.webp";
+import app from "@/main";
 Vue.use(Vuex);
 const lang = location.href.includes("zmkm") ? "zh" : "";
 export default new Vuex.Store({
@@ -164,7 +165,12 @@ export default new Vuex.Store({
       const [err, result] = await userApi[
         `${token ? "servReq" : "servTmpReq"}`
       ]();
-      if (err) return [err];
+      if (err) {
+        if (err.msg) {
+          app.$toast(err.msg);
+        }
+        return [err];
+      }
       commit("setServeData", result.data);
       return [null, result];
     },

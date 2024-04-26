@@ -412,11 +412,11 @@ export default {
     height: 16px;
     border-radius: 3.5px;
     padding: 0 8px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--main);
     color: #fff;
     font-size: 12px;
     z-index: 3;
-    color: var(--primary);
+    color: var(--main);
     img {
       height: 22px;
       width: 22px;
@@ -435,7 +435,7 @@ export default {
       width: 100%;
       background-color: var(--bg-body);
 
-      border: 1px solid var(--primary);
+      border: 1px solid var(--main);
       & > li {
         height: 24px;
       }
