@@ -8,11 +8,13 @@
     </AppTopBar>
     <ul class="text-center color-primary m-b-24">
       <li class="m-b-8">
-        <p class="color-active money-str m-b-4">
+        <p class="money-str m-b-4">
           {{ numToFixed(moneyStr, $globalUnit.val) }}
         </p>
         <p class="m-b-4">{{ $t("wallet.Account.Balance") }}</p>
-        <p><i @click="refresh" class="iconfont font14 icon-shuaxin"></i></p>
+        <p>
+          <i @click="refresh" class="iconfont font14 icon-shuaxin active"></i>
+        </p>
       </li>
       <!-- <li class="m-b-8">
         <p class="m-b-4">

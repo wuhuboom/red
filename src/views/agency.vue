@@ -23,7 +23,7 @@
           class="m-r-16"
           v-for="(item, idx) in tabsList"
           @click="chang(item)"
-          :class="{ 'color-active': tabCurrent === item.value }"
+          :class="{ active: tabCurrent === item.value }"
           :key="idx"
         >
           {{ item.name }}
@@ -41,19 +41,19 @@
       >
         <van-grid-item>
           <div>{{ $t("agency.center.teambalance.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ numToFixed(totalBalance, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("team.report.teamrecharge.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ numToFixed(totalBalance, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("team.report.teamrecharge.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ numToFixed(totalRecharge, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
@@ -65,19 +65,19 @@
       >
         <van-grid-item>
           <div>{{ $t("team.report.teamwithdraw.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ numToFixed(totalWithdrawal, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("team.report.netprofit.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ numToFixed(netProfit, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("agency.center.teamSize.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ playerCount }}
           </div>
         </van-grid-item>
@@ -89,19 +89,19 @@
       >
         <van-grid-item>
           <div>{{ $t("agency.center.newreg.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ newPlayer }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("bet.index.stake.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ numToFixed(totalBetBalance, $globalUnit.val) / $globalNum.val }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("agency.center.numofbets.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ totalBetPlayer }}
           </div>
         </van-grid-item>
@@ -113,7 +113,7 @@
       >
         <van-grid-item>
           <div>{{ $t("agency.center.amountofwin.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{
               numToFixed(cumulativeWinning, $globalUnit.val) / $globalNum.val
             }}
@@ -121,13 +121,13 @@
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("agency.center.team.motivation.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ teamGroupAim }}
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>{{ $t("agency.center.team.motivation.not.text") }}</div>
-          <div class="color-active m-t-4">
+          <div class="m-t-4">
             {{ teamGroupUnAim }}
           </div>
         </van-grid-item>

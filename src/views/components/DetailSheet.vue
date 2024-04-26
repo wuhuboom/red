@@ -1,5 +1,5 @@
 <template>
-  <van-action-sheet class="detail-action-sheet color-primary" v-model="show">
+  <van-action-sheet class="detail-action-sheet color-fff" v-model="show">
     <div class="content font12">
       <ul class="title flex-column center-center px-16">
         <li class="center-center color-primary color-primary p-t-24 p-b-4">
@@ -360,7 +360,7 @@ export default {
         width: 80px;
         height: 36px;
         padding: 4px;
-        border-right: 1px solid var(--active);
+        border-right: 1px solid var(--main);
       }
       & > li:last-child {
         border-right: none;

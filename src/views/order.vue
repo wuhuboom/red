@@ -424,8 +424,8 @@ export default {
     }
     .alliance-name {
       color: #fff;
-      border-bottom: 1px solid var(--active);
-      border-top: 1px solid var(--active);
+      border-bottom: 1px solid var(--main);
+      border-top: 1px solid var(--main);
     }
     .btm-text {
       & > li:nth-child(2) {

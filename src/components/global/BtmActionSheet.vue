@@ -1,7 +1,7 @@
 <template>
   <van-action-sheet
     :description="description"
-    class="btm-action-sheet color-primary"
+    class="btm-action-sheet color-fff"
     v-model="show"
     :actions="list"
     @select="onSelect"
@@ -70,7 +70,7 @@ export default {
     .van-action-sheet__description {
       color: var(--primary);
       &::after {
-        border-color: var(--primary);
+        border-color: var(--main);
       }
     }
     .van-action-sheet__item {

@@ -16,25 +16,25 @@
         <ul class="agency-lst d-flex flex-wrap p-x-16">
           <li class="m-b-16 p-b-8 border-active">
             <p>{{ $t("backapi.self.rebate.top.content.total.text") }}</p>
-            <p class="color-active">
+            <p class="">
               {{ numToFixed(totalNum, $globalUnit.val) / $globalNum.val }}
             </p>
           </li>
           <li class="m-b-16 p-b-8 border-active">
             <p>{{ $t("backapi.self.rebate.top.content.lastweek.text") }}</p>
-            <p class="color-active">
+            <p class="">
               {{ numToFixed(lastWeekNum, $globalUnit.val) / $globalNum.val }}
             </p>
           </li>
           <li>
             <p>{{ $t("backapi.self.rebate.top.content.today.text") }}</p>
-            <p class="color-active">
+            <p class="">
               {{ numToFixed(todayNum, $globalUnit.val) / $globalNum.val }}
             </p>
           </li>
           <li>
             <p>{{ $t("backapi.self.rebate.top.content.week.text") }}</p>
-            <p class="color-active">
+            <p class="">
               {{ numToFixed(weekNum, $globalUnit.val) / $globalNum.val }}
             </p>
           </li>

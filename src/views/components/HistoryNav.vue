@@ -1,13 +1,13 @@
 <template>
   <ul class="order-nav color-fff">
     <li
-      :class="{ 'color-primary': type === 0 }"
+      :class="{ active: type === 0 }"
       @click="$router.replace({ name: skip1.name })"
     >
       <p>{{ skip1.text }}</p>
     </li>
     <li
-      :class="{ 'color-primary': type === 1 }"
+      :class="{ active: type === 1 }"
       @click="$router.replace({ name: skip2.name })"
     >
       <p>{{ skip2.text }}</p>

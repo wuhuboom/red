@@ -351,7 +351,7 @@ export default {
       }
     }
     .search {
-      border: 1px solid var(--primary);
+      border: 1px solid var(--main);
       .field-input-box {
         padding-top: 0;
         padding-bottom: 0;

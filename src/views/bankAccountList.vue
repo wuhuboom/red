@@ -25,7 +25,7 @@
         </li>
         <li class="rit">
           <i
-            class="el-icon-edit"
+            class="el-icon-edit active"
             @click="
               $router.push({ name: 'AddressUsdt', query: { id: item.id } })
             "
@@ -49,7 +49,7 @@
         </li>
         <li class="rit">
           <i
-            class="el-icon-edit"
+            class="el-icon-edit active"
             @click="
               $router.push({ name: 'AddBankCard', query: { id: item.id } })
             "
@@ -73,7 +73,7 @@
         </li>
         <li class="rit">
           <i
-            class="el-icon-edit"
+            class="el-icon-edit active"
             @click="
               $router.push({ name: 'AddressWallet', query: { id: item.id } })
             "
@@ -217,7 +217,7 @@ export default {
   .bank {
     height: 80px;
     border-radius: 15px;
-    border: solid 1px var(--primary);
+    border: solid 1px var(--main);
     margin-bottom: 8px;
 
     background-size: auto 100%;
@@ -252,7 +252,7 @@ export default {
   .add-list {
     height: 48px;
     border-radius: 15px;
-    border: solid 1px var(--primary);
+    border: solid 1px var(--main);
     margin-bottom: 4px;
 
     color: #fff;

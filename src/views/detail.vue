@@ -188,8 +188,8 @@ export default {
       background-color: transparent !important;
     }
     p.active {
-      color: #fff;
-      background-color: var(--active) !important;
+      color: #fff !important;
+      background-color: var(--main) !important;
     }
   }
   .loss-list {

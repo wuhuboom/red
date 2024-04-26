@@ -55,7 +55,7 @@
       @sure="loginOut"
     />
     <van-action-sheet
-      class="btm-action-sheet color-primary"
+      class="btm-action-sheet color-fff"
       v-model="show"
       :description="$t(`index.index.lang`)"
     >
@@ -324,7 +324,7 @@ export default {
       .van-action-sheet__description {
         color: var(--primary);
         &::after {
-          border-color: var(--primary);
+          border-color: var(--main);
         }
       }
       .van-action-sheet__item {

@@ -19,7 +19,7 @@
           @click="copy(invitationCode)"
         >
           <span>{{ invitationCode }}</span
-          ><i class="iconfont icon-copy"></i>
+          ><i class="iconfont icon-copy color-active"></i>
         </div>
         <p class="referral-link">{{ $t(`ercode.referral.link`) }}</p>
         <div class="hrefs center-center copy-button" @click="copy(link)">
@@ -131,7 +131,7 @@ export default {
     height: 55px;
     border-radius: 16px;
     padding: 0 16px;
-    border: solid 1px var(--active);
+    border: solid 1px var(--main);
     color: var(--color-fff);
   }
   .href-link {

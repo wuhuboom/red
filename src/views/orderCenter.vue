@@ -1,6 +1,6 @@
 u
 <template>
-  <div class="wallet-page font12 color-primary font12">
+  <div class="wallet-page font12 color-fff font12">
     <AppTopBar
       :titleClass="['app-top-black-title']"
       :topBarTitle="$t('deal_my_orders')"

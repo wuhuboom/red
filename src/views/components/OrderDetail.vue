@@ -251,7 +251,7 @@ export default {
     font-weight: bold;
   }
   .head-score {
-    border-bottom: solid 1px #484b4c;
+    border-bottom: solid 1px var(--main);
   }
   .game-info {
   }
