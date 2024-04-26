@@ -1096,8 +1096,8 @@
    "Edit.USDT.Address":"Edit USDT Address", 
    "withdraw.failed": "Withdrawal failed",
    
-  "Edt.Bank.Card":"Edt Bank Card",
-  "Edt.Bank.Wallet":"Edit Bank Card",
+  "Edt.Bank.Card":"Edit Bank Card",
+  "Edt.Bank.Wallet":"Edit Wallet",
   
   "home.order.535219-0": "Orders",
   "Today.s.Orders":"Today's Orders",
