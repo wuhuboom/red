@@ -190,13 +190,13 @@ export default {
   }
   .agency-lst {
     border-radius: 10px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--main);
     text-align: center;
     & > li {
       width: 50%;
     }
     .border-active {
-      border-bottom: 1px solid var(--active);
+      border-bottom: 1px solid var(--main);
     }
   }
   .type-head {
