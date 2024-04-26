@@ -76,7 +76,7 @@ export default {
   name: "BalanceDetailsView",
   data() {
     return {
-      tranfser: [6, 31, 32],
+      tranfser: [27, 6, 31, 32],
       head: [
         i18n.t("bet.index.date.text"),
         i18n.t("rebate.center.list.nav.type.text"),
@@ -226,7 +226,7 @@ export default {
           value: 26,
         },
         {
-          label: this.$t("dropdown.billing.income.fixed.day.text"),
+          label: this.$t("dropdown.billing.offline.activity.text"),
           value: 27,
         },
         {
