@@ -49,10 +49,10 @@
           <img class="uploader-img" src="@/assets/img/kyc3.webp" alt="" />
         </van-uploader>
       </div>
-      <div class="upload-btm">
+      <div class="upload-btm center-center">
         <van-button
           @click="submit"
-          class="res-van-button button-blue"
+          class="page-res-btn"
           :loading="loading"
           block
           type="info"
