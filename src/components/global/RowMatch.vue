@@ -1,7 +1,7 @@
 <template>
   <div class="row-list">
     <div
-      class="row-list-item m-x-24 mt-0 font12 p-l-16 p-r-16 p-t-8 p-b-8"
+      class="border-color-main row-list-item m-x-24 mt-0 font12 p-l-16 p-r-16 p-t-8 p-b-8"
       v-for="(item, idx) in hotList"
       :key="idx"
       @click="goDetail(item)"
@@ -26,7 +26,9 @@
           </Count-down>
         </li>
       </ul> -->
-      <p class="center-center font14 alliance-name m-t-4 p-x-4">
+      <p
+        class="border-color-main center-center font14 alliance-name m-t-4 p-x-4"
+      >
         {{ item.allianceName }}
       </p>
       <ul class="team-vs m-t-8">
