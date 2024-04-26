@@ -103,7 +103,7 @@ export default {
   padding: 0 25px;
   position: relative;
   font-size: 16px;
-  background-color: var(--primary);
+  background-color: var(--main);
   color: #fff;
   display: flex;
   align-items: flex-end;
