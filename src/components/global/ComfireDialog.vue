@@ -8,7 +8,7 @@
     :class="{ 'no-foot-btn': !footBtn }"
   >
     <ul class="flex-column cancle-dialog">
-      <li class="sure-game flex-column center-center p-l-16 p-r-16">
+      <li class="sure-game flex-column center-center p-l-16 p-r-16 m-t-16">
         <p
           :class="{ 'm-b-16': idx !== texts.length - 1 }"
           v-for="(item, idx) in texts"

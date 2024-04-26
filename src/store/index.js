@@ -166,8 +166,8 @@ export default new Vuex.Store({
         `${token ? "servReq" : "servTmpReq"}`
       ]();
       if (err) {
-        if (err.msg) {
-          app.$toast(err.msg);
+        if (Array.isArray(err.data) && err.data.length) {
+          app.$toast(err.data[0].msg);
         }
         return [err];
       }

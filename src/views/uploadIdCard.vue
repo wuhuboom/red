@@ -2,6 +2,7 @@
   <div class="uploadId-card-page font14">
     <AppTopBar
       :titleClass="['app-top-black-title']"
+      class="app-top-bar-black"
       :topBarTitle="$t('KYC.Verification')"
     >
     </AppTopBar>

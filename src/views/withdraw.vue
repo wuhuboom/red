@@ -207,7 +207,7 @@
         </ul>
       </div>
 
-      <van-dialog
+      <!-- <van-dialog
         class="upload-dialog"
         :confirmButtonText="$t(`withdraw.risk.uploadTitle`)"
         v-model="show"
@@ -220,37 +220,21 @@
           <li class="center-center">{{ $t(`withdraw.risk.warning`) }}</li>
           <li>{{ $t(`withdraw.risk.content`) }}</li>
         </ul>
-      </van-dialog>
-      <van-dialog
-        class="success-upload-dialog"
-        :showConfirmButton="false"
-        v-model="successDialog"
-        :close-on-click-overlay="true"
-      >
-        <ul class="success-cont font14">
-          <li class="center-center">
-            <img src="@/assets/img/withdraw.png" alt="" />
-          </li>
+      </van-dialog> -->
 
-          <li class="center-center font16">
-            {{ $t(`Submitted.successfully`) }}
-          </li>
-          <li class="center-center">
-            {{ $t(`Submitted.submitted.arrive`) }}
-          </li>
-        </ul>
-        <div>
-          <van-button
-            class="res-van-button button-blue"
-            :loading="loading"
-            block
-            type="info"
-            @click="successDialog = false"
-            >{{ $t("modal.confirm.text") }}</van-button
-          >
-        </div>
-      </van-dialog>
       <WithdrawClearVip @confirm="sumitData(false)" ref="WithdrawClearVip" />
+      <ComfireDialog
+        :texts="[
+          $t(`Submitted.successfully`),
+          $t(`Submitted.submitted.arrive`),
+        ]"
+        ref="ComfireDialog"
+      />
+      <ComfireDialog
+        :texts="[$t(`withdraw.risk.warning`), $t(`withdraw.risk.content`)]"
+        ref="riskCode"
+        @sure="confirm"
+      />
     </div>
   </div>
 </template>
@@ -273,7 +257,7 @@ export default {
       fingerprint: "",
       successDialog: false,
       riskCode: "",
-      show: false,
+      show: true,
       loading: false,
       withdrawList: [],
       chooseRecType: {},
@@ -481,17 +465,21 @@ export default {
           }
           if ([2, 3, 4].includes(riskCode)) {
             this.riskCode = riskCode;
-            this.show = true;
+            // this.show = true;
+            this.$refs.riskCode.open();
             return;
           }
           this.$toast(this.$t(`backapi.${err.data[0].msgKey}`));
         }
         return;
       }
-      this.successDialog = true;
+      this.openSucceessDialog();
       this.amount = "";
       this.$store.dispatch("getInfo");
       this.withdrawalPre(false);
+    },
+    openSucceessDialog() {
+      this.$refs.ComfireDialog.open();
     },
     async initFaceRecognition() {
       // 在调用服务端初始化请求时需要传入该MetaInfo值
