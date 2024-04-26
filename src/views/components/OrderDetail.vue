@@ -13,7 +13,7 @@
     <div v-else class="order-detail p-l-12 p-r-12 font12">
       <ul class="text-center p-t-24 p-b-24 head-score">
         <li>{{ $t(`bet.detail.title.text`) }}</li>
-        <li class="color-active bet-score p-t-8 p-b-8">
+        <li class="bet-score p-t-8 p-b-8">
           {{ betinfo.betScore }}
         </li>
         <li>{{ $t(`bet.detail.score.text`) }}</li>

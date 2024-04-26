@@ -11,14 +11,14 @@
       <div>
         <ul class="color-primary">
           <li class="m-b-8 user-name">
-            <p class="color-active m-b-4 color-fff">{{ user.username }}</p>
+            <p class="m-b-4 color-fff">{{ user.username }}</p>
             <p class="align-center level">
               Lv{{ user.vipLevel }}
               <img class="m-l-4" src="@/assets/img/red/vip.png" alt="" />
             </p>
           </li>
           <li class="user-num">
-            <p class="color-active">{{ balanceMoneyNum }}</p>
+            <p class="">{{ balanceMoneyNum }}</p>
             <p>{{ $t("home.index.account.balance.text") }}</p>
           </li>
         </ul>

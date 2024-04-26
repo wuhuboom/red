@@ -12,7 +12,7 @@
             class="num"
             v-clipboard:copy="getCopyValue(item)"
             v-clipboard:success="handleCopySuccess"
-            >ID:{{ item.id }} <i class="el-icon-document-copy"></i
+            >ID:{{ item.id }} <i class="el-icon-document-copy active"></i
           ></span>
         </li>
         <li>{{ item.startTime | timestampStr }}</li>

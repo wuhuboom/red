@@ -13,25 +13,23 @@
 }
 :root{
   --bg-body:  #171b1e;
-  --color-text:#222222;
+
   --color-fff:#ffffff;
-  //主题色
-  // --primary:  #f11714;
-  // --active:#ef7367;
-   --primary:  #ff7f72;
-  --active:#dc2525;
+  //主题色 #dc2525
+  --color-text:var(--color-fff);
+   --primary:  var(--color-fff);
+  --active:var(--color-fff);
+  --main:#dc2525;
   --bg-primary: linear-gradient(to right, #051da0, #0025fc);
 }
 
 .color-fff{
   color: var(--color-fff);
 }
-.color-active{
-  color: var(--active) !important;
+.active,.color-active{
+  color: var(--main) !important;
 }
-.color-primary{
-  color: var(--primary);
-}
+
 .color222{
   color: var(--color-text);
 }
