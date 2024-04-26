@@ -33,7 +33,7 @@
           :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.password.text')"
           @click-right-icon="openEye"
-          :right-icon="`icon iconfont color-active ${
+          :right-icon="`color-fff icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :rules="[
@@ -51,7 +51,7 @@
           @click-right-icon="openEye"
           :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.twoPassword.text')"
-          :right-icon="`icon iconfont color-active ${
+          :right-icon="`color-fff icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :rules="[

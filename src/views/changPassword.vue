@@ -23,7 +23,7 @@
           :type="showText ? 'text' : 'password'"
           :placeholder="$t('password.setting.login.pass.button.text')"
           @click-right-icon="openEye"
-          :right-icon="`icon iconfont ${
+          :right-icon="`color-fff icon iconfont ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :rules="[{ required: true, message: $t('backapi.passwordIsEmpty') }]"
@@ -35,7 +35,7 @@
           :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.new.password.text')"
           @click-right-icon="openEye"
-          :right-icon="`icon iconfont ${
+          :right-icon="`color-fff icon iconfont ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :rules="[
@@ -52,7 +52,7 @@
           :type="showText ? 'text' : 'password'"
           :placeholder="$t('form.confirm.password.text')"
           @click-right-icon="openEye"
-          :right-icon="`icon iconfont ${
+          :right-icon="`color-fff icon iconfont ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :rules="[

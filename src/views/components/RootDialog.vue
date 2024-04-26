@@ -15,7 +15,7 @@
       <van-form class="defind-form" @submit="onSubmit">
         <van-field
           v-model.trim="form.payPwd"
-          :right-icon="`icon iconfont color-active ${
+          :right-icon="`color-fff icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           :type="showText ? 'text' : 'password'"
@@ -33,7 +33,7 @@
           v-model.trim="form.payPwdAgain"
           :type="showText ? 'text' : 'password'"
           @click-right-icon="openEye"
-          :right-icon="`icon iconfont color-active ${
+          :right-icon="`color-fff icon iconfont color-active ${
             showText ? 'icon-yanjing_xianshi_o' : 'icon-yanjing_yincang_o'
           }`"
           autocomplete="new-password"
