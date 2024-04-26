@@ -46,7 +46,7 @@
           </div>
         </van-grid-item>
         <van-grid-item>
-          <div>{{ $t("team.report.teamrecharge.text") }}</div>
+          <div>{{ $t("team.report.teambalance.text") }}</div>
           <div class="m-t-4">
             {{ numToFixed(totalBalance, $globalUnit.val) / $globalNum.val }}
           </div>
