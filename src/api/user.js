@@ -629,4 +629,11 @@ export default {
       data,
     });
   },
+  groupUnaimReq(data) {
+    return request({
+      url: "/group/unaim",
+      method: "post",
+      data,
+    });
+  },
 };

@@ -129,6 +129,13 @@ const routes = [
     },
   },
   {
+    path: "/pages/function/groupUnAimList",
+    name: "userUnaim",
+    components: {
+      default: () => import("@/views/userUnaim.vue"),
+    },
+  },
+  {
     path: "/pages/wallet/minsUploadIdCard",
     name: "MinsUploadIdCard",
     components: {
