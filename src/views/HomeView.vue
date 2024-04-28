@@ -149,7 +149,8 @@ export default {
       const link = item.link;
       if (link) {
         if (link === "service") {
-          this.$store.commit("goServe");
+          this.$store.dispatch("getServeData", 1);
+          // this.$store.commit("goServe");
           return;
         }
         this.$router.push({ name: item.link });
@@ -241,7 +242,7 @@ export default {
   },
   created() {
     this.$store.commit("setPdTop", false);
-    this.$store.dispatch("getServeData");
+
     this.$store.dispatch("getInfo");
     if (this.$store.state.token) {
       this.haveUser();

@@ -250,7 +250,7 @@ export default {
       this.form.verifyKey = res.data.verifyKey;
     },
     goServe() {
-      this.$store.commit("goServe");
+      this.$store.dispatch("getServeData", 1);
     },
   },
   async created() {

@@ -80,7 +80,7 @@ export default {
   methods: {
     goTo(name) {
       if (name === "service") {
-        this.$store.commit("goServe");
+        this.$store.dispatch("getServeData", 1);
         return;
       }
       this.$router.push({ name });

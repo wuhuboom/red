@@ -160,19 +160,30 @@ export default new Vuex.Store({
       commit("setSafeConfig", result.data);
       return [null, result];
     },
-    async getServeData({ commit }) {
+    async getServeData({ commit }, open = 0) {
+      if (open) {
+        app.$toast.loading({
+          duration: 0,
+          forbidClick: true,
+        });
+      }
       const token = auth.getToken();
       const [err, result] = await userApi[
         `${token ? "servReq" : "servTmpReq"}`
       ]();
+      app.$toast.clear();
       if (err) {
-        if (Array.isArray(err.data) && err.data.length) {
+        if (Array.isArray(err.data) && err.data.length && open) {
           app.$toast(err.data[0].msg);
         }
         return [err];
       }
-      commit("setServeData", result.data);
-      return [null, result];
+      if (open) {
+        location.href = result.data.serviceAddr;
+      } else {
+        commit("setServeData", result.data);
+        return [null, result];
+      }
     },
     async getHasMsg({ commit }) {
       const [err, result] = await userApi.hasMsg();
