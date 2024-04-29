@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "scripts": {
+    "v": "node incrementVersion.js",
     "dev": "vue-cli-service serve",
     "beta": "vue-cli-service build",
     "build": "vue-cli-service build",
