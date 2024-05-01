@@ -24,13 +24,13 @@
         :loading="loading"
         block
         type="info"
-        @click="confirm"
+        @click="hide"
         >{{ $t("modal.cancel.text") }}</van-button
       >
       <van-button
         class="page-res-btn cancle"
         :loading="loading"
-        @click="hide"
+        @click="confirm"
         block
         type="info"
         >{{ $t("index.editor.psd.modal.confirm.btn") }}</van-button
