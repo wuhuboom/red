@@ -1120,5 +1120,7 @@
   "Username.cannot.numbers.or.letters":"Benutzername darf nicht nur aus Zahlen oder Buchstaben bestehen, sondern muss eine Kombination aus Buchstaben und Zahlen sein.",
   "now.exit":"Möchten Sie jetzt aussteigen?",
   "Transfer.source.account":"Überweisungsquelle-Konto",
-  "Welcome.to":"Willkommen bei"
+  "Welcome.to":"Willkommen bei",
+  "Trading.Range":"Handelsspanne",
+  "Your.current.VIPlevel":"Sehr geehrtes Mitglied, Ihr derzeitiges VIP-Level ist {vip}. Wenn diese Abhebung erfolgreich ist, haben Sie noch {num} kostenlose Abhebungen übrig, ohne dass sich Ihr Level verringert. Möchten Sie mit der Abhebung fortfahren?"
 }

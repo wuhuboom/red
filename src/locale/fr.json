@@ -1119,5 +1119,7 @@
   "Username.cannot.numbers.or.letters":"Le nom d'utilisateur ne peut pas être composé uniquement de chiffres ou de lettres, mais doit être une combinaison de lettres et de chiffres.",
   "now.exit":"Voulez-vous quitter maintenant ?",
   "Transfer.source.account":"Compte source de transfert",
-  "Welcome.to":"Bienvenue à"
+  "Welcome.to":"Bienvenue à",
+  "Trading.Range":"Plage de négociation",
+  "Your.current.VIPlevel":"Cher membre, votre niveau VIP actuel est {vip}.Vous avez encore {num} retraits gratuits sans rétrogradation de niveau. Souhaitez-vous continuer le retrait ?"
 }

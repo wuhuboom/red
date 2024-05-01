@@ -206,22 +206,14 @@
           </li>
         </ul>
       </div>
-
-      <!-- <van-dialog
-        class="upload-dialog"
-        :confirmButtonText="$t(`withdraw.risk.uploadTitle`)"
-        v-model="show"
-        @confirm="confirm"
-      >
-        <ul class="upload-cont">
-          <li class="center-center">
-            <img src="@/assets/img/upload-face.webp" alt="" />
-          </li>
-          <li class="center-center">{{ $t(`withdraw.risk.warning`) }}</li>
-          <li>{{ $t(`withdraw.risk.content`) }}</li>
-        </ul>
-      </van-dialog> -->
-
+      <WithdrawFree
+        :obj="{
+          vip: user.vipLevel,
+          num: chooseRecType.wiClearVipCount - 1,
+        }"
+        @confirm="sumitData(false)"
+        ref="WithdrawFree"
+      />
       <WithdrawClearVip @confirm="sumitData(false)" ref="WithdrawClearVip" />
       <ComfireDialog
         :texts="[
@@ -245,11 +237,13 @@ import userApi from "@/api/user";
 import i18n from "@/locale";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import WithdrawClearVip from "@/views/components/WithdrawClearVip.vue";
+import WithdrawFree from "@/views/components/WithdrawFree.vue";
 import to from "await-to-js";
 export default {
   name: "WithdrawView",
   components: {
     WithdrawClearVip,
+    WithdrawFree,
   },
   data() {
     return {
@@ -448,10 +442,17 @@ export default {
       }
       const [errVaild] = await to(this.$refs.form.validate());
       if (errVaild) return;
-      if (this.chooseRecType.wiClearVip === 1 && set) {
-        this.$refs.WithdrawClearVip.show();
-        return;
+      if (set) {
+        if (this.chooseRecType.wiClearVipCount > 0) {
+          this.$refs.WithdrawFree.show();
+          return false;
+        }
+        if (this.chooseRecType.wiClearVip === 1) {
+          this.$refs.WithdrawClearVip.show();
+          return;
+        }
       }
+
       this.loading = true;
       const [err] = await userApi.withdrawalReq(reqParam);
       this.loading = false;

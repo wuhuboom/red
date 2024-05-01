@@ -1119,5 +1119,7 @@
   "Username.cannot.numbers.or.letters":"Username cannot be all numbers or all letters, must be a combination of letters and numbers.",
   "now.exit":"Do you want to exit now?",
   "Transfer.source.account":"Transfer source account",
-  "Welcome.to":"Welcome to"
+  "Welcome.to":"Welcome to",
+  "Trading.Range":"Trading Range",
+  "Your.current.VIPlevel":"Dear member, your current VIP level is {vip}. If this withdrawal is successful, you have {num} free withdrawals remaining without downgrading your level. Do you want to proceed with the withdrawal?"
 }
