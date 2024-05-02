@@ -481,6 +481,7 @@ export default {
     },
     openSucceessDialog() {
       this.$refs.ComfireDialog.open();
+      this.$refs.ComfireDialog.cancelBtnShow(false);
     },
     async initFaceRecognition() {
       // 在调用服务端初始化请求时需要传入该MetaInfo值

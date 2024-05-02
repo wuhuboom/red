@@ -18,7 +18,7 @@
         </p>
       </li>
       <li v-if="footBtn" class="cancle-btns center-center p-l-24 p-r-24">
-        <p class="page-res-btn" @click="cancle">
+        <p v-if="cancelBtn" class="page-res-btn" @click="cancle">
           {{ $t("modal.cancel.text") }}
         </p>
         <p class="page-res-btn" @click="sure">
@@ -35,6 +35,7 @@ export default {
   name: "ComfireDialog",
   data() {
     return {
+      cancelBtn: true,
       show: false,
     };
   },
@@ -49,6 +50,9 @@ export default {
     },
   },
   methods: {
+    cancelBtnShow(v) {
+      this.cancelBtn = v;
+    },
     open() {
       this.show = true;
     },
