@@ -297,16 +297,16 @@ export default {
     },
     withdrawNumRate() {
       //提现费用。计算出提现手续费用
-      return (
+      let num =
         (this.amount / this.chooseRecType.rate) *
-        (this.chooseRecType.withdrawalRate / 100)
-      );
+        (this.chooseRecType.withdrawalRate / 100);
+      return this.numToFixed(num, this.$globalUnit.val);
     },
     actualAmountTran() {
       //实际到账金额
-      return (
-        (this.amount / this.chooseRecType.rate) * 1 - this.withdrawNumRate * 1
-      );
+      let num =
+        (this.amount / this.chooseRecType.rate) * 1 - this.withdrawNumRate * 1;
+      return this.numToFixed(num, this.$globalUnit.val);
     },
     getWithdrawChooseName() {
       // 4钱包 1银行卡 2虚拟币 3sim
