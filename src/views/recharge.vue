@@ -203,11 +203,11 @@ export default {
     chose(item) {
       if (!item) return;
       this.chooseRecType = item;
-      if (this.quickAmountList && this.quickAmountList.length > 0) {
-        this.amount = this.quickAmountList[0];
-        return;
-      }
-      this.amount = "";
+      // if (this.quickAmountList && this.quickAmountList.length > 0) {
+      //   this.amount = this.quickAmountList[0];
+      //   return;
+      // }
+      this.amount = this.chooseRecType.def;
     },
   },
   created() {
