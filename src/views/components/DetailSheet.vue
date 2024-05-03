@@ -138,7 +138,12 @@ export default {
       reqParam.money = this.amount;
       reqParam.type = this.score.gameType;
       this.loading = true;
+      this.$toast.loading({
+        forbidClick: true,
+        duration: 0,
+      });
       const [err] = await userApi.betOrder(reqParam);
+      this.$toast.clear();
       this.loading = false;
       if (err) {
         if (err.data && err.data[0]) {
