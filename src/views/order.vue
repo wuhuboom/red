@@ -95,7 +95,7 @@
       </div>
       <NoData v-if="nothing" />
     </van-list>
-    <OrderDetail ref="OrderDetail" />
+    <OrderDetail @onLoad="onLoad(1)" ref="OrderDetail" />
     <ComfireDialog @sure="sure" ref="ComfireDialog" />
     <!-- <van-dialog
       v-model="show"

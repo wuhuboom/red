@@ -219,8 +219,8 @@ export default {
 
       await this.sleep(1000);
       this.$toast(this.$t("wallet.index.cancel.bet.success.desc"));
-
-      this.onLoad(1);
+      this.$emit("onLoad");
+      // this.onLoad(1);
     },
     async getBetInfo() {
       this.load = true;
