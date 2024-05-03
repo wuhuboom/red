@@ -29,6 +29,7 @@ import {
   dropdownItem,
   radio,
   checkbox,
+  progress,
 } from "element-ui";
 export default {
   install(Vue) {
@@ -62,5 +63,6 @@ export default {
     Vue.use(dropdownItem);
     Vue.use(radio);
     Vue.use(checkbox);
+    Vue.use(progress);
   },
 };

@@ -15,17 +15,23 @@
             >ID:{{ item.id }} <i class="el-icon-document-copy active"></i
           ></span>
         </li>
-        <li>{{ item.startTime | timestampStr }}</li>
+        <li class="flex-1 m-l-8" v-if="item.gameCurrBet !== undefined">
+          <el-progress
+            :percentage="percent(item)"
+            color="#dc2525"
+            :stroke-width="4"
+          />
+        </li>
       </ul>
-      <!-- <ul class="justify-between align-center">
+      <ul class="justify-between align-center">
         <li>{{ item.startTime | timestampStr }}</li>
-        <li class="justify-between align-center">
+        <!-- <li class="justify-between align-center">
           {{ $t("match.order.detail.closing.text") }}:
           <Count-down :time="item.remainingTime" format="hh:mm:ss">
             <template slot-scope="{ time }">{{ time }}</template>
           </Count-down>
-        </li>
-      </ul> -->
+        </li> -->
+      </ul>
       <p
         class="border-color-main center-center font14 alliance-name m-t-4 p-x-4"
       >
@@ -37,6 +43,10 @@
           <img src="@/assets/img/red/vs.webp" alt="" class="d-block" />
         </li>
         <li class="text-center">{{ item.guestName | removeEsports }}</li>
+      </ul>
+      <ul class="justify-between m-t-4">
+        <li>{{ $t("trade.Current.Bet") }}:{{ item.gameCurrBet }}</li>
+        <li>{{ $t("trade.Total.Bet") }}:{{ item.gameTotalBet }}</li>
       </ul>
     </div>
   </div>
@@ -67,6 +77,11 @@ export default {
     },
   },
   methods: {
+    percent(d) {
+      console.log(d.gameCurrBet, d.gameTotalBet);
+      if (d.gameTotalBet === 0) return 0;
+      return +((d.gameCurrBet / d.gameTotalBet) * 100).toFixed(0);
+    },
     getCopyValue(item) {
       return `${item.id}`;
     },
@@ -115,6 +130,28 @@ export default {
 <style scoped lang="less">
 @shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 .row-list {
+  ::v-deep {
+    .el-progress-bar__outer {
+      background-color: #484b4c !important;
+      overflow: visible;
+    }
+    .el-progress__text {
+      color: var(--main) !important;
+    }
+    .el-progress-bar__inner {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 12px;
+        top: 50%;
+        margin-top: -6px;
+        right: 0;
+        background-color: #ff7f72;
+      }
+    }
+  }
   .row-list-item {
     box-shadow: @shadow;
     border-radius: 20px;
@@ -172,7 +209,6 @@ export default {
     width: 54px;
     height: 44px;
     border-radius: 10px;
-
     font-size: 12px;
     & > p:last-child {
       font-size: 14px;

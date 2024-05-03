@@ -1120,6 +1120,9 @@
   "now.exit":"Voulez-vous quitter maintenant ?",
   "Transfer.source.account":"Compte source de transfert",
   "Welcome.to":"Bienvenue à",
+  "trade.Total.Bet":"Mise totale",
+  "trade.Current.Bet":"Mise actuelle",
+  "Remaining Limit":"Limite restante",
   "Trading.Range":"Plage de négociation",
   "Your.current.VIPlevel":"Cher membre, votre niveau VIP actuel est {vip}.Vous avez encore {num} retraits gratuits sans rétrogradation de niveau. Souhaitez-vous continuer le retrait ?"
 }

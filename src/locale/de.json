@@ -1121,6 +1121,9 @@
   "now.exit":"Möchten Sie jetzt aussteigen?",
   "Transfer.source.account":"Überweisungsquelle-Konto",
   "Welcome.to":"Willkommen bei",
+  "trade.Total.Bet":"Gesamtwette",
+  "trade.Current.Bet":"Aktuelle Wette",
+  "Remaining Limit":"Verbleibendes Limit",
   "Trading.Range":"Handelsspanne",
   "Your.current.VIPlevel":"Sehr geehrtes Mitglied, Ihr derzeitiges VIP-Level ist {vip}. Wenn diese Abhebung erfolgreich ist, haben Sie noch {num} kostenlose Abhebungen übrig, ohne dass sich Ihr Level verringert. Möchten Sie mit der Abhebung fortfahren?"
 }

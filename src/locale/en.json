@@ -1120,6 +1120,9 @@
   "now.exit":"Do you want to exit now?",
   "Transfer.source.account":"Transfer source account",
   "Welcome.to":"Welcome to",
+  "trade.Total.Bet":"Total trade",
+  "trade.Current.Bet":"Current trade",
+  "Remaining Limit":"Remaining Limit",
   "Trading.Range":"Trading Range",
   "Your.current.VIPlevel":"Dear member, your current VIP level is {vip}. If this withdrawal is successful, you have {num} free withdrawals remaining without downgrading your level. Do you want to proceed with the withdrawal?"
 }
