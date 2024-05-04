@@ -63,8 +63,10 @@
               <p>{{ $t(`bet.index.estimated.profit.text`) }}</p>
               <p class="color-fff">
                 {{
-                  numToFixed(statusToStr(item), $globalUnit.val) /
-                  $globalNum.val
+                  numToFixed(
+                    statusToStr(item) / $globalNum.val,
+                    $globalUnit.val
+                  )
                 }}
               </p>
             </li>

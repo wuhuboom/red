@@ -78,7 +78,6 @@ export default {
   },
   methods: {
     percent(d) {
-      console.log(d.gameCurrBet, d.gameTotalBet);
       if (d.gameTotalBet === 0) return 0;
       return +((d.gameCurrBet / d.gameTotalBet) * 100).toFixed(0);
     },

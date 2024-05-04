@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-const semver = require("semver");
+//const semver = require("semver");
 const fs = require("fs");
 const path = require("path");
 const dayjs = require("dayjs");
@@ -25,8 +25,8 @@ try {
   const oldVersion = envContent
     .match(/^VUE_APP_VERSION\s*=\s*.*/m)[0]
     .replace(/^VUE_APP_VERSION\s*=\s*/, "");
-  const newVersion = semver.inc(oldVersion, "patch"); // 可以更改 'patch' 为 'minor' 或 'major'
-
+  // const newVersion = semver.inc(oldVersion, "patch"); // 可以更改 'patch' 为 'minor' 或 'major'
+  const newVersion = +oldVersion + 1;
   // 更新或追加 VUE_APP_VERSION 变量
   envContent = envContent.replace(
     /^VUE_APP_VERSION\s*=\s*.*/m,
