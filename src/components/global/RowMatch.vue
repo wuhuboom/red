@@ -15,22 +15,7 @@
             >ID:{{ item.id }} <i class="el-icon-document-copy active"></i
           ></span>
         </li>
-        <li class="flex-1 m-l-8" v-if="item.gameCurrBet !== undefined">
-          <el-progress
-            :percentage="percent(item)"
-            color="#dc2525"
-            :stroke-width="4"
-          />
-        </li>
-      </ul>
-      <ul class="justify-between align-center">
         <li>{{ item.startTime | timestampStr }}</li>
-        <!-- <li class="justify-between align-center">
-          {{ $t("match.order.detail.closing.text") }}:
-          <Count-down :time="item.remainingTime" format="hh:mm:ss">
-            <template slot-scope="{ time }">{{ time }}</template>
-          </Count-down>
-        </li> -->
       </ul>
       <p
         class="border-color-main center-center font14 alliance-name m-t-4 p-x-4"
@@ -44,9 +29,18 @@
         </li>
         <li class="text-center">{{ item.guestName | removeEsports }}</li>
       </ul>
-      <ul class="justify-between m-t-4">
-        <li>{{ $t("trade.Current.Bet") }}:{{ item.gameCurrBet }}</li>
-        <li>{{ $t("trade.Total.Bet") }}:{{ item.gameTotalBet }}</li>
+      <ul class="justify-between m-t-4 align-center">
+        <li class="flex-1 m-r-8" v-if="item.gameCurrBet !== undefined">
+          <el-progress
+            :percentage="percent(item)"
+            color="#dc2525"
+            :stroke-width="4"
+          />
+        </li>
+        <li>
+          <p>{{ $t("trade.Current.Bet") }}:{{ item.gameCurrBet }}</p>
+          <p>{{ $t("trade.Total.Bet") }}:{{ item.gameTotalBet }}</p>
+        </li>
       </ul>
     </div>
   </div>
@@ -130,12 +124,24 @@ export default {
 @shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 .row-list {
   ::v-deep {
+    .el-progress {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+    .el-progress-bar {
+      padding-right: 0;
+      margin-right: 0;
+    }
     .el-progress-bar__outer {
       background-color: #484b4c !important;
       overflow: visible;
     }
     .el-progress__text {
       color: var(--main) !important;
+      margin-right: 4px;
+      margin-left: 0;
+      padding-right: 4px;
     }
     .el-progress-bar__inner {
       position: relative;
