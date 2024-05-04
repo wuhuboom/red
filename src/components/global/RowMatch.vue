@@ -138,7 +138,7 @@ export default {
       overflow: visible;
     }
     .el-progress__text {
-      color: var(--main) !important;
+      color: #ff7f72 !important;
       margin-right: 4px;
       margin-left: 0;
       padding-right: 4px;
