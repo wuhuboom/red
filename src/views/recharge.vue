@@ -40,9 +40,7 @@
             type="number"
           >
             <template #button>
-              <span class="color-primary">{{
-                chooseRecType.currencySymbol
-              }}</span>
+              <span class="color-fff">{{ chooseRecType.currencySymbol }}</span>
             </template>
           </van-field>
           <p class="limit">
