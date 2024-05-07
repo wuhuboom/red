@@ -52,14 +52,12 @@
       </div>
       <ul class="pre-amount p-l-24 p-r-24 m-b-16">
         <li
+          class="m-b-8"
           v-for="(item, idx) in quickAmountList"
           @click="amount = item"
           :key="idx"
         >
-          <div
-            class="num center-center color-active"
-            :class="{ 'color-primary': item == amount }"
-          >
+          <div class="num center-center" :class="{ active: item == amount }">
             {{ item }}
           </div>
         </li>
@@ -231,6 +229,8 @@ export default {
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+        border-radius: 15px;
+        border: solid 1px #9d9d9d;
       }
       .pic {
         height: 42px;
@@ -243,11 +243,12 @@ export default {
       }
     }
     & > li:nth-child(3n + 2) {
-      border-right: 1px solid var(--primary);
-      border-left: 1px solid var(--primary);
+      // border-right: 1px solid var(--primary);
+      // border-left: 1px solid var(--primary);
     }
-    & > li.active {
+    & > li.color-active {
       .cont {
+        border-color: var(--main) !important;
       }
     }
   }
@@ -290,21 +291,25 @@ export default {
       height: 24px;
       line-height: 21px;
       text-align: center;
+      padding: 4px;
     }
-    & > li:nth-child(4n + 1) {
-      border-right: 1px solid var(--primary);
-    }
-    & > li:nth-child(4n + 2) {
-      border-right: 1px solid var(--primary);
-    }
-    & > li:nth-child(4n + 3) {
-      border-right: 1px solid var(--primary);
-    }
+    // & > li:nth-child(4n + 1) {
+    //   border-right: 1px solid var(--primary);
+    // }
+    // & > li:nth-child(4n + 2) {
+    //   border-right: 1px solid var(--primary);
+    // }
+    // & > li:nth-child(4n + 3) {
+    //   border-right: 1px solid var(--primary);
+    // }
     .num {
+      border: solid 1px #9d9d9d;
+      border-radius: 8px;
     }
     .active {
-      background-color: #10ab61;
-      color: #fff;
+      background-color: var(--main);
+      border-color: var(--main);
+      color: #fff !important;
     }
   }
   .sumit-section {

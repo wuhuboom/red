@@ -73,14 +73,14 @@
 
         <div class="sumit-section font14">
           <van-button
-            class="res-van-button"
+            class="page-res-btn"
             block
             type="info"
             native-type="submit"
             >{{ $t("login.btn.text") }}</van-button
           >
           <van-button
-            class="res-van-button"
+            class="page-res-btn"
             block
             type="info"
             native-type="button"
@@ -293,8 +293,9 @@ export default {
       width: auto;
       height: auto;
       padding: 0;
-      background-color: transparent;
+      background-color: transparent !important;
       color: var(--primary);
+      border-color: #fff !important;
     }
   }
   .serve-btm {

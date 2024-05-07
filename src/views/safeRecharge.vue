@@ -230,12 +230,15 @@ export default {
     flex-wrap: wrap;
     & > li {
       width: 33.33%;
+      padding: 4px;
       .cont {
         height: 84px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+        border-radius: 15px;
+        border: solid 1px #9d9d9d;
       }
       .pic {
         height: 42px;
@@ -248,11 +251,12 @@ export default {
       }
     }
     & > li:nth-child(3n + 2) {
-      border-right: 1px solid var(--primary);
-      border-left: 1px solid var(--primary);
+      // border-right: 1px solid var(--primary);
+      // border-left: 1px solid var(--primary);
     }
-    & > li.active {
+    & > li.color-active {
       .cont {
+        border-color: var(--main) !important;
       }
     }
   }

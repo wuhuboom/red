@@ -154,14 +154,14 @@
         </van-field>
         <div class="sumit-section">
           <van-button
-            class="res-van-button"
+            class="page-res-btn"
             block
             type="info"
             native-type="submit"
             >{{ $t("reg.btn.text") }}</van-button
           >
           <van-button
-            class="res-van-button"
+            class="page-res-btn"
             block
             type="info"
             native-type="button"
@@ -398,9 +398,9 @@ export default {
         width: auto;
         height: auto;
         padding: 0;
-        background-color: transparent;
+        background-color: transparent !important;
         color: var(--primary);
-        background-image: none;
+        border-color: #fff !important;
       }
     }
     .van-cell {
