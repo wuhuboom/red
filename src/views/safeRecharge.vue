@@ -47,6 +47,21 @@
           v-model="amount"
         />
       </van-form>
+      <p class="limit">
+        {{ $t(`deal.buyDetail.387081-5`) }}:{{ chooseRecType.minMax }}
+      </p>
+      <ul class="pre-amount m-t-8">
+        <li
+          class="m-b-8"
+          v-for="(item, idx) in quickAmountList"
+          @click="amount = item"
+          :key="idx"
+        >
+          <div class="num center-center" :class="{ active: item == amount }">
+            {{ item }}
+          </div>
+        </li>
+      </ul>
       <ul class="text-center">
         <li class="p-t-24 p-b-24">
           <p>{{ $t("recharge.usdt.rate.text") }}</p>
@@ -212,6 +227,29 @@ export default {
 </script>
 <style scoped lang="less">
 .safe-recharge-view {
+  .limit {
+    // text-align: right;
+  }
+  .pre-amount {
+    display: flex;
+    flex-wrap: wrap;
+    & > li {
+      width: 25%;
+      height: 24px;
+      line-height: 21px;
+      text-align: center;
+      padding: 4px;
+    }
+    .num {
+      border: solid 1px #9d9d9d;
+      border-radius: 8px;
+    }
+    .active {
+      background-color: var(--main);
+      border-color: var(--main);
+      color: #fff !important;
+    }
+  }
   .form-box {
     border: 1px solid var(--primary);
     border-radius: 20px;

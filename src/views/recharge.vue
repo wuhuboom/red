@@ -293,15 +293,6 @@ export default {
       text-align: center;
       padding: 4px;
     }
-    // & > li:nth-child(4n + 1) {
-    //   border-right: 1px solid var(--primary);
-    // }
-    // & > li:nth-child(4n + 2) {
-    //   border-right: 1px solid var(--primary);
-    // }
-    // & > li:nth-child(4n + 3) {
-    //   border-right: 1px solid var(--primary);
-    // }
     .num {
       border: solid 1px #9d9d9d;
       border-radius: 8px;
