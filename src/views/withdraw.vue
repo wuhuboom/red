@@ -459,6 +459,7 @@ export default {
       if (err) {
         if (err.data && err.data[0]) {
           const riskCode = err.data[0].data;
+          const msgKey = `backapi.${err.data[0].msgKey}`;
           //风控逻辑处理
           if (err.data[0]?.submitted === 1) {
             this.$toast(this.$t("withdraw.risk.waitAudit"));
@@ -470,7 +471,11 @@ export default {
             this.$refs.riskCode.open();
             return;
           }
-          this.$toast(this.$t(`backapi.${err.data[0].msgKey}`));
+          if (msgKey === "backapi.withdrawalLimit") {
+            this.$toast(err.data[0].withdrawalLimitMsg);
+            return;
+          }
+          this.$toast(this.$t(msgKey));
         }
         return;
       }
