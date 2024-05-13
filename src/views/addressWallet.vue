@@ -49,19 +49,8 @@
         <van-field
           v-model.trim="form.usdtAddress"
           class="mb-16"
-          :label="
-            $t('backapi.self.whitdraw.type.ewallet.form.wallet.addr.text')
-          "
-          :rules="[
-            {
-              required: true,
-              message: $t('ruls.xxx.please', {
-                name: $t(
-                  'backapi.self.whitdraw.type.ewallet.form.wallet.addr.text'
-                ),
-              }),
-            },
-          ]"
+          :label="text"
+          :rules="ewalletRule"
         />
         <van-field :label="$t('index.editor.psd.text')">
           <template #input>
@@ -170,6 +159,7 @@ export default {
           value: 2,
         },
       ],
+      text: "M-pesa ID",
     };
   },
   computed: {
@@ -181,6 +171,26 @@ export default {
         time: this.editImportantLogout,
         name: this.$t("wallet.list.wallet.text"),
       });
+    },
+    user() {
+      return this.$store.state.user;
+    },
+    ewalletRule() {
+      const rule = [
+        {
+          required: true,
+          message: this.$t("ruls.xxx.please", {
+            name: this.text,
+          }),
+        },
+      ];
+      if (this.user.areaCode == "254") {
+        rule.push({
+          pattern: /^0\d{9}$/,
+          message: this.$t("wallet.numm.ten"),
+        });
+      }
+      return rule;
     },
   },
   methods: {
