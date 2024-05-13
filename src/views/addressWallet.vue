@@ -190,6 +190,7 @@ export default {
           message: this.$t("wallet.numm.ten"),
         });
       }
+
       return rule;
     },
   },
