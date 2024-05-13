@@ -743,7 +743,7 @@
   "backapi.addrExists": "The virtual currency address has been used",
   "backapi.saveFailed": "Fail to add",
   "backapi.delFailed": "Delete fail",
-  "backapi.walletExists": "Wallet has been bound",
+  "backapi.walletExists": "Wallet is only allowed to bind one",
   "backapi.walletNotExists": "Unbound wallet",
   "backapi.ltMinMoney": "The withdrawal amount is less than the minimum withdrawal amount",
   "backapi.dayMaxTimes": "Daily withdrawal limit has been reached",
