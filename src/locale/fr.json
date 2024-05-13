@@ -1124,5 +1124,6 @@
   "trade.Current.Bet":"Mise actuelle",
   "Remaining Limit":"Limite restante",
   "Trading.Range":"Plage de négociation",
-  "Your.current.VIPlevel":"Cher membre, votre niveau VIP actuel est {vip}.Vous avez encore {num} retraits gratuits sans rétrogradation de niveau. Souhaitez-vous continuer le retrait ?"
+  "Your.current.VIPlevel":"Cher membre, votre niveau VIP actuel est {vip}.Vous avez encore {num} retraits gratuits sans rétrogradation de niveau. Souhaitez-vous continuer le retrait ?",
+  "wallet.numm.ten": "Veuillez entrer une combinaison de 10 chiffres commençant par 0"
 }

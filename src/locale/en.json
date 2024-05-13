@@ -1124,5 +1124,6 @@
   "trade.Current.Bet":"Current trade",
   "Remaining Limit":"Remaining Limit",
   "Trading.Range":"Trading Range",
-  "Your.current.VIPlevel":"Dear member, your current VIP level is {vip}. If this withdrawal is successful, you have {num} free withdrawals remaining without downgrading your level. Do you want to proceed with the withdrawal?"
+  "Your.current.VIPlevel":"Dear member, your current VIP level is {vip}. If this withdrawal is successful, you have {num} free withdrawals remaining without downgrading your level. Do you want to proceed with the withdrawal?",
+  "wallet.numm.ten": "Please enter a 10-digit combination starting with 0"
 }
