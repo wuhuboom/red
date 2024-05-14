@@ -28,7 +28,10 @@
             },
           ]"
         />
-        <van-field :label="$t('backapi.self.safe.bill.data.type.text')">
+        <van-field
+          v-if="usdtTypeOptions.length"
+          :label="$t('backapi.self.safe.bill.data.type.text')"
+        >
           <template #input>
             <el-select
               v-model="form.typeValue"
