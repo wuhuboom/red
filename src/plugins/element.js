@@ -31,6 +31,10 @@ import {
   checkbox,
   progress,
 } from "element-ui";
+import lang from "element-ui/lib/locale/lang/en";
+import locale from "element-ui/lib/locale";
+// 设置语言
+locale.use(lang);
 export default {
   install(Vue) {
     Vue.use(Button);
