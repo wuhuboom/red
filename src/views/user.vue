@@ -12,8 +12,8 @@
         <ul class="color-primary">
           <li class="m-b-8 user-name">
             <p class="m-b-4 color-fff">{{ user.username }}</p>
-            <p class="align-center level">
-              Lv{{ user.vipLevel }}
+            <p class="align-center level font16">
+              VIP{{ user.vipLevel }}
               <img class="m-l-4" src="@/assets/img/red/vip.png" alt="" />
             </p>
           </li>
