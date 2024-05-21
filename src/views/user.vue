@@ -103,15 +103,16 @@ export default {
       ],
       menu: [
         {
-          icon: require("@/assets/img/red/usernav1.png"),
-          name: i18n.t("backapi.self.safe.text"),
-          link: "Wallet",
-        },
-        {
           icon: require("@/assets/img/red/usernav2.png"),
           name: i18n.t("deal_my_orders"),
           link: "orderCenter",
         },
+        {
+          icon: require("@/assets/img/red/usernav1.png"),
+          name: i18n.t("fuc.safe.text"),
+          link: "Wallet",
+        },
+
         {
           icon: require("@/assets/img/red/usernav3.png"),
           name: i18n.t("user.Report.Management"),

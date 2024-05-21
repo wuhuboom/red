@@ -93,7 +93,7 @@ export default {
       userPic,
       navList: [
         {
-          name: i18n.t("backapi.self.safe.text"),
+          name: i18n.t("fuc.safe.text"),
           link: "Wallet",
           icon: nav1,
         },
