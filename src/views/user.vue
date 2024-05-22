@@ -388,20 +388,24 @@ export default {
     justify-content: space-between;
     font-size: 12px;
     color: var(--primary);
+    margin-top: 24px;
+    margin-bottom: 8px;
     & > li {
       flex-direction: column;
-      width: 76px;
-      height: 70px;
-      border-radius: 8px;
+      height: 67px;
+      min-width: 72px;
+      border-radius: 15px;
+      border: solid 1px #ef7367;
+      padding: 6px 0;
     }
     & > li {
       p:last-child {
-        margin-top: 6px;
+        margin-top: 2px;
       }
     }
     img {
       display: block;
-      height: 18px;
+      height: 34px;
     }
   }
   .menu {
