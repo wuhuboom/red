@@ -40,7 +40,7 @@ instance.interceptors.response.use(
     const result = res.data || {};
     let { code, msg } = result;
     if ([500].includes(code)) {
-      msg = "system  fai";
+      msg = "system  fail";
     }
     if (code === 402) {
       app.$toast.clear();
