@@ -39,6 +39,9 @@ instance.interceptors.response.use(
   (res) => {
     const result = res.data || {};
     let { code, msg } = result;
+    if ([500].includes(code)) {
+      msg = "";
+    }
     if (code === 402) {
       app.$toast.clear();
       app.$store.commit("loginOut");
