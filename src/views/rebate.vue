@@ -1,6 +1,6 @@
 <!-- eslint-disable no-unused-vars -->
 <template>
-  <div class="agency-page font12 color-primary">
+  <div class="agency-page font14 color-primary p-t-24">
     <AppTopBar
       :titleClass="['app-top-black-title']"
       class="app-top-bar-black"
@@ -41,14 +41,19 @@
         </ul>
       </div>
       <van-list
+        class="p-t-8"
         v-model="loading"
         :finished="curItem.hasNext === false"
         finished-text=""
         loading-text="loading"
         @load="onLoad"
       >
-        <div class="px-16 p-16">
-          <van-grid class="color-primary m-b-8" :border="false" :column-num="3">
+        <div class="px-16 p-16 font16">
+          <van-grid
+            class="color-primary m-b-32"
+            :border="false"
+            :column-num="3"
+          >
             <van-grid-item v-for="value in head" :key="value">
               {{ value }}
             </van-grid-item>
@@ -58,7 +63,7 @@
           </div>
           <van-grid
             v-show="!nothing"
-            class="color-primary m-b-8"
+            class="color-primary m-b-32 font16"
             v-for="(item, idx) in curItem.results"
             :key="idx"
             :border="false"
@@ -154,14 +159,8 @@ export default {
         return;
       }
       let list = this.curItem.results.concat(res.data.results);
-      // if (list.length === 0) {
-      //   list = [
-      //     {
-      //       money: 0,
-      //       type: 1,
-      //       ymd: new Date().getTime(),
-      //     },
-      //   ];
+      // for (let i = 0; i < 7; i++) {
+      //   list.push(list[0]);
       // }
       this.curItem = {
         ...res.data,
