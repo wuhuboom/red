@@ -85,10 +85,10 @@ export default {
       });
       clipboard.on("success", () => {
         this.$toast(this.$t(`copy.success.text`));
-        if (+window.shareDialogConfig === 1) {
-          this.showDialog = true;
-        }
+        // if (+window.shareDialogConfig === 1) {
 
+        // }
+        this.showDialog = true;
         clipboard.destroy();
       });
       clipboard.on("error", () => {
