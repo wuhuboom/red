@@ -1127,5 +1127,5 @@
   "Your.current.VIPlevel":"Dear member, your current VIP level is {vip}. If this withdrawal is successful, you have {num} free withdrawals remaining without downgrading your level. Do you want to proceed with the withdrawal?",
   "wallet.numm.ten": "Please enter a 10-digit combination starting with 0",
   "WARNING":"WARNING",
-  "WARNING.desc":"Promotion on social media platforms like Facebook, TikTok, Instagram, Twitter is not allowed. Violation will result in account deactivation."
+  "WARNING.desc":"Promotion on social media platforms like Facebook, TikTok, Instagram, Twitter is not allowed. "
 }
