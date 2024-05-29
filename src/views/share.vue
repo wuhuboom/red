@@ -35,18 +35,20 @@
       :close-on-click-overlay="true"
     >
       <ul class="promotion-cont font14">
-        <li class="center-center">
-          <img src="@/assets/img/shared.png" alt="" />
+        <li></li>
+        <li class="center-center tip color-active font16 p-t-24 p-b-24">
+          {{ $t(`WARNING`) }}!
         </li>
-        <li class="center-center tip">{{ $t(`Promotion.Internet.such`) }}</li>
         <li class="center-center">
-          <img src="@/assets/img/sharelist.png" alt="" />
+          <img src="@/assets/img/red/share1.png" alt="" />
         </li>
-        <li class="center-center tip">{{ $t(`prohibited.account.banned`) }}</li>
+        <li class="center-center tip colorfff p-t-24">
+          {{ $t(`WARNING.desc`) }}
+        </li>
       </ul>
-      <div>
+      <div class="center-center p-b-24 p-t-24">
         <van-button
-          class="res-van-button button-blue"
+          class="page-res-btn"
           block
           type="info"
           @click="showDialog = false"
@@ -138,7 +140,8 @@ export default {
     font-size: 16px;
   }
   .promotion-upload-dialog {
-    background-image: linear-gradient(to bottom, #c6cdff, #fff 22%);
+    background: url("@/assets/img/sharebg.png") no-repeat center center;
+    background-size: 100% 100%;
     color: #474747;
     padding: 10px 20px 20px;
     ::v-deep {

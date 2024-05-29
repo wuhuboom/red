@@ -167,6 +167,7 @@ export default {
         results: list,
         pageNo: res.data.pageNo + 1,
       };
+      this.curItem.hasNext = false;
     },
   },
   created() {
