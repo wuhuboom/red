@@ -1125,5 +1125,7 @@
   "Remaining Limit":"Limite restante",
   "Trading.Range":"Plage de négociation",
   "Your.current.VIPlevel":"Cher membre, votre niveau VIP actuel est {vip}.Vous avez encore {num} retraits gratuits sans rétrogradation de niveau. Souhaitez-vous continuer le retrait ?",
-  "wallet.numm.ten": "Veuillez entrer une combinaison de 10 chiffres commençant par 0"
+  "wallet.numm.ten": "Veuillez entrer une combinaison de 10 chiffres commençant par 0",
+  "WARNING": "AVERTISSEMENT",
+  "WARNING.desc": "La promotion sur des plateformes de médias sociaux telles que Facebook, TikTok, Instagram, Twitter n'est pas autorisée. La violation entraînera la désactivation du compte."
 }

@@ -104,7 +104,7 @@ export default {
       curItem: {
         hasNext: true,
         pageNo: 1,
-        pageSize: 10,
+        pageSize: 7,
         results: [],
         totalCount: null,
         totalPage: null,

@@ -1126,5 +1126,7 @@
   "Remaining Limit":"Verbleibendes Limit",
   "Trading.Range":"Handelsspanne",
   "Your.current.VIPlevel":"Sehr geehrtes Mitglied, Ihr derzeitiges VIP-Level ist {vip}. Wenn diese Abhebung erfolgreich ist, haben Sie noch {num} kostenlose Abhebungen übrig, ohne dass sich Ihr Level verringert. Möchten Sie mit der Abhebung fortfahren?",
-  "wallet.numm.ten": "Bitte geben Sie eine 10-stellige Kombination ein, die mit 0 beginnt"
+  "wallet.numm.ten": "Bitte geben Sie eine 10-stellige Kombination ein, die mit 0 beginnt",
+  "WARNING": "WARNUNG",
+  "WARNING.desc": "Die Promotion auf Social-Media-Plattformen wie Facebook, TikTok, Instagram, Twitter ist nicht erlaubt. Verstöße führen zur Deaktivierung des Kontos."
 }
