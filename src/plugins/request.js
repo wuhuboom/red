@@ -42,7 +42,8 @@ instance.interceptors.response.use(
     if ([500].includes(code)) {
       msg = "system  fail";
     }
-    if (code === 402) {
+    //401-无权访问 402-未登录或者登录失效 403-账号已被禁用
+    if ([401, 402, 403].includes(code)) {
       app.$toast.clear();
       app.$store.commit("loginOut");
       app.$router.push({
