@@ -93,11 +93,6 @@ export default {
       userPic,
       navList: [
         {
-          name: i18n.t("fuc.safe.text"),
-          link: "Wallet",
-          icon: nav1,
-        },
-        {
           name: i18n.t("home.index.recharge.text"),
           link: "Recharge",
           icon: nav2,
@@ -106,6 +101,11 @@ export default {
           name: i18n.t("home.index.withdraw.text"),
           link: "Withdraw",
           icon: nav3,
+        },
+        {
+          name: i18n.t("fuc.safe.text"),
+          link: "Wallet",
+          icon: nav1,
         },
         {
           name: i18n.t("backapi.self.home.tool.online.ser.text"),
