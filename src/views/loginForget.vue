@@ -38,8 +38,8 @@
           :rules="[
             { required: true, message: $t('ruls.accout.empty') },
             {
-              pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d\W]+$/,
-              message: this.$t('Username.cannot.numbers.or.letters'),
+              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: this.$t('ruls.email.length'),
             },
           ]"
         >
