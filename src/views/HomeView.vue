@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>提交提现订单</h2>
+    <p style="padding: 16px; text-align: center">提交提现订单</p>
     <el-form
       :model="form"
       :rules="rules"
@@ -114,7 +114,6 @@ export default {
     return {
       apiUrl: "/api/payment/withdraw",
       token: "your_token_here", // 替换成实际的token
-      secretKey: "your_secret_key_here", // 替换成实际的secret key
       form: {
         amount: "",
         nameSurname: "",
@@ -190,7 +189,7 @@ export default {
       concatenatedString += this.token;
 
       // 使用 SHA-256 计算签名
-      const hash = CryptoJS.HmacSHA256(concatenatedString, this.secretKey);
+      const hash = CryptoJS.HmacSHA256(concatenatedString);
       const signature = hash.toString(CryptoJS.enc.Hex);
 
       return signature;
@@ -233,7 +232,8 @@ export default {
         // 提交成功后清空表单数据
         this.$refs[formName].resetFields();
       } catch (error) {
-        console.error("提交提现订单失败:", error.response.data);
+        //, error.response.data
+        console.error("提交提现订单失败:");
       }
     },
   },
