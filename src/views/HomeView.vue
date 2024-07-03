@@ -5,7 +5,7 @@
       :model="form"
       :rules="rules"
       ref="form"
-      label-width="120px"
+      label-width="146px"
       size="small"
     >
       <el-form-item label="金额" prop="amount">
@@ -30,9 +30,15 @@
         ></el-input>
       </el-form-item>
       <el-form-item label="币种" prop="fundType">
+        <el-select v-model="form.fundType" placeholder="请选择币种" clearable>
+          <el-option label="CNY" value="CNY"></el-option>
+          <el-option label="TRY" value="TRY"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="订单信息" prop="orderInfo">
         <el-input
-          v-model="form.fundType"
-          placeholder="请输入币种"
+          v-model="form.orderInfo"
+          placeholder="请输入订单信息"
           clearable
         ></el-input>
       </el-form-item>
@@ -145,6 +151,9 @@ export default {
           { required: false, message: "请输入用户名", trigger: "blur" },
         ],
         fundType: [{ required: true, message: "请输入币种", trigger: "blur" }],
+        orderInfo: [
+          { required: true, message: "请输入订单信息", trigger: "blur" },
+        ],
         receiptAccountName: [
           { required: true, message: "请输入收款人名称", trigger: "blur" },
         ],
@@ -159,21 +168,21 @@ export default {
         ],
         bankName: [
           {
-            required: false,
+            required: true,
             message: "请输入收款账户开户行名称",
             trigger: "blur",
           },
         ],
         bankType: [
           {
-            required: false,
+            required: true,
             message: "请输入收款人账户联行号",
             trigger: "blur",
           },
         ],
-        birthday: [{ required: false, message: "请输入生日", trigger: "blur" }],
+        birthday: [{ required: true, message: "请输入生日", trigger: "blur" }],
         identity: [
-          { required: false, message: "请输入证件号", trigger: "blur" },
+          { required: true, message: "请输入证件号", trigger: "blur" },
         ],
         // 其他参数的验证规则根据接口要求添加
       },
@@ -218,7 +227,7 @@ export default {
 
         // 生成签名
         const signature = this.generateSignature(withdrawalData);
-
+        console.log("签名:", signature);
         // 构造请求数据
         const requestData = {
           ...withdrawalData,
