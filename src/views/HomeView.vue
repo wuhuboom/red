@@ -92,11 +92,12 @@
         ></el-input>
       </el-form-item>
       <el-form-item label="生日" prop="birthday">
-        <el-input
-          v-model.trim="form.birthday"
-          placeholder="请输入生日"
-          clearable
-        ></el-input>
+        <el-date-picker
+          v-model="form.birthday"
+          type="date"
+          placeholder="选择日期"
+        >
+        </el-date-picker>
       </el-form-item>
       <el-form-item label="证件号" prop="identity">
         <el-input
@@ -143,37 +144,79 @@ export default {
         amount: [
           { required: true, message: "请输入金额", trigger: "blur" },
           {
-            pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/,
-            message: "金额必须为数字，最多保留两位小数",
+            pattern: /^(0|[1-9]\d*)(\.\d{2})?$/,
+            message: "金额必须为数字，整数或保留两位小数",
             trigger: "blur",
           },
         ],
         nameSurname: [
           { required: true, message: "请输入用户姓名", trigger: "blur" },
+          {
+            min: 3,
+            max: 128,
+            message: "用户姓名长度在 3 到 128 个字符",
+            trigger: "blur",
+          },
         ],
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
+          {
+            min: 1,
+            max: 16,
+            message: "用户名长度在 1 到 16 个字符",
+            trigger: "blur",
+          },
         ],
-        fundType: [{ required: true, message: "请输入币种", trigger: "blur" }],
+        fundType: [{ required: true, message: "请选择币种", trigger: "blur" }],
         orderInfo: [
           { required: true, message: "请输入订单信息", trigger: "blur" },
+          {
+            min: 1,
+            max: 2048,
+            message: "订单信息长度在 1 到 2048 个字符",
+            trigger: "blur",
+          },
         ],
         receiptAccountName: [
           { required: true, message: "请输入收款人名称", trigger: "blur" },
+          {
+            min: 1,
+            max: 64,
+            message: "收款人名称长度在 1 到 64 个字符",
+            trigger: "blur",
+          },
         ],
         receiptAccountNo: [
           { required: true, message: "请输入收款人账号", trigger: "blur" },
+          {
+            min: 1,
+            max: 102,
+            message: "收款人账号长度在 1 到 102 个字符",
+            trigger: "blur",
+          },
         ],
         receiptAccountType: [
           { required: true, message: "请选择收款账户类型", trigger: "blur" },
         ],
         bankId: [
           { required: true, message: "请输入银行编码", trigger: "blur" },
+          {
+            min: 1,
+            max: 32,
+            message: "银行编码长度在 1 到 32 个字符",
+            trigger: "blur",
+          },
         ],
         bankName: [
           {
             required: true,
             message: "请输入收款账户开户行名称",
+            trigger: "blur",
+          },
+          {
+            min: 1,
+            max: 32,
+            message: "收款账户开户行名称长度在 1 到 32 个字符",
             trigger: "blur",
           },
         ],
@@ -183,10 +226,22 @@ export default {
             message: "请输入收款人账户联行号",
             trigger: "blur",
           },
+          {
+            min: 1,
+            max: 32,
+            message: "收款人账户联行号长度在 1 到 32 个字符",
+            trigger: "blur",
+          },
         ],
-        birthday: [{ required: true, message: "请输入生日", trigger: "blur" }],
+        birthday: [{ required: true, message: "请选择日期", trigger: "blur" }],
         identity: [
           { required: true, message: "请输入证件号", trigger: "blur" },
+          {
+            min: 1,
+            max: 32,
+            message: "证件号长度在 1 到 32 个字符",
+            trigger: "blur",
+          },
         ],
         // 其他参数的验证规则根据接口要求添加
       },

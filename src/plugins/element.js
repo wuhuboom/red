@@ -30,6 +30,7 @@ import {
   radio,
   checkbox,
   progress,
+  datePicker,
 } from "element-ui";
 export default {
   install(Vue) {
@@ -64,5 +65,6 @@ export default {
     Vue.use(radio);
     Vue.use(checkbox);
     Vue.use(progress);
+    Vue.use(datePicker);
   },
 };
