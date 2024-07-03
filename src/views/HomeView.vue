@@ -94,6 +94,7 @@
       <el-form-item label="生日" prop="birthday">
         <el-date-picker
           v-model="form.birthday"
+          value-format="yyyy-MM-dd"
           type="date"
           placeholder="选择日期"
         >
@@ -290,9 +291,10 @@ export default {
       // 构造请求数据
       const requestData = {
         ...withdrawalData,
-        sign: signature, // 将签名添加到请求数据中
+        signature: signature, // 将签名添加到请求数据中
       };
       const formData = qs.stringify(requestData);
+      console.log("请求数据:", formData);
       // 发送 POST 请求
       const response = await axios.post(this.apiUrl, formData, {
         headers: {
