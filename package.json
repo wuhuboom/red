@@ -25,6 +25,8 @@
     "nprogress": "^0.2.0",
     "postcss-pxtorem": "^6.1.0",
     "qrcode.vue": "1.7.0",
+    "sass": "^1.77.6",
+    "sass-loader": "^14.2.1",
     "semver": "^7.6.0",
     "vant": "^2.13.2",
     "vue": "^2.6.14",

@@ -5,7 +5,7 @@
       :model="form"
       :rules="rules"
       ref="form"
-      label-width="100px"
+      label-width="120px"
       size="small"
     >
       <el-form-item label="金额" prop="amount">
@@ -15,10 +15,10 @@
           clearable
         ></el-input>
       </el-form-item>
-      <el-form-item label="姓名" prop="nameSurname">
+      <el-form-item label="用户姓名" prop="nameSurname">
         <el-input
           v-model="form.nameSurname"
-          placeholder="请输入姓名"
+          placeholder="请输入用户姓名"
           clearable
         ></el-input>
       </el-form-item>
@@ -51,16 +51,47 @@
         ></el-input>
       </el-form-item>
       <el-form-item label="收款账户类型" prop="receiptAccountType">
-        <el-input
+        <el-select
           v-model="form.receiptAccountType"
-          placeholder="请输入收款账户类型"
+          placeholder="请选择收款账户类型"
           clearable
-        ></el-input>
+        >
+          <el-option label="个人账户" value="private"></el-option>
+          <el-option label="对公账户" value="public"></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="银行编码" prop="bankId">
         <el-input
           v-model="form.bankId"
           placeholder="请输入银行编码"
+          clearable
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="收款账户开户行名称" prop="bankName">
+        <el-input
+          v-model="form.bankName"
+          placeholder="请输入收款账户开户行名称"
+          clearable
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="收款人账户联行号" prop="bankType">
+        <el-input
+          v-model="form.bankType"
+          placeholder="请输入收款人账户联行号"
+          clearable
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="生日" prop="birthday">
+        <el-input
+          v-model="form.birthday"
+          placeholder="请输入生日"
+          clearable
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="证件号" prop="identity">
+        <el-input
+          v-model="form.identity"
+          placeholder="请输入证件号"
           clearable
         ></el-input>
       </el-form-item>
@@ -77,7 +108,6 @@
 <script>
 import axios from "axios";
 import CryptoJS from "crypto-js";
-import { ElMessage } from "element-ui";
 
 export default {
   data() {
@@ -90,10 +120,15 @@ export default {
         nameSurname: "",
         username: "",
         fundType: "",
+        orderInfo: "",
         receiptAccountName: "",
         receiptAccountNo: "",
         receiptAccountType: "",
         bankId: "",
+        bankName: "",
+        bankType: "",
+        birthday: "",
+        identity: "",
       },
       rules: {
         amount: [
@@ -105,10 +140,10 @@ export default {
           },
         ],
         nameSurname: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
+          { required: true, message: "请输入用户姓名", trigger: "blur" },
         ],
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
+          { required: false, message: "请输入用户名", trigger: "blur" },
         ],
         fundType: [{ required: true, message: "请输入币种", trigger: "blur" }],
         receiptAccountName: [
@@ -118,10 +153,28 @@ export default {
           { required: true, message: "请输入收款人账号", trigger: "blur" },
         ],
         receiptAccountType: [
-          { required: true, message: "请输入收款账户类型", trigger: "blur" },
+          { required: true, message: "请选择收款账户类型", trigger: "blur" },
         ],
         bankId: [
           { required: true, message: "请输入银行编码", trigger: "blur" },
+        ],
+        bankName: [
+          {
+            required: false,
+            message: "请输入收款账户开户行名称",
+            trigger: "blur",
+          },
+        ],
+        bankType: [
+          {
+            required: false,
+            message: "请输入收款人账户联行号",
+            trigger: "blur",
+          },
+        ],
+        birthday: [{ required: false, message: "请输入生日", trigger: "blur" }],
+        identity: [
+          { required: false, message: "请输入证件号", trigger: "blur" },
         ],
         // 其他参数的验证规则根据接口要求添加
       },
@@ -152,10 +205,15 @@ export default {
           nameSurname: this.form.nameSurname,
           username: this.form.username,
           fundType: this.form.fundType,
+          orderInfo: this.form.orderInfo,
           receiptAccountName: this.form.receiptAccountName,
           receiptAccountNo: this.form.receiptAccountNo,
           receiptAccountType: this.form.receiptAccountType,
           bankId: this.form.bankId,
+          bankName: this.form.bankName,
+          bankType: this.form.bankType,
+          birthday: this.form.birthday,
+          identity: this.form.identity,
           // 其他参数根据接口要求添加
         };
 
@@ -171,13 +229,11 @@ export default {
         // 发送 POST 请求
         const response = await axios.post(this.apiUrl, requestData);
         console.log("提交提现订单成功:", response.data);
-        ElMessage.success("提交提现订单成功");
 
         // 提交成功后清空表单数据
         this.$refs[formName].resetFields();
       } catch (error) {
         console.error("提交提现订单失败:", error.response.data);
-        ElMessage.error("提交提现订单失败");
       }
     },
   },
@@ -185,5 +241,5 @@ export default {
 </script>
 
 <style>
-/* 这里是你的样式 */
+/* 可以在这里添加样式 */
 </style>
