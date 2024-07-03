@@ -5,60 +5,64 @@
       :model="form"
       :rules="rules"
       ref="form"
-      label-width="146px"
+      label-width="150px"
       size="small"
     >
       <el-form-item label="金额" prop="amount">
         <el-input
-          v-model="form.amount"
+          v-model.trim="form.amount"
           placeholder="请输入金额"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="用户姓名" prop="nameSurname">
         <el-input
-          v-model="form.nameSurname"
+          v-model.trim="form.nameSurname"
           placeholder="请输入用户姓名"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="用户名" prop="username">
         <el-input
-          v-model="form.username"
+          v-model.trim="form.username"
           placeholder="请输入用户名"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="币种" prop="fundType">
-        <el-select v-model="form.fundType" placeholder="请选择币种" clearable>
+        <el-select
+          v-model.trim="form.fundType"
+          placeholder="请选择币种"
+          clearable
+        >
           <el-option label="CNY" value="CNY"></el-option>
           <el-option label="TRY" value="TRY"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="订单信息" prop="orderInfo">
         <el-input
-          v-model="form.orderInfo"
+          v-model.trim="form.orderInfo"
           placeholder="请输入订单信息"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="收款人名称" prop="receiptAccountName">
         <el-input
-          v-model="form.receiptAccountName"
+          v-model.trim="form.receiptAccountName"
           placeholder="请输入收款人名称"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="收款人账号" prop="receiptAccountNo">
         <el-input
-          v-model="form.receiptAccountNo"
+          v-model.trim="form.receiptAccountNo"
           placeholder="请输入收款人账号"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="收款账户类型" prop="receiptAccountType">
         <el-select
-          v-model="form.receiptAccountType"
+          v-model.trim="form.receiptAccountType"
           placeholder="请选择收款账户类型"
           clearable
         >
@@ -68,35 +72,35 @@
       </el-form-item>
       <el-form-item label="银行编码" prop="bankId">
         <el-input
-          v-model="form.bankId"
+          v-model.trim="form.bankId"
           placeholder="请输入银行编码"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="收款账户开户行名称" prop="bankName">
         <el-input
-          v-model="form.bankName"
+          v-model.trim="form.bankName"
           placeholder="请输入收款账户开户行名称"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="收款人账户联行号" prop="bankType">
         <el-input
-          v-model="form.bankType"
+          v-model.trim="form.bankType"
           placeholder="请输入收款人账户联行号"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="生日" prop="birthday">
         <el-input
-          v-model="form.birthday"
+          v-model.trim="form.birthday"
           placeholder="请输入生日"
           clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="证件号" prop="identity">
         <el-input
-          v-model="form.identity"
+          v-model.trim="form.identity"
           placeholder="请输入证件号"
           clearable
         ></el-input>
@@ -114,7 +118,7 @@
 <script>
 import axios from "axios";
 import CryptoJS from "crypto-js";
-
+import qs from "qs";
 export default {
   data() {
     return {
@@ -148,7 +152,7 @@ export default {
           { required: true, message: "请输入用户姓名", trigger: "blur" },
         ],
         username: [
-          { required: false, message: "请输入用户名", trigger: "blur" },
+          { required: true, message: "请输入用户名", trigger: "blur" },
         ],
         fundType: [{ required: true, message: "请输入币种", trigger: "blur" }],
         orderInfo: [
@@ -198,52 +202,51 @@ export default {
       concatenatedString += this.token;
 
       // 使用 SHA-256 计算签名
-      const hash = CryptoJS.HmacSHA256(concatenatedString);
+      const hash = CryptoJS.HmacSHA256(concatenatedString, "");
       const signature = hash.toString(CryptoJS.enc.Hex);
 
       return signature;
     },
+    vaidForm() {
+      return new Promise((resolve) => {
+        this.$refs.form.validate((valid) => {
+          if (valid) {
+            resolve(valid);
+          } else {
+            resolve(false);
+          }
+        });
+      });
+    },
     async submitForm(formName) {
-      try {
-        await this.$refs[formName].validate();
-
-        // 准备请求参数
-        const withdrawalData = {
-          amount: this.form.amount,
-          nameSurname: this.form.nameSurname,
-          username: this.form.username,
-          fundType: this.form.fundType,
-          orderInfo: this.form.orderInfo,
-          receiptAccountName: this.form.receiptAccountName,
-          receiptAccountNo: this.form.receiptAccountNo,
-          receiptAccountType: this.form.receiptAccountType,
-          bankId: this.form.bankId,
-          bankName: this.form.bankName,
-          bankType: this.form.bankType,
-          birthday: this.form.birthday,
-          identity: this.form.identity,
-          // 其他参数根据接口要求添加
-        };
-
-        // 生成签名
-        const signature = this.generateSignature(withdrawalData);
-        console.log("签名:", signature);
-        // 构造请求数据
-        const requestData = {
-          ...withdrawalData,
-          sign: signature, // 将签名添加到请求数据中
-        };
-
-        // 发送 POST 请求
-        const response = await axios.post(this.apiUrl, requestData);
-        console.log("提交提现订单成功:", response.data);
-
-        // 提交成功后清空表单数据
-        this.$refs[formName].resetFields();
-      } catch (error) {
-        //, error.response.data
-        console.error("提交提现订单失败:");
+      const status = await this.vaidForm();
+      console.log("表单验证结果:", status);
+      if (!status) {
+        return;
       }
+      // 准备请求参数
+      const withdrawalData = {
+        ...this.form,
+      };
+
+      // 生成签名
+      const signature = this.generateSignature(withdrawalData);
+      console.log("签名:", signature);
+      // 构造请求数据
+      const requestData = {
+        ...withdrawalData,
+        sign: signature, // 将签名添加到请求数据中
+      };
+      const formData = qs.stringify(requestData);
+      // 发送 POST 请求
+      const response = await axios.post(this.apiUrl, formData, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+      console.log("提交结果:", response.data);
+      // 提交成功后清空表单数据
+      this.$refs[formName].resetFields();
     },
   },
 };
