@@ -994,5 +994,6 @@
   "deal_entry_time": "入驻时间",
   "deal_deposit": "保证金",
   "deal_total_trades_last_30_days": "成交单数（近30天）",
-  "deal_trade_rate_last_30_days": "成交率（近30天）"
+  "deal_trade_rate_last_30_days": "成交率（近30天）",
+  "backapi.betFrequently": "贸易频率太快,稍后尝试"
 }
