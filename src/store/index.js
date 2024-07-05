@@ -179,7 +179,12 @@ export default new Vuex.Store({
         return [err];
       }
       if (open) {
-        location.href = result.data.serviceAddr;
+        const host = window.btoa(window.location.origin);
+        const link = result.data.serviceAddr;
+        location.href =
+          link.indexOf("?") !== -1
+            ? `${link}&toUrl=${host}`
+            : `${link}?toUrl=${host}`;
       } else {
         commit("setServeData", result.data);
         return [null, result];
