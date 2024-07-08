@@ -70,17 +70,17 @@
             {{ totalBetPlayer }}
           </div>
         </van-grid-item>
-        <van-grid-item @click.native="$router.push({ name: 'userUnaim' })">
+        <van-grid-item>
           <div>{{ $t("agency.center.team.motivation.text") }}</div>
           <div class="m-t-4">
             {{ teamGroupAim }}
-            <i class="el-icon-arrow-right m-l-4 bold"></i>
           </div>
         </van-grid-item>
-        <van-grid-item>
+        <van-grid-item @click.native="$router.push({ name: 'userUnaim' })">
           <div>{{ $t("agency.center.team.motivation.not.text") }}</div>
           <div class="m-t-4 center-center">
             {{ teamGroupUnAim }}
+            <i class="el-icon-arrow-right m-l-4 bold"></i>
           </div>
         </van-grid-item>
       </van-grid>
