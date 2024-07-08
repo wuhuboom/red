@@ -19,6 +19,11 @@ import { publicDateTimeSolt } from "@/plugins/publicTool.js";
 // 公共样式
 import "@/assets/style/base.less";
 import "@/assets/font/iconfont.css";
+import { Locale } from "vant";
+// 引入英文语言包
+import enUS from "vant/es/locale/lang/en-US";
+
+Locale.use("en-US", enUS);
 Vue.config.productionTip = false;
 Vue.use(global);
 Vue.use(VueClipboard);
