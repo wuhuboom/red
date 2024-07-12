@@ -178,6 +178,13 @@ export default {
     async onSubmit() {
       const status = await this.comfirm();
       if (!status) return;
+      if (!this.form.areaCode) {
+        this.$toast(this.$t("backapi.areaCodeIsEmpty"));
+        if (!this.area_code.length) {
+          this.$store.dispatch("getCodeList");
+        }
+        return;
+      }
       let reqParam = {
         phone: this.form.areaCode + this.form.phone,
         code: this.form.vercode,
