@@ -204,7 +204,6 @@ export default {
       this.$toast.success();
       this.$store.dispatch("getInfo");
       this.$router.back();
-      //this.$router.replace({ name: "Login" });
     },
   },
   async created() {
