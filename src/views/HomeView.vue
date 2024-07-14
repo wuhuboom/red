@@ -15,7 +15,9 @@
       </li>
       <li class="lock-list c-c">
         <p class="lock"><img src="@/assets/img/lock.webp" alt="" /></p>
-        <p class="dack">02. 36</p>
+        <p class="dack">
+          <CountDown :time="0" />
+        </p>
       </li>
     </ul>
     <ul class="order-msg order-btn">
@@ -48,7 +50,7 @@
     <p class="line"></p>
     <div class="upload-row c-c">
       <div class="upload">
-        <div class="up-in"></div>
+        <div class="up-in c-c">your receipt will be displayed here</div>
       </div>
       <div>
         <ul>
@@ -66,10 +68,12 @@
     <p class="c-c minutes dack">
       Expected to receive in <span>10 minutes</span>
     </p>
+    <Uploader />
   </div>
 </template>
 
 <script>
+import { Uploader, CountDown } from "vant";
 export default {
   data() {
     return {
@@ -77,6 +81,10 @@ export default {
         ...this.$route.query,
       },
     };
+  },
+  components: {
+    Uploader,
+    CountDown,
   },
   computed: {
     // 计算过期时间
@@ -237,6 +245,8 @@ export default {
       width: 100%;
       border-radius: 21px;
       border: dotted 2px #fff;
+      text-align: center;
+      padding: 0 10px;
     }
   }
   .line-btn {
@@ -256,6 +266,11 @@ export default {
   padding: 22px 30px;
   span {
     padding-left: 4px;
+    color: #fff;
+  }
+}
+:deep() {
+  .van-count-down {
     color: #fff;
   }
 }
