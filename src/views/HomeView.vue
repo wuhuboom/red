@@ -69,42 +69,57 @@
       Expected to receive in <span>10 minutes</span>
     </p>
     <Uploader v-show="false" />
+    <popup v-model="show" position="top">
+      <div class="cont">
+        <p class="drc drc-l c-c">
+          BACK <img src="@/assets/img/left.png" alt="" />
+        </p>
+        <img :src="img" alt="" />
+        <p class="drc drc-r c-c">
+          <img src="@/assets/img/rit.png" alt="" /> NEXT
+        </p>
+      </div>
+    </popup>
   </div>
 </template>
 
 <script>
-import { Uploader, CountDown } from "vant";
+import { Uploader, CountDown, Popup } from "vant";
 export default {
   data() {
     return {
+      show: true,
+      index: 0,
       query: {
         ...this.$route.query,
       },
       now: new Date().getTime(),
       imgs: [
-        {
-          url: require("@/assets/img/step1.png"),
-          name: 1,
-        },
-        {
-          url: require("@/assets/img/step1.png"),
-          name: 2,
-        },
-        {
-          url: require("@/assets/img/step1.png"),
-          name: 3,
-        },
+        require("@/assets/img/step1.png"),
+        require("@/assets/img/step1.png"),
+        require("@/assets/img/step1.png"),
       ],
     };
   },
   components: {
     Uploader,
     CountDown,
+    // eslint-disable-next-line vue/no-unused-components
+    Popup,
   },
   computed: {
     // 计算过期时间
     expiration() {
       return this.formatExpiration(this.query.expiration);
+    },
+    img() {
+      return this.imgs[this.index];
+    },
+    next() {
+      return this.imgs[this.index + 1] || "";
+    },
+    prv() {
+      return this.imgs[this.index - 1] || "";
     },
   },
   methods: {
@@ -288,9 +303,44 @@ export default {
     color: #fff;
   }
 }
+.cont {
+  position: relative;
+  &,
+  img {
+    width: 308px;
+  }
+  img {
+    object-fit: contain;
+
+    display: block;
+  }
+}
+.drc {
+  position: absolute;
+  font-size: 12px;
+  color: #ef7367;
+  top: 77px;
+  img {
+    display: block;
+    width: 32px;
+    height: 18px;
+    margin: 0 8px;
+  }
+}
+.drc-l {
+  left: 36px;
+}
+.drc-r {
+  right: 36px;
+}
 :deep() {
   .van-count-down {
     color: #fff;
+  }
+  .van-popup--top {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
   }
 }
 </style>
