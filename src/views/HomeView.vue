@@ -91,7 +91,7 @@
 import { Uploader, CountDown, Popup } from "vant";
 import axios from "axios";
 //封装 axios
-const host = process.env.VUE_APP_API;
+const host = window.BASEPATH || process.env.VUE_APP_API;
 axios.defaults.baseURL = `${host}/user/v2`;
 export default {
   data() {
