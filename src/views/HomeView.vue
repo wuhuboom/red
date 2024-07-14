@@ -1,14 +1,15 @@
 <template>
   <div class="win-usdt">
-    <p class="icon-back">
+    <p class="icon-back" @click="open">
       <img src="@/assets/img/back.webp" alt="" />
+      <span>Help</span>
     </p>
     <p class="num-card">{{ query.amount }}</p>
     <ul class="order-msg">
       <li class="date c-c">{{ formatExpiration(query.expiration) }}</li>
       <li class="c-c rows number">
         <p>order number：</p>
-        <p class="c-c">
+        <p class="c-c" @click="copyToClipboard(query.orderNumber)">
           {{ query.orderNumber }}
           <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
         </p>
@@ -16,59 +17,58 @@
       <li class="lock-list c-c">
         <p class="lock"><img src="@/assets/img/lock.webp" alt="" /></p>
         <p class="dack">
-          <CountDown :time="count()" />
+          <CountDown :time="count()" format="DD:HH:mm:ss" />
         </p>
       </li>
     </ul>
     <ul class="order-msg order-btn">
       <li class="c-c rows number d-c m-b-16">
         <p>bank name</p>
-        <p class="c-c">
+        <p class="c-c" @click="copyToClipboard(query.bankname)">
           {{ query.bankname }}
           <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
         </p>
       </li>
       <li class="c-c rows number d-c m-b-16">
         <p>account name</p>
-        <p class="c-c">
+        <p class="c-c" @click="copyToClipboard(query.username)">
           {{ query.username }}
           <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
         </p>
       </li>
       <li class="c-c rows number d-c m-b-16">
         <p>account number</p>
-        <p class="c-c">
+        <p class="c-c" @click="copyToClipboard(query.bankCode)">
           {{ query.bankCode }}
           <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
         </p>
       </li>
-      <li class="desc line1 c-c">
+      <li class="desc line1 c-c" @click="open">
         click here for instuctions
         <span class="tips"><img src="@/assets/img/tips.webp" alt="" /></span>
       </li>
     </ul>
     <p class="line"></p>
     <div class="upload-row c-c">
-      <div class="upload">
-        <div class="up-in c-c">your receipt will be displayed here</div>
+      <div class="upload" @click="upload">
+        <div class="up-in c-c" v-if="url">
+          <img :src="url" alt="" />
+        </div>
+        <div v-else class="up-in c-c">your receipt will be displayed here</div>
       </div>
       <div>
         <ul>
-          <li class="line-btn line1 c-c">upload</li>
+          <li class="line-btn line1 c-c" @click="upload">upload</li>
           <li class="dack">
-            upload the payment receipt here after the transfer is done.
+            <p>upload the payment receipt here after the transfer is done.</p>
           </li>
-        </ul>
-        <ul class="service">
-          <li class="line-btn line1 c-c">customer service</li>
-          <li class="dack">assistance from customer service</li>
         </ul>
       </div>
     </div>
     <p class="c-c minutes dack">
       Expected to receive in <span>10 minutes</span>
     </p>
-    <Uploader v-show="false" />
+    <Uploader :after-read="afterRead" ref="upload" v-show="false" />
     <popup v-model="show" position="top">
       <div class="cont">
         <p class="drc drc-l c-c" v-if="index > 0" @click="chang(-1)">
@@ -89,10 +89,14 @@
 
 <script>
 import { Uploader, CountDown, Popup } from "vant";
+import axios from "axios";
+//封装 axios
+const host = process.env.VUE_APP_API;
+axios.defaults.baseURL = `${host}/user/v2`;
 export default {
   data() {
     return {
-      show: true,
+      show: false,
       index: 0,
       query: {
         ...this.$route.query,
@@ -103,12 +107,12 @@ export default {
         require("@/assets/img/step2.png"),
         require("@/assets/img/step3.png"),
       ],
+      url: "",
     };
   },
   components: {
     Uploader,
     CountDown,
-    // eslint-disable-next-line vue/no-unused-components
     Popup,
   },
   computed: {
@@ -121,6 +125,19 @@ export default {
     },
   },
   methods: {
+    copyToClipboard(text) {
+      const input = document.createElement("input");
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+      this.$toast("Copied to clipboard");
+    },
+    open() {
+      this.show = true;
+      this.index = 0;
+    },
     chang(num) {
       this.index += num;
       console.log(this.index);
@@ -146,6 +163,39 @@ export default {
       // 构建格式化的日期时间字符串  ${hours}:${minutes}:${seconds}
       return `${year}-${month}-${day}`;
     },
+    getDate() {
+      const own_order = this.query.orderNumber;
+      const formData = new FormData();
+      formData.append("own_order", own_order);
+      axios.post("/getCertificateForImageRtt", formData).then((res) => {
+        const { code, result } = res.data;
+        if (code !== 200) return;
+        this.url = result.host + result.imageUrl;
+      });
+    },
+    afterRead(file) {
+      console.log(file);
+      const own_order = this.query.orderNumber;
+      const formData = new FormData();
+      formData.append("order_num", own_order);
+      formData.append("file", file.file);
+      axios.post("/uploadCertificateImageRrt", formData).then((res) => {
+        const { code } = res.data;
+        console.log(code, "---");
+        if (code !== 200) {
+          this.$toast("Upload failed");
+          return;
+        }
+        this.url = file.content;
+        this.$toast("Upload successful");
+      });
+    },
+    upload() {
+      this.$refs.upload.chooseFile();
+    },
+  },
+  mounted() {
+    this.getDate();
   },
 };
 </script>
@@ -174,6 +224,11 @@ export default {
 }
 .icon-back {
   padding: 18px 0 0;
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 8px;
+  }
   img {
     width: 30px;
     height: 18px;
@@ -283,6 +338,12 @@ export default {
       border: dotted 2px #fff;
       text-align: center;
       padding: 0 10px;
+      img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
     }
   }
   .line-btn {
@@ -344,5 +405,10 @@ export default {
     display: flex;
     justify-content: center;
   }
+}
+</style>
+<style>
+.van-toast {
+  background-color: green !important;
 }
 </style>
