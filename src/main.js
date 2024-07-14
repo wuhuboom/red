@@ -1,14 +1,13 @@
 import Vue from "vue";
-// import ElementUI from "element-ui";
-// import "element-ui/lib/theme-chalk/index.css";
-// Vue.use(ElementUI);
-import element from "./plugins/element";
+import { Toast } from "vant";
+Vue.use(Toast);
+import VueClipboard from "vue-clipboard2";
+Vue.use(VueClipboard);
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "@/assets/css/comm.scss";
 Vue.config.productionTip = false;
-Vue.use(element);
 new Vue({
   router,
   store,

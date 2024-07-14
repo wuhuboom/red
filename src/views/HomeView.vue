@@ -68,7 +68,7 @@
     <p class="c-c minutes dack">
       Expected to receive in <span>10 minutes</span>
     </p>
-    <Uploader />
+    <Uploader v-show="false" />
   </div>
 </template>
 
@@ -81,6 +81,20 @@ export default {
         ...this.$route.query,
       },
       now: new Date().getTime(),
+      imgs: [
+        {
+          url: require("@/assets/img/step1.png"),
+          name: 1,
+        },
+        {
+          url: require("@/assets/img/step1.png"),
+          name: 2,
+        },
+        {
+          url: require("@/assets/img/step1.png"),
+          name: 3,
+        },
+      ],
     };
   },
   components: {
