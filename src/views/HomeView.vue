@@ -5,7 +5,7 @@
     </p>
     <p class="num-card">{{ query.amount }}</p>
     <ul class="order-msg">
-      <li class="date c-c">{{ query.expiration }}</li>
+      <li class="date c-c">{{ formatExpiration(query.expiration) }}</li>
       <li class="c-c rows number">
         <p>order number：</p>
         <p class="c-c">
@@ -16,7 +16,7 @@
       <li class="lock-list c-c">
         <p class="lock"><img src="@/assets/img/lock.webp" alt="" /></p>
         <p class="dack">
-          <CountDown :time="0" />
+          <CountDown :time="count()" />
         </p>
       </li>
     </ul>
@@ -80,6 +80,7 @@ export default {
       query: {
         ...this.$route.query,
       },
+      now: new Date().getTime(),
     };
   },
   components: {
@@ -93,6 +94,10 @@ export default {
     },
   },
   methods: {
+    count() {
+      let now = this.query.expiration * 1000 - new Date().getTime();
+      return now > 0 ? now : 0;
+    },
     formatExpiration(time) {
       // 将时间戳从秒转换为毫秒
       const date = new Date(time * 1000);
