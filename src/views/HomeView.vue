@@ -40,12 +40,32 @@
           <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
         </p>
       </li>
-      <li class="desc c-c">
+      <li class="desc line1 c-c">
         click here for instuctions
         <span class="tips"><img src="@/assets/img/tips.webp" alt="" /></span>
       </li>
     </ul>
     <p class="line"></p>
+    <div class="upload-row c-c">
+      <div class="upload">
+        <div class="up-in"></div>
+      </div>
+      <div>
+        <ul>
+          <li class="line-btn line1 c-c">upload</li>
+          <li class="dack">
+            upload the payment receipt here after the transfer is done.
+          </li>
+        </ul>
+        <ul class="service">
+          <li class="line-btn line1 c-c">customer service</li>
+          <li class="dack">assistance from customer service</li>
+        </ul>
+      </div>
+    </div>
+    <p class="c-c minutes dack">
+      Expected to receive in <span>10 minutes</span>
+    </p>
   </div>
 </template>
 
@@ -87,6 +107,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.line1 {
+  line-height: 1;
+}
 .m-b-16 {
   margin-bottom: 16px;
 }
@@ -197,5 +220,43 @@ export default {
     #fa574c 91%,
     #f03f38
   );
+}
+.upload-row {
+  display: flex;
+  margin-top: 8px;
+  .upload {
+    width: 112px;
+    height: 142px;
+    padding: 8px;
+    border-radius: 21px;
+    border: solid 2px #dc2525;
+    flex-shrink: 0;
+    margin-right: 26px;
+    .up-in {
+      height: 100%;
+      width: 100%;
+      border-radius: 21px;
+      border: dotted 2px #fff;
+    }
+  }
+  .line-btn {
+    height: 18px;
+    border-radius: 8px;
+    background-color: #dc2525;
+    padding: 0 8px;
+    min-width: 80px;
+    flex-grow: 0;
+    margin-bottom: 5px;
+  }
+}
+.service {
+  margin-top: 30px;
+}
+.minutes {
+  padding: 22px 30px;
+  span {
+    padding-left: 4px;
+    color: #fff;
+  }
 }
 </style>
