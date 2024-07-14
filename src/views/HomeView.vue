@@ -96,7 +96,7 @@ axios.defaults.baseURL = `${host}/user/v2`;
 export default {
   data() {
     return {
-      show: false,
+      show: true,
       index: 0,
       query: {
         ...this.$route.query,
