@@ -71,11 +71,15 @@
     <Uploader v-show="false" />
     <popup v-model="show" position="top">
       <div class="cont">
-        <p class="drc drc-l c-c">
+        <p class="drc drc-l c-c" v-if="index > 0" @click="chang(-1)">
           BACK <img src="@/assets/img/left.png" alt="" />
         </p>
         <img :src="img" alt="" />
-        <p class="drc drc-r c-c">
+        <p
+          class="drc drc-r c-c"
+          v-if="index < imgs.length - 1"
+          @click="chang(1)"
+        >
           <img src="@/assets/img/rit.png" alt="" /> NEXT
         </p>
       </div>
@@ -96,8 +100,8 @@ export default {
       now: new Date().getTime(),
       imgs: [
         require("@/assets/img/step1.png"),
-        require("@/assets/img/step1.png"),
-        require("@/assets/img/step1.png"),
+        require("@/assets/img/step2.png"),
+        require("@/assets/img/step3.png"),
       ],
     };
   },
@@ -115,14 +119,12 @@ export default {
     img() {
       return this.imgs[this.index];
     },
-    next() {
-      return this.imgs[this.index + 1] || "";
-    },
-    prv() {
-      return this.imgs[this.index - 1] || "";
-    },
   },
   methods: {
+    chang(num) {
+      this.index += num;
+      console.log(this.index);
+    },
     count() {
       let now = this.query.expiration * 1000 - new Date().getTime();
       return now > 0 ? now : 0;
