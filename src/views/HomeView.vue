@@ -16,6 +16,24 @@
       <ul class="order-msg order-btn">
         <li class="order-list">
           <p>प्रयोगकर्ता नाम</p>
+          <p class="list-desc c-c" @click="copyToClipboard(query.username)">
+            {{ query.username }}
+            <span class="copy"
+              ><img src="@/assets/img/bluecopt.webp" alt=""
+            /></span>
+          </p>
+        </li>
+        <li class="order-list">
+          <p>खाता</p>
+          <p class="list-desc c-c" @click="copyToClipboard(query.bankCode)">
+            {{ query.bankCode }}
+            <span class="copy"
+              ><img src="@/assets/img/bluecopt.webp" alt=""
+            /></span>
+          </p>
+        </li>
+        <li class="order-list">
+          <p>बैंकको नाम</p>
           <p class="list-desc c-c" @click="copyToClipboard(query.bankname)">
             {{ query.bankname }}
             <span class="copy"
@@ -23,28 +41,26 @@
             /></span>
           </p>
         </li>
+        <li class="order-list" style="border-color: transparent">
+          <p>आदेश संख्या</p>
+          <p class="list-desc c-c" @click="copyToClipboard(query.orderNumber)">
+            {{ query.orderNumber }}
+            <span class="copy"
+              ><img src="@/assets/img/bluecopt.webp" alt=""
+            /></span>
+          </p>
+        </li>
       </ul>
-      <div class="upload-row c-c">
-        <div class="upload" @click="upload">
-          <div class="up-in c-c" v-if="url">
-            <img :src="url" alt="" />
-          </div>
-          <div v-else class="up-in c-c">
-            your receipt will be displayed here
-          </div>
-        </div>
-        <div>
-          <ul>
-            <li class="line-btn line1 c-c" @click="upload">upload</li>
-            <li class="dack">
-              <p>upload the payment receipt here after the transfer is done.</p>
-            </li>
-          </ul>
+      <p class="upload-desc">
+        कृपया हामीलाई तपाईंको आदेश पुष्टि गर्नका लागि स्थानान्तरण प्राप्ति अपलोड
+        गर्नुहोस्।
+      </p>
+      <div class="upload-row">
+        <div class="upload c-c" @click="upload">
+          <img :src="url" v-if="url" alt="" />
         </div>
       </div>
-      <p class="c-c minutes dack">
-        Expected to receive in <span>10 minutes</span>
-      </p>
+
       <Uploader :after-read="afterRead" ref="upload" v-show="false" />
       <popup v-model="show" position="top">
         <div class="cont">
@@ -253,95 +269,26 @@ $blue: #00d6d4;
   }
 }
 
-.date {
-  height: 18px;
+.upload-desc {
+  margin: 22px 0 11px 12px;
   font-size: 14px;
-  border-top: 1px solid #dc2525;
-  border-bottom: 1px solid #dc2525;
-}
-.number {
-  margin: 8px 0 12px;
-}
-.lock-list {
-  flex-direction: column;
-}
-.lock {
-  margin-bottom: 8px;
-  img {
-    width: 22px;
-    height: 25px;
-    display: block;
-  }
-}
-.desc {
-  width: 264px;
-  height: 18px;
-  background-color: #dc2525;
-  border-radius: 18px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -9px;
-  .tips {
-    margin-left: 4px;
-    img {
-      width: 12px;
-      height: 12px;
-      display: block;
-    }
-  }
-}
-.order-btn {
-  margin-bottom: 22px;
-}
-.line {
-  height: 3.2px;
-  background-image: linear-gradient(
-    to right,
-    #8a1c1b,
-    #f34139 30%,
-    #ff928d 38%,
-    #fd7361 53%,
-    #f4483f 54%,
-    #ef3932 64%,
-    #fa574c 91%,
-    #f03f38
-  );
+  color: #ff0505;
 }
 .upload-row {
   display: flex;
   margin-top: 8px;
-  .upload {
-    width: 112px;
-    height: 142px;
-    padding: 8px;
-    border-radius: 21px;
-    border: solid 2px #dc2525;
-    flex-shrink: 0;
-    margin-right: 26px;
-    .up-in {
-      height: 100%;
-      width: 100%;
-      border-radius: 21px;
-      border: dotted 2px #fff;
-      text-align: center;
-      padding: 0 10px;
-      img {
-        display: block;
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-      }
-    }
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
-  .line-btn {
-    height: 18px;
-    border-radius: 8px;
-    background-color: #dc2525;
-    padding: 0 8px;
-    min-width: 80px;
-    flex-grow: 0;
-    margin-bottom: 5px;
+  .upload {
+    width: 131px;
+    height: 131px;
+    padding: 1px;
+    background: url("@/assets/img/uploadbg.webp") no-repeat center center;
+    background-size: 100% 100%;
   }
 }
 .service {
