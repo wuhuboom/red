@@ -62,7 +62,7 @@
       </div>
 
       <Uploader :after-read="afterRead" ref="upload" v-show="false" />
-      <popup v-model="show" position="top">
+      <popup v-model="show" position="center" class="pop-alert">
         <div class="cont">
           <p class="drc drc-l c-c" v-if="index > 0" @click="chang(-1)">
             BACK <img src="@/assets/img/left.png" alt="" />
@@ -75,6 +75,10 @@
           >
             <img src="@/assets/img/rit.png" alt="" /> NEXT
           </p>
+          <ul class="handel-btn">
+            <li @click="chang(1)" v-if="index < imgs.length - 1">अर्को चरण</li>
+            <li @click="show = false">थाहा भयो, यो चरण छोड्नुहोस्</li>
+          </ul>
         </div>
       </popup>
     </div>
@@ -90,7 +94,7 @@ axios.defaults.baseURL = `${host}/user/v2`;
 export default {
   data() {
     return {
-      show: false,
+      show: true,
       index: 0,
       query: {
         ...this.$route.query,
@@ -291,54 +295,29 @@ $blue: #00d6d4;
     background-size: 100% 100%;
   }
 }
-.service {
-  margin-top: 30px;
-}
-.minutes {
-  padding: 22px 30px;
-  span {
-    padding-left: 4px;
-    color: #fff;
-  }
-}
-.cont {
-  position: relative;
-  &,
+.pop-alert {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
   img {
-    width: 308px;
-  }
-  img {
-    object-fit: contain;
-
-    display: block;
+    max-width: 100%;
   }
 }
-.drc {
+.handel-btn {
   position: absolute;
-  font-size: 12px;
-  color: #ef7367;
-  top: 77px;
-  img {
-    display: block;
-    width: 32px;
-    height: 18px;
-    margin: 0 8px;
+  width: 100%;
+  bottom: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > li {
+    height: 36px;
+    padding: 10px 43px 9px;
+    border-radius: 18px;
+    border: solid 1px #00d6d4;
   }
-}
-.drc-l {
-  left: 36px;
-}
-.drc-r {
-  right: 36px;
-}
-:deep() {
-  .van-count-down {
-    color: #fff;
-  }
-  .van-popup--top {
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
+  & > li:nth-child(1) {
+    margin-bottom: 20px;
   }
 }
 </style>
