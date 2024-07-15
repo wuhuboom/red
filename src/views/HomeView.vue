@@ -1,89 +1,67 @@
 <template>
-  <div class="win-usdt">
-    <p class="icon-back" @click="open">
-      <img src="@/assets/img/back.webp" alt="" />
-      <span>Help</span>
+  <div>
+    <p class="icon-back">
+      <span @click="open">मार्गदर्शन चरणहरू</span>
     </p>
-    <p class="num-card">{{ query.amount }}</p>
-    <ul class="order-msg">
-      <li class="date c-c">{{ formatExpiration(query.expiration) }}</li>
-      <li class="c-c rows number">
-        <p>order number：</p>
-        <p class="c-c" @click="copyToClipboard(query.orderNumber)">
-          {{ query.orderNumber }}
-          <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
-        </p>
-      </li>
-      <li class="lock-list c-c">
-        <p class="lock"><img src="@/assets/img/lock.webp" alt="" /></p>
-        <p class="dack">
+    <div class="win-usdt">
+      <div class="amount-list">
+        <div>
+          <p>स्थानान्तरण रकम</p>
+          <p class="num-card">{{ query.amount }}</p>
+        </div>
+        <p class="count-down">
           <CountDown :time="count()" format="DD:HH:mm:ss" />
         </p>
-      </li>
-    </ul>
-    <ul class="order-msg order-btn">
-      <li class="c-c rows number d-c m-b-16">
-        <p>bank name</p>
-        <p class="c-c" @click="copyToClipboard(query.bankname)">
-          {{ query.bankname }}
-          <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
-        </p>
-      </li>
-      <li class="c-c rows number d-c m-b-16">
-        <p>account name</p>
-        <p class="c-c" @click="copyToClipboard(query.username)">
-          {{ query.username }}
-          <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
-        </p>
-      </li>
-      <li class="c-c rows number d-c m-b-16">
-        <p>account number</p>
-        <p class="c-c" @click="copyToClipboard(query.bankCode)">
-          {{ query.bankCode }}
-          <span class="copy"><img src="@/assets/img/copy.webp" alt="" /></span>
-        </p>
-      </li>
-      <li class="desc line1 c-c" @click="open">
-        click here for instuctions
-        <span class="tips"><img src="@/assets/img/tips.webp" alt="" /></span>
-      </li>
-    </ul>
-    <p class="line"></p>
-    <div class="upload-row c-c">
-      <div class="upload" @click="upload">
-        <div class="up-in c-c" v-if="url">
-          <img :src="url" alt="" />
+      </div>
+      <ul class="order-msg order-btn">
+        <li class="order-list">
+          <p>प्रयोगकर्ता नाम</p>
+          <p class="list-desc c-c" @click="copyToClipboard(query.bankname)">
+            {{ query.bankname }}
+            <span class="copy"
+              ><img src="@/assets/img/bluecopt.webp" alt=""
+            /></span>
+          </p>
+        </li>
+      </ul>
+      <div class="upload-row c-c">
+        <div class="upload" @click="upload">
+          <div class="up-in c-c" v-if="url">
+            <img :src="url" alt="" />
+          </div>
+          <div v-else class="up-in c-c">
+            your receipt will be displayed here
+          </div>
         </div>
-        <div v-else class="up-in c-c">your receipt will be displayed here</div>
+        <div>
+          <ul>
+            <li class="line-btn line1 c-c" @click="upload">upload</li>
+            <li class="dack">
+              <p>upload the payment receipt here after the transfer is done.</p>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <ul>
-          <li class="line-btn line1 c-c" @click="upload">upload</li>
-          <li class="dack">
-            <p>upload the payment receipt here after the transfer is done.</p>
-          </li>
-        </ul>
-      </div>
+      <p class="c-c minutes dack">
+        Expected to receive in <span>10 minutes</span>
+      </p>
+      <Uploader :after-read="afterRead" ref="upload" v-show="false" />
+      <popup v-model="show" position="top">
+        <div class="cont">
+          <p class="drc drc-l c-c" v-if="index > 0" @click="chang(-1)">
+            BACK <img src="@/assets/img/left.png" alt="" />
+          </p>
+          <img :src="img" alt="" />
+          <p
+            class="drc drc-r c-c"
+            v-if="index < imgs.length - 1"
+            @click="chang(1)"
+          >
+            <img src="@/assets/img/rit.png" alt="" /> NEXT
+          </p>
+        </div>
+      </popup>
     </div>
-    <p class="c-c minutes dack">
-      Expected to receive in <span>10 minutes</span>
-    </p>
-    <Uploader :after-read="afterRead" ref="upload" v-show="false" />
-    <popup v-model="show" position="top">
-      <div class="cont">
-        <p class="drc drc-l c-c" v-if="index > 0" @click="chang(-1)">
-          BACK <img src="@/assets/img/left.png" alt="" />
-        </p>
-        <img :src="img" alt="" />
-        <p
-          class="drc drc-r c-c"
-          v-if="index < imgs.length - 1"
-          @click="chang(1)"
-        >
-          <img src="@/assets/img/rit.png" alt="" /> NEXT
-        </p>
-      </div>
-    </popup>
   </div>
 </template>
 
@@ -96,7 +74,7 @@ axios.defaults.baseURL = `${host}/user/v2`;
 export default {
   data() {
     return {
-      show: true,
+      show: false,
       index: 0,
       query: {
         ...this.$route.query,
@@ -200,7 +178,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+$blue: #00d6d4;
+.icon-back {
+  padding: 18px 18px 18px 0;
+  display: flex;
+  justify-content: flex-end;
+  color: $blue;
+  text-decoration: underline;
+  background-color: #0b0b0b;
+}
 .line1 {
   line-height: 1;
 }
@@ -222,54 +209,55 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.icon-back {
-  padding: 18px 0 0;
+.amount-list {
   display: flex;
-  align-items: center;
-  span {
-    margin-left: 8px;
+  justify-content: space-between;
+  padding: 30px 0;
+  color: $blue;
+  font-size: 14px;
+  .num-card {
+    font-size: 25px;
+    font-weight: bold;
+
+    margin-top: 10px;
   }
-  img {
-    width: 30px;
-    height: 18px;
-    display: block;
+  .van-count-down {
+    font-size: 20px;
+    color: $blue;
   }
-}
-.num-card {
-  font-size: 26px;
-  font-weight: 900;
-  height: 88px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .order-msg {
-  min-height: 132px;
-  border-radius: 21px;
-  border: solid 2px #b31917;
-  padding: 16px;
-  margin-bottom: 8px;
-  position: relative;
+  padding: 26px 18px 18px 19px;
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 14px;
+  color: #000;
+  .order-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    border-bottom: 1px solid #707070;
+  }
+  .list-desc {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .copy {
+    margin-left: 8px;
+    img {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+  }
 }
+
 .date {
   height: 18px;
   font-size: 14px;
   border-top: 1px solid #dc2525;
   border-bottom: 1px solid #dc2525;
-}
-.rows {
-  & > p:nth-child(1) {
-    font-size: 12px;
-    color: #ef7367;
-  }
-  .copy {
-    margin-left: 8px;
-    img {
-      width: 8px;
-      height: 10px;
-      display: block;
-    }
-  }
 }
 .number {
   margin: 8px 0 12px;
