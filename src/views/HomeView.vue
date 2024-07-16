@@ -10,7 +10,7 @@
           <p class="num-card">{{ query.amount }}</p>
         </div>
         <p class="count-down">
-          <CountDown :time="count()" format="DD:HH:mm:ss" />
+          <CountDown :time="count()" format="HH:mm:ss" />
         </p>
       </div>
       <ul class="order-msg order-btn">
@@ -103,7 +103,7 @@ export default {
       imgs: [
         require("@/assets/img/step1.webp"),
         require("@/assets/img/step2.webp"),
-        require("@/assets/img/step3.webp"),
+        // require("@/assets/img/step3.webp"),
       ],
       url: "",
     };
