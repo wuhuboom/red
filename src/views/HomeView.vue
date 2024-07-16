@@ -16,39 +16,42 @@
       <ul class="order-msg order-btn">
         <li class="order-list">
           <p>प्रयोगकर्ता नाम</p>
-          <p class="list-desc c-c" @click="copyToClipboard(query.username)">
-            {{ query.username }}
+          <div class="list-desc c-c" @click="copyToClipboard(query.username)">
+            <p class="expe">{{ query.username }}</p>
             <span class="copy"
               ><img src="@/assets/img/bluecopt.webp" alt=""
             /></span>
-          </p>
+          </div>
         </li>
         <li class="order-list">
           <p>खाता</p>
-          <p class="list-desc c-c" @click="copyToClipboard(query.bankCode)">
-            {{ query.bankCode }}
+          <div class="list-desc c-c" @click="copyToClipboard(query.bankCode)">
+            <p class="expe">{{ query.bankCode }}</p>
             <span class="copy"
               ><img src="@/assets/img/bluecopt.webp" alt=""
             /></span>
-          </p>
+          </div>
         </li>
         <li class="order-list">
           <p>बैंकको नाम</p>
-          <p class="list-desc c-c" @click="copyToClipboard(query.bankname)">
-            {{ query.bankname }}
+          <div class="list-desc c-c" @click="copyToClipboard(query.bankname)">
+            <p class="expe">{{ query.bankname }}</p>
             <span class="copy"
               ><img src="@/assets/img/bluecopt.webp" alt=""
             /></span>
-          </p>
+          </div>
         </li>
         <li class="order-list" style="border-color: transparent">
           <p>आदेश संख्या</p>
-          <p class="list-desc c-c" @click="copyToClipboard(query.orderNumber)">
-            {{ query.orderNumber }}
+          <div
+            class="list-desc c-c"
+            @click="copyToClipboard(query.orderNumber)"
+          >
+            <p class="expe">{{ query.orderNumber }}</p>
             <span class="copy"
               ><img src="@/assets/img/bluecopt.webp" alt=""
             /></span>
-          </p>
+          </div>
         </li>
       </ul>
       <p class="upload-desc">
@@ -94,7 +97,7 @@ axios.defaults.baseURL = `${host}/user/v2`;
 export default {
   data() {
     return {
-      show: true,
+      show: false,
       index: 0,
       query: {
         ...this.$route.query,
@@ -258,10 +261,22 @@ $blue: #00d6d4;
     justify-content: space-between;
     height: 56px;
     border-bottom: 1px solid #707070;
+    & > p:first-child {
+      flex-shrink: 0;
+      margin-right: 6px;
+    }
   }
   .list-desc {
     font-size: 16px;
     font-weight: bold;
+    overflow: hidden;
+  }
+  .expe {
+    //一行显示
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // max-width: 198px;
   }
   .copy {
     margin-left: 8px;
