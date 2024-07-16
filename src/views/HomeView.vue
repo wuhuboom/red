@@ -63,18 +63,18 @@
 
       <Uploader :after-read="afterRead" ref="upload" v-show="false" />
       <popup v-model="show" position="center" class="pop-alert">
-        <div class="cont">
-          <p class="drc drc-l c-c" v-if="index > 0" @click="chang(-1)">
+        <div class="cont-popup">
+          <!-- <p class="drc drc-l c-c" v-if="index > 0" @click="chang(-1)">
             BACK <img src="@/assets/img/left.png" alt="" />
-          </p>
+          </p> -->
           <img :src="img" alt="" />
-          <p
+          <!-- <p
             class="drc drc-r c-c"
             v-if="index < imgs.length - 1"
             @click="chang(1)"
           >
             <img src="@/assets/img/rit.png" alt="" /> NEXT
-          </p>
+          </p> -->
           <ul class="handel-btn">
             <li @click="chang(1)" v-if="index < imgs.length - 1">अर्को चरण</li>
             <li @click="show = false">थाहा भयो, यो चरण छोड्नुहोस्</li>
@@ -101,9 +101,9 @@ export default {
       },
       now: new Date().getTime(),
       imgs: [
-        require("@/assets/img/step1.png"),
-        require("@/assets/img/step2.png"),
-        require("@/assets/img/step3.png"),
+        require("@/assets/img/step1.webp"),
+        require("@/assets/img/step2.webp"),
+        require("@/assets/img/step3.webp"),
       ],
       url: "",
     };
@@ -318,6 +318,12 @@ $blue: #00d6d4;
   }
   & > li:nth-child(1) {
     margin-bottom: 20px;
+  }
+}
+.cont-popup {
+  img {
+    display: block;
+    width: 375px;
   }
 }
 </style>
