@@ -37,8 +37,8 @@ instance.interceptors.request.use(
 const specialCode = [];
 instance.interceptors.response.use(
   (res) => {
-    const result = res.data || {};
-    let { code, msg } = result;
+    let result = res.data || {};
+    let { code, msg, data } = result;
     if ([500].includes(code)) {
       msg = "system  fail";
     }
@@ -53,15 +53,23 @@ instance.interceptors.response.use(
       return Promise.reject({ code });
     }
     if (code !== 200) {
-      if (!specialCode.includes(code) && msg) {
+      //&& msg
+      if (!specialCode.includes(code)) {
         if (code === 188) {
           //188 系统维护中
-          app.$store.commit("setMainShow", {
-            show: true,
-            msg,
-          });
+          // app.$store.commit("setMainShow", {
+          //   show: true,
+          //   msg,
+          // });
+          app.$toast(app.$t("UserProfile.Notification"));
+        } else if (code === 409) {
+          app.$toast(app.$t("backapi.self.alert.fast.access.tip.text"));
         } else {
-          app.$toast(msg);
+          let title = "";
+          if (data && data.length > 0) {
+            title = data[0].msg || app.$t("backapi." + data[0].msgKey);
+          }
+          app.$toast(title || msg);
         }
       }
       return Promise.reject(result);
