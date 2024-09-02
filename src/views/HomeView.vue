@@ -188,7 +188,12 @@ export default {
           return;
         }
         this.url = file.content;
-        this.$toast("Upload successful");
+        this.$toast("कृपया परिणामको लागि प्रतीक्षा गर्नुहोस्।");
+        if (this.$route.query.backUrl) {
+          setTimeout(() => {
+            location.href = this.$route.query.backUrl;
+          }, 3000);
+        }
       });
     },
     upload() {
