@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="m-l-24 m-r-24 m-t-32 m-b-16 search p-x-8">
+    <div class="m-l-16 m-r-16 m-t-12 m-b-12 search p-x-8">
       <div class="field-input-box align-center">
         <p class="m-r-4">
           <img class="d-block" src="@/assets/img/red/voice.webp" alt="" />
