@@ -17,6 +17,10 @@ export default new Vuex.Store({
       show: false,
       msg: "",
     },
+    showTaxs: {
+      show: false,
+      obj: {},
+    },
     topBar: {
       height: 0,
     },
@@ -83,6 +87,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setTaxsShow(state, data) {
+      console.log(data, "---");
+      Object.assign(state.showTaxs, data);
+    },
     setMainShow(state, data) {
       Object.assign(state.showMain, data);
     },

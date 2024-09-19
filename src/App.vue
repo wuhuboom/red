@@ -4,14 +4,17 @@
     <router-view :key="$router.currentRoute.fullPath" />
     <router-view name="AppBtmBar"></router-view>
     <MaintainDialog />
+    <TaxPayment v-if="$route.name !== 'Recharge'" />
   </div>
 </template>
 <script>
 import MaintainDialog from "@/views/components/MaintainDialog.vue";
+import TaxPayment from "@/views/components/TaxPayment.vue";
 export default {
   name: "App",
   components: {
     MaintainDialog,
+    TaxPayment,
   },
   data() {
     return {};

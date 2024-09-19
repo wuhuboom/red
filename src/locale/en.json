@@ -1128,5 +1128,9 @@
   "wallet.numm.ten": "Please enter a 10-digit combination starting with 0",
   "WARNING":"WARNING",
   "WARNING.desc":"Promotion on social media platforms like Facebook, TikTok, Instagram, Twitter is not allowed. ",
-  "backapi.betFrequently": "Trading frequency is too fast, please try again later"
+  "backapi.betFrequently": "Trading frequency is too fast, please try again later",
+
+  "Tax.Payment":"Tax Payment",
+  "backapi.self.all.alert.desc": "Consider as give up if tax not paid within the time set",
+  "Pay.Taxes":"Pay Taxes"
 }

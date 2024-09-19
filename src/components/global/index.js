@@ -34,6 +34,7 @@ import {
   DropdownItem,
   uploader,
   Checkbox,
+  countDown,
 } from "vant";
 export default {
   install(Vue) {
@@ -71,5 +72,6 @@ export default {
     Vue.use(DropdownItem);
     Vue.use(uploader);
     Vue.use(Checkbox);
+    Vue.use(countDown);
   },
 };
