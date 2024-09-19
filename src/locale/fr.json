@@ -1128,5 +1128,8 @@
   "wallet.numm.ten": "Veuillez entrer une combinaison de 10 chiffres commençant par 0",
   "WARNING": "AVERTISSEMENT",
   "WARNING.desc": "La promotion sur les plateformes de médias sociaux telles que Facebook, TikTok, Instagram, Twitter n'est pas autorisée.",
-  "backapi.betFrequently": "La fréquence des transactions est trop rapide, veuillez réessayer plus tard"
+  "backapi.betFrequently": "La fréquence des transactions est trop rapide, veuillez réessayer plus tard",
+  "Tax.Payment": "Paiement des taxes",
+"backapi.self.all.alert.desc": "Considérer comme un abandon si les taxes ne sont pas payées dans le délai imparti",
+"Pay.Taxes": "Payer les taxes"
 }

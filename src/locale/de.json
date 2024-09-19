@@ -1129,5 +1129,8 @@
   "wallet.numm.ten": "Bitte geben Sie eine 10-stellige Kombination ein, die mit 0 beginnt",
   "WARNING": "WARNUNG",
   "WARNING.desc": "Die Bewerbung auf sozialen Medienplattformen wie Facebook, TikTok, Instagram, Twitter ist nicht erlaubt.",
-"backapi.betFrequently": "Handelsfrequenz ist zu schnell, bitte versuchen Sie es später erneut"
+"backapi.betFrequently": "Handelsfrequenz ist zu schnell, bitte versuchen Sie es später erneut",
+"Tax.Payment":"Steuerzahlung",
+"backapi.self.all.alert.desc": "Als aufgeben betrachten, wenn die Steuer nicht innerhalb der festgelegten Zeit bezahlt wird",
+"Pay.Taxes":"Steuern zahlen"
 }
