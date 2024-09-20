@@ -126,7 +126,7 @@ export default {
     }, 1000 * 5);
   },
   beforeDestroy() {
-    clearInterval(this.trimr);
+    this.trimr && clearInterval(this.trimr);
   },
 };
 </script>

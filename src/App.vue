@@ -4,7 +4,12 @@
     <router-view :key="$router.currentRoute.fullPath" />
     <router-view name="AppBtmBar"></router-view>
     <MaintainDialog />
-    <TaxPayment v-if="$route.name !== 'Recharge'" />
+    <!-- v-if="$route.name !== 'Recharge'" -->
+    <TaxPayment
+      v-if="
+        !['Recharge', 'Login', 'Register', 'LoginForget'].includes($route.name)
+      "
+    />
   </div>
 </template>
 <script>
