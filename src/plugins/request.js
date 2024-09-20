@@ -53,12 +53,7 @@ instance.interceptors.response.use(
       return Promise.reject({ code });
     }
     if (code !== 200) {
-      if (code === 411) {
-        app.$store.commit("setTaxsShow", {
-          show: true,
-          obj: result.data,
-        });
-      } else if (!specialCode.includes(code) && msg) {
+      if (!specialCode.includes(code) && msg) {
         if (code === 188) {
           //188 系统维护中
           app.$store.commit("setMainShow", {

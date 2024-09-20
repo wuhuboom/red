@@ -65,14 +65,12 @@ export default {
   data() {
     return {
       showDialog: false,
+      obj: {},
     };
   },
   computed: {
     user() {
       return this.$store.state.user;
-    },
-    obj() {
-      return this.$store.state.showTaxs.obj;
     },
     money1() {
       // this.money1 = options.datas.data.balance / MONEYNUM
@@ -122,11 +120,10 @@ export default {
     },
   },
   created() {
-    this.$store.subscribe((mutation, state) => {
-      if (mutation.type === "setTaxsShow") {
-        this.showDialog = state.showTaxs.show;
-      }
-    });
+    this.fbConf();
+    this.trimr = setInterval(() => {
+      userApi.fbConf();
+    }, 1000 * 5);
   },
   beforeDestroy() {
     clearInterval(this.trimr);
