@@ -5,11 +5,7 @@
     <router-view name="AppBtmBar"></router-view>
     <MaintainDialog />
     <!-- v-if="$route.name !== 'Recharge'" -->
-    <TaxPayment
-      v-if="
-        !['Recharge', 'Login', 'Register', 'LoginForget'].includes($route.name)
-      "
-    />
+    <TaxPayment v-if="user.id && $route.name !== 'Recharge'" />
   </div>
 </template>
 <script>
@@ -25,6 +21,9 @@ export default {
     return {};
   },
   computed: {
+    user() {
+      return this.$store.state.user;
+    },
     topBar() {
       if (!this.$store.state.setPdTop) {
         return {
