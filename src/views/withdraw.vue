@@ -227,6 +227,11 @@
         ref="riskCode"
         @sure="confirm"
       />
+      <ComfireDialog
+        :texts="[withdrawalLimitMsg]"
+        ref="dangers"
+        @sure="confirm"
+      />
     </div>
   </div>
 </template>
@@ -259,7 +264,7 @@ export default {
       typeValue: "",
       cardNumSelect: "",
       amount: "",
-
+      withdrawalLimitMsg: "",
       veriftValue: "",
       rechargeTipLists: [
         i18n.t("backapi.self.recharge.tip.content1.text"),
@@ -472,7 +477,7 @@ export default {
             return;
           }
           if (msgKey === "backapi.withdrawalLimit") {
-            this.$toast(err.data[0].withdrawalLimitMsg);
+            this.openDanerDialog(err.data[0].withdrawalLimitMsg);
             return;
           }
           this.$toast(this.$t(msgKey));
@@ -487,6 +492,11 @@ export default {
     openSucceessDialog() {
       this.$refs.ComfireDialog.open();
       this.$refs.ComfireDialog.cancelBtnShow(false);
+    },
+    openDanerDialog(v = "1232323") {
+      this.$refs.dangers.cancelBtnShow(false);
+      this.$refs.dangers.open();
+      this.withdrawalLimitMsg = v;
     },
     async initFaceRecognition() {
       // 在调用服务端初始化请求时需要传入该MetaInfo值

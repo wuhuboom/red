@@ -218,6 +218,12 @@ export default {
 
       this.$store.commit("setToken", res.data.token);
       this.$store.dispatch("getServeData");
+      if (res.data.withdrawalLimitMsg) {
+        this.$store.commit(
+          "setwithdrawalLimitMsg",
+          res.data.withdrawalLimitMsg
+        );
+      }
       if (this.$route.query.backUrl) {
         this.$router.push(this.$route.query.backUrl);
         return;

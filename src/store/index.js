@@ -13,6 +13,7 @@ Vue.use(Vuex);
 const lang = location.href.includes("zmkm") ? "zh" : "";
 export default new Vuex.Store({
   state: {
+    withdrawalLimitMsg: "",
     showMain: {
       show: false,
       msg: "",
@@ -87,6 +88,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setwithdrawalLimitMsg(state, data) {
+      state.withdrawalLimitMsg = data;
+    },
     setTaxsShow(state, data) {
       console.log(data, "---");
       Object.assign(state.showTaxs, data);

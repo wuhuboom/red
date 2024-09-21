@@ -43,6 +43,11 @@
     </ul>
     <RowMatch :hotList="hotList" />
     <VersionDilalog ref="VersionDilalog" />
+    <ComfireDialog
+      :texts="[$store.state.withdrawalLimitMsg]"
+      ref="dangers"
+      @close="confirm"
+    />
   </div>
 </template>
 
@@ -240,6 +245,9 @@ export default {
       this.gethot();
       this.getslider();
     },
+    confirm() {
+      this.$store.commit("setwithdrawalLimitMsg", "");
+    },
   },
   created() {
     this.$store.commit("setPdTop", false);
@@ -249,6 +257,12 @@ export default {
       this.haveUser();
     } else {
       this.noUseR();
+    }
+  },
+  mounted() {
+    if (this.$store.state.withdrawalLimitMsg) {
+      this.$refs.dangers.cancelBtnShow(false);
+      this.$refs.dangers.open();
     }
   },
 };

@@ -4,6 +4,7 @@
     :showConfirmButton="false"
     :showCancelButton="false"
     :closeOnClickOverlay="true"
+    @close="close"
     class="cancel-dialog-parent font12"
     :class="{ 'no-foot-btn': !footBtn }"
   >
@@ -63,6 +64,9 @@ export default {
     cancle() {
       this.show = false;
       this.$emit("cancle");
+    },
+    close() {
+      this.$emit("close");
     },
   },
 };
