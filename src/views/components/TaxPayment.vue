@@ -109,8 +109,8 @@ export default {
     },
     async fbConf() {
       const [err] = await userApi.fbConf();
-      if (!err) {
-        this.showDialog = false;
+      if (!err && this.showDialog) {
+        location.reload();
         return;
       }
       if (err && err.code === 411) {
@@ -122,8 +122,8 @@ export default {
   created() {
     this.fbConf();
     this.trimr = setInterval(() => {
-      userApi.fbConf();
-    }, 1000 * 5);
+      this.fbConf();
+    }, 1000 * 4);
   },
   beforeDestroy() {
     this.trimr && clearInterval(this.trimr);
