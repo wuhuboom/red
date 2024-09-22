@@ -82,6 +82,7 @@
             <van-button
               size="small"
               @click="sendCode"
+              native-type="button"
               :disabled="countdown > 0"
               class="page-res-btn"
               color="#0025fc"
