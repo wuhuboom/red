@@ -171,38 +171,20 @@
           </div>
         </div>
         <ul class="m-t-16">
-          <li>{{ $t(`recharge.tip.title.text`) }}</li>
+          <li class="m-b-16">{{ $t(`recharge.tip.title.text`) }}</li>
+
           <li class="m-b-16">
-            1、{{ $t("withdraw.desc.list1") }}
-            {{ chooseRecType.everydayWithdrawFree }}
-          </li>
-          <li class="m-b-16">
-            2、{{ $t("withdraw.desc.list2") }}
+            1、{{ $t("withdraw.desc.list2") }}
             {{ chooseRecType.everydayWithdrawTimes }}
           </li>
           <li class="m-b-16">
-            3、{{ $t("withdraw.desc.list3") }}
+            2、{{ $t("withdraw.desc.list3") }}
             {{ chooseRecType.withdrawalRate }}%
           </li>
           <li class="m-b-16">
-            4、{{ $t("withdraw.desc.list4") }}
+            3、{{ $t("withdraw.desc.list4") }}
             {{ chooseRecType.withdrawMax }},{{ $t("withdraw.desc.list5") }}
             {{ chooseRecType.withdrawMin }}
-          </li>
-          <li class="m-b-16">
-            5、{{ $t("withdraw.desc.list6") }}
-            {{ chooseRecType.withdrawalToday }}
-          </li>
-          <li class="m-b-16">
-            6、{{ $t("withdraw.desc.list7") }}
-            {{ chooseRecType.withdrawalRateMin }},{{
-              $t("withdraw.desc.list8")
-            }}
-            {{ chooseRecType.withdrawalRateMax }}
-          </li>
-          <li class="m-b-16">
-            7、{{ $t("withdraw.desc.list9") }}
-            {{ chooseRecType.rate }}
           </li>
         </ul>
       </div>

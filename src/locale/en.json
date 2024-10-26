@@ -1124,7 +1124,7 @@
   "trade.Current.Bet":"Current trade",
   "Remaining Limit":"Remaining Limit",
   "Trading.Range":"Trading Range",
-  "Your.current.VIPlevel":"Dear member, your current VIP level is {vip}. If this withdrawal is successful, you have {num} free withdrawals remaining without downgrading your level. Do you want to proceed with the withdrawal?",
+  "Your.current.VIPlevel":"Dear member, your current VIP level is level {num}. If this withdrawal is successful, your VIP level will be reduced to level 0, which will affect your VIP income. Do you want to continue withdrawing?",
   "wallet.numm.ten": "Please enter a 10-digit combination starting with 0",
   "WARNING":"WARNING",
   "WARNING.desc":"Promotion on social media platforms like Facebook, TikTok, Instagram, Twitter is not allowed. ",
