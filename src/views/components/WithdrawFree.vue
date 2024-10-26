@@ -13,7 +13,7 @@
         {{
           $t(`Your.current.VIPlevel`, {
             vip: obj.vip,
-            num: obj.num,
+            num: obj.vip,
           })
         }}
       </li>
