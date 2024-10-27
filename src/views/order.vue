@@ -1,7 +1,13 @@
 <template>
   <div class="list-page">
     <ul class="user-money p-l-24 p-r-24 font12 p-t-32 m-b-24">
-      <li class="text-center">{{ curItem.data.totalCount }}</li>
+      <li class="text-center head-gold">
+        {{ curItem.data.totalCount }}
+        <i
+          @click="open = !open"
+          class="icon icon-eys iconfont icon-yanjing_xianshi_o"
+        ></i>
+      </li>
       <li class="center-center m-t-1 m-b-8">
         {{ $t(`Today.s.Orders`) }}
       </li>
@@ -41,7 +47,10 @@
               <p class="color-fff">{{ item.betScore }} @ {{ item.betOdds }}%</p>
               <p class="color-fff">
                 {{
-                  numToFixed(item.betMoney, $globalUnit.val) / $globalNum.val
+                  !open
+                    ? "*******"
+                    : numToFixed(item.betMoney, $globalUnit.val) /
+                      $globalNum.val
                 }}
               </p>
             </li>
@@ -175,6 +184,7 @@ export default {
       allList: [],
       startTime: 1,
       tabsList: initList(),
+      open: false,
     };
   },
   components: {
@@ -317,6 +327,24 @@ export default {
         });
         return;
       }
+      // 模拟数据 res.data.results
+      // res.data.results = [
+      //   {
+      //     id: 1,
+      //     allianceName: "AllianceName",
+      //     mainName: "MainName",
+      //     guestName: "GuestName",
+      //     betScore: "1:2",
+      //     betOdds: 1.5,
+      //     betMoney: 100,
+      //     createdAt: 1627584000000,
+      //     orderNo: "2021073000001",
+      //     status: 1,
+      //     statusSettlement: 0,
+      //     statusOpen: 0,
+      //     winningAmount: 150,
+      //   },
+      // ];
       if (res.data.pageNo == 1) {
         this.tabsList.forEach((item) => {
           if (item.startTime === startTime) {
@@ -589,6 +617,16 @@ export default {
         object-fit: cover;
       }
     }
+  }
+}
+.head-gold {
+  position: relative;
+  .icon-eys {
+    font-size: 22px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 </style>
