@@ -435,7 +435,8 @@ export default {
           return false;
         }
         if (this.chooseRecType.wiClearVip === 1) {
-          this.$refs.WithdrawClearVip.show();
+          //this.$refs.WithdrawClearVip.show();
+          this.$refs.WithdrawFree.show();
           return;
         }
       }
